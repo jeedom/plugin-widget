@@ -1,0 +1,19 @@
+<div class="cmd cmd-widget" data-type="action" data-subtype="color" data-cmd_id="#id#" style="min-height: 170px;width: 146px;">
+    <div class="action_colorpicker"></div>
+    <a class="btn btn-xs btn-black action_colorpicker_off" style="margin-top : 3px;border: none;border-radius : 0px;">Off</a>
+    <script>
+        $.include(['plugins/widget/core/template/dashboard/cmd.action.color.circle/farbtastic.js', 'plugins/widget/core/template/dashboard/cmd.action.color.circle/farbtastic.css'], function() {
+            $('.cmd[data-cmd_id=#id#] .action_colorpicker').off();
+            if ($('.cmd[data-cmd_id=#id#] .action_colorpicker').length > 0) {
+                $('.cmd[data-cmd_id=#id#] .action_colorpicker').farbtastic();
+                $.farbtastic($('.cmd[data-cmd_id=#id#] .action_colorpicker')).setColor(('#state#' != '') ? '#state#' : '#000000');
+                $('.cmd[data-cmd_id=#id#] .action_colorpicker_off').on('click', function() {
+                    jeedom.cmd.execute({id: '#id#', value: {color: '#000000'}});
+                });
+                $('.cmd[data-cmd_id=#id#] .action_colorpicker').on('mouseup', function() {
+                    jeedom.cmd.execute({id: '#id#', value: {color: $.farbtastic($(this)).color}});
+                });
+            }
+        });
+    </script>
+</div>

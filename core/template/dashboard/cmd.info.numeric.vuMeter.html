@@ -1,0 +1,78 @@
+<div class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" style="width:90px;min-height:105px;">
+    <div class="vuMeter"></div>
+    <center>
+        <span style="#displayHistory#" class="statistiques">
+            <span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> <i class="#tendance#"></i>
+        </span>
+    </center>
+    <script>
+        if (is_numeric('#state#')) {
+        $('.cmd[data-cmd_id=#id#] .vuMeter').highcharts({
+        chart: {
+        type: 'gauge',
+                plotBackgroundImage: null,
+                backgroundColor: null,
+                height: 90,
+                spacingTop: 0,
+                spacingLeft: 0,
+                spacingRight: 0,
+                spacingBottom: 0
+        },
+                credits: {
+                text: '',
+                        href: '',
+                },
+                title: {
+                text: ''
+                },
+                navigation: {
+                buttonOptions: {
+                enabled: false
+                }
+                },
+                tooltip: {
+                enabled: false
+                },
+                pane: [{
+                startAngle: - 45,
+                        endAngle: 45,
+                        background: null,
+                        center: ['55%', '100%'],
+                        size: 80
+                }],
+                yAxis: [{
+                min: #minValue#,
+                        max: #maxValue#,
+                        minorTickPosition: 'outside',
+                        tickPosition: 'outside',
+                        labels: {
+                        rotation: 'auto',
+                                distance: - 10
+                        },
+                        pane: 0,
+                        title: {
+                        text: '<span style="font-size:8px">#unite#</span>',
+                        }
+                }],
+                plotOptions: {
+                gauge: {
+                dataLabels: {
+                y: - 95,
+                        borderWidth: 0
+                },
+                },
+                        series: {
+                        animation: false
+                        }
+                },
+                series: [{
+                data: [parseInt('#state#')]
+                }]
+
+        });
+        } else {
+        $('.cmd[data-cmd_id=#id#] .vuMeter').append('<center><span class="label label-danger" style="margin-top : 5px;">#state#</span></center>');
+        }
+    </script>
+
+</div>

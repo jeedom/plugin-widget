@@ -1,0 +1,30 @@
+<div style="width:100px;min-height:90px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+    <center>
+        <span class="cursor" style="font-size: 3em;font-weight: bold;" id="iconCmd#id#"></span>
+        <div class="slider full-width-slider ui-slider" style="width: 96%;text-align: right;min-width : 120px;">
+            <input type="number" data-type="range" min="#minValue#" max="#maxValue#" value="#state#" data-highlight="true" />
+        </div>
+    </center>
+    <script>
+        if ('#state#' > '1' || '#state#' > 1) {
+            $('#iconCmd#id#').append('<i class="icon jeedom-lumiere-on"></i>');
+            $('#iconCmd#id#').attr('data-state', 'on');
+        }
+        if ('#state#' == '0' || '#state#' == 0) {
+            $('#iconCmd#id#').append('<i class="icon jeedom-lumiere-off"></i>');
+            $('#iconCmd#id#').attr('data-state', 'off');
+        }
+
+        $('#iconCmd#id#').on('click', function() {
+            if ($(this).attr('data-state') == 'on') {
+                jeedom.cmd.execute({id: '#id#', value: {slider: 0}});
+            } else {
+                jeedom.cmd.execute({id: '#id#', value: {slider: 99}});
+            }
+        });
+
+        $('.cmd[data-cmd_id=#id#] .slider').on("slidestop", function(event, ui) {
+            jeedom.cmd.execute({id: '#id#', value: {slider: $(this).find('input').value()}});
+        });
+    </script>
+</div>
