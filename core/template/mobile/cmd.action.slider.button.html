@@ -6,15 +6,15 @@
     </div>
     <script>
         $('.cmd[data-cmd_id=#id#] .bt_plus').on('click', function() {
-            $('.cmd[data-cmd_id=#id#] .value').val((parseFloat($('.cmd[data-cmd_id] .value').val()) + 0.5));
+            $('.cmd[data-cmd_id=#id#] .value').val((parseFloat($('.cmd[data-cmd_id=#id#] .value').val()) + 0.5));
             $('.cmd[data-cmd_id=#id#] .value').trigger('change');
         });
         $('.cmd[data-cmd_id=#id#] .bt_minus').on('click', function() {
-            $('.cmd[data-cmd_id=#id#] .value').val((parseFloat($('.cmd[data-cmd_id] .value').val()) - 0.5));
+            $('.cmd[data-cmd_id=#id#] .value').val((parseFloat($('.cmd[data-cmd_id=#id#] .value').val()) - 0.5));
             $('.cmd[data-cmd_id=#id#] .value').trigger('change');
         });
         $('.cmd[data-cmd_id=#id#] .value').on('change', function() {
-            jeedom.cmd.execute({id: '#id#', value: {slider: $('.cmd[data-cmd_id] .value').val()}});
+            jeedom.cmd.execute({id: '#id#', value: {slider: $('.cmd[data-cmd_id=#id#] .value').val()}});
         });
     </script>
     <style>
