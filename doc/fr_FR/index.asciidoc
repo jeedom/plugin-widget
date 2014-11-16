@@ -1,3 +1,10 @@
 == Widget
 
+=== Description
+Que fait le plugin
+
 === Configuration
+Comment le configurer
+
+=== Changelog
+include::changelog.asciidoc[]
