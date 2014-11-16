@@ -1,7 +1,7 @@
 == Widget
 
 === Description
-Que fait le plugin
+Plugin permetant de recuperer et/ou de creer de nouveaux widget
 
 === Configuration
 Comment le configurer
