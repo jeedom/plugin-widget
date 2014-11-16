@@ -4,7 +4,7 @@
 Plugin permetant de recuperer et/ou de creer de nouveaux widget
 
 === Configuration
-Comment le configurer
+include::configuration.asciidoc[]
 
 === Changelog
 include::changelog.asciidoc[]
