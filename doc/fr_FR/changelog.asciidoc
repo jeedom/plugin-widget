@@ -1,4 +1,2 @@
 
 ==== Juillet 2014
-
-- bugfix du bouton “ajouter un widget”
