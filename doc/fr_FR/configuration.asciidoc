@@ -38,6 +38,6 @@ Ensuite pour affecter un widget à une commande on peut passer par la page Gén�
     jeedom.cmd.execute({id :'#id#', value : {slider : 30}})
 
 ** Exemple pour une commande de type color :
-     jeedom.cmd.execute({id :'#id#', {color: '#000000'}})
+     jeedom.cmd.execute({id :'#id#', { color: '#000000'}})
 
 Voilà ce plugin permet de modifier facilement le rendu des commandes pour pouvoir configurer son tableau de bord exactement comme on le souhaite.
