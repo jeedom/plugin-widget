@@ -14,7 +14,7 @@
             fgColor: "#FFFFFF",
                     bgColor: '#cmdColor#',
                     noScroll: true,
-                    change: function(v) {
+                    release: function(v) {
                         jeedom.cmd.execute({id: '#id#', value: {slider: v}});
                     },
                     draw : function(){
