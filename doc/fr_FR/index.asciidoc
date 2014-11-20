@@ -8,5 +8,9 @@ Plugin permetant de recuperer et/ou de creer de nouveaux widget
 include::configuration.asciidoc[]
 
 '''
+=== FAQ
+include::faq.asciidoc[]
+
+'''
 === Changelog
 include::changelog.asciidoc[]
