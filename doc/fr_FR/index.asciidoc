@@ -3,8 +3,10 @@
 === Description
 Plugin permetant de recuperer et/ou de creer de nouveaux widget
 
+'''
 === Configuration
 include::configuration.asciidoc[]
 
+'''
 === Changelog
 include::changelog.asciidoc[]
