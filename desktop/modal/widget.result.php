@@ -48,8 +48,10 @@ if ($widget->getVersion() == 'mobile') {
     include_file('desktop', 'commun', 'css');
     include_file('3rdparty', 'bootstrap/css/bootstrap.min', 'css');
     include_file('3rdparty', 'jquery.ui/jquery-ui-bootstrap/jquery-ui', 'css');
+    include_file('3rdparty', 'bootstrap.slider/css/slider', 'css');
     include_file('3rdparty', 'bootstrap/bootstrap.min', 'js');
     include_file('3rdparty', 'jquery.ui/jquery-ui.min', 'js');
+    include_file('3rdparty', 'bootstrap.slider/js/bootstrap-slider', 'js');
 }
 include_file('3rdparty', 'jquery.utils/jquery.utils', 'js');
 include_file('core', 'js.inc', 'php');
