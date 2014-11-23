@@ -43,7 +43,7 @@ include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
 </style>
 
 <div class="row row-overflow">
-    <div class="col-lg-2">
+    <div class="col-lg-2 col-md-3 col-sm-4">
         <div class="bs-sidebar">
             <ul id="ul_widget" class="nav nav-list bs-sidenav">
                 <a class="btn btn-default btn-sm tooltips" id="bt_getFromMarket" title="{{Récuperer du market}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Market}}</a>
@@ -92,10 +92,10 @@ include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
             </ul>
         </div>
     </div>
-    <div class="col-lg-10 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+    <div class="col-lg-10 col-md-9 col-sm-8 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-sm-6">
                 <legend>
                     {{Général}}
                     <a class="btn btn-default btn-xs pull-right" id="bt_manageFiles"><i class="fa fa-file"></i> {{Fichiers}}</a>
@@ -104,16 +104,16 @@ include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
                     <fieldset>
 
                         <div class="form-group">
-                            <label class="col-lg-4 control-label">{{Nom du widget}}</label>
-                            <div class="col-lg-6">
+                            <label class="col-sm-4 control-label">{{Nom du widget}}</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="widgetAttr form-control" data-l1key="path" style="display : none;" />
                                 <input type="text" class="widgetAttr form-control" data-l1key="logicalId" style="display : none;" />
                                 <input type="text" class="widgetAttr form-control" data-l1key="name" placeholder="{{Nom du widget}}"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-4 control-label">{{Version}}</label>
-                            <div class="col-lg-6">
+                            <label class="col-sm-4 control-label">{{Version}}</label>
+                            <div class="col-sm-6">
                                 <select class="widgetAttr form-control" data-l1key='version'>
                                     <option value='dashboard'>{{Dashboard}}</option>
                                     <option value='mobile'>{{Mobile}}</option>
@@ -121,8 +121,8 @@ include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-4 control-label">{{Type}}</label>
-                            <div class="col-lg-6">
+                            <label class="col-sm-4 control-label">{{Type}}</label>
+                            <div class="col-sm-6">
                                 <select class="widgetAttr form-control" data-l1key='type'>
                                     <option value='none'>{{Aucun}}</option>
                                     <?php
@@ -134,8 +134,8 @@ include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-4 control-label">{{Sous-type}}</label>
-                            <div class="col-lg-6">
+                            <label class="col-sm-4 control-label">{{Sous-type}}</label>
+                            <div class="col-sm-6">
                                 <select class="widgetAttr form-control" data-l1key='subtype'>
                                     <option value='none'>{{Aucun}}</option>
                                     <?php
@@ -150,12 +150,12 @@ include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
                 </form>
             </div>
 
-            <div class="col-lg-6" >
+            <div class="col-sm-6" >
                 <legend>{{Apercu}}
                     <a class="btn btn-xs btn-default pull-right" id="bt_applyWidget"><i class="fa fa-fire"></i> {{Appliquer sur des commandes}}</a>
                     <a class="btn btn-xs btn-warning pull-right" id="bt_shareOnMarket"><i class="fa fa-cloud-upload"></i> {{Partager}}</a>
                 </legend>
-                <div class="col-lg-6" id='div_widgetResult'style="height: 350px;"></div>
+                <div class="col-sm-6" id='div_widgetResult'style="height: 350px;"></div>
             </div>
         </div>
         <a class="btn btn-default btn-xs" id="bt_insertIcon"><i class="fa fa-flag"></i> Rechercher une icone</a><br/><br/>
