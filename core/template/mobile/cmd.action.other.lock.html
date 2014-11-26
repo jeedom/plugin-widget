@@ -5,14 +5,15 @@
 </div>
 
 <script>
+     var cmdName = '#name#';
     if ('#state#' == '1' || '#state#' == 1) {
         $('#iconCmd#id#').append('<i class="icon jeedom-lock-ferme"></i>');
-        if ('#name#' == 'lock') {
+        if (cmdName.toLowerCase().indexOf('lock') != -1) {
             $('.cmd[data-cmd_id=#id#]').hide();
         }
     } else {
         $('#iconCmd#id#').append('<i class="icon jeedom-lock-ouvert"></i>');
-        if ('#name#' == 'unlock') {
+        if (cmdName.toLowerCase().indexOf('unlock') != -1) {
             $('.cmd[data-cmd_id=#id#]').hide();
         }
     }

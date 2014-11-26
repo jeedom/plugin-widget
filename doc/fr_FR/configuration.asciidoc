@@ -27,6 +27,7 @@ Ensuite pour affecter un widget à une commande on peut passer par la page Gén�
 - Action
 * \#id# => ID de la commande
 * \#name# => Nom de la commande
+* \#valueName# => Nom de la commande info, si la commande action est liée à une commande info
 * \#lastValue# => Dernière valeur de la commande (peut être vide)
 * \#minValue# => Valeur minimum que peut prendre la commande
 * \#maxValue# => Valeur maximum que peut prendre la commande

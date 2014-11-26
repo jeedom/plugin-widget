@@ -4,19 +4,20 @@
         <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" class="action" id="iconCmd#id#"></span>
     </center>
     <script>
+        var cmdName = '#name#';
         if ('#state#' == '1' || '#state#' == 1) {
             $('#iconCmd#id#').append('<i class="icon jeedom-prise"></i>');
-            if ('#name#' == 'ON' || '#name#' == 'on' || '#name#' == 'On') {
+            if (cmdName.toLowerCase().indexOf('on') != -1) {
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
         } else {
             $('#iconCmd#id#').append('<i class="fa fa-times"></i>');
-            if ('#name#' == 'OFF' || '#name#' == 'off' || '#name#' == 'Off') {
+            if (cmdName.toLowerCase().indexOf('off') != -1) {
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
         }
         $('.cmd[data-cmd_id=#id#] .action').off();
-        $('.cmd[data-cmd_id=#id#] .action').on('click', function() {
+        $('.cmd[data-cmd_id=#id#] .action').on('click', function () {
             jeedom.cmd.execute({id: '#id#'});
         });
     </script>
