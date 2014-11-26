@@ -5,20 +5,20 @@
 </div>
 
 <script>
-     var cmdName = '#name#';
+    var cmdName = '#name#';
     if ('#state#' == '1' || '#state#' == 1) {
         $('#iconCmd#id#').append('<i class="icon jeedom-lock-ferme"></i>');
-        if (cmdName.toLowerCase().indexOf('lock') != -1) {
+        if (cmdName.toLowerCase().indexOf('lock') == 0) {
             $('.cmd[data-cmd_id=#id#]').hide();
         }
     } else {
         $('#iconCmd#id#').append('<i class="icon jeedom-lock-ouvert"></i>');
-        if (cmdName.toLowerCase().indexOf('unlock') != -1) {
+        if (cmdName.toLowerCase().indexOf('unlock') == 0) {
             $('.cmd[data-cmd_id=#id#]').hide();
         }
     }
     $('.cmd[data-cmd_id=#id#] .action').off();
-    $('.cmd[data-cmd_id=#id#] .action').on('click', function() {
+    $('.cmd[data-cmd_id=#id#] .action').on('click', function () {
         jeedom.cmd.execute({id: '#id#'});
     });
 </script>

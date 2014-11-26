@@ -8,12 +8,12 @@
     var cmdName = '#name#';
     if ('#state#' == '1' || '#state#' == 1) {
         $('#iconCmd#id#').append('<i class="icon jeedom-lumiere-on"></i>');
-        if (cmdName.toLowerCase().indexOf('on') != -1) {
+        if (cmdName.toLowerCase().indexOf('on') == 0) {
             $('.cmd[data-cmd_id=#id#]').hide();
         }
     } else {
         $('#iconCmd#id#').append('<i class="icon jeedom-lumiere-off"></i>');
-        if (cmdName.toLowerCase().indexOf('off') != -1) {
+        if (cmdName.toLowerCase().indexOf('off') == 0) {
             $('.cmd[data-cmd_id=#id#]').hide();
         }
     }
