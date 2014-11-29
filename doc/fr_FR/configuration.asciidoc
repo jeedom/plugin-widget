@@ -10,6 +10,7 @@ Ensuite pour affecter un widget à une commande on peut passer par la page Gén�
 
 - Info
 * \#id# => ID de la commande
+* \#logicalId# => ID logique de la commande (peut etre vide)
 * \#name# => Nom de la commande
 * \#unite# => Unité de la commande
 * \#collectDate# => Date exacte ou de la valeur de la commande
@@ -26,6 +27,7 @@ Ensuite pour affecter un widget à une commande on peut passer par la page Gén�
 
 - Action
 * \#id# => ID de la commande
+* \#logicalId# => ID logique de la commande (peut etre vide)
 * \#name# => Nom de la commande
 * \#valueName# => Nom de la commande info, si la commande action est liée à une commande info
 * \#lastValue# => Dernière valeur de la commande (peut être vide)
