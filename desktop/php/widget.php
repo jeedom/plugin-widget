@@ -12,6 +12,54 @@ include_file('3rdparty', 'codemirror/mode/css/css', 'js');
 include_file('3rdparty', 'jquery.fileupload/jquery.ui.widget', 'js');
 include_file('3rdparty', 'jquery.fileupload/jquery.iframe-transport', 'js');
 include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
+include_file('3rdparty', 'jquery.lazyload/jquery.lazyload', 'js');
+include_file('3rdparty', 'jquery.masonry/jquery.masonry', 'js');
+
+$mobileWidget = widget::listWidget('mobile');
+$dashboardWidget = widget::listWidget('dashboard');
+
+function displayWidgetName($_name) {
+    $result = '';
+    $name = explode('.', $_name);
+    if (count($name) != 3) {
+        return $name;
+    }
+    switch ($name[0]) {
+        case 'info':
+            $result .= '<span class="label label-success" style="text-shadow: none;">info</span> ';
+            break;
+        case 'action':
+            $result .= '<span class="label label-danger" style="text-shadow: none;">action</span> ';
+            break;
+        default:
+            $result .= $name[0];
+            break;
+    }
+    switch ($name[1]) {
+        case 'other':
+            $result .= '<span class="label label-warning" style="text-shadow: none;">other</span> ';
+            break;
+        case 'color':
+            $result .= '<span class="label label-success" style="text-shadow: none;">color</span> ';
+            break;
+        case 'slider':
+            $result .= '<span class="label label-primary" style="text-shadow: none;">slider</span> ';
+            break;
+        case 'binary':
+            $result .= '<span class="label label-info" style="text-shadow: none;">binary</span> ';
+            break;
+        case 'numeric':
+            $result .= '<span class="label label-danger" style="text-shadow: none;">numeric</span> ';
+            break;
+        case 'string':
+            $result .= '<span class="label label-default" style="text-shadow: none;">string</span> ';
+            break;
+        default:
+            $result .= $name[1];
+            break;
+    }
+    return $result .= $name[2];
+}
 ?>
 <style>
     .CodeMirror {
@@ -23,81 +71,67 @@ include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
         overflow-x: auto;
     }
 
-    li.li_widget.active{
-        color: white;
-        background-color: #178FE5;
-        text-decoration-color: white;
+    #ul_widget{
+        line-height: 85%;
+
     }
 
-    li.li_widget.active a{
-        color: white;
-        background-color: #178FE5;
-        text-decoration-color: white;
+    .market:hover{
+        background-color : #F2F1EF !important;
     }
-
-    li a{
-        text-decoration: none;
-        margin-left: 4px;
-    }
-
 </style>
 
 <div class="row row-overflow">
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-4">
         <div class="bs-sidebar">
             <ul id="ul_widget" class="nav nav-list bs-sidenav">
                 <a class="btn btn-default btn-sm tooltips" id="bt_getFromMarket" title="{{Récuperer du market}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Market}}</a>
                 <a class="btn btn-default widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter un widget}}</a>
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_dashboard">
-                                    Dashboard
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse_dashboard" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <?php
-                                foreach (widget::listWidget('dashboard') as $widget) {
-                                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a>' . $widget->getHumanName();
-                                    echo '</a></li>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_mobile">
-                                    Mobile
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse_mobile" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <?php
-                                foreach (widget::listWidget('mobile') as $widget) {
-                                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a>' . $widget->getHumanName();
-                                    echo '</a></li>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>       
+                <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
+                <?php
+                foreach ($dashboardWidget as $widget) {
+                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><span class="label label-info" style="text-shadow: none;">Dashboard</span> ' . displayWidgetName($widget->getHumanName());
+                    echo '</a></li>';
+                }
+                foreach ($mobileWidget as $widget) {
+                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><span class="label label-primary" style="text-shadow: none;">Mobile</span> ' . displayWidgetName($widget->getHumanName());
+                    echo '</a></li>';
+                }
+                ?>
             </ul>
         </div>
     </div>
-    <div class="col-lg-10 col-md-9 col-sm-8 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+    <div class="col-lg-9 col-md-8 col-sm-8 widgetListDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
+        <legend>{{Liste des widgets desktop}}</legend>
+        <div class="pluginContainer">
+            <?php
+            $widget_list = array_merge($dashboardWidget, $mobileWidget);
+            foreach ($widget_list as $widget) {
+                echo '<div class="widgetDisplayCard cursor ' . $install . '" data-path="' . $widget->getPath() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
+                if ($widget->getVersion() == 'mobile') {
+                    echo '<i class="fa fa-mobile pull-left" style="color:#c5c5c5"></i>';
+                } else {
+                    echo '<i class="fa fa-desktop pull-left" style="color:#c5c5c5"></i>';
+                }
+                echo "<center>";
+                $urlPath = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
+                echo '<img class="lazy" src="core/img/no_image.gif" data-original="' . $urlPath . '" height="105" width="95" />';
+                echo "</center>";
+                echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getHumanName() . '</span>';
+                echo '</div>';
+            }
+            ?>
+        </div>
+    </div>
+
+
+
+    <div class="col-lg-9 col-md-8 col-sm-8 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
 
         <div class="row">
             <div class="col-sm-6">
                 <legend>
-                    {{Général}}
+                    <i class="fa fa-arrow-circle-left cursor" id="bt_displayWidgetList"></i> {{Général}}
                     <a class="btn btn-default btn-xs pull-right" id="bt_manageFiles"><i class="fa fa-file"></i> {{Fichiers}}</a>
                 </legend>
                 <form class="form-horizontal">
