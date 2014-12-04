@@ -18,7 +18,7 @@
 
 editor = null;
 
-$(".li_widget").on('click', function(event) {
+$(".li_widget").on('click', function (event) {
     $('.widget').show();
     $('.li_widget').removeClass('active');
     $(this).addClass('active');
@@ -34,43 +34,48 @@ if (getUrlVars('removeSuccessFull') == 1) {
     $('#div_alert').showAlert({message: '{{Suppression effectué avec succès}}', level: 'success'});
 }
 
-$('.widgetAction[data-action=save]').on('click', function() {
+jwerty.key('ctrl+s', function (e) {
+    e.preventDefault();
     saveWidget();
 });
 
-$('.widgetAction[data-action=remove]').on('click', function() {
-    bootbox.confirm('{{Etes-vous sûr de vouloir supprimer le widget}} <span style="font-weight: bold ;">' + $('.widgetAttr[data-l1key=name]').value() + '</span> ?', function(result) {
+$('.widgetAction[data-action=save]').on('click', function () {
+    saveWidget();
+});
+
+$('.widgetAction[data-action=remove]').on('click', function () {
+    bootbox.confirm('{{Etes-vous sûr de vouloir supprimer le widget}} <span style="font-weight: bold ;">' + $('.widgetAttr[data-l1key=name]').value() + '</span> ?', function (result) {
         if (result) {
             removeWidget($('.widgetAttr[data-l1key=path]').value());
         }
     });
 });
 
-$('.widgetAction[data-action=add]').on('click', function() {
+$('.widgetAction[data-action=add]').on('click', function () {
     $.hideAlert();
-    bootbox.prompt("Nom du widget ?", function(result) {
+    bootbox.prompt("Nom du widget ?", function (result) {
         if (result !== null) {
             addWidget(result);
         }
     });
 });
 
-$('#bt_shareOnMarket').on('click', function() {
+$('#bt_shareOnMarket').on('click', function () {
     $('#md_modal').dialog({title: "Partager sur le market"});
     $('#md_modal').load('index.php?v=d&modal=market.send&type=widget&logicalId=' + encodeURI($('.widgetAttr[data-l1key=logicalId]').value()) + '&name=' + encodeURI($('.widgetAttr[data-l1key=logicalId]').value())).dialog('open');
 });
 
-$('#bt_applyWidget').on('click', function() {
+$('#bt_applyWidget').on('click', function () {
     $('#md_modal').dialog({title: "Appliquer widget"});
     $('#md_modal').load('index.php?v=d&plugin=widget&modal=widget.apply&path=' + encodeURI($('.widgetAttr[data-l1key=path]').value())).dialog('open');
 });
 
-$('#bt_manageFiles').on('click', function() {
+$('#bt_manageFiles').on('click', function () {
     $('#md_modal').dialog({title: "Gérer les dépendances"});
     $('#md_modal').load('index.php?v=d&plugin=widget&modal=widget.3rdparty&path=' + encodeURI($('.widgetAttr[data-l1key=path]').value())).dialog('open');
 });
 
-$('#bt_getFromMarket').on('click', function() {
+$('#bt_getFromMarket').on('click', function () {
     $('#md_modal').dialog({title: "Partager sur le market"});
     $('#md_modal').load('index.php?v=d&modal=market.list&type=widget').dialog('open');
 });
@@ -85,12 +90,12 @@ if (getUrlVars('id') != '') {
     $('#ul_widget .li_widget:first').click();
 }
 
-$('body').delegate('.widgetAttr', 'change', function() {
+$('body').delegate('.widgetAttr', 'change', function () {
     modifyWithoutSave = true;
 });
 
-$('#bt_insertIcon').on('click', function() {
-    chooseIcon(function(_icon) {
+$('#bt_insertIcon').on('click', function () {
+    chooseIcon(function (_icon) {
         editor.replaceSelection(_icon);
     });
 });
@@ -104,10 +109,10 @@ function printWidget(_path) {
             path: _path
         },
         dataType: 'json',
-        error: function(request, status, error) {
+        error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function(data) { // si l'appel a bien fonctionné
+        success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -118,7 +123,7 @@ function printWidget(_path) {
                 if (isset(data.result.content)) {
                     $('#ta_script').val(data.result.content);
                 }
-                setTimeout(function() {
+                setTimeout(function () {
                     editor = CodeMirror.fromTextArea(document.getElementById("ta_widgetContent"), {
                         lineNumbers: true,
                         mode: "text/html",
@@ -154,10 +159,10 @@ function saveWidget() {
             widget: json_encode(widget),
         },
         dataType: 'json',
-        error: function(request, status, error) {
+        error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function(data) { // si l'appel a bien fonctionné
+        success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -186,10 +191,10 @@ function addWidget(_name) {
             name: _name,
         },
         dataType: 'json',
-        error: function(request, status, error) {
+        error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function(data) { // si l'appel a bien fonctionné
+        success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -216,10 +221,10 @@ function removeWidget(_path) {
             path: _path,
         },
         dataType: 'json',
-        error: function(request, status, error) {
+        error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function(data) { // si l'appel a bien fonctionné
+        success: function (data) { // si l'appel a bien fonctionné
             if (data.state != 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
