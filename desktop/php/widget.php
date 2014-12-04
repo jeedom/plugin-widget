@@ -26,10 +26,10 @@ function displayWidgetName($_name) {
     }
     switch ($name[0]) {
         case 'info':
-            $result .= '<span class="label label-success" style="text-shadow: none;">info</span> ';
+            $result .= '<i class="fa fa-eye" title="Widget de type information"></i> ';
             break;
         case 'action':
-            $result .= '<span class="label label-danger" style="text-shadow: none;">action</span> ';
+            $result .= '<i class="fa fa-exclamation-circle" title="Widget de type action"></i> ';
             break;
         default:
             $result .= $name[0];
@@ -82,7 +82,7 @@ function displayWidgetName($_name) {
 </style>
 
 <div class="row row-overflow">
-    <div class="col-lg-3 col-md-4 col-sm-4">
+    <div class="col-lg-2 col-md-3 col-sm-4">
         <div class="bs-sidebar">
             <ul id="ul_widget" class="nav nav-list bs-sidenav">
                 <a class="btn btn-default btn-sm tooltips" id="bt_getFromMarket" title="{{Récuperer du market}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Market}}</a>
@@ -90,19 +90,24 @@ function displayWidgetName($_name) {
                 <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
                 <?php
                 foreach ($dashboardWidget as $widget) {
-                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><span class="label label-info" style="text-shadow: none;">Dashboard</span> ' . displayWidgetName($widget->getHumanName());
+                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop" title="Widget pour la version bureau"></i> ' . displayWidgetName($widget->getHumanName());
                     echo '</a></li>';
                 }
                 foreach ($mobileWidget as $widget) {
-                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><span class="label label-primary" style="text-shadow: none;">Mobile</span> ' . displayWidgetName($widget->getHumanName());
+                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-mobile" title="Widget pour la version mobile"></i> ' . displayWidgetName($widget->getHumanName());
                     echo '</a></li>';
                 }
                 ?>
             </ul>
         </div>
     </div>
-    <div class="col-lg-9 col-md-8 col-sm-8 widgetListDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-        <legend>{{Liste des widgets desktop}}</legend>
+    <div class="col-lg-10 col-md-9 col-sm-8 widgetListDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
+        <legend>{{Widgets installés sur votre Jeedom}}
+            <span style="font-size: 0.7em;color:#c5c5c5">
+                Vous devez être connecté à internet pour voir les prévisualisation
+            </span>
+        
+        </legend>
         <div class="pluginContainer">
             <?php
             $widget_list = array_merge($dashboardWidget, $mobileWidget);
