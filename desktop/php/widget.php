@@ -26,10 +26,10 @@ function displayWidgetName($_name) {
     }
     switch ($name[0]) {
         case 'info':
-            $result .= '<i class="fa fa-eye" title="Widget de type information"></i> ';
+            $result .= '<i class="fa fa-eye fa-fw" title="Widget de type information"></i> ';
             break;
         case 'action':
-            $result .= '<i class="fa fa-exclamation-circle" title="Widget de type action"></i> ';
+            $result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action"></i> ';
             break;
         default:
             $result .= $name[0];
@@ -90,11 +90,11 @@ function displayWidgetName($_name) {
                 <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
                 <?php
                 foreach ($dashboardWidget as $widget) {
-                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop" title="Widget pour la version bureau"></i> ' . displayWidgetName($widget->getHumanName());
+                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop fa-fw" title="Widget pour la version bureau"></i> ' . displayWidgetName($widget->getHumanName());
                     echo '</a></li>';
                 }
                 foreach ($mobileWidget as $widget) {
-                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-mobile" title="Widget pour la version mobile"></i> ' . displayWidgetName($widget->getHumanName());
+                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-mobile fa-fw" title="Widget pour la version mobile"></i> ' . displayWidgetName($widget->getHumanName());
                     echo '</a></li>';
                 }
                 ?>
