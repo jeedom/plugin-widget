@@ -1,11 +1,8 @@
-<div style="width:90px;min-height:105px;" class="#history# tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" >
+<div style="min-width:90px;min-height:105px;padding:0px !important;" class="#history# container-fluid tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" >
     <div class="gauge"></div>
-    <center>
-        <span style="#displayHistory#" class="statistiques">
-            <span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> <i class="#tendance#"></i>
-        </span>
-    </center>
-
+    <div style="#displayHistory# font-size: 0.8em;" class="col-xs-12 center-block">
+        <span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> <i class="#tendance#"></i>
+    </div>
     <script>
         if (is_numeric('#state#')) {
         $('.cmd[data-cmd_id=#id#] .gauge').highcharts({
@@ -36,7 +33,7 @@
                 },
                 plotOptions: {
                 series: {
-                animation: false
+                animation: false,
                 }
                 },
                 tooltip: {

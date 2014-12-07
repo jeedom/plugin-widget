@@ -13,7 +13,7 @@ include_file('3rdparty', 'jquery.fileupload/jquery.ui.widget', 'js');
 include_file('3rdparty', 'jquery.fileupload/jquery.iframe-transport', 'js');
 include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
 include_file('3rdparty', 'jquery.lazyload/jquery.lazyload', 'js');
-include_file('3rdparty', 'jquery.masonry/jquery.masonry', 'js');
+include_file('3rdparty', 'jquery.packery/jquery.packery', 'js');
 
 $mobileWidget = widget::listWidget('mobile');
 $dashboardWidget = widget::listWidget('dashboard');

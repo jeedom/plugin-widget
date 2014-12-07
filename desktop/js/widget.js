@@ -18,7 +18,7 @@
 
 editor = null;
 
-$('.pluginContainer').masonry({columnWidth: 10});
+$('.pluginContainer').packery();
 
 $("img.lazy").lazyload({
     event: "sporty"
