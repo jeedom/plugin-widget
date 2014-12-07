@@ -12,69 +12,101 @@
 
     <script>
         setTimeout(function(){
-            if (is_numeric(parseInt('#state#'))) {
-                $('.cmd[data-cmd_id=#id#] .vuMeter').highcharts({
-                    chart: {
-                        type: 'gauge',
-                        plotBackgroundImage: null,
-                        backgroundColor: null,
-                        height: 130
-                    },
-                    credits: {
-                        text: '',
+        if (is_numeric('#state#')) {
+        $('.cmd[data-cmd_id=#id#] .vuMeter').highcharts({
+        chart: {
+        events: {
+        click: function (event) {
+        if (!$.mobile && '#history#' == 'history cursor') {
+        $('#md_modal').dialog({title: "{{Historique}}"});
+                $("#md_modal").load('index.php?v=d&modal=cmd.history&id=#id#').dialog('open');
+        }
+        }
+        },
+                type: 'gauge',
+                plotBackgroundColor: null,
+                plotBackgroundImage: null,
+                backgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false,
+                height: 90,
+                spacingTop: 0,
+                spacingLeft: 0,
+                spacingRight: 0,
+                spacingBottom: 0
+        },
+                credits: {
+                text: '',
                         href: '',
-                    },
-                    title: {
-                        text: ''
-                    },
-                    navigation: {
-                        buttonOptions: {
-                            enabled: false
-                        }
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    pane: [{
-                            startAngle: -45,
-                            endAngle: 45,
-                            background: null,
-                            center: ['55%', '100%'],
-                            size: 130
-                        }],
-                    yAxis: [{
-                            min: #minValue#,
-                            max: #maxValue#,
-                            minorTickPosition: 'outside',
-                            tickPosition: 'outside',
-                            labels: {
-                                rotation: 'auto',
-                                distance: -10
-                            },
-                            pane: 0,
-                            title: {
-                                text: '<span style="font-size:8px">Channel A</span>',
-                            }
-                        }],
-                    plotOptions: {
-                        gauge: {
-                            dataLabels: {
-                                y: -95,
-                                borderWidth: 0
-                            },
+                },
+                title: {
+                text: ''
+                },
+                navigation: {
+                buttonOptions: {
+                enabled: false
+                }
+                },
+                tooltip: {
+                enabled: false
+                },
+                pane: [{
+                startAngle: - 60,
+                        endAngle: 60,
+                        background: null,
+                        center: ['50%', '80%'],
+                        size: 100
+                }],
+                yAxis: [{
+                min: #minValue#,
+                        max: #maxValue#,
+                        tickWidth: 2,
+                        tickLength: 10,
+                        lineWidth: 3,
+                        minorTickPosition: 'outside',
+                        tickPosition: 'outside',
+                        tickColor: '#FFFFFF',
+                        lineColor: '#FFFFFF',
+                        labels: {
+                        rotation: 'auto',
+                                style: {
+                                color: '#FFFFFF',
+                                        fontWeight: 'bold'
+                                },
+                                distance: - 14
                         },
-                        series: {
-                            animation: false
+                        pane: 0,
+                        title: {
+                        useHTML: true,
+                                style: {
+                                color:'white',
+                                        zIndex: 999,
+                                        'font-weight': 'bold',
+                                },
+                                align: 'middle',
+                                y: 20,
+                                text: '#state# #unite#',
                         }
-                    },
-                    series: [{
-                            data: [parseInt('#state#')]
-                        }]
+                }],
+                plotOptions: {
+                gauge: {
+                dataLabels: {
+                y: - 95,
+                        borderWidth: 0
+                },
+                },
+                        series: {
+                        animation: false
+                        }
+                },
+                series: [{
+                data: [parseInt('#state#')]
+                }]
 
-                });
-            } else {
-                $('.cmd[data-cmd_id=#id#] .vuMeter').append('<span class="label label-danger" style="vertical-align : top;">#state#</span>');
-            }
-       },100);
+        });
+        } else {
+        $('.cmd[data-cmd_id=#id#] .vuMeter').append('<center><span class="label label-danger" style="margin-top : 5px;">#state#</span></center>');
+        }
+        }, 100);
     </script>
 </span>

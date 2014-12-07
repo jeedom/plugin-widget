@@ -7,7 +7,15 @@
         if (is_numeric('#state#')) {
         $('.cmd[data-cmd_id=#id#] .vuMeter').highcharts({
         chart: {
-        type: 'gauge',
+        events: {
+        click: function (event) {
+        if (!$.mobile && '#history#' == 'history cursor') {
+        $('#md_modal').dialog({title: "{{Historique}}"});
+                $("#md_modal").load('index.php?v=d&modal=cmd.history&id=#id#').dialog('open');
+        }
+        }
+        },
+                type: 'gauge',
                 plotBackgroundColor: null,
                 plotBackgroundImage: null,
                 backgroundColor: null,
