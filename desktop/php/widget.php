@@ -112,7 +112,7 @@ function displayWidgetName($_name) {
             <?php
             $widget_list = array_merge($dashboardWidget, $mobileWidget);
             foreach ($widget_list as $widget) {
-                echo '<div class="widgetDisplayCard cursor ' . $install . '" data-path="' . $widget->getPath() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
+                echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
                 if ($widget->getVersion() == 'mobile') {
                     echo '<i class="fa fa-mobile pull-left" style="color:#c5c5c5"></i>';
                 } else {
