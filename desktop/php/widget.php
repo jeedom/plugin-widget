@@ -131,7 +131,7 @@ function displayWidgetName($_name) {
 
 
 
-    <div class="col-lg-9 col-md-8 col-sm-8 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+    <div class="col-lg-10 col-md-9 col-sm-8 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
 
         <div class="row">
             <div class="col-sm-6">
