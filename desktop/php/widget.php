@@ -71,11 +71,6 @@ function displayWidgetName($_name) {
         overflow-x: auto;
     }
 
-    #ul_widget{
-        line-height: 85%;
-
-    }
-
     .market:hover{
         background-color : #F2F1EF !important;
     }
