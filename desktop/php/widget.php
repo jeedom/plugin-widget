@@ -115,8 +115,9 @@ function displayWidgetName($_name) {
                 }
                 $urlPath = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
                 $urlPath2 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
+                $urlPath3 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.jpg';
                 echo "<center>";
-                echo '<img class="lazy" src="/plugins/widget/doc/images/widget_icon.png" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
+                echo '<img class="lazy" src="/plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
                 echo "</center>";
                 echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getHumanName() . '</span>';
                 echo '</div>';
