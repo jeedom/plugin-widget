@@ -101,7 +101,7 @@ function displayWidgetName($_name) {
             <span style="font-size: 0.7em;color:#c5c5c5">
                 Vous devez être connecté à internet pour voir les prévisualisation
             </span>
-        
+
         </legend>
         <div class="pluginContainer">
             <?php
@@ -113,9 +113,10 @@ function displayWidgetName($_name) {
                 } else {
                     echo '<i class="fa fa-desktop pull-left" style="color:#c5c5c5"></i>';
                 }
-                echo "<center>";
                 $urlPath = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
-                echo '<img class="lazy" src="core/img/no_image.gif" data-original="' . $urlPath . '" height="105" width="95" />';
+                $urlPath2 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
+                echo "<center>";
+                echo '<img class="lazy" src="/plugins/widget/doc/images/widget_icon.png" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
                 echo "</center>";
                 echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getHumanName() . '</span>';
                 echo '</div>';

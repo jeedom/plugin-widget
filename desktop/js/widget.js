@@ -20,15 +20,37 @@ editor = null;
 
 $('.pluginContainer').packery();
 
-$("img.lazy").lazyload({
-    event: "sporty"
+$("img.lazy").each(function () {
+    var el = $(this);
+    if (el.attr('data-original2') != undefined) {
+        $("<img>", {
+            src: el.attr('data-original2'),
+            error: function () {
+                el.lazyload({
+                    event: "sporty"
+                });
+                el.trigger("sporty");
+            },
+            load: function () {
+                el.attr("data-original", el.attr('data-original2'));
+                el.lazyload({
+                    event: "sporty"
+                });
+                el.trigger("sporty");
+            }
+        });
+    } else {
+        el.lazyload({
+            event: "sporty"
+        });
+        el.trigger("sporty");
+    }
 });
-$("img.lazy").trigger("sporty");
 
-$('#bt_displayWidgetList').on('click',function(){
+$('#bt_displayWidgetList').on('click', function () {
     $('.widget').hide();
     $('.widgetListDisplay').show();
-     $('.li_widget').removeClass('active');
+    $('.li_widget').removeClass('active');
 });
 
 $(".li_widget").on('click', function (event) {
