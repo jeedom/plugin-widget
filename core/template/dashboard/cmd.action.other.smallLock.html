@@ -4,15 +4,14 @@
         <span style="font-size: 2em;font-weight: bold;margin-top: 5px;" class="action" id="iconCmd#id#"></span>
     </center>
     <script>
-        var cmdName = '#name#';
         if ('#state#' == '1' || '#state#' == 1) {
             $('#iconCmd#id#').append('<i class="icon jeedom-lock-ferme"></i>');
-            if (cmdName.toLowerCase().indexOf('lock') == 0) {
+            if (jeedom.cmd.normalizeName('#name#') == 'on') {
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
         } else {
             $('#iconCmd#id#').append('<i class="icon jeedom-lock-ouvert"></i>');
-            if (cmdName.toLowerCase().indexOf('unlock') == 0) {
+            if (jeedom.cmd.normalizeName('#name#') == 'off') {
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
         }
