@@ -32,10 +32,10 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
 ?>
 
 <div style="display: none;" id="md_applyWidgetAlert"></div>
-
-<a class="btn btn-default" id="bt_applyWidgetToogle" data-state="0"><i class="fa fa-check-circle-o"></i> {{Basculer}}</a>
-<a class="btn btn-success pull-right bt_applyWidgetToCmd" data-path="<?php echo $widget->getPath() ?>" style="color : white;" data-version=""><i class="fa fa-check"></i> {{Valider}}</a>
-
+<div style="position: fixed;height: 50px;background-color: white;margin-top:-6px;padding-top: 6px;" id="div_boutons">
+    <a class="btn btn-default" id="bt_applyWidgetToogle" data-state="0"><i class="fa fa-check-circle-o"></i> {{Basculer}}</a>
+    <a class="btn btn-success pull-right bt_applyWidgetToCmd" data-path="<?php echo $widget->getPath() ?>" style="color : white;" data-version=""><i class="fa fa-check"></i> {{Valider}}</a>
+</div>
 <br/><br/>
 
 <table class="table table-bordered table-condensed tablesorter" id="table_applyWidget">
@@ -85,8 +85,11 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
 
 
 <script>
+   $('#div_boutons').width($('#div_boutons').parent().width() - 8);
+    
+    
     initTableSorter();
-    $('#bt_applyWidgetToogle').on('click', function() {
+    $('#bt_applyWidgetToogle').on('click', function () {
         var state = false;
         if ($(this).attr('data-state') == 0) {
             state = true;
@@ -97,17 +100,17 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
             $(this).attr('state', 0);
             $(this).find('i').removeClass('fa-circle-o').addClass('fa-check-circle-o');
         }
-        $('#table_applyWidget tbody tr').each(function() {
+        $('#table_applyWidget tbody tr').each(function () {
             if ($(this).is(':visible')) {
                 $(this).find('.applyWidget').prop('checked', state);
             }
         });
     });
 
-    $('.bt_applyWidgetToCmd').on('click', function() {
+    $('.bt_applyWidgetToCmd').on('click', function () {
         var cmds = [];
         var unselects = [];
-        $('#table_applyWidget tbody tr').each(function() {
+        $('#table_applyWidget tbody tr').each(function () {
             if ($(this).find('.applyWidget').prop('checked')) {
                 cmds.push($(this).attr('data-cmd_id'));
             } else {
@@ -127,10 +130,10 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
                 version: version
             },
             dataType: 'json',
-            error: function(request, status, error) {
-                handleAjaxError(request, status, error,$('#md_applyWidgetAlert'));
+            error: function (request, status, error) {
+                handleAjaxError(request, status, error, $('#md_applyWidgetAlert'));
             },
-            success: function(data) { // si l'appel a bien fonctionné
+            success: function (data) { // si l'appel a bien fonctionné
                 if (data.state != 'ok') {
                     $('#md_applyWidgetAlert').showAlert({message: data.result, level: 'danger'});
                     return;
