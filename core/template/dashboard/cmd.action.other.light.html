@@ -7,7 +7,7 @@
         if ('#displayName#' == 1 || '#displayName#' == '1') {
             $('.cmd[data-cmd_id=#id#] .cmdName').show();
         }
-        if ('#state#' == '1' || '#state#' == 1) {
+        if ('#state#' == '1' || '#state#' == 1 || '#state#' == '99' || '#state#' == 99 || '#state#' == 'on') {
             $('#iconCmd#id#').append('<i class="icon jeedom-lumiere-on"></i>');
             if (jeedom.cmd.normalizeName('#name#') == 'on') {
                 $('.cmd[data-cmd_id=#id#]').hide();
