@@ -215,6 +215,10 @@ class widget {
         return $this->getVersion() . '.' . $this->getHumanName();
     }
 
+    public function getUsedBy() {
+        return cmd::searchTemplate('"'.$this->getVersion() . '":"' . $this->getName().'"', null, $this->getType(), $this->getSubtype());
+    }
+
     /*     * **********************Getteur Setteur*************************** */
 
     public function getType() {

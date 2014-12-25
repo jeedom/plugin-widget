@@ -182,6 +182,14 @@ function displayWidgetName($_name) {
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{Utilisé par }}</label>
+                            <div class="col-sm-6">
+                                <span class="label label-primary">
+                                <span class="widgetAttr" data-l1key="nbUsedBy"></span> commande(s)
+                                </span>
+                            </div>
+                        </div>
                     </fieldset>
                 </form>
             </div>

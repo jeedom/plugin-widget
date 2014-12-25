@@ -30,6 +30,9 @@ try {
         }
         $return = utils::o2a($widget);
         $return['logicalId'] = $widget->getLogicalId();
+        $usedBy = $widget->getUsedBy();
+        $return['nbUsedBy'] = count($usedBy);
+        $return['usedBy'] = $usedBy;
         ajax::success($return);
     }
 
