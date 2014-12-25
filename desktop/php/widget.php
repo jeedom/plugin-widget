@@ -77,7 +77,7 @@ function displayWidgetName($_name) {
 </style>
 
 <div class="row row-overflow">
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-4">
         <div class="bs-sidebar">
             <ul id="ul_widget" class="nav nav-list bs-sidenav">
                 <a class="btn btn-default btn-sm tooltips" id="bt_getFromMarket" title="{{Récuperer du market}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Market}}</a>
@@ -86,17 +86,19 @@ function displayWidgetName($_name) {
                 <?php
                 foreach ($dashboardWidget as $widget) {
                     echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop fa-fw" title="Widget pour la version bureau"></i> ' . displayWidgetName($widget->getHumanName());
+                     echo '<span class="badge pull-right">'.count($widget->getUsedBy()).'</span>';
                     echo '</a></li>';
                 }
                 foreach ($mobileWidget as $widget) {
                     echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-mobile fa-fw" title="Widget pour la version mobile"></i> ' . displayWidgetName($widget->getHumanName());
+                    echo '<span class="badge pull-right">'.count($widget->getUsedBy()).'</span>';
                     echo '</a></li>';
                 }
                 ?>
             </ul>
         </div>
     </div>
-    <div class="col-lg-10 col-md-9 col-sm-8 widgetListDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
+    <div class="col-lg-9 col-md-8 col-sm-8 widgetListDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Widgets installés sur votre Jeedom}}
             <span style="font-size: 0.7em;color:#c5c5c5">
                 Vous devez être connecté à internet pour voir les prévisualisation
@@ -128,7 +130,7 @@ function displayWidgetName($_name) {
 
 
 
-    <div class="col-lg-10 col-md-9 col-sm-8 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+    <div class="col-lg-9 col-md-8 col-sm-8 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
 
         <div class="row">
             <div class="col-sm-6">
