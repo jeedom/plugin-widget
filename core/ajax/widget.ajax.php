@@ -67,6 +67,14 @@ try {
         ajax::success();
     }
 
+     if (init('action') == 'copy') {
+        $widget = widget::byPath(init('path'));
+        if (!is_object($widget)) {
+            throw new Exception(__('Widget non trouvé : ', __FILE__) . init('path'));
+        }
+        ajax::success(utils::o2a($widget->copy(init('name',$widget->getName().'_copy'))));
+    }
+
     if (init('action') == 'applyWidget') {
         if (init('path') != 'default') {
             $widget = widget::byPath(init('path'));

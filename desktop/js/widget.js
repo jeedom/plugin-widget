@@ -16,11 +16,11 @@
  */
 
 
-editor = null;
+ editor = null;
 
-$('.pluginContainer').packery();
+ $('.pluginContainer').packery();
 
-$("img.lazy").each(function () {
+ $("img.lazy").each(function () {
     var el = $(this);
     if (el.attr('data-original2') != undefined) {
         $("<img>", {
@@ -61,20 +61,20 @@ $("img.lazy").each(function () {
                         el.trigger("sporty");
                     }
                 });
-            },
-            load: function () {
-                el.lazyload({
-                    event: "sporty"
-                });
-                el.trigger("sporty");
-            }
-        });
-    } else {
-        el.lazyload({
-            event: "sporty"
-        });
-        el.trigger("sporty");
-    }
+},
+load: function () {
+    el.lazyload({
+        event: "sporty"
+    });
+    el.trigger("sporty");
+}
+});
+} else {
+    el.lazyload({
+        event: "sporty"
+    });
+    el.trigger("sporty");
+}
 });
 
 $('#bt_displayWidgetList').on('click', function () {
@@ -113,6 +113,14 @@ $('.widgetAction[data-action=remove]').on('click', function () {
     bootbox.confirm('{{Etes-vous sûr de vouloir supprimer le widget}} <span style="font-weight: bold ;">' + $('.widgetAttr[data-l1key=name]').value() + '</span> ?', function (result) {
         if (result) {
             removeWidget($('.widgetAttr[data-l1key=path]').value());
+        }
+    });
+});
+
+$('.widgetAction[data-action=copy]').on('click', function () {
+    bootbox.prompt("{{Nom la copie du widget ?}}", function (result) {
+        if (result) {
+            copyWidget($('.widgetAttr[data-l1key=path]').value(),result);
         }
     });
 });
@@ -179,35 +187,35 @@ function printWidget(_path) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                return;
-            }
-            $('.widget').setValues(data.result, '.widgetAttr');
-
-            if (editor == null) {
-                if (isset(data.result.content)) {
-                    $('#ta_script').val(data.result.content);
-                }
-                setTimeout(function () {
-                    editor = CodeMirror.fromTextArea(document.getElementById("ta_widgetContent"), {
-                        lineNumbers: true,
-                        mode: "text/html",
-                        matchBrackets: true,
-                        viewportMargin: Infinity
-                    });
-                }, 1);
-            } else {
-                if (isset(data.result.content)) {
-                    editor.setValue(data.result.content);
-                }
-            }
-            initTooltips();
-            $('#div_widgetResult').empty();
-            $('#div_widgetResult').append('<iframe src="index.php?v=d&plugin=widget&modal=widget.result&path=' + data.result.path + '" frameBorder="0" height="200"></iframe>');
-            modifyWithoutSave = false;
+        if (data.state != 'ok') {
+            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            return;
         }
-    });
+        $('.widget').setValues(data.result, '.widgetAttr');
+
+        if (editor == null) {
+            if (isset(data.result.content)) {
+                $('#ta_script').val(data.result.content);
+            }
+            setTimeout(function () {
+                editor = CodeMirror.fromTextArea(document.getElementById("ta_widgetContent"), {
+                    lineNumbers: true,
+                    mode: "text/html",
+                    matchBrackets: true,
+                    viewportMargin: Infinity
+                });
+            }, 1);
+        } else {
+            if (isset(data.result.content)) {
+                editor.setValue(data.result.content);
+            }
+        }
+        initTooltips();
+        $('#div_widgetResult').empty();
+        $('#div_widgetResult').append('<iframe src="index.php?v=d&plugin=widget&modal=widget.result&path=' + data.result.path + '" frameBorder="0" height="200"></iframe>');
+        modifyWithoutSave = false;
+    }
+});
 }
 
 function saveWidget() {
@@ -229,22 +237,22 @@ function saveWidget() {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                return;
-            }
-            var vars = getUrlVars();
-            var url = 'index.php?';
-            for (var i in vars) {
-                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull' && i != undefined) {
-                    url += i + '=' + vars[i].replace('#', '') + '&';
-                }
-            }
-            url += 'id=' + data.result.path + '&saveSuccessFull=1';
-            modifyWithoutSave = false;
-            window.location.href = url;
+        if (data.state != 'ok') {
+            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            return;
         }
-    });
+        var vars = getUrlVars();
+        var url = 'index.php?';
+        for (var i in vars) {
+            if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull' && i != undefined) {
+                url += i + '=' + vars[i].replace('#', '') + '&';
+            }
+        }
+        url += 'id=' + data.result.path + '&saveSuccessFull=1';
+        modifyWithoutSave = false;
+        window.location.href = url;
+    }
+});
 }
 
 
@@ -261,21 +269,21 @@ function addWidget(_name) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                return;
-            }
-            var vars = getUrlVars();
-            var url = 'index.php?';
-            for (var i in vars) {
-                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
-                    url += i + '=' + vars[i].replace('#', '') + '&';
-                }
-            }
-            url += 'id=' + data.result.path + '&saveSuccessFull=1';
-            window.location.href = url;
+        if (data.state != 'ok') {
+            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            return;
         }
-    });
+        var vars = getUrlVars();
+        var url = 'index.php?';
+        for (var i in vars) {
+            if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
+                url += i + '=' + vars[i].replace('#', '') + '&';
+            }
+        }
+        url += 'id=' + data.result.path + '&saveSuccessFull=1';
+        window.location.href = url;
+    }
+});
 }
 
 function removeWidget(_path) {
@@ -291,20 +299,51 @@ function removeWidget(_path) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                return;
-            }
-            var vars = getUrlVars();
-            var url = 'index.php?';
-            for (var i in vars) {
-                if (i != 'id' && i != 'removeSuccessFull' && i != 'saveSuccessFull') {
-                    url += i + '=' + vars[i].replace('#', '') + '&';
-                }
-            }
-            url += 'removeSuccessFull=1';
-            modifyWithoutSave = false;
-            window.location.href = url;
+        if (data.state != 'ok') {
+            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            return;
         }
-    });
+        var vars = getUrlVars();
+        var url = 'index.php?';
+        for (var i in vars) {
+            if (i != 'id' && i != 'removeSuccessFull' && i != 'saveSuccessFull') {
+                url += i + '=' + vars[i].replace('#', '') + '&';
+            }
+        }
+        url += 'removeSuccessFull=1';
+        modifyWithoutSave = false;
+        window.location.href = url;
+    }
+});
+}
+
+function copyWidget(_path,_name) {
+    $.ajax({// fonction permettant de faire de l'ajax
+        type: "POST", // methode de transmission des données au fichier php
+        url: "plugins/widget/core/ajax/widget.ajax.php", // url du fichier php
+        data: {
+            action: "copy",
+            path: _path,
+            name: _name,
+        },
+        dataType: 'json',
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error);
+        },
+        success: function (data) { // si l'appel a bien fonctionné
+        if (data.state != 'ok') {
+            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            return;
+        }
+        var vars = getUrlVars();
+        var url = 'index.php?';
+        for (var i in vars) {
+            if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
+                url += i + '=' + vars[i].replace('#', '') + '&';
+            }
+        }
+        url += 'id=' + data.result.path + '&saveSuccessFull=1';
+        window.location.href = url;
+    }
+});
 }

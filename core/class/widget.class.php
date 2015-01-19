@@ -166,6 +166,22 @@ class widget {
         }
     }
 
+    public function copy($_name){
+        $dep = realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' .$this->getSubtype() . '.' . $this->getName();
+        if(file_exists($dep)){
+            mkdir(realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' .$this->getSubtype() . '.' . $_name);
+            if (!rcopy($dep, realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' .$this->getSubtype() . '.' . $_name, false)) {
+                throw new Exception(__('Impossible de copier ', __FILE__) . $cibDirs[1] . ' => ' . $tmp_dir);
+            }
+        }
+        $widget = clone $this;
+        $widget->setName($_name);
+        $widget->setpath(realpath($widget->generatePath()));
+        $widget->setContent(str_replace('cmd.' . $this->getType() . '.' .$this->getSubtype() . '.' . $this->getName(), 'cmd.' . $this->getType() . '.' .$this->getSubtype() . '.' . $_name, $widget->getContent()));
+        $widget->save();
+        return $widget;
+    }
+
     public function save() {
         if (trim($this->getName()) == '') {
             throw new Exception(__('Le nom du widget ne peut etre vide', __FILE__));
