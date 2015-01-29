@@ -217,7 +217,9 @@ class widget {
         if (count($cmds) < 1) {
             return __('Il n\'y a aucune commande de type : ', __FILE__) . $this->getType() . __(' et de sous-type : ', __FILE__) . $this->getSubtype();
         }
-        foreach ($cmds as $cmd) {
+        $usedBy = $this->getUsedBy();
+        if(count($usedBy) > 0){
+           foreach ($usedBy as $cmd) {
             $cmd->setTemplate($this->getVersion(), $this->getName());
             $html = $cmd->toHtml($this->getVersion());
             if (trim($html) != '') {
@@ -225,65 +227,75 @@ class widget {
                 return '<div class="eqLogic-widget" style="background-color : ' . $color . ';">' . $html . '</div>';
             }
         }
-    }
 
-    public function getLogicalId() {
-        return $this->getVersion() . '.' . $this->getHumanName();
     }
-
-    public function getUsedBy() {
-        return cmd::searchTemplate('"'.$this->getVersion() . '":"' . $this->getName().'"', null, $this->getType(), $this->getSubtype());
+    foreach ($cmds as $cmd) {
+        $cmd->setTemplate($this->getVersion(), $this->getName());
+        $html = $cmd->toHtml($this->getVersion());
+        if (trim($html) != '') {
+            $color = $cmd->getEqLogic()->getBackgroundColor($this->getVersion());
+            return '<div class="eqLogic-widget" style="background-color : ' . $color . ';">' . $html . '</div>';
+        }
     }
+}
 
-    /*     * **********************Getteur Setteur*************************** */
+public function getLogicalId() {
+    return $this->getVersion() . '.' . $this->getHumanName();
+}
 
-    public function getType() {
-        return $this->type;
-    }
+public function getUsedBy() {
+    return cmd::searchTemplate('"'.$this->getVersion() . '":"' . $this->getName().'"', null, $this->getType(), $this->getSubtype());
+}
 
-    public function setType($type) {
-        $this->type = $type;
-    }
+/*     * **********************Getteur Setteur*************************** */
 
-    public function getSubtype() {
-        return $this->subtype;
-    }
+public function getType() {
+    return $this->type;
+}
 
-    public function setSubtype($subtype) {
-        $this->subtype = $subtype;
-    }
+public function setType($type) {
+    $this->type = $type;
+}
 
-    public function getName() {
-        return $this->name;
-    }
+public function getSubtype() {
+    return $this->subtype;
+}
 
-    public function setName($name) {
-        $this->name = $name;
-    }
+public function setSubtype($subtype) {
+    $this->subtype = $subtype;
+}
 
-    public function getPath() {
-        return $this->path;
-    }
+public function getName() {
+    return $this->name;
+}
 
-    public function setPath($path) {
-        $this->path = $path;
-    }
+public function setName($name) {
+    $this->name = $name;
+}
 
-    public function getContent() {
-        return $this->content;
-    }
+public function getPath() {
+    return $this->path;
+}
 
-    public function setContent($content) {
-        $this->content = $content;
-    }
+public function setPath($path) {
+    $this->path = $path;
+}
 
-    public function getVersion() {
-        return $this->version;
-    }
+public function getContent() {
+    return $this->content;
+}
 
-    public function setVersion($version) {
-        $this->version = $version;
-    }
+public function setContent($content) {
+    $this->content = $content;
+}
+
+public function getVersion() {
+    return $this->version;
+}
+
+public function setVersion($version) {
+    $this->version = $version;
+}
 
 }
 

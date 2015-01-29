@@ -137,7 +137,7 @@ function displayWidgetName($_name) {
                 <legend>
                     <i class="fa fa-arrow-circle-left cursor" id="bt_displayWidgetList"></i> {{Général}}
                     <a class="btn btn-default btn-xs pull-right" id="bt_manageFiles"><i class="fa fa-file"></i> {{Fichiers}}</a>
-                    <a class="btn btn-default btn-xs pull-right widgetAction" data-action="copy"><i class="fa fa-files-o"></i> {{Dupliquer}}</a>
+                    <a class="btn btn-default btn-xs pull-right widgetAction expertModeVisible" data-action="copy"><i class="fa fa-files-o"></i> {{Dupliquer}}</a>
                 </legend>
                 <form class="form-horizontal">
                     <fieldset>
