@@ -194,6 +194,15 @@ class widget {
         if (realpath($this->getPath()) != realpath($this->generatePath())) {
             if (file_exists($this->getPath())) {
                 unlink($this->getPath());
+                $informations = explode('.', $this->getPath());
+                $name = $informations[count($informations) - 2];
+                $type = $informations[count($informations) - 4];
+                $subtype = $informations[count($informations) - 3];
+                $cmds = cmd::searchTemplate('"'.$this->getVersion() . '":"' . $name.'"', null, $type, $subtype);
+                foreach ($cmds as $cmd) {
+                    $cmd->setTemplate($this->getVersion(),$this->getName());
+                    $cmd->save();
+                }
             }
             if (is_dir(str_replace('.html', '', $this->getPath()))) {
                 if (!rename(str_replace('.html', '', $this->getPath()), str_replace('.html', '', $this->generatePath()))) {
@@ -201,7 +210,9 @@ class widget {
                 }
             }
         }
-        $this->setPath($this->generatePath());
+        foreach ($this->getUsedBy() as $cmd) {
+            $cmd->save();
+        }
         return true;
     }
 
@@ -219,7 +230,7 @@ class widget {
         }
         $usedBy = $this->getUsedBy();
         if(count($usedBy) > 0){
-           foreach ($usedBy as $cmd) {
+         foreach ($usedBy as $cmd) {
             $cmd->setTemplate($this->getVersion(), $this->getName());
             $html = $cmd->toHtml($this->getVersion());
             if (trim($html) != '') {
@@ -270,7 +281,7 @@ public function getName() {
 }
 
 public function setName($name) {
-    $this->name = $name;
+    $this->name = str_replace('.', '_', $name);
 }
 
 public function getPath() {
