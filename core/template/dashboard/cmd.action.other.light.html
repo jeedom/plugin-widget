@@ -1,4 +1,4 @@
-<div style="width:90px;min-height:80px;" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+<div style="width:90px;min-height:80px;" class="cmd tooltips cmd-widget cursor" data-type="action" data-subtype="other" data-cmd_id="#id#">
     <center>
         <span class='cmdName' style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br/>
         <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" class="action" id="iconCmd#id#"></span>
@@ -18,8 +18,7 @@
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
         }
-        $('.cmd[data-cmd_id=#id#] .action').off();
-        $('.cmd[data-cmd_id=#id#] .action').on('click', function () {
+        $('.cmd[data-cmd_id=#id#] .action').off().on('click', function () {
             jeedom.cmd.execute({id: '#id#'});
         });
     </script>
