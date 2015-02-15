@@ -97,7 +97,7 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
             $(this).find('i').removeClass('fa-check-circle-o').addClass('fa-circle-o');
         } else {
             state = false;
-            $(this).attr('state', 0);
+            $(this).attr('data-state', 0);
             $(this).find('i').removeClass('fa-circle-o').addClass('fa-check-circle-o');
         }
         $('#table_applyWidget tbody tr').each(function () {
