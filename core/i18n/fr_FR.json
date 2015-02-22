@@ -44,5 +44,9 @@
         "Commande": "Commande",
         "Unité": "Unité",
         "Widget appliqué avec succès": "Widget appliqué avec succès"
+    },
+    "plugins\/widget\/plugin_info\/info.xml": {
+        "Plugin pour appliquer\/modifier widget": "Plugin pour appliquer\/modifier widget",
+        "Aucune": "Aucune"
     }
 }
