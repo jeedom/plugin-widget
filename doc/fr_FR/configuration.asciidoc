@@ -12,6 +12,7 @@ Ensuite pour affecter un widget à une commande on peut passer par la page Gén�
 * \#id# => ID de la commande
 * \#logicalId# => ID logique de la commande (peut etre vide)
 * \#name# => Nom de la commande
+* \#name_display# => Nom de la commande avec retour à la ligne et vide si le nom de la commande ne doit pas être affiché
 * \#unite# => Unité de la commande
 * \#collectDate# => Date exacte ou de la valeur de la commande
 * \#state# => Valeur de la commande 
