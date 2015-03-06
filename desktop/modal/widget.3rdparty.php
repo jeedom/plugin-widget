@@ -16,23 +16,23 @@
  */
 
 if (!isConnect('admin')) {
-    throw new Exception('{{401 - Accès non autorisé}}');
+	throw new Exception('{{401 - Accès non autorisé}}');
 }
 
 if (init('path') == '') {
-    throw new Exception('{{Aucun widget fourni}}');
+	throw new Exception('{{Aucun widget fourni}}');
 }
 $widget = widget::byPath(init('path'));
 if (!is_object($widget)) {
-    throw new Exception('{{Widget non trouvé}}');
+	throw new Exception('{{Widget non trouvé}}');
 }
 include_file('3rdparty', 'jquery.tablesorter/theme.bootstrap', 'css');
 include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.min', 'js');
 include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'js');
 ?>
 <div style="display: none;" id="md_fileManageAlert"></div>
-<span style="display: none;" class="md_fileMangeAttr" data-l1key="path"><?php echo $widget->getPath(); ?></span>
-<input class="btn btn-warning pull-right" style="color: white;" id="bt_fileManageUpload" type="file" name="file" data-url="plugins/widget/core/ajax/widget.ajax.php?action=fileupload&path=<?php echo urlencode($widget->getPath()); ?>">
+<span style="display: none;" class="md_fileMangeAttr" data-l1key="path"><?php echo $widget->getPath();?></span>
+<input class="btn btn-warning pull-right" style="color: white;" id="bt_fileManageUpload" type="file" name="file" data-url="plugins/widget/core/ajax/widget.ajax.php?action=fileupload&path=<?php echo urlencode($widget->getPath());?>">
 <br/><br/><br/>
 <table class="table table-bordered table-condensed tablesorter" id="table_mdFileManage">
     <thead>
@@ -91,6 +91,7 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
                     tr += '</td>';
                     tr += '<td>';
                     tr += '<a class="btn btn-danger btn-xs pull-right bt_remove3rdpartyFile" style="color : white;"><i class="fa fa-minus-circle"></i></a>';
+                    tr += '<a class="btn btn-primary btn-xs pull-right" target="_blank" style="color : white;" download="'+data.result[i].name+'" href="' + encodeURI(data.result[i].relativePath) + '"><i class="fa fa-cloud-download"></i></a>';
                     tr += '</td>';
                     tr += '</tr>';
                 }
