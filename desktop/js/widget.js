@@ -16,11 +16,13 @@
  */
 
 
- editor = null;
+editor = null;
+var imagesWidgets = [];
+updateListImages();
 
- $('.pluginContainer').packery();
+$('.pluginContainer').packery();
 
- $("img.lazy").each(function () {
+$("img.lazy").each(function () {
     var el = $(this);
     if (el.attr('data-original2') != undefined) {
         $("<img>", {
@@ -61,30 +63,32 @@
                         el.trigger("sporty");
                     }
                 });
-},
-load: function () {
-    el.lazyload({
-        event: "sporty"
-    });
-    el.trigger("sporty");
-}
-});
-} else {
-    el.lazyload({
-        event: "sporty"
-    });
-    el.trigger("sporty");
-}
+            },
+            load: function () {
+                el.lazyload({
+                    event: "sporty"
+                });
+                el.trigger("sporty");
+            }
+        });
+    } else {
+        el.lazyload({
+            event: "sporty"
+        });
+        el.trigger("sporty");
+    }
 });
 
-$('#bt_displayWidgetList').on('click', function () {
+$('.bt_displayWidgetList').on('click', function () {
     $('.widget').hide();
+    $('.widgetImageView').hide();
     $('.widgetListDisplay').show();
     $('.li_widget').removeClass('active');
 });
 
 $(".li_widget").on('click', function (event) {
     $('.widget').show();
+    $('.widgetImageView').hide();
     $('.widgetListDisplay').hide();
     $('.li_widget').removeClass('active');
     $(this).addClass('active');
@@ -120,9 +124,15 @@ $('.widgetAction[data-action=remove]').on('click', function () {
 $('.widgetAction[data-action=copy]').on('click', function () {
     bootbox.prompt("{{Nom la copie du widget ?}}", function (result) {
         if (result) {
-            copyWidget($('.widgetAttr[data-l1key=path]').value(),result);
+            copyWidget($('.widgetAttr[data-l1key=path]').value(), result);
         }
     });
+});
+
+$('.widgetAction[data-action=create]').on('click', function () {
+    $('.widgetListDisplay').hide();
+    $('.widget').hide();
+    $('.widgetImageView').show();
 });
 
 $('.widgetAction[data-action=add]').on('click', function () {
@@ -187,35 +197,35 @@ function printWidget(_path) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-        if (data.state != 'ok') {
-            $('#div_alert').showAlert({message: data.result, level: 'danger'});
-            return;
-        }
-        $('.widget').setValues(data.result, '.widgetAttr');
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            }
+            $('.widget').setValues(data.result, '.widgetAttr');
 
-        if (editor == null) {
-            if (isset(data.result.content)) {
-                $('#ta_script').val(data.result.content);
+            if (editor == null) {
+                if (isset(data.result.content)) {
+                    $('#ta_script').val(data.result.content);
+                }
+                setTimeout(function () {
+                    editor = CodeMirror.fromTextArea(document.getElementById("ta_widgetContent"), {
+                        lineNumbers: true,
+                        mode: "text/html",
+                        matchBrackets: true,
+                        viewportMargin: Infinity
+                    });
+                }, 1);
+            } else {
+                if (isset(data.result.content)) {
+                    editor.setValue(data.result.content);
+                }
             }
-            setTimeout(function () {
-                editor = CodeMirror.fromTextArea(document.getElementById("ta_widgetContent"), {
-                    lineNumbers: true,
-                    mode: "text/html",
-                    matchBrackets: true,
-                    viewportMargin: Infinity
-                });
-            }, 1);
-        } else {
-            if (isset(data.result.content)) {
-                editor.setValue(data.result.content);
-            }
+            initTooltips();
+            $('#div_widgetResult').empty();
+            $('#div_widgetResult').append('<iframe src="index.php?v=d&plugin=widget&modal=widget.result&path=' + data.result.path + '" frameBorder="0" height="200"></iframe>');
+            modifyWithoutSave = false;
         }
-        initTooltips();
-        $('#div_widgetResult').empty();
-        $('#div_widgetResult').append('<iframe src="index.php?v=d&plugin=widget&modal=widget.result&path=' + data.result.path + '" frameBorder="0" height="200"></iframe>');
-        modifyWithoutSave = false;
-    }
-});
+    });
 }
 
 function saveWidget() {
@@ -237,22 +247,22 @@ function saveWidget() {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-        if (data.state != 'ok') {
-            $('#div_alert').showAlert({message: data.result, level: 'danger'});
-            return;
-        }
-        var vars = getUrlVars();
-        var url = 'index.php?';
-        for (var i in vars) {
-            if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull' && i != undefined) {
-                url += i + '=' + vars[i].replace('#', '') + '&';
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
             }
+            var vars = getUrlVars();
+            var url = 'index.php?';
+            for (var i in vars) {
+                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull' && i != undefined) {
+                    url += i + '=' + vars[i].replace('#', '') + '&';
+                }
+            }
+            url += 'id=' + data.result.path + '&saveSuccessFull=1';
+            modifyWithoutSave = false;
+            window.location.href = url;
         }
-        url += 'id=' + data.result.path + '&saveSuccessFull=1';
-        modifyWithoutSave = false;
-        window.location.href = url;
-    }
-});
+    });
 }
 
 
@@ -269,21 +279,21 @@ function addWidget(_name) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-        if (data.state != 'ok') {
-            $('#div_alert').showAlert({message: data.result, level: 'danger'});
-            return;
-        }
-        var vars = getUrlVars();
-        var url = 'index.php?';
-        for (var i in vars) {
-            if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
-                url += i + '=' + vars[i].replace('#', '') + '&';
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
             }
+            var vars = getUrlVars();
+            var url = 'index.php?';
+            for (var i in vars) {
+                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
+                    url += i + '=' + vars[i].replace('#', '') + '&';
+                }
+            }
+            url += 'id=' + data.result.path + '&saveSuccessFull=1';
+            window.location.href = url;
         }
-        url += 'id=' + data.result.path + '&saveSuccessFull=1';
-        window.location.href = url;
-    }
-});
+    });
 }
 
 function removeWidget(_path) {
@@ -299,25 +309,25 @@ function removeWidget(_path) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-        if (data.state != 'ok') {
-            $('#div_alert').showAlert({message: data.result, level: 'danger'});
-            return;
-        }
-        var vars = getUrlVars();
-        var url = 'index.php?';
-        for (var i in vars) {
-            if (i != 'id' && i != 'removeSuccessFull' && i != 'saveSuccessFull') {
-                url += i + '=' + vars[i].replace('#', '') + '&';
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
             }
+            var vars = getUrlVars();
+            var url = 'index.php?';
+            for (var i in vars) {
+                if (i != 'id' && i != 'removeSuccessFull' && i != 'saveSuccessFull') {
+                    url += i + '=' + vars[i].replace('#', '') + '&';
+                }
+            }
+            url += 'removeSuccessFull=1';
+            modifyWithoutSave = false;
+            window.location.href = url;
         }
-        url += 'removeSuccessFull=1';
-        modifyWithoutSave = false;
-        window.location.href = url;
-    }
-});
+    });
 }
 
-function copyWidget(_path,_name) {
+function copyWidget(_path, _name) {
     $.ajax({// fonction permettant de faire de l'ajax
         type: "POST", // methode de transmission des données au fichier php
         url: "plugins/widget/core/ajax/widget.ajax.php", // url du fichier php
@@ -331,19 +341,157 @@ function copyWidget(_path,_name) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-        if (data.state != 'ok') {
-            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+            if (data.state != 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            }
+            var vars = getUrlVars();
+            var url = 'index.php?';
+            for (var i in vars) {
+                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
+                    url += i + '=' + vars[i].replace('#', '') + '&';
+                }
+            }
+            url += 'id=' + data.result.path + '&saveSuccessFull=1';
+            window.location.href = url;
+        }
+    });
+}
+
+$('#bsImagesView').on('click', '.bsDelDefaultImage', function () {
+    var image = $(this).data('image');
+    bootbox.confirm("{{Etes-vous sur de vouloir effacer cette image}}", function (result) {
+        if (result) {
+            removeImage({
+                image: image,
+                category: "",
+                error: function (error) {
+                    $('#div_alert').showAlert({message: error.message, level: 'danger'});
+                },
+                success: function (data) {
+                    $('#bsImageMainWindow').val('0');
+                    updateListImages($('#bsImageMainWindow').val());
+                    notify("Suppression d'une Image", '{{Image supprimée avec succès}}', 'success');
+                }
+            });
+        }
+    });
+});
+
+$('#bsImagesFileload').fileupload({
+    dataType: 'json',
+    done: function (e, data) {
+        if (data.result.state !== 'ok') {
+            $('#div_alert').showAlert({message: data.result.result, level: 'danger'});
             return;
         }
-        var vars = getUrlVars();
-        var url = 'index.php?';
-        for (var i in vars) {
-            if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
-                url += i + '=' + vars[i].replace('#', '') + '&';
-            }
-        }
-        url += 'id=' + data.result.path + '&saveSuccessFull=1';
-        window.location.href = url;
+        updateListImages();
+        notify("{{Ajout d'une Image}}", '{{Image ajoutée avec succès}}', 'success');
     }
 });
+
+function updateListImages() {
+    listImage({
+        error: function (error) {
+            $('#div_alert').showAlert({message: error.message, level: 'danger'});
+        },
+        success: function (data) {
+            var images = '';
+            imagesWidgets = [];
+            for (var i in data) {
+                images += '<div class="media-left col-sm-2" >';
+                images += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noPaddingRight noMarginBottom">';
+                images += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelDefaultImage" data-category="" data-image="' + data[i] + "\" title=\"{{Supprimer l'image}}\"><i class='fa fa-trash-o'></i></button>";
+                images += '<div class="col-sm-6 pull-right" id="bsViewImageSize' + i + '"></div>';
+                images += '</div>';
+                images += '<img class="img-thumbnail center-block" src="plugins/widget/core/images/' + data[i] + '" alt="' + data[i] + '" id="bsViewImage' + i + '">';
+                images += '<div class="well col-sm-12 noPaddingWell" id="bsViewImageWH' + i + '"></div>';
+                images += '</div>';//href="plugins/widget/core/images/' + data[i] + '"
+                imagesWidgets.push(data[i]);
+            }
+            $('#bsImagesView').html('<div class="media">' + images + '</div>');
+            for (var i in data) {
+                addImage(data[i], i);
+            }
+        }
+    });
 }
+
+function addImage(image, index) {
+    var img = new Image();
+    img.src = "plugins/widget/core/images/" + image + "";
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', img.src, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var size = Math.round(xhr.getResponseHeader('Content-Length') / 1024);
+                $('#bsImagesView').find('#bsViewImageSize' + index).append('<span class="pull-right">' + size + ' Ko</span>');
+            }
+        }
+    };
+    xhr.send(null);
+    img.onload = function () {
+        $('#bsImagesView').find('#bsViewImageWH' + index).append('<span class="pull-left">H: ' + this.width + '</span><span class="pull-right">L:' + this.height + '</span>');
+    };
+};
+
+function listImage(_params) {
+    var paramsRequired = [];
+    var paramsSpecifics = {};
+    try {
+        jeedom.private.checkParamsRequired(_params || {}, paramsRequired);
+    } catch (e) {
+        (_params.error || paramsSpecifics.error || jeedom.private.default_params.error)(e);
+        return;
+    }
+    var params = $.extend({}, jeedom.private.default_params, paramsSpecifics, _params || {});
+    var paramsAJAX = jeedom.private.getParamsAJAX(params);
+    paramsAJAX.url = 'plugins/widget/core/ajax/widget.ajax.php';
+    paramsAJAX.data = {
+        action: 'listImage'
+    };
+    $.ajax(paramsAJAX);
+}
+
+function removeImage(_params) {
+    var paramsRequired = ['image'];
+    var paramsSpecifics = {};
+    try {
+        jeedom.private.checkParamsRequired(_params || {}, paramsRequired);
+    } catch (e) {
+        (_params.error || paramsSpecifics.error || jeedom.private.default_params.error)(e);
+        return;
+    }
+    var params = $.extend({}, jeedom.private.default_params, paramsSpecifics, _params || {});
+    var paramsAJAX = jeedom.private.getParamsAJAX(params);
+    paramsAJAX.url = 'plugins/widget/core/ajax/widget.ajax.php';
+    paramsAJAX.data = {
+        action: 'removeImage',
+        image: _params.image
+    };
+    $.ajax(paramsAJAX);
+}
+
+function setSelectImage(select) {
+    var options = '<option value="0">{{Aucune}}</option>';
+    for(var index in imagesWidgets) {
+        options += '<option value="' + imagesWidgets[index] + '">' + imagesWidgets[index] + '</option>';        
+    }
+    select.html(options);
+}
+
+$('#bt_OtherActionAdd').on('click', function () {
+    $('#md_modalWidget').dialog({title: "Widget Oher.Action", width:1050});
+    $('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=other.widget' ).dialog('open');
+});
+
+$('#bt_InfoBinaryAdd').on('click', function () {
+    $('#md_modalWidget').dialog({title: "Widget Info.Binary", width:1050});
+    $('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=binary.widget' ).dialog('open');
+});
+
+$('#bt_InfoNumericAdd').on('click', function () {
+    $('#md_modalWidget').dialog({title: "Widget Info.Numeric", width:1050});
+    $('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=numeric.widget' ).dialog('open');
+});

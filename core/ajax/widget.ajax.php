@@ -51,6 +51,19 @@ try {
         ajax::success(utils::o2a($widget_db));
     }
 
+    if (init('action') == 'create') {
+        $widget_ajax = json_decode(init('widget'), true);
+        $widget = new widget();
+        $widget->setName($widget_ajax['name']);
+        $widget->setType($widget_ajax['type']);
+        $widget->setSubtype($widget_ajax['subtype']);
+        $widget->setContent($widget_ajax['content']);
+        $widget->setVersion($widget_ajax['version']);
+        $widget->setPath($widget->generatePath());
+        $widget->save();
+        ajax::success(utils::o2a($widget));
+    }
+
     if (init('action') == 'add') {
         $widget = new widget();
         $widget->setName(init('name'));
@@ -176,6 +189,49 @@ try {
         ajax::success();
     }
 
+    if (init('action') == 'listImage') {
+        $uploaddir = dirname(__FILE__) . '/../images';
+        if (!file_exists($uploaddir)) {
+            mkdir($uploaddir);
+        }
+        if (!file_exists($uploaddir)) {
+            throw new Exception(__("{{Répertoire d'upload d'images non trouvé}} : ", __FILE__) . $uploaddir);
+        }
+        ajax::success(ls($uploaddir, "*", false, array('files')));
+    }
+
+    if (init('action') == 'removeImage') {
+        $uploaddir = dirname(__FILE__) . '/../images/';
+        $name = init('image');
+        ajax::success(unlink($uploaddir . $name));
+    }
+
+    if (init('action') == 'imageUpload') {
+        $uploaddir = dirname(__FILE__) . '/../images';
+        if (!file_exists($uploaddir)) {
+            mkdir($uploaddir);
+        }
+        if (!file_exists($uploaddir)) {
+            throw new Exception(__("{{Répertoire d'upload non trouvé}} : ", __FILE__) . $uploaddir);
+        }
+        if (!isset($_FILES['images'])) {
+            throw new Exception(__('{{Aucun fichier trouvé. Vérifié parametre PHP (post size limit}}', __FILE__));
+        }
+        $extension = strtolower(strrchr($_FILES['images']['name'], '.'));
+        if (!in_array($extension, array('.png','.jpg'))) {
+            throw new Exception('{{Seul les images sont accepté (autorisé .jpg .png)}} : ' . $extension);
+        }
+        if (filesize($_FILES['images']['tmp_name']) > 1000000) {
+            throw new Exception(__('{{Le fichier est trop gros}} (maximum 8mo)', __FILE__));
+        }
+        if (!move_uploaded_file($_FILES['images']['tmp_name'], $uploaddir . '/' . $_FILES['images']['name'])) {
+            throw new Exception(__('{{Impossible de déplacer le fichier temporaire}}', __FILE__));
+        }
+        if (!file_exists($uploaddir . '/' . $_FILES['images']['name'])) {
+            throw new Exception(__("{{Impossible d'uploader le fichier (limite du serveur web ?)}}", __FILE__));
+        }
+        ajax::success();
+    }
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
 } catch (Exception $e) {
     ajax::error(displayExeption($e), $e->getCode());
