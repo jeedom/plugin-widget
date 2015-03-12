@@ -399,14 +399,14 @@ function updateListImages() {
             var images = '';
             imagesWidgets = [];
             for (var i in data) {
-                images += '<div class="media-left col-sm-2" >';
+                images += '<div class="media-left col-sm-2" style="min-width: 105px">';
                 images += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noPaddingRight noMarginBottom">';
                 images += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelDefaultImage" data-category="" data-image="' + data[i] + "\" title=\"{{Supprimer l'image}}\"><i class='fa fa-trash-o'></i></button>";
-                images += '<div class="col-sm-6 pull-right" id="bsViewImageSize' + i + '"></div>';
+                images += '<div class="col-sm-6 noPaddingLeft noPaddingRight text-right pull-right" id="bsViewImageSize' + i + '"></div>';
                 images += '</div>';
                 images += '<img class="img-thumbnail center-block" src="plugins/widget/core/images/' + data[i] + '" alt="' + data[i] + '" id="bsViewImage' + i + '">';
-                images += '<div class="well col-sm-12 noPaddingWell" id="bsViewImageWH' + i + '"></div>';
-                images += '</div>';//href="plugins/widget/core/images/' + data[i] + '"
+                images += '<div class="well col-sm-12 noPaddingLeft noPaddingRight noPaddingWell text-center" id="bsViewImageWH' + i + '"></div>';
+                images += '</div>';
                 imagesWidgets.push(data[i]);
             }
             $('#bsImagesView').html('<div class="media">' + images + '</div>');
@@ -426,13 +426,13 @@ function addImage(image, index) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 var size = Math.round(xhr.getResponseHeader('Content-Length') / 1024);
-                $('#bsImagesView').find('#bsViewImageSize' + index).append('<span class="pull-right">' + size + ' Ko</span>');
+                $('#bsImagesView').find('#bsViewImageSize' + index).append('<strong class="text-right text-nowrap">' + size + 'Ko</strong>');
             }
         }
     };
     xhr.send(null);
     img.onload = function () {
-        $('#bsImagesView').find('#bsViewImageWH' + index).append('<span class="pull-left">H: ' + this.width + '</span><span class="pull-right">L:' + this.height + '</span>');
+        $('#bsImagesView').find('#bsViewImageWH' + index).append('<strong style="font-size:12px" class="text-nowrap">H: ' + this.width + ' - L:' + this.height + '</strong>');
     };
 };
 
