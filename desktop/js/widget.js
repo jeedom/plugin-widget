@@ -82,11 +82,13 @@ $("img.lazy").each(function () {
 $('.bt_displayWidgetList').on('click', function () {
     $('.widget').hide();
     $('.widgetImageView').hide();
+    $('#bsListWidgets').show();
     $('.widgetListDisplay').show();
     $('.li_widget').removeClass('active');
 });
 
 $(".li_widget").on('click', function (event) {
+    $('#bsListWidgets').show();
     $('.widget').show();
     $('.widgetImageView').hide();
     $('.widgetListDisplay').hide();
@@ -131,6 +133,7 @@ $('.widgetAction[data-action=copy]').on('click', function () {
 
 $('.widgetAction[data-action=create]').on('click', function () {
     $('.widgetListDisplay').hide();
+    $('#bsListWidgets').hide();
     $('.widget').hide();
     $('.widgetImageView').show();
 });
