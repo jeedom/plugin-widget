@@ -204,6 +204,9 @@ class widget {
                     $cmd->save();
                 }
             }
+            else if($this->getPath() == NULL) {
+                $this->setPath($this->generatePath());
+            }
             if (is_dir(str_replace('.html', '', $this->getPath()))) {
                 if (!rename(str_replace('.html', '', $this->getPath()), str_replace('.html', '', $this->generatePath()))) {
                     throw new Exception(__('Impossible de déplacer : ', __FILE__) . str_replace('.html', '', $this->getPath()) . __(' vers ', __FILE__) . str_replace('.html', '', $this->generatePath()));
