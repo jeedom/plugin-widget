@@ -484,17 +484,106 @@ function setSelectImage(select) {
     select.html(options);
 }
 
+var editorOther = null;
+
 $('#bt_OtherActionAdd').on('click', function () {
-    $('#md_modalWidget').dialog({title: "Widget Oher.Action", width:1050});
-    $('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=other.widget' ).dialog('open');
+    //$('#md_modalWidget').dialog({title: "Widget Oher.Action", width:1050});
+    //$('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=other.widget' ).dialog('open');
+    if (editorOther === null) {
+        editorOther = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
+            lineNumbers: true,
+            mode: "text/html",
+            matchBrackets: true,
+            viewportMargin: Infinity
+        });
+    }
+    var image1,image2;
+    if($('#bsOtherImage1').val() !== undefined && $('#bsOtherImage1').val() !== null && $('#bsOtherImage1').val() !== '0')
+        image1 = $('#bsOtherImage1').val();
+    else
+        image1 = '0';
+    if($('#bsOtherImage2').val() !== undefined && $('#bsOtherImage2').val() !== null && $('#bsOtherImage2').val() !== '0')
+        image2 = $('#bsOtherImage2').val();
+    else
+        image2 = '0';
+    $('#bsOtherImage1').empty();
+    setSelectImage($('#bsOtherImage1'));
+    $('#bsOtherImage1').val(image1);
+    $('#bsOtherImage2').empty();
+    setSelectImage($('#bsOtherImage2'));    
+    $('#bsOtherImage2').val(image2);
+    bsOtherActionType();
+    $('#bsOtherImage1').val(image1);
+    $('#bsCategory').hide();
+    $('#bsInfoBinaryCategory').hide();
+    $('#bsInfoNumericCategory').hide();
+    $('#bsOtherActionCategory').show();
 });
+
+var editorBinary = null;
 
 $('#bt_InfoBinaryAdd').on('click', function () {
-    $('#md_modalWidget').dialog({title: "Widget Info.Binary", width:1050});
-    $('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=binary.widget' ).dialog('open');
+    //$('#md_modalWidget').dialog({title: "Widget Info.Binary", width:1050});
+    //$('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=binary.widget' ).dialog('open');
+
+    if (editorBinary === null) {
+        editorBinary = CodeMirror.fromTextArea(document.getElementById("bsViewInfoBinary"), {
+            lineNumbers: true,
+            mode: "text/html",
+            matchBrackets: true,
+            viewportMargin: Infinity
+        });
+    }
+    var image1,image2;
+    if($('#bsInfoBinaryImage1').val() !== undefined && $('#bsInfoBinaryImage1').val() !== null && $('#bsInfoBinaryImage1').val() !== '0')
+        image1 = $('#bsInfoBinaryImage1').val();
+    else
+        image1 = '0';
+    if($('#bsInfoBinaryImage2').val() !== undefined && $('#bsInfoBinaryImage2').val() !== null && $('#bsInfoBinaryImage2').val() !== '0')
+        image2 = $('#bsInfoBinaryImage2').val();
+    else
+        image2 = '0';
+    $('#bsInfoBinaryImage1').empty();
+    setSelectImage($('#bsInfoBinaryImage1'));
+    $('#bsInfoBinaryImage1').val(image1);
+    $('#bsInfoBinaryImage2').empty();
+    setSelectImage($('#bsInfoBinaryImage2'));
+    $('#bsInfoBinaryImage2').val(image2);
+    bsInfoBinaryType();
+    $('#bsCategory').hide();
+    $('#bsInfoNumericCategory').hide();
+    $('#bsOtherActionCategory').hide();
+    $('#bsInfoBinaryCategory').show();
 });
 
+var editorNumeric = null;
+
 $('#bt_InfoNumericAdd').on('click', function () {
-    $('#md_modalWidget').dialog({title: "Widget Info.Numeric", width:1050});
-    $('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=numeric.widget' ).dialog('open');
+    //$('#md_modalWidget').dialog({title: "Widget Info.Numeric", width:1050});
+    //$('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=numeric.widget' ).dialog('open');
+    if (editorNumeric === null) {
+        editorNumeric = CodeMirror.fromTextArea(document.getElementById("bsViewInfoNumeric"), {
+            lineNumbers: true,
+            mode: "text/html",
+            matchBrackets: true,
+            viewportMargin: Infinity
+        });
+    }
+    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
+    for (var index = 0; index < all; index++) {
+        var image;
+        if ($('#bsInfoNumericImage' + index).val() !== undefined && $('#bsInfoNumericImage' + index).val() !== null && $('#bsInfoNumericImage' + index).val() !== '0')
+            image = $('#bsInfoNumericImage' + index).val();
+        else
+            image = '0';
+        $('#bsInfoNumericImage' + index).empty();
+        setSelectImage($('#bsInfoNumericImage' + index));
+        $('#bsInfoNumericImage' + index).val(image);
+    }
+    $('#modalInfoNumericSave').prop('disabled',true);
+    bsInfoNumericType();
+    $('#bsCategory').hide();
+    $('#bsInfoBinaryCategory').hide();
+    $('#bsOtherActionCategory').hide();
+    $('#bsInfoNumericCategory').show();
 });

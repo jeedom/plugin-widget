@@ -4,35 +4,7 @@
  * and open the template in the editor.
  */
 
-var editorOther = null;
-initOtherAction();
-
-function initOtherAction() {
-    if (editorOther === null) {
-        editorOther = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
-            lineNumbers: true,
-            mode: "text/html",
-            matchBrackets: true,
-            viewportMargin: Infinity
-        });
-    }
-    var image1,image2;
-    if($('#bsOtherImage1').val() !== undefined && $('#bsOtherImage1').val() !== null && $('#bsOtherImage1').val() !== '0')
-        image1 = $('#bsOtherImage1').val();
-    else
-        image1 = '0';
-    if($('#bsOtherImage2').val() !== undefined && $('#bsOtherImage2').val() !== null && $('#bsOtherImage2').val() !== '0')
-        image2 = $('#bsOtherImage2').val();
-    else
-        image2 = '0';
-    $('#bsOtherImage1').empty();
-    setSelectImage($('#bsOtherImage1'));
-    $('#bsOtherImage1').val(image1);
-    $('#bsOtherImage2').empty();
-    setSelectImage($('#bsOtherImage2'));    
-    $('#bsOtherImage2').val(image2);
-    bsOtherActionType();
-};
+//initOtherAction();
 
 $('#modalOtherActionCancel').on('click', function () {
     $('#bsOtherWidgetOff').empty();
@@ -44,6 +16,12 @@ $('#modalOtherActionCancel').on('click', function () {
     $('#bsOtherPreview2').attr('src', "");
     $('#bsOtherImage1').val('0');
     $('#bsOtherImage2').val('0');
+    $('#bsOtherActionDash').val('1');
+    $('#bsOtherActionType').val('0');
+    $('#bsOtherActionIconSize1').val('2.5');
+    $('#bsOtherActionIconSize2').val('2.5');
+    $('#bsOtherActionIconCmd1').html('');
+    $('#bsOtherActionIconCmd2').html('');
     $('#bsOtherLabel1').empty();
     $('#bsOtherLabel2').empty();
     $('#bsOtherActionName').val('');
@@ -52,7 +30,9 @@ $('#modalOtherActionCancel').on('click', function () {
         editorOther = null;
         $('#bsViewOther').empty();
     }
-    $('#md_modalWidget').dialog('close');
+    //$('#md_modalWidget').dialog('close');
+    $('#bsOtherActionCategory').hide();
+    $('#bsCategory').show();
 });
 
 $('#bsOtherActionType').on('change', function () {
@@ -63,63 +43,64 @@ function bsOtherActionType() {
         case "0":
             $('.widgetsView').hide();
             $('.JeedomView').show();
-            if ($('#bsOtherActionIconCmd2').html() !== '' && $('#bsOtherActionIconCmd1').html() !== '') {
-                var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
-                var text = getHtmlWidgetOtherAction(dashboard);
-                editorOther.setValue(text);
-                $('#modalOtherActionSave').prop('disabled', false);
-                $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0").replace("#valueName#",$('#bsOtherActionName').val()));
-                $('#bsOtherWidgetOff').parent().parent().show();
-                $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1").replace("#valueName#",$('#bsOtherActionName').val()));
-                $('#bsOtherWidgetOn').parent().parent().show();
-            }
-            else {
-                editorOther.setValue('');
-                $('#bsOtherWidgetOff').empty();
-                $('#bsOtherWidgetOn').empty();
-                $('#bsOtherWidgetOff').parent().parent().hide();
-                $('#bsOtherWidgetOn').parent().parent().hide();
-                $('#modalOtherActionSave').prop('disabled', true);
-           }
+            checkOtherJeedomIcon();
             break;
         case "1":
             $('.JeedomView').hide();
             $('.widgetsView').show();
-            if ($('#bsOtherLabel1').text() === $('#bsOtherLabel2').text() && $('#bsOtherImage1').val() !=='0' && $('#bsOtherImage2').val() !=='0') {
-                var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
-                var text = getHtmlWidgetOtherAction(dashboard);
-                editorOther.setValue(text);
-                $('#modalOtherActionSave').prop('disabled', false);
-                $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0"));
-                $('#bsOtherWidgetOff').parent().parent().show();
-                $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1"));
-                $('#bsOtherWidgetOn').parent().parent().show();
-            }
-            else {
-                editorOther.setValue('');
-                $('#bsOtherWidgetOff').empty();
-                $('#bsOtherWidgetOn').empty();
-                $('#bsOtherWidgetOff').parent().parent().hide();
-                $('#bsOtherWidgetOn').parent().parent().hide();
-                $('#modalOtherActionSave').prop('disabled', true);
-           }
+            checkOtherWidgetImage();
             break;
+    }
+}
+
+function checkOtherJeedomIcon() {
+    if ($('#bsOtherActionIconCmd2').html() !== '' && $('#bsOtherActionIconCmd1').html() !== '') {
+        var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
+        var text = getHtmlWidgetOtherAction(dashboard);
+        editorOther.setValue(text);
+        if ($('#bsOtherActionName').val() !== '')
+            $('#modalOtherActionSave').prop('disabled', false);
+        $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0").replace("#valueName#", $('#bsOtherActionName').val()));
+        $('#bsOtherWidgetOff').parent().parent().show();
+        $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1").replace("#valueName#", $('#bsOtherActionName').val()));
+        $('#bsOtherWidgetOn').parent().parent().show();
+    }
+    else {
+        editorOther.setValue('');
+        $('#bsOtherWidgetOff').empty();
+        $('#bsOtherWidgetOn').empty();
+        $('#bsOtherWidgetOff').parent().parent().hide();
+        $('#bsOtherWidgetOn').parent().parent().hide();
+        $('#modalOtherActionSave').prop('disabled', true);
+    }
+}
+
+function checkOtherWidgetImage() {
+    if ($('#bsOtherLabel1').text() === $('#bsOtherLabel2').text() && $('#bsOtherImage1').val() !== '0' && $('#bsOtherImage2').val() !== '0') {
+        var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
+        var text = getHtmlWidgetOtherAction(dashboard);
+        editorOther.setValue(text);
+        if ($('#bsOtherActionName').val() !== '')
+            $('#modalOtherActionSave').prop('disabled', false);
+        $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0"));
+        $('#bsOtherWidgetOff').parent().parent().show();
+        $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1"));
+        $('#bsOtherWidgetOn').parent().parent().show();
+    }
+    else {
+        editorOther.setValue('');
+        $('#bsOtherWidgetOff').empty();
+        $('#bsOtherWidgetOn').empty();
+        $('#bsOtherWidgetOff').parent().parent().hide();
+        $('#bsOtherWidgetOn').parent().parent().hide();
+        $('#modalOtherActionSave').prop('disabled', true);
     }
 }
 
 $('#bsOtherActionInsertIcon1').on('click', function () {
     chooseIcon(function (_icon) {
         $('#bsOtherActionIconCmd1').html(_icon);
-        if ($('#bsOtherActionIconCmd2').html() !== '') {
-            var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
-            var text = getHtmlWidgetOtherAction(dashboard);
-            editorOther.setValue(text);
-            $('#modalOtherActionSave').prop('disabled', false);
-            $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0").replace("#valueName#",$('#bsOtherActionName').val()));
-            $('#bsOtherWidgetOff').parent().parent().show();
-            $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1").replace("#valueName#",$('#bsOtherActionName').val()));
-            $('#bsOtherWidgetOn').parent().parent().show();
-        }
+        checkOtherJeedomIcon();
     });
 });
 
@@ -127,31 +108,13 @@ $('#bsOtherActionIconSize1').on('change', function () {
     $('#bsOtherActionIconSize2').val($(this).val());
     $('#bsOtherActionIconCmd1').css('font-size',$(this).val() + 'em');
     $('#bsOtherActionIconCmd2').css('font-size',$(this).val() + 'em');
-    if ($('#bsOtherActionIconCmd2').html() !== '') {
-        var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
-        var text = getHtmlWidgetOtherAction(dashboard);
-        editorOther.setValue(text);
-        $('#modalOtherActionSave').prop('disabled', false);
-        $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0").replace("#valueName#",$('#bsOtherActionName').val()));
-        $('#bsOtherWidgetOff').parent().parent().show();
-        $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1").replace("#valueName#",$('#bsOtherActionName').val()));
-        $('#bsOtherWidgetOn').parent().parent().show();
-    }
+    checkOtherJeedomIcon();
 });
 
 $('#bsOtherActionInsertIcon2').on('click', function () {
     chooseIcon(function (_icon) {
         $('#bsOtherActionIconCmd2').html(_icon);
-        if ($('#bsOtherActionIconCmd1').html() !== '') {
-            var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
-            var text = getHtmlWidgetOtherAction(dashboard);
-            editorOther.setValue(text);
-            $('#modalOtherActionSave').prop('disabled', false);
-            $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0").replace("#valueName#",$('#bsOtherActionName').val()));
-            $('#bsOtherWidgetOff').parent().parent().show();
-            $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1").replace("#valueName#",$('#bsOtherActionName').val()));
-            $('#bsOtherWidgetOn').parent().parent().show();
-        }
+        checkOtherJeedomIcon();
     });
 });
 
@@ -204,6 +167,12 @@ $('#modalOtherActionSave').on('click', function () {
     $('#bsOtherPreview2').attr('src', "");
     $('#bsOtherImage1').val('0');
     $('#bsOtherImage2').val('0');
+    $('#bsOtherActionDash').val('1');
+    $('#bsOtherActionType').val('0');
+    $('#bsOtherActionIconSize1').val('2.5');
+    $('#bsOtherActionIconSize2').val('2.5');
+    $('#bsOtherActionIconCmd1').html('');
+    $('#bsOtherActionIconCmd2').html('');
     $('#bsOtherLabel1').empty();
     $('#bsOtherLabel2').empty();
     $('#bsOtherActionName').val('');
@@ -212,20 +181,13 @@ $('#modalOtherActionSave').on('click', function () {
         editorOther = null;
         $('#bsViewOther').empty();
     }
-    $('#md_modalWidget').dialog('close');
+    //$('#md_modalWidget').dialog('close');
+    $('#bsOtherActionCategory').hide();
+    $('#bsCategory').show();
 });
 
 $('#bsOtherActionDash').on('change', function () {
-    if ($('#bsOtherLabel1').text() === $('#bsOtherLabel2').text()) {
-        var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
-        var text = getHtmlWidgetOtherAction(dashboard);
-        editorOther.setValue(text);
-        $('#modalOtherActionSave').prop('disabled', false);
-        $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0"));
-        $('#bsOtherWidgetOff').parent().parent().show();
-        $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1"));
-        $('#bsOtherWidgetOn').parent().parent().show();
-    }
+    bsOtherActionType();
 });
 
 $('#bsOtherActionName').on('change', function () {
@@ -245,36 +207,14 @@ $('#bsOtherImage1').on('change', function () {
         $('#modalOtherActionSave').prop('disabled',true);
         return;
     }
-    var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
     var img = new Image();
     img.src = "plugins/widget/core/images/" + image + "";
     $('#bsOtherPreview1').attr('src', img.src);
     img.onload = function () {
-        var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+        var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsOtherLabel1').empty();
         $('#bsOtherLabel1').append(temp);      
-        if($('#bsOtherLabel2').text() === "")
-            return;
-        if ($('#bsOtherLabel1').text() !== $('#bsOtherLabel2').text()) {
-            $('#bsOtherLabel1').css('color', 'red');
-            $('#modalOtherActionSave').prop('disabled', true);
-            $('#bsOtherWidgetOff').empty();
-            $('#bsOtherWidgetOn').empty();
-            $('#bsOtherWidgetOff').parent().parent().hide();
-            $('#bsOtherWidgetOn').parent().parent().hide();
-            editorOther.setValue(" ");
-        }
-        else {
-            $('#bsOtherLabel1').css('color','');                
-            $('#bsOtherLabel2').css('color','');
-            $('#modalOtherActionSave').prop('disabled',false);
-            var text = getHtmlWidgetOtherAction(dashboard);
-            editorOther.setValue(text);
-            $('#bsOtherWidgetOff').html(text.replace(/#id#/g,"1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g,"0"));
-            $('#bsOtherWidgetOff').parent().parent().show();
-            $('#bsOtherWidgetOn').html(text.replace(/#id#/g,"2").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g,"1"));
-            $('#bsOtherWidgetOn').parent().parent().show();
-        }
+        checkOtherWidgetImage();
     };
 });
 
@@ -292,35 +232,13 @@ $('#bsOtherImage2').on('change', function () {
         return;
     }
     var img = new Image();
-    var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
     img.src = "plugins/widget/core/images/" + image + "";
     $('#bsOtherPreview2').attr('src', img.src);
     img.onload = function () {
-        var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+        var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsOtherLabel2').empty();
         $('#bsOtherLabel2').append(temp);
-        if($('#bsOtherLabel1').text() === "")
-            return;
-        if ($('#bsOtherLabel2').text() !== $('#bsOtherLabel1').text()) {
-            $('#bsOtherLabel2').css('color', 'red');
-            $('#modalOtherActionSave').prop('disabled', true);
-            $('#bsOtherWidgetOff').empty();
-            $('#bsOtherWidgetOn').empty();
-            $('#bsOtherWidgetOff').parent().parent().hide();
-            $('#bsOtherWidgetOn').parent().parent().hide();
-            editorOther.setValue(" ");
-        }
-        else {
-            $('#bsOtherLabel1').css('color', '');
-            $('#bsOtherLabel2').css('color', '');
-            $('#modalOtherActionSave').prop('disabled', false);
-            var text = getHtmlWidgetOtherAction(dashboard);
-            editorOther.setValue(text);
-            $('#bsOtherWidgetOff').html(text.replace(/#id#/g,"1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g,"0"));
-            $('#bsOtherWidgetOff').parent().parent().show();
-            $('#bsOtherWidgetOn').html(text.replace(/#id#/g,"2").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g,"1"));
-            $('#bsOtherWidgetOn').parent().parent().show();
-        }
+        checkOtherWidgetImage();
     };
 });
 
@@ -409,4 +327,31 @@ function getHtmlWidgetOtherAction(dashboard) {
 
     return html;
 }
+
+/*function initOtherAction() {
+    if (editorOther === null) {
+        editorOther = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
+            lineNumbers: true,
+            mode: "text/html",
+            matchBrackets: true,
+            viewportMargin: Infinity
+        });
+    }
+    var image1,image2;
+    if($('#bsOtherImage1').val() !== undefined && $('#bsOtherImage1').val() !== null && $('#bsOtherImage1').val() !== '0')
+        image1 = $('#bsOtherImage1').val();
+    else
+        image1 = '0';
+    if($('#bsOtherImage2').val() !== undefined && $('#bsOtherImage2').val() !== null && $('#bsOtherImage2').val() !== '0')
+        image2 = $('#bsOtherImage2').val();
+    else
+        image2 = '0';
+    $('#bsOtherImage1').empty();
+    setSelectImage($('#bsOtherImage1'));
+    $('#bsOtherImage1').val(image1);
+    $('#bsOtherImage2').empty();
+    setSelectImage($('#bsOtherImage2'));    
+    $('#bsOtherImage2').val(image2);
+    bsOtherActionType();
+};*/
 
