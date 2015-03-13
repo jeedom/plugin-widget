@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 
-var editorNumeric = null;
-initInfoNumeric();
+//initInfoNumeric();
 
 $('#bsInfoNumeric').bootstrapSlider({
     formatter: function (value) {
@@ -17,42 +16,24 @@ $('#bsInfoNumeric').on('slideStop', function () {
     bsInfoNumericType();
 });
 
-function initInfoNumeric() {
-    if (editorNumeric === null) {
-        editorNumeric = CodeMirror.fromTextArea(document.getElementById("bsViewInfoNumeric"), {
-            lineNumbers: true,
-            mode: "text/html",
-            matchBrackets: true,
-            viewportMargin: Infinity
-        });
-    }
-    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
-    for (var index = 0; index < all; index++) {
-        var image;
-        if ($('#bsInfoNumericImage' + index).val() !== undefined && $('#bsInfoNumericImage' + index).val() !== null && $('#bsInfoNumericImage' + index).val() !== '0')
-            image = $('#bsInfoNumericImage' + index).val();
-        else
-            image = '0';
-        $('#bsInfoNumericImage' + index).empty();
-        setSelectImage($('#bsInfoNumericImage' + index));
-        $('#bsInfoNumericImage' + index).val(image);
-    }
-    $('#modalInfoNumericSave').prop('disabled',true);
-    bsInfoNumericType();
-}
-
 $('#modalInfoNumericCancel').on('click', function () {
     $('#bsInfoNumericPreview0').attr('src', "");
     $('#bsInfoNumericLabel0').empty();
     $('#bsInfoNumericName').val('');
     $('#bsInfoNumericImage0').val('0');
+    $('#bsInfoNumericDash').val('1');
+    $('#bsInfoNumericType').val('0');
+    $('#bsInfoNumericIconSize0').val('2.5');
+    $('#bsInfoNumericIconCmd0').html('');
     $('#bodyInfoNumeric').children(':gt(0)').remove();
     if (editorNumeric !== null) {
         editorNumeric.toTextArea();
         editorNumeric = null;
         $('#bsViewInfoNumeric').empty();
     }
-    $('#md_modalWidget').dialog('close');
+    //$('#md_modalWidget').dialog('close');
+    $('#bsInfoNumericCategory').hide();
+    $('#bsCategory').show();
 });
 
 $('#bsInfoNumericType').on('change', function () {
@@ -64,12 +45,12 @@ function bsInfoNumericType() {
         case "0":
             $('.widgetsView').hide();
             $('.JeedomView').show();
-            checkJeedomIcon();
+            checkNumericJeedomIcon();
             break;
         case "1":
             $('.JeedomView').hide();
             $('.widgetsView').show();
-            checkWidgeImage();
+            checkNumericWidgetImage();
             break;
     }
 }
@@ -79,7 +60,7 @@ $('#bodyInfoNumeric').on('click', "a[name*='bsInfoNumericInsertIcon']", function
     $('#modalInfoNumericSave').prop('disabled', false);
     chooseIcon(function (_icon) {
         $('#bsInfoNumericIconCmd' + index).html(_icon);
-        checkJeedomIcon();
+        checkNumericJeedomIcon();
     });
 });
 
@@ -91,7 +72,7 @@ $('#bodyInfoNumeric').on('click', "input[name*='bsInfoNumericIconSize']", functi
             $('#bsInfoNumericIconSize' + nbCmd).val($(this).val());
         $('#bsInfoNumericIconCmd' + nbCmd).css('font-size', $(this).val() + 'em');
     }
-    checkJeedomIcon();
+    checkNumericJeedomIcon();
 });
 
 $('#modalInfoNumericSave').on('click', function () {
@@ -139,12 +120,19 @@ $('#modalInfoNumericSave').on('click', function () {
     $('#bsInfoNumericName').val('');
     $('#bsInfoNumericImage0').val('0');
     $('#bsInfoNumericEcartMax0').val('100');
+    $('#bsInfoNumericDash').val('1');
+    $('#bsInfoNumericType').val('0');
+    $('#bsInfoNumericIconSize0').val('2.5');
+    $('#bsInfoNumericIconCmd0').html('');
     $('#bodyInfoNumeric').children(':gt(0)').remove();
     if (editorNumeric !== null) {
         editorNumeric.toTextArea();
         editorNumeric = null;
         $('#bsViewInfoNumeric').empty();
     }
+    //$('#md_modalWidget').dialog('close');
+    $('#bsInfoNumericCategory').hide();
+    $('#bsCategory').show();
 });
 
 $('#bsInfoNumericDash').on('change', function () {
@@ -239,7 +227,7 @@ $('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericImage']", function
         var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsInfoNumericLabel' + index).empty();
         $('#bsInfoNumericLabel' + index).append(temp);      
-        checkWidgeImage();
+        checkNumericWidgetImage();
     };
 });
 
@@ -276,7 +264,7 @@ $('#bsInfoNumericAddEntry').on('click', function () {
     bsInfoNumericType();
 });
 
-function checkJeedomIcon() {
+function checkNumericJeedomIcon() {
     var check = true;
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     for (var index = 0; index < all; index++) {
@@ -287,7 +275,8 @@ function checkJeedomIcon() {
         var dashboard = $('#bsInfoNumericDash').val() === "1" ? true : false;
         var text = getHtmlWidgetInfoNumeric(dashboard);
         editorNumeric.setValue(text);
-        $('#modalInfoNumericSave').prop('disabled', false);
+        if($('#bsInfoNumericName').val() !== '')
+            $('#modalInfoNumericSave').prop('disabled', false);
         text = text.replace(/#id#/g, "5").replace("#displayName#", "1").replace("#state#", $('#bsInfoNumeric').bootstrapSlider('getValue'));
         text = text.replace("#valueName#", $('#bsInfoNumericName').val()).replace("#minValue#", "0").replace("#maxValue#", "100");
         $('#bsInfoNumericWidgetOff').html(text);
@@ -301,7 +290,7 @@ function checkJeedomIcon() {
     }
 }
 
-function checkWidgeImage() {
+function checkNumericWidgetImage() {
     var check = true;
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     if ($('#bsInfoNumericLabel0').text() === "") {
@@ -319,7 +308,8 @@ function checkWidgeImage() {
         var dashboard = $('#bsInfoNumericDash').val() === "1" ? true : false;
         var text = getHtmlWidgetInfoNumeric(dashboard);
         editorNumeric.setValue(text);
-        $('#modalInfoNumericSave').prop('disabled', false);
+        if($('#bsInfoNumericName').val() !== '')
+            $('#modalInfoNumericSave').prop('disabled', false);
         text = text.replace(/#id#/g, "5").replace("#displayName#", "1").replace("#state#", $('#bsInfoNumeric').bootstrapSlider('getValue'));
         text = text.replace("#valueName#", $('#bsInfoNumericName').val()).replace("#minValue#", "0").replace("#maxValue#", "100");
         $('#bsInfoNumericWidgetOff').html(text);
@@ -418,3 +408,27 @@ function getHtmlWidgetInfoNumeric(dashboard) {
     html += '</div>\n';
     return html;
 }
+
+/*function initInfoNumeric() {
+    if (editorNumeric === null) {
+        editorNumeric = CodeMirror.fromTextArea(document.getElementById("bsViewInfoNumeric"), {
+            lineNumbers: true,
+            mode: "text/html",
+            matchBrackets: true,
+            viewportMargin: Infinity
+        });
+    }
+    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
+    for (var index = 0; index < all; index++) {
+        var image;
+        if ($('#bsInfoNumericImage' + index).val() !== undefined && $('#bsInfoNumericImage' + index).val() !== null && $('#bsInfoNumericImage' + index).val() !== '0')
+            image = $('#bsInfoNumericImage' + index).val();
+        else
+            image = '0';
+        $('#bsInfoNumericImage' + index).empty();
+        setSelectImage($('#bsInfoNumericImage' + index));
+        $('#bsInfoNumericImage' + index).val(image);
+    }
+    $('#modalInfoNumericSave').prop('disabled',true);
+    bsInfoNumericType();
+}*/

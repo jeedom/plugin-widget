@@ -4,35 +4,7 @@
  * and open the template in the editor.
  */
 
-var editorBinary = null;
-initInfoBinary();
-
-function initInfoBinary() {
-    if (editorBinary === null) {
-        editorBinary = CodeMirror.fromTextArea(document.getElementById("bsViewInfoBinary"), {
-            lineNumbers: true,
-            mode: "text/html",
-            matchBrackets: true,
-            viewportMargin: Infinity
-        });
-    }
-    var image1,image2;
-    if($('#bsInfoBinaryImage1').val() !== undefined && $('#bsInfoBinaryImage1').val() !== null && $('#bsInfoBinaryImage1').val() !== '0')
-        image1 = $('#bsInfoBinaryImage1').val();
-    else
-        image1 = '0';
-    if($('#bsInfoBinaryImage2').val() !== undefined && $('#bsInfoBinaryImage2').val() !== null && $('#bsInfoBinaryImage2').val() !== '0')
-        image2 = $('#bsInfoBinaryImage2').val();
-    else
-        image2 = '0';
-    $('#bsInfoBinaryImage1').empty();
-    setSelectImage($('#bsInfoBinaryImage1'));
-    $('#bsInfoBinaryImage1').val(image1);
-    $('#bsInfoBinaryImage2').empty();
-    setSelectImage($('#bsInfoBinaryImage2'));
-    $('#bsInfoBinaryImage2').val(image2);
-    bsInfoBinaryType();
-};
+//initInfoBinary();
 
 $('#modalInfoBinaryCancel').on('click', function () {
     $('#bsInfoBinaryWidgetOff').empty();
@@ -46,6 +18,12 @@ $('#modalInfoBinaryCancel').on('click', function () {
     $('#bsInfoBinaryImage2').val('0');
     $('#bsInfoBinaryLabel1').empty();
     $('#bsInfoBinaryLabel2').empty();
+    $('#bsInfoBinaryDash').val('1');
+    $('#bsInfoBinaryType').val('0');
+    $('#bsInfoBinaryIconSize1').val('2.5');
+    $('#bsInfoBinaryIconSize2').val('2.5');
+    $('#bsInfoBinaryIconCmd1').html('');
+    $('#bsInfoBinaryIconCmd2').html('');
     $('#bsInfoBinaryName').val('');
     if (editorBinary !== null) {
         editorBinary.toTextArea();
@@ -63,63 +41,62 @@ function bsInfoBinaryType() {
         case "0":
             $('.widgetsView').hide();
             $('.JeedomView').show();
-            if ($('#bsInfoBinaryIconCmd2').html() !== '' && $('#bsInfoBinaryIconCmd1').html() !== '') {
-                var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
-                var text = getHtmlWidgetInfoBinary(dashboard);
-                editorBinary.setValue(text);
-                $('#modalInfoBinarySave').prop('disabled',false);
-                $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#", $('#bsInfoBinaryName').val()));
-                $('#bsInfoBinaryWidgetOff').parent().parent().show();
-                $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#", $('#bsInfoBinaryName').val()));
-                $('#bsInfoBinaryWidgetOn').parent().parent().show();
-            }
-            else {
-                editorBinary.setValue('');
-                $('#bsInfoBinaryWidgetOff').empty();
-                $('#bsInfoBinaryWidgetOn').empty();
-                $('#bsInfoBinaryWidgetOff').parent().parent().hide();
-                $('#bsInfoBinaryWidgetOn').parent().parent().hide();
-                $('#modalInfoBinarySave').prop('disabled', true);
-            }
+            checkInfoNumericJeedomIcon();
             break;
         case "1":
             $('.JeedomView').hide();
             $('.widgetsView').show();
-            if ($('#bsInfoBinaryLabel1').text() === $('#bsInfoBinaryLabel2').text() && $('#bsInfoBinaryImage1').val() !=='0' && $('#bsInfoBinaryImage2').val() !=='0') {
-                var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
-                var text = getHtmlWidgetInfoBinary(dashboard);
-                editorBinary.setValue(text);
-                $('#modalInfoBinarySave').prop('disabled',false);
-                $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#", $('#bsInfoBinaryName').val()));
-                $('#bsInfoBinaryWidgetOff').parent().parent().show();
-                $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#", $('#bsInfoBinaryName').val()));
-                $('#bsInfoBinaryWidgetOn').parent().parent().show();
-            }
-            else {
-                editorBinary.setValue('');
-                $('#bsInfoBinaryWidgetOff').empty();
-                $('#bsInfoBinaryWidgetOn').empty();
-                $('#bsInfoBinaryWidgetOff').parent().parent().hide();
-                $('#bsInfoBinaryWidgetOn').parent().parent().hide();
-                $('#modalInfoBinarySave').prop('disabled', true);
-            }
+            checkInfoNumericWidgetImage();
             break;
+    }
+}
+
+function checkInfoNumericJeedomIcon() {
+    if ($('#bsInfoBinaryIconCmd2').html() !== '' && $('#bsInfoBinaryIconCmd1').html() !== '') {
+        var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
+        var text = getHtmlWidgetInfoBinary(dashboard);
+        editorBinary.setValue(text);
+        $('#modalInfoBinarySave').prop('disabled', false);
+        $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#", $('#bsInfoBinaryName').val()));
+        $('#bsInfoBinaryWidgetOff').parent().parent().show();
+        $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#", $('#bsInfoBinaryName').val()));
+        $('#bsInfoBinaryWidgetOn').parent().parent().show();
+    }
+    else {
+        editorBinary.setValue('');
+        $('#bsInfoBinaryWidgetOff').empty();
+        $('#bsInfoBinaryWidgetOn').empty();
+        $('#bsInfoBinaryWidgetOff').parent().parent().hide();
+        $('#bsInfoBinaryWidgetOn').parent().parent().hide();
+        $('#modalInfoBinarySave').prop('disabled', true);
+    }
+}
+
+function checkInfoNumericWidgetImage() {
+    if ($('#bsInfoBinaryLabel1').text() === $('#bsInfoBinaryLabel2').text() && $('#bsInfoBinaryImage1').val() !== '0' && $('#bsInfoBinaryImage2').val() !== '0') {
+        var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
+        var text = getHtmlWidgetInfoBinary(dashboard);
+        editorBinary.setValue(text);
+        $('#modalInfoBinarySave').prop('disabled', false);
+        $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#", $('#bsInfoBinaryName').val()));
+        $('#bsInfoBinaryWidgetOff').parent().parent().show();
+        $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#", $('#bsInfoBinaryName').val()));
+        $('#bsInfoBinaryWidgetOn').parent().parent().show();
+    }
+    else {
+        editorBinary.setValue('');
+        $('#bsInfoBinaryWidgetOff').empty();
+        $('#bsInfoBinaryWidgetOn').empty();
+        $('#bsInfoBinaryWidgetOff').parent().parent().hide();
+        $('#bsInfoBinaryWidgetOn').parent().parent().hide();
+        $('#modalInfoBinarySave').prop('disabled', true);
     }
 }
 
 $('#bsInfoBinaryInsertIcon1').on('click', function () {
     chooseIcon(function (_icon) {
         $('#bsInfoBinaryIconCmd1').html(_icon);
-        if ($('#bsInfoBinaryIconCmd2').html() !== '') {
-            var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
-            var text = getHtmlWidgetInfoBinary(dashboard);
-            editorBinary.setValue(text);
-            $('#modalInfoBinarySave').prop('disabled',false);
-            $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#",$('#bsInfoBinaryName').val()));
-            $('#bsInfoBinaryWidgetOff').parent().parent().show();
-            $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#",$('#bsInfoBinaryName').val()));
-            $('#bsInfoBinaryWidgetOn').parent().parent().show();
-        }
+        checkInfoNumericJeedomIcon();
     });
 });
 
@@ -127,31 +104,13 @@ $('#bsInfoBinaryIconSize1').on('change', function () {
     $('#bsInfoBinaryIconSize2').val($(this).val());
     $('#bsInfoBinaryIconCmd1').css('font-size',$(this).val() + 'em');
     $('#bsInfoBinaryIconCmd2').css('font-size',$(this).val() + 'em');
-    if ($('#bsInfoBinaryIconCmd2').html() !== '') {
-        var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
-        var text = getHtmlWidgetInfoBinary(dashboard);
-        editorBinary.setValue(text);
-        $('#modalInfoBinarySave').prop('disabled',false);
-        $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#",$('#bsInfoBinaryName').val()));
-        $('#bsInfoBinaryWidgetOff').parent().parent().show();
-        $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#",$('#bsInfoBinaryName').val()));
-        $('#bsInfoBinaryWidgetOn').parent().parent().show();
-    }
+    checkInfoNumericJeedomIcon();
 });
 
 $('#bsInfoBinaryInsertIcon2').on('click', function () {
     chooseIcon(function (_icon) {
         $('#bsInfoBinaryIconCmd2').html(_icon);
-        if ($('#bsInfoBinaryIconCmd1').html() !== '') {
-            var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
-            var text = getHtmlWidgetInfoBinary(dashboard);
-            editorBinary.setValue(text);
-            $('#modalInfoBinarySave').prop('disabled',false);
-            $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#",$('#bsInfoBinaryName').val()));
-            $('#bsInfoBinaryWidgetOff').parent().parent().show();
-            $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#",$('#bsInfoBinaryName').val()));
-            $('#bsInfoBinaryWidgetOn').parent().parent().show();
-        }
+        checkInfoNumericJeedomIcon();
     });
 });
 
@@ -206,6 +165,12 @@ $('#modalInfoBinarySave').on('click', function () {
     $('#bsInfoBinaryImage2').val('0');
     $('#bsInfoBinaryLabel1').empty();
     $('#bsInfoBinaryLabel2').empty();
+    $('#bsInfoBinaryDash').val('1');
+    $('#bsInfoBinaryType').val('0');
+    $('#bsInfoBinaryIconSize1').val('2.5');
+    $('#bsInfoBinaryIconSize2').val('2.5');
+    $('#bsInfoBinaryIconCmd1').html('');
+    $('#bsInfoBinaryIconCmd2').html('');
     $('#bsInfoBinaryName').val('');
     if (editorBinary !== null) {
         editorBinary.toTextArea();
@@ -216,16 +181,7 @@ $('#modalInfoBinarySave').on('click', function () {
 });
 
 $('#bsInfoBinaryDash').on('change', function () {
-    if ($('#bsInfoBinaryLabel1').text() === $('#bsInfoBinaryLabel2').text()) {
-        var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
-        var text = getHtmlWidgetInfoBinary(dashboard);
-        editorBinary.setValue(text);
-        $('#modalInfoBinarySave').prop('disabled',false);
-        $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#", $('#bsInfoBinaryName').val()));
-        $('#bsInfoBinaryWidgetOff').parent().parent().show();
-        $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#", $('#bsInfoBinaryName').val()));
-        $('#bsInfoBinaryWidgetOn').parent().parent().show();
-    }
+    bsInfoBinaryType();
 });
 
 $('#bsInfoBinaryName').on('change', function () {
@@ -246,35 +202,13 @@ $('#bsInfoBinaryImage1').on('change', function () {
         return;
     }
     var img = new Image();
-    var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
     img.src = "plugins/widget/core/images/" + image + "";
     $('#bsInfoBinaryPreview1').attr('src', img.src);
     img.onload = function () {
         var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsInfoBinaryLabel1').empty();
         $('#bsInfoBinaryLabel1').append(temp);      
-        if($('#bsInfoBinaryLabel2').text() === "")
-            return;
-        if($('#bsInfoBinaryLabel1').text() !== $('#bsInfoBinaryLabel2').text()) {
-            $('#bsInfoBinaryLabel1').css('color','red');
-            $('#modalInfoBinarySave').prop('disabled', true);
-            $('#bsInfoBinaryWidgetOff').empty();
-            $('#bsInfoBinaryWidgetOn').empty();
-            $('#bsInfoBinaryWidgetOff').parent().parent().hide();
-            $('#bsInfoBinaryWidgetOn').parent().parent().hide();
-            editorBinary.setValue(" ");
-        }
-        else {
-            $('#bsInfoBinaryLabel1').css('color','');                
-            $('#bsInfoBinaryLabel2').css('color','');
-            $('#modalInfoBinarySave').prop('disabled',false);
-            var text = getHtmlWidgetInfoBinary(dashboard);
-            editorBinary.setValue(text);
-            $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g,"3").replace("#displayName#","1").replace(/#state#/g,"0").replace("#valueName#",$('#bsInfoBinaryName').val()));
-            $('#bsInfoBinaryWidgetOff').parent().parent().show();
-            $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g,"4").replace("#displayName#","1").replace(/#state#/g,"1").replace("#valueName#",$('#bsInfoBinaryName').val()));
-            $('#bsInfoBinaryWidgetOn').parent().parent().show();
-        }
+        checkInfoNumericWidgetImage();
     };
 });
 
@@ -292,35 +226,13 @@ $('#bsInfoBinaryImage2').on('change', function () {
         return;
     }
     var img = new Image();
-    var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
     img.src = "plugins/widget/core/images/" + image + "";
     $('#bsInfoBinaryPreview2').attr('src', img.src);
     img.onload = function () {
         var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsInfoBinaryLabel2').empty();
         $('#bsInfoBinaryLabel2').append(temp);
-        if($('#bsInfoBinaryLabel1').text() === "")
-            return;
-        if($('#bsInfoBinaryLabel2').text() !== $('#bsInfoBinaryLabel1').text()) {
-            $('#bsInfoBinaryLabel2').css('color','red');
-            $('#modalInfoBinarySave').prop('disabled',true);
-            $('#bsInfoBinaryWidgetOff').empty();
-            $('#bsInfoBinaryWidgetOn').empty();
-            $('#bsInfoBinaryWidgetOff').parent().parent().hide();
-            $('#bsInfoBinaryWidgetOn').parent().parent().hide();
-            editorBinary.setValue(" ");
-        }
-        else {
-            $('#bsInfoBinaryLabel1').css('color','');
-            $('#bsInfoBinaryLabel2').css('color','');
-            $('#modalInfoBinarySave').prop('disabled',false);
-            var text = getHtmlWidgetInfoBinary(dashboard);
-            editorBinary.setValue(text);
-            $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g,"3").replace("#displayName#","1").replace(/#state#/g,"0").replace("#valueName#",$('#bsInfoBinaryName').val()));
-            $('#bsInfoBinaryWidgetOff').parent().parent().show();
-            $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g,"4").replace("#displayName#","1").replace(/#state#/g,"1").replace("#valueName#",$('#bsInfoBinaryName').val()));
-            $('#bsInfoBinaryWidgetOn').parent().parent().show();
-        }
+        checkInfoNumericWidgetImage();
     };
 });
 
@@ -410,4 +322,31 @@ function getHtmlWidgetInfoBinary(dashboard) {
     html += '</div>\n';
     return html;
 }
+
+/*function initInfoBinary() {
+    if (editorBinary === null) {
+        editorBinary = CodeMirror.fromTextArea(document.getElementById("bsViewInfoBinary"), {
+            lineNumbers: true,
+            mode: "text/html",
+            matchBrackets: true,
+            viewportMargin: Infinity
+        });
+    }
+    var image1,image2;
+    if($('#bsInfoBinaryImage1').val() !== undefined && $('#bsInfoBinaryImage1').val() !== null && $('#bsInfoBinaryImage1').val() !== '0')
+        image1 = $('#bsInfoBinaryImage1').val();
+    else
+        image1 = '0';
+    if($('#bsInfoBinaryImage2').val() !== undefined && $('#bsInfoBinaryImage2').val() !== null && $('#bsInfoBinaryImage2').val() !== '0')
+        image2 = $('#bsInfoBinaryImage2').val();
+    else
+        image2 = '0';
+    $('#bsInfoBinaryImage1').empty();
+    setSelectImage($('#bsInfoBinaryImage1'));
+    $('#bsInfoBinaryImage1').val(image1);
+    $('#bsInfoBinaryImage2').empty();
+    setSelectImage($('#bsInfoBinaryImage2'));
+    $('#bsInfoBinaryImage2').val(image2);
+    bsInfoBinaryType();
+};*/
 
