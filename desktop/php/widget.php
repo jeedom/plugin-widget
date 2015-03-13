@@ -114,7 +114,7 @@ function displayWidgetName($_name) {
 </style>
 <div id="md_modalWidget"></div>
 <div class="row row-overflow">
-    <div class="col-lg-3 col-md-4 col-sm-4">
+    <div class="col-lg-3 col-md-4 col-sm-4" id="bsListWidgets">
         <div class="bs-sidebar">
             <ul id="ul_widget" class="nav nav-list bs-sidenav">
                 <a class="btn btn-default btn-sm tooltips" id="bt_getFromMarket" title="{{Récuperer du market}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Market}}</a>
@@ -136,12 +136,12 @@ function displayWidgetName($_name) {
             </ul>
         </div>
     </div>
-    <div class="col-lg-9 col-md-8 col-sm-8 widgetImageView"  style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+    <div class="col-lg-12 col-md-12 col-sm-12 widgetImageView"  style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
         <form class="form-horizontal" method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend><i class="fa fa-arrow-circle-left cursor bt_displayWidgetList"></i> {{Général}}</legend>
                 <div class="container-fluid" id="bsMenuThemesImagesView">
-                    <div class="form-horizontal col-sm-2">
+                    <div class="form-horizontal col-sm-3" style="min-width: 225px">
                         <div class="well col-sm-12">
                             <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Images}}</strong>    
                             <div class="form-group form-group-sm">
@@ -165,7 +165,7 @@ function displayWidgetName($_name) {
                             </div>
                         </div>
                     </div>                
-                    <div class="well col-sm-10" id="bsCategory">
+                    <div class="well col-sm-9" id="bsCategory">
                         <div class="panel panel-default" id="bsCategoryDefault">
                             <div class="panel-heading">
                                 <h4>{{Catégorie : Jeedom}}<small><em><bold> - {{Les divers icônes de Jeedom disponibles}}</bold></em></small></h4></div>
