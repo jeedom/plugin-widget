@@ -16,12 +16,20 @@ $('#modalOtherActionCancel').on('click', function () {
     $('#bsOtherPreview2').attr('src', "");
     $('#bsOtherImage1').val('0');
     $('#bsOtherImage2').val('0');
+    $('#bsOtherSpecialCat1').val('');
+    $('#bsOtherSpecial1').val('');
+    $('#bsOtherSpecialCat2').val('');
+    $('#bsOtherSpecial2').val('');
     $('#bsOtherActionDash').val('1');
     $('#bsOtherActionType').val('0');
     $('#bsOtherActionIconSize1').val('2.5');
     $('#bsOtherActionIconSize2').val('2.5');
     $('#bsOtherActionIconCmd1').html('');
     $('#bsOtherActionIconCmd2').html('');
+    $('#bsOtherPreviewSpec1').attr('src', "");
+    $('#bsOtherPreviewSpec2').attr('src', "");
+    $('#bsOtherLabelSpec1').empty();
+    $('#bsOtherLabelSpec2').empty();
     $('#bsOtherLabel1').empty();
     $('#bsOtherLabel2').empty();
     $('#bsOtherActionName').val('');
@@ -35,6 +43,38 @@ $('#modalOtherActionCancel').on('click', function () {
     $('#bsCategory').show();
 });
 
+$('#bsOtherSpecialCat1').on('change', function () {
+    if($(this).val() !== '')
+        setSelectPackIcones($('#bsOtherSpecial1'),$(this).val());
+    else {
+        $('#bsOtherSpecial1').children(':gt(0)').remove();
+        $('#bsOtherWidgetOff').empty();
+        $('#bsOtherWidgetOn').empty();
+        $('#bsOtherWidgetOff').parent().parent().hide();
+        $('#bsOtherWidgetOn').parent().parent().hide();
+        editorOther.setValue(" ");
+        $('#bsOtherPreviewSpec1').attr('src', "");
+        $('#bsOtherLabelSpec1').empty();
+        $('#modalOtherActionSave').prop('disabled',true);
+     }
+});
+
+$('#bsOtherSpecialCat2').on('change', function () {
+    if($(this).val() !== '')
+        setSelectPackIcones($('#bsOtherSpecial2'),$(this).val());
+    else {
+        $('#bsOtherSpecial2').children(':gt(0)').remove();
+        $('#bsOtherWidgetOff').empty();
+        $('#bsOtherWidgetOn').empty();
+        $('#bsOtherWidgetOff').parent().parent().hide();
+        $('#bsOtherWidgetOn').parent().parent().hide();
+        editorOther.setValue(" ");
+        $('#bsOtherPreviewSpec2').attr('src', "");
+        $('#bsOtherLabelSpec2').empty();
+        $('#modalOtherActionSave').prop('disabled',true);
+     }
+});
+
 $('#bsOtherActionType').on('change', function () {
     bsOtherActionType();
 });
@@ -42,13 +82,21 @@ function bsOtherActionType() {
     switch ($('#bsOtherActionType').val()) {
         case "0":
             $('.widgetsView').hide();
+            $('.specialView').hide();
             $('.JeedomView').show();
             checkOtherJeedomIcon();
             break;
         case "1":
+            $('.specialView').hide();
             $('.JeedomView').hide();
             $('.widgetsView').show();
             checkOtherWidgetImage();
+            break;
+        case "2":
+            $('.JeedomView').hide();
+            $('.widgetsView').hide();
+            $('.specialView').show();
+            checkOtherSpecial();
             break;
     }
 }
@@ -64,6 +112,7 @@ function checkOtherJeedomIcon() {
         $('#bsOtherWidgetOff').parent().parent().show();
         $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1").replace("#valueName#", $('#bsOtherActionName').val()));
         $('#bsOtherWidgetOn').parent().parent().show();
+        return true;
     }
     else {
         editorOther.setValue('');
@@ -72,20 +121,24 @@ function checkOtherJeedomIcon() {
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
         $('#modalOtherActionSave').prop('disabled', true);
+        return false;
     }
 }
 
 function checkOtherWidgetImage() {
     if ($('#bsOtherLabel1').text() === $('#bsOtherLabel2').text() && $('#bsOtherImage1').val() !== '0' && $('#bsOtherImage2').val() !== '0') {
         var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
+        $('#bsOtherLabel1').css("color","");
+        $('#bsOtherLabel2').css("color","");
         var text = getHtmlWidgetOtherAction(dashboard);
         editorOther.setValue(text);
         if ($('#bsOtherActionName').val() !== '')
             $('#modalOtherActionSave').prop('disabled', false);
-        $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0"));
+        $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0").replace("#valueName#", $('#bsOtherActionName').val()));
         $('#bsOtherWidgetOff').parent().parent().show();
-        $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1"));
+        $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1").replace("#valueName#", $('#bsOtherActionName').val()));
         $('#bsOtherWidgetOn').parent().parent().show();
+        return true;
     }
     else {
         editorOther.setValue('');
@@ -94,29 +147,35 @@ function checkOtherWidgetImage() {
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
         $('#modalOtherActionSave').prop('disabled', true);
+        return false;
     }
 }
 
-$('#bsOtherActionInsertIcon1').on('click', function () {
-    chooseIcon(function (_icon) {
-        $('#bsOtherActionIconCmd1').html(_icon);
-        checkOtherJeedomIcon();
-    });
-});
-
-$('#bsOtherActionIconSize1').on('change', function () {
-    $('#bsOtherActionIconSize2').val($(this).val());
-    $('#bsOtherActionIconCmd1').css('font-size',$(this).val() + 'em');
-    $('#bsOtherActionIconCmd2').css('font-size',$(this).val() + 'em');
-    checkOtherJeedomIcon();
-});
-
-$('#bsOtherActionInsertIcon2').on('click', function () {
-    chooseIcon(function (_icon) {
-        $('#bsOtherActionIconCmd2').html(_icon);
-        checkOtherJeedomIcon();
-    });
-});
+function checkOtherSpecial() {
+    if ($('#bsOtherLabelSpec1').text() === $('#bsOtherLabelSpec2').text() && $('#bsOtherSpecial1').val() !== '' && $('#bsOtherSpecial2').val() !== '') {
+        var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
+        $('#bsOtherLabelSpec1').css("color","");
+        $('#bsOtherLabelSpec2').css("color","");
+        var text = getHtmlWidgetOtherAction(dashboard);
+        editorOther.setValue(text);
+        if ($('#bsOtherActionName').val() !== '')
+            $('#modalOtherActionSave').prop('disabled', false);
+        $('#bsOtherWidgetOff').html(text.replace(/#id#/g, "1").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "0").replace("#valueName#", $('#bsOtherActionName').val()));
+        $('#bsOtherWidgetOff').parent().parent().show();
+        $('#bsOtherWidgetOn').html(text.replace(/#id#/g, "2").replace("#displayName#", "1").replace("jeedom.cmd.execute", "\/\/jeedom.cmd.execute").replace(/#state#/g, "1").replace("#valueName#", $('#bsOtherActionName').val()));
+        $('#bsOtherWidgetOn').parent().parent().show();
+        return true;
+    }
+    else {
+        editorOther.setValue('');
+        $('#bsOtherWidgetOff').empty();
+        $('#bsOtherWidgetOn').empty();
+        $('#bsOtherWidgetOff').parent().parent().hide();
+        $('#bsOtherWidgetOn').parent().parent().hide();
+        $('#modalOtherActionSave').prop('disabled', true);
+        return false;
+    }
+}
 
 $('#modalOtherActionSave').on('click', function () {
     var widget = {
@@ -150,7 +209,7 @@ $('#modalOtherActionSave').on('click', function () {
             var vars = getUrlVars();
             var url = 'index.php?';
             for (var i in vars) {
-                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
+                if (i !== 'id' && i !== 'saveSuccessFull' && i !== 'removeSuccessFull') {
                     url += i + '=' + vars[i].replace('#', '') + '&';
                 }
             }
@@ -167,12 +226,20 @@ $('#modalOtherActionSave').on('click', function () {
     $('#bsOtherPreview2').attr('src', "");
     $('#bsOtherImage1').val('0');
     $('#bsOtherImage2').val('0');
+    $('#bsOtherSpecialCat1').val('');
+    $('#bsOtherSpecial1').val('');
+    $('#bsOtherSpecialCat2').val('');
+    $('#bsOtherSpecial2').val('');
     $('#bsOtherActionDash').val('1');
     $('#bsOtherActionType').val('0');
     $('#bsOtherActionIconSize1').val('2.5');
     $('#bsOtherActionIconSize2').val('2.5');
     $('#bsOtherActionIconCmd1').html('');
     $('#bsOtherActionIconCmd2').html('');
+    $('#bsOtherPreviewSpec1').attr('src', "");
+    $('#bsOtherPreviewSpec2').attr('src', "");
+    $('#bsOtherLabelSpec1').empty();
+    $('#bsOtherLabelSpec2').empty();
     $('#bsOtherLabel1').empty();
     $('#bsOtherLabel2').empty();
     $('#bsOtherActionName').val('');
@@ -194,6 +261,79 @@ $('#bsOtherActionName').on('change', function () {
     bsOtherActionType();
 });
 
+$('#bsOtherSpecial1').on('change', function () {
+    var image = $('#bsOtherSpecial1').val();
+    if (image === "") {
+        $('#bsOtherWidgetOff').empty();
+        $('#bsOtherWidgetOn').empty();
+        $('#bsOtherWidgetOff').parent().parent().hide();
+        $('#bsOtherWidgetOn').parent().parent().hide();
+        editorOther.setValue(" ");
+        $('#bsOtherPreviewSpec1').attr('src', "");
+        $('#bsOtherLabelSpec1').empty();
+        $('#modalOtherActionSave').prop('disabled',true);
+        return;
+    }
+    var img = new Image();
+    var dir = $('#bsOtherSpecialCat1').val().split('.');
+    img.src = "plugins/widget/core/special/" + dir + '/' + image;
+    $('#bsOtherPreviewSpec1').attr('src', img.src);
+    img.onload = function () {
+        var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+        $('#bsOtherLabelSpec1').empty();
+        $('#bsOtherLabelSpec1').append(temp);      
+        if(!checkOtherSpecial() && $('#bsOtherLabelSpec2').text() !== '')
+            $('#bsOtherLabelSpec1').css("color","red");
+    };
+});
+
+$('#bsOtherSpecial2').on('change', function () {
+    var image = $('#bsOtherSpecial2').val();
+    if (image === "") {
+        $('#bsOtherWidgetOff').empty();
+        $('#bsOtherWidgetOn').empty();
+        $('#bsOtherWidgetOff').parent().parent().hide();
+        $('#bsOtherWidgetOn').parent().parent().hide();
+        editorOther.setValue(" ");
+        $('#bsOtherPreviewSpec2').attr('src', "");
+        $('#bsOtherLabelSpec2').empty();
+        $('#modalOtherActionSave').prop('disabled',true);
+        return;
+    }
+    var img = new Image();
+    var dir = $('#bsOtherSpecialCat2').val().split('.');
+    img.src = "plugins/widget/core/special/" + dir + '/' + image;
+    $('#bsOtherPreviewSpec2').attr('src', img.src);
+    img.onload = function () {
+        var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+        $('#bsOtherLabelSpec2').empty();
+        $('#bsOtherLabelSpec2').append(temp);      
+        if(!checkOtherSpecial() && $('#bsOtherLabelSpec1').text() !== '')
+            $('#bsOtherLabelSpec2').css("color","red");
+    };
+});
+
+$('#bsOtherActionInsertIcon1').on('click', function () {
+    chooseIcon(function (_icon) {
+        $('#bsOtherActionIconCmd1').html(_icon);
+        checkOtherJeedomIcon();
+    });
+});
+
+$('#bsOtherActionInsertIcon2').on('click', function () {
+    chooseIcon(function (_icon) {
+        $('#bsOtherActionIconCmd2').html(_icon);
+        checkOtherJeedomIcon();
+    });
+});
+
+$('#bsOtherActionIconSize1').on('change', function () {
+    $('#bsOtherActionIconSize2').val($(this).val());
+    $('#bsOtherActionIconCmd1').css('font-size',$(this).val() + 'em');
+    $('#bsOtherActionIconCmd2').css('font-size',$(this).val() + 'em');
+    checkOtherJeedomIcon();
+});
+
 $('#bsOtherImage1').on('change', function () {
     var image = $('#bsOtherImage1').val();
     if (image === "0") {
@@ -208,13 +348,14 @@ $('#bsOtherImage1').on('change', function () {
         return;
     }
     var img = new Image();
-    img.src = "plugins/widget/core/images/" + image + "";
+    img.src = "plugins/widget/core/images/" + image;
     $('#bsOtherPreview1').attr('src', img.src);
     img.onload = function () {
         var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsOtherLabel1').empty();
         $('#bsOtherLabel1').append(temp);      
-        checkOtherWidgetImage();
+        if(!checkOtherWidgetImage() && $('#bsOtherLabel2').text() !== '')
+            $('#bsOtherLabel1').css("color","red");
     };
 });
 
@@ -232,20 +373,20 @@ $('#bsOtherImage2').on('change', function () {
         return;
     }
     var img = new Image();
-    img.src = "plugins/widget/core/images/" + image + "";
+    img.src = "plugins/widget/core/images/" + image;
     $('#bsOtherPreview2').attr('src', img.src);
     img.onload = function () {
         var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsOtherLabel2').empty();
         $('#bsOtherLabel2').append(temp);
-        checkOtherWidgetImage();
+        if(!checkOtherWidgetImage() && $('#bsOtherLabel1').text() !== '')
+            $('#bsOtherLabel2').css("color","red");
     };
 });
 
 function getHtmlWidgetOtherAction(dashboard) {
     var html = "";
-    var width;
-    var height;
+    var width, height, image1, image2, dir1, dir2;
     switch ($('#bsOtherActionType').val()) {
         case "0":
             width = $('#bsOtherActionIconSize1').val() * 20 + 15;
@@ -253,7 +394,17 @@ function getHtmlWidgetOtherAction(dashboard) {
             break;
         case "1":
             width = $('#bsOtherPreview2').width() + 15;
-            height = $('#bsOtherPreview2').height() + 20;
+            height = $('#bsOtherPreview2').height() + 15;
+            image1 = $('#bsOtherImage1').val();
+            image2 = $('#bsOtherImage2').val();
+            break;
+        case "2":
+            width = $('#bsOtherPreviewSpec2').width() + 15;
+            height = $('#bsOtherPreviewSpec2').height() + 15;
+            image1 = $('#bsOtherSpecial1').val();
+            image2 = $('#bsOtherSpecial2').val();
+            dir1 = $('#bsOtherSpecialCat1').val().split('.');
+            dir2 = $('#bsOtherSpecialCat2').val().split('.');
             break;
     }
     if (dashboard) {
@@ -264,18 +415,14 @@ function getHtmlWidgetOtherAction(dashboard) {
                 html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
                 html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
                 html += '\t</center>\n';
-                html += '\t<script>\n';
-                html += '\t\tvar temp = "#name#";\n';
-                html += '\t\tif ("#displayName#" == 1 || "#displayName#" == "1") {\n';
-                html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
-                html += '\t\t}\n';
                 break;
             case "1":
+            case "2":
                 html += '<div style="width:' + width + 'px; height:' + height + 'px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="action" data-subtype="other" data-cmd_id="#id#">\n';
                 html += '\t<div class="row">\n';
+                html += '\t\t<center><span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span></center>\n';
                 html += '\t\t<h5 class="action center-block" style="vertical-align:middle;" id="iconCmd#id#"></h5>\n';
                 html += '\t</div>\n';
-                html += '\t<script>\n';
                 break;
         }      
     }
@@ -287,11 +434,31 @@ function getHtmlWidgetOtherAction(dashboard) {
                 html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
                 break;
             case "1":
+            case "2":
                 html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
                 break;
         }
         html += '\t</center>\n';
-        html += '\t<script>\n';
+    }
+    html += '\t<script>\n';
+    if (dashboard) {
+        html += '\t\tif ("#displayName#" == "1") {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
+        switch ($('#bsOtherActionType').val()) {
+             case "1":
+             case "2":
+                html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 20) + 'px");\n';
+                break;
+        }
+        html += '\t\t} else {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
+        switch ($('#bsOtherActionType').val()) {
+            case "1":
+            case "2":
+                html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + height + 'px");\n';
+                break;
+        }
+        html += '\t\t}\n';
     }
     html += '\t\tif ("#state#" == "1" || "#state#" == 1) {\n';
     switch ($('#bsOtherActionType').val()) {
@@ -299,7 +466,10 @@ function getHtmlWidgetOtherAction(dashboard) {
             html += '\t\t\t$("#iconCmd#id#").append("' + $('#bsOtherActionIconCmd2').html().replace(/\"/g,"'") + '");\n';
             break;
         case "1":
-            html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + $('#bsOtherImage2').val() + '\'>");\n';
+            html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + image2 + '\'>");\n';
+            break;
+        case "2":
+           html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + dir2 + '/' + image2 + '\'>");\n';
             break;
     }
     html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "on") {\n';
@@ -311,7 +481,10 @@ function getHtmlWidgetOtherAction(dashboard) {
             html += '\t\t\t$("#iconCmd#id#").append("' + $('#bsOtherActionIconCmd1').html().replace(/\"/g,"'") + '");\n';
             break;
         case "1":
-            html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + $('#bsOtherImage1').val() + '\'>");\n';
+            html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + image1 + '\'>");\n';
+            break;
+        case "2":
+            html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + dir1 + '/' + image1 + '\'>");\n';
             break;
     }
     html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "off") {\n';

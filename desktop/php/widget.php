@@ -171,7 +171,7 @@ function displayWidgetName($_name) {
                     <div class="well col-sm-9" id="bsCategory" style="min-width: 725px;">
                         <div class="panel panel-default" id="bsCategoryDefault">
                             <div class="panel-heading">
-                                <h4>{{ibliothèque d'images : Jeedom}}<small><em><bold> - {{Les divers icônes de Jeedom disponibles}}</bold></em></small></h4></div>
+                                <h4>{{Bibliothèque d'images : Jeedom}}<small><em><bold> - {{Les divers icônes de Jeedom disponibles}}</bold></em></small></h4></div>
                             <div class="panel-body" style="height: 250px; overflow: auto">
                                 <div class="col-sm-12" id="bsIconView">
 
@@ -410,12 +410,12 @@ foreach (ls('core/css/icon', '*') as $dir) {
     $('#in_iconSelectorSearch').on('keyup',function(){
         $('.divIconSel').show();
         var search = $(this).value();
-        if(search != ''){
+        if(search !== ''){
             $('.iconDesc').each(function(){
-                if($(this).text().indexOf(search) == -1){
+                if($(this).text().indexOf(search) === -1){
                     $(this).closest('.divIconSel').hide();
                 }
-            })
+            });
         }
     });
     $('.divIconSel').on('click', function () {
@@ -431,26 +431,28 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                 </div> 
                             </div> 
                         </div>
-                        <div class="panel panel-warning">
+                        <div class="panel panel-warning" id="bsImagesPanel">
                             <div class="panel-heading">
-                                <h4>ibliothèque d'images : Widgets<small><em><bold> - {{Vos images personnelles}}</bold></em></small></h4>
+                                <h4>Bibliothèque d'images : Widgets<small><em><bold> - {{Vos images personnelles}}</bold></em></small></h4>
                             </div>
                             <div class="panel-body">
-                                <div class="col-sm-12" id="bsImagesView">
+                                <div class="col-sm-12" id="bsImagesView" style="min-height: 50px">
                                 </div>
                             </div>
                         </div>                    
-                        <div class="panel panel-success">
+                        <div class="panel panel-success" id="bsSpecialPanel">
+                            <input class="form-control" type="file" id="bsSpecialFileload" name="special" style="display: none;" data-url="plugins/widget/core/ajax/widget.ajax.php?action=specialUpload"/>
                             <div class="panel-heading">
-                                <h4>ibliothèque d'images : Spécial<small><em><bold> - {{Pack d'icones}}</bold></em></small></h4>
+                                <h4>Bibliothèque d'images : Spécial<small><em><bold> - {{Pack d'icônes}}</bold></em></small></h4>
                             </div>
                             <div class="panel-body">
-                                <div class="col-sm-12" name="bsImagesViewWidgets">
+                                <div class="col-sm-12" id="bsSpecialView" style="min-height: 50px">
                                 </div>
                             </div>
                         </div>                    
                     </div>
-                    <div class="well col-sm-9" id="bsOtherActionCategory" style="display: none;">
+                    <div class="col-sm-9" id="bsOtherActionCategory" style="display: none;">
+                        <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Other.Action</strong>
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -515,38 +517,44 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" id="bsOtherActionInsertIcon1" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" id="bsOtherImage1" >
-                                                    </select>
+                                                    <select class="form-control widgetsView" value="" id="bsOtherImage1" ></select>
+                                                    <select class="form-control specialView" value="" id="bsOtherSpecialCat1" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView" value="" id="bsOtherSpecial1" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control JeedomView" style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsOtherActionIconSize1"/>
                                                     <label class="col-sm-12 control-label widgetsView" id="bsOtherLabel1"></label>
+                                                    <label class="col-sm-12 control-label specialView" id="bsOtherLabelSpec1"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsOtherActionIconCmd1"></span>
                                                     <img src="" id="bsOtherPreview1" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 1">
+                                                    <img src="" id="bsOtherPreviewSpec1" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 1">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" id="bsOtherActionInsertIcon2" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" id="bsOtherImage2" >
-                                                    </select>
+                                                    <select class="form-control widgetsView" value="" id="bsOtherImage2" ></select>
+                                                    <select class="form-control specialView" value="" id="bsOtherSpecialCat2" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView" value="" id="bsOtherSpecial2" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control JeedomView" disabled style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsOtherActionIconSize2"/>
                                                     <label class="col-sm-12 control-label widgetsView" id="bsOtherLabel2"></label>
+                                                    <label class="col-sm-12 control-label specialView" id="bsOtherLabelSpec2"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView" id="bsOtherActionIconCmd2"></span>
                                                     <img src="" id="bsOtherPreview2" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 2">
+                                                    <img src="" id="bsOtherPreviewSpec2" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 2">
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" id="bsViewOther" style='height: 600px;dispaly: none;'></textarea>
+                                    <textarea class="form-control" id="bsViewOther" style='height: 600px;display: none;'></textarea>
                                 </div>
                             </div>
                         </div>
@@ -558,7 +566,8 @@ foreach (ls('core/css/icon', '*') as $dir) {
                             </div>
                         </div>
                     </div>    
-                    <div class="well col-sm-9" id="bsInfoBinaryCategory" style="display: none;">
+                    <div class="col-sm-9" id="bsInfoBinaryCategory" style="display: none;">
+                        <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Info.Binary</strong>
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -623,38 +632,44 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" id="bsInfoBinaryInsertIcon1" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" id="bsInfoBinaryImage1" >
-                                                    </select>
+                                                    <select class="form-control widgetsView" value="" id="bsInfoBinaryImage1" ></select>
+                                                    <select class="form-control specialView" value="" id="bsInfoBinarySpecialCat1" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView" value="" id="bsInfoBinarySpecial1" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control JeedomView" style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsInfoBinaryIconSize1"/>
                                                     <label class="col-sm-12 control-label widgetsView" id="bsInfoBinaryLabel1"></label>
+                                                    <label class="col-sm-12 control-label specialView" id="bsInfoBinaryLabelSpec1"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsInfoBinaryIconCmd1"></span>
                                                     <img src="" id="bsInfoBinaryPreview1" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 1">
+                                                    <img src="" id="bsInfoBinaryPreviewSpec1" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 1">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" id="bsInfoBinaryInsertIcon2" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" id="bsInfoBinaryImage2" >
-                                                    </select>
+                                                    <select class="form-control widgetsView" value="" id="bsInfoBinaryImage2" ></select>
+                                                    <select class="form-control specialView" value="" id="bsInfoBinarySpecialCat2" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView" value="" id="bsInfoBinarySpecial2" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control JeedomView" disabled style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsInfoBinaryIconSize1"/>
                                                     <label class="col-sm-12 control-label widgetsView" id="bsInfoBinaryLabel2"></label>
+                                                    <label class="col-sm-12 control-label specialView" id="bsInfoBinaryLabelSpec2"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsInfoBinaryIconCmd2"></span>
                                                     <img src="" id="bsInfoBinaryPreview2" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 2">
+                                                    <img src="" id="bsInfoBinaryPreviewSpec2" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 2">
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" id="bsViewInfoBinary" style='height: 600px;dispaly: none;'></textarea>
+                                    <textarea class="form-control" id="bsViewInfoBinary" style='height: 600px;display: none;'></textarea>
                                 </div>
                             </div>
                         </div>
@@ -666,7 +681,8 @@ foreach (ls('core/css/icon', '*') as $dir) {
                             </div>
                         </div>
                     </div>    
-                    <div class="well col-sm-9" id="bsInfoNumericCategory" style="display: none;">
+                    <div class="col-sm-9" id="bsInfoNumericCategory" style="display: none;">
+                        <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Info.Numeric</strong>
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -713,12 +729,14 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" data-index="0" name="bsInfoNumericInsertIcon0" id="bsInfoNumericInsertIcon0" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" data-index="0" name="bsInfoNumericImage0" id="bsInfoNumericImage0">
-                                                    </select>
+                                                    <select class="form-control widgetsView" value="" data-index="0" name="bsInfoNumericImage0" id="bsInfoNumericImage0"></select>
+                                                    <select class="form-control specialView" value="" data-index="0" name="bsInfoNumericSpecialCat0" id="bsInfoNumericSpecialCat0" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView" value="" data-index="0" name="bsInfoNumericSpecialIcon0" id="bsInfoNumericSpecialIcon0" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control JeedomView" data-index="0" style=display:none" value="2.5" min="1" max="5" step="0.2" name="bsInfoNumericIconSize0" id="bsInfoNumericIconSize0"/>
                                                     <label class="col-sm-12 control-label widgetsView" id="bsInfoNumericLabel0"></label>
+                                                    <label class="col-sm-12 control-label specialView" id="bsInfoNumericLabelSpec0"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control" value="0" max="100" data-index="0" name="bsInfoNumericEcartMin0" id="bsInfoNumericEcartMin0" disabled/>
@@ -729,6 +747,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView" data-index="0" name="bsInfoNumericIconCmd0" id="bsInfoNumericIconCmd0"></span>
                                                     <img src="" id="bsInfoNumericPreview0" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 0">
+                                                    <img src="" id="bsInfoNumericPreviewSpec0" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 0">
                                                 </td>
                                                 <td style=" vertical-align: middle;">
                                                 </td>

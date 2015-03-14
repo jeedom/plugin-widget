@@ -18,20 +18,22 @@
 
 editor = null;
 var imagesWidgets = [];
+var specialWidgets = [];
 updateListImages();
+updateListSvgs();
 
 $('.pluginContainer').packery();
 
 $("img.lazy").each(function () {
     var el = $(this);
-    if (el.attr('data-original2') != undefined) {
+    if (el.attr('data-original2') !== undefined) {
         $("<img>", {
             src: el.attr('data-original'),
             error: function () {
                 $("<img>", {
                     src: el.attr('data-original2'),
                     error: function () {
-                        if (el.attr('data-original3') != undefined) {
+                        if (el.attr('data-original3') !== undefined) {
                             $("<img>", {
                                 src: el.attr('data-original3'),
                                 error: function () {
@@ -98,11 +100,11 @@ $(".li_widget").on('click', function (event) {
     return false;
 });
 
-if (getUrlVars('saveSuccessFull') == 1) {
+if (getUrlVars('saveSuccessFull') === 1) {
     $('#div_alert').showAlert({message: '{{Sauvegarde effectué avec succès}}', level: 'success'});
 }
 
-if (getUrlVars('removeSuccessFull') == 1) {
+if (getUrlVars('removeSuccessFull') === 1) {
     $('#div_alert').showAlert({message: '{{Suppression effectué avec succès}}', level: 'success'});
 }
 
@@ -167,8 +169,8 @@ $('#bt_getFromMarket').on('click', function () {
     $('#md_modal').load('index.php?v=d&modal=market.list&type=widget').dialog('open');
 });
 
-if (getUrlVars('id') != '') {
-    if ($('#ul_widget .li_widget[data-path="' + getUrlVars('id') + '"]').length != 0) {
+if (getUrlVars('id') !== '') {
+    if ($('#ul_widget .li_widget[data-path="' + getUrlVars('id') + '"]').length !== 0) {
         $('#ul_widget .li_widget[data-path="' + getUrlVars('id') + '"]').click();
     }
 }
@@ -200,13 +202,13 @@ function printWidget(_path) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
+            if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             $('.widget').setValues(data.result, '.widgetAttr');
 
-            if (editor == null) {
+            if (editor === null) {
                 if (isset(data.result.content)) {
                     $('#ta_script').val(data.result.content);
                 }
@@ -235,7 +237,7 @@ function saveWidget() {
     $.hideAlert();
     var widget = $('.widget').getValues('.widgetAttr');
     widget = widget[0];
-    if (editor != null) {
+    if (editor !== null) {
         widget.content = editor.getValue();
     }
     $.ajax({// fonction permettant de faire de l'ajax
@@ -243,21 +245,21 @@ function saveWidget() {
         url: "plugins/widget/core/ajax/widget.ajax.php", // url du fichier php
         data: {
             action: "save",
-            widget: json_encode(widget),
+            widget: json_encode(widget)
         },
         dataType: 'json',
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
+            if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             var vars = getUrlVars();
             var url = 'index.php?';
             for (var i in vars) {
-                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull' && i != undefined) {
+                if (i !== 'id' && i !== 'saveSuccessFull' && i !== 'removeSuccessFull' && i !== undefined) {
                     url += i + '=' + vars[i].replace('#', '') + '&';
                 }
             }
@@ -275,21 +277,21 @@ function addWidget(_name) {
         url: "plugins/widget/core/ajax/widget.ajax.php", // url du fichier php
         data: {
             action: "add",
-            name: _name,
+            name: _name
         },
         dataType: 'json',
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
+            if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             var vars = getUrlVars();
             var url = 'index.php?';
             for (var i in vars) {
-                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
+                if (i !== 'id' && i !== 'saveSuccessFull' && i !== 'removeSuccessFull') {
                     url += i + '=' + vars[i].replace('#', '') + '&';
                 }
             }
@@ -305,21 +307,21 @@ function removeWidget(_path) {
         url: "plugins/widget/core/ajax/widget.ajax.php", // url du fichier php
         data: {
             action: "remove",
-            path: _path,
+            path: _path
         },
         dataType: 'json',
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
+            if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             var vars = getUrlVars();
             var url = 'index.php?';
             for (var i in vars) {
-                if (i != 'id' && i != 'removeSuccessFull' && i != 'saveSuccessFull') {
+                if (i !== 'id' && i !== 'removeSuccessFull' && i !== 'saveSuccessFull') {
                     url += i + '=' + vars[i].replace('#', '') + '&';
                 }
             }
@@ -337,21 +339,21 @@ function copyWidget(_path, _name) {
         data: {
             action: "copy",
             path: _path,
-            name: _name,
+            name: _name
         },
         dataType: 'json',
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
         success: function (data) { // si l'appel a bien fonctionné
-            if (data.state != 'ok') {
+            if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
             var vars = getUrlVars();
             var url = 'index.php?';
             for (var i in vars) {
-                if (i != 'id' && i != 'saveSuccessFull' && i != 'removeSuccessFull') {
+                if (i !== 'id' && i !== 'saveSuccessFull' && i !== 'removeSuccessFull') {
                     url += i + '=' + vars[i].replace('#', '') + '&';
                 }
             }
@@ -361,28 +363,120 @@ function copyWidget(_path, _name) {
     });
 }
 
-$('#bsImagesView').on('click', '.bsDelDefaultImage', function () {
-    var image = $(this).data('image');
-    bootbox.confirm("{{Etes-vous sur de vouloir effacer cette image}}", function (result) {
+$('#bsSpecialFileload').fileupload({
+    dataType: 'json',
+    dropZone: "#bsSpecialPanel",
+    done: function (e, data) {
+        if (data.result.state !== 'ok') {
+            $('#div_alert').showAlert({message: data.result.result, level: 'danger'});
+            return;
+        }
+        updateListSvgs();
+        notify("{{Ajout Spécial}}", '{{Pack ajouté avec succès}}', 'success');
+    }
+});
+
+$('#bsSpecialView').on('click', '.bsDelSvg', function () {
+    var svg = $(this).data('svg');
+    bootbox.confirm("{{Etes-vous sur de vouloir effacer ce Svg}}", function (result) {
         if (result) {
-            removeImage({
-                image: image,
-                category: "",
+            removeSvg({
+                special: svg,
                 error: function (error) {
                     $('#div_alert').showAlert({message: error.message, level: 'danger'});
                 },
                 success: function (data) {
-                    $('#bsImageMainWindow').val('0');
-                    updateListImages($('#bsImageMainWindow').val());
-                    notify("Suppression d'une Image", '{{Image supprimée avec succès}}', 'success');
+                    updateListSvgs();
+                    notify("Suppression Spécial", '{{Pack supprimé avec succès}}', 'success');
                 }
             });
         }
     });
 });
 
+function updateListSvgs() {
+    listSvg({
+        error: function (error) {
+            $('#div_alert').showAlert({message: error.message, level: 'danger'});
+        },
+        success: function (data) {
+            var special = '';
+            console.log(data);
+            specialWidgets = data;
+            for (var i in data.files) {
+                var filename = data.files[i].split('.');
+                special += '<div class="media-left col-sm-4" style="min-width: 100px">';
+                special += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noPaddingRight noMarginBottom">';
+                special += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelSvg" data-svg="' + data.files[i] + "\" title=\"{{Supprimer le Svg}}\"><i class='fa fa-trash-o'></i></button>";
+                special += '<strong class="col-sm-6 noPaddingLeft noPaddingRight text-right pull-right" id="bsVieSvgSize' + i + '">' + data.files[i] + '</strong>';
+                special += '</div>';
+                special += '<div class="col-sm-12 center-block" id="bsViewSvg' + i + '">';
+                for (var index in data.folders) {
+                    if (data.folders[index].folder === filename[0]) {
+                        var row = 0;
+                        for (var nbIcons in data.folders[index].files) {
+                            row++;
+                            if (row === 1)
+                                special += '<div class="row" style="padding-top: 5px;">';
+                            special += '<div class="col-sm-2 center-block"><img class="img-thumbnail center-block" src="plugins/widget/core/special/' + data.folders[index].folder + '/' + data.folders[index].files[nbIcons] + '" alt="' + data.folders[index].files[nbIcons] + '"></div>';
+                            if (row === 6) {
+                                special += '</div>';
+                                row = 0;
+                            }
+                        }
+                        if (row !== 6) {
+                            special += '</div>';
+                        }
+                    }
+                }
+                special += '</div>';
+                special += '</div>';
+            }
+            $('#bsSpecialView').html('<div class="media">' + special + '</div>');
+        }
+    });
+}
+
+function listSvg(_params) {
+    var paramsRequired = [];
+    var paramsSpecifics = {};
+    try {
+        jeedom.private.checkParamsRequired(_params || {}, paramsRequired);
+    } catch (e) {
+        (_params.error || paramsSpecifics.error || jeedom.private.default_params.error)(e);
+        return;
+    }
+    var params = $.extend({}, jeedom.private.default_params, paramsSpecifics, _params || {});
+    var paramsAJAX = jeedom.private.getParamsAJAX(params);
+    paramsAJAX.url = 'plugins/widget/core/ajax/widget.ajax.php';
+    paramsAJAX.data = {
+        action: 'listSvg'
+    };
+    $.ajax(paramsAJAX);
+}
+
+function removeSvg(_params) {
+    var paramsRequired = ['special'];
+    var paramsSpecifics = {};
+    try {
+        jeedom.private.checkParamsRequired(_params || {}, paramsRequired);
+    } catch (e) {
+        (_params.error || paramsSpecifics.error || jeedom.private.default_params.error)(e);
+        return;
+    }
+    var params = $.extend({}, jeedom.private.default_params, paramsSpecifics, _params || {});
+    var paramsAJAX = jeedom.private.getParamsAJAX(params);
+    paramsAJAX.url = 'plugins/widget/core/ajax/widget.ajax.php';
+    paramsAJAX.data = {
+        action: 'removeSvg',
+        special: _params.special
+    };
+    $.ajax(paramsAJAX);
+}
+
 $('#bsImagesFileload').fileupload({
     dataType: 'json',
+    dropZone: "#bsImagesPanel",
     done: function (e, data) {
         if (data.result.state !== 'ok') {
             $('#div_alert').showAlert({message: data.result.result, level: 'danger'});
@@ -391,6 +485,24 @@ $('#bsImagesFileload').fileupload({
         updateListImages();
         notify("{{Ajout d'une Image}}", '{{Image ajoutée avec succès}}', 'success');
     }
+});
+
+$('#bsImagesView').on('click', '.bsDelImage', function () {
+    var image = $(this).data('image');
+    bootbox.confirm("{{Etes-vous sur de vouloir effacer cette image}}", function (result) {
+        if (result) {
+            removeImage({
+                image: image,
+                error: function (error) {
+                    $('#div_alert').showAlert({message: error.message, level: 'danger'});
+                },
+                success: function (data) {
+                    updateListImages();
+                    notify("Suppression d'une Image", '{{Image supprimée avec succès}}', 'success');
+                }
+            });
+        }
+    });
 });
 
 function updateListImages() {
@@ -404,7 +516,7 @@ function updateListImages() {
             for (var i in data) {
                 images += '<div class="media-left col-sm-2" style="min-width: 105px">';
                 images += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noPaddingRight noMarginBottom">';
-                images += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelDefaultImage" data-category="" data-image="' + data[i] + "\" title=\"{{Supprimer l'image}}\"><i class='fa fa-trash-o'></i></button>";
+                images += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelImage" data-image="' + data[i] + "\" title=\"{{Supprimer l'image}}\"><i class='fa fa-trash-o'></i></button>";
                 images += '<div class="col-sm-6 noPaddingLeft noPaddingRight text-right pull-right" id="bsViewImageSize' + i + '"></div>';
                 images += '</div>';
                 images += '<img class="img-thumbnail center-block" src="plugins/widget/core/images/' + data[i] + '" alt="' + data[i] + '" id="bsViewImage' + i + '">';
@@ -484,6 +596,32 @@ function setSelectImage(select) {
     select.html(options);
 }
 
+function setSelectPack(select) {
+    var options = '<option value="">{{Aucune}}</option>';
+    if (is_object(specialWidgets)) {
+        for (var index in specialWidgets.files) {
+            var filename = specialWidgets.files[index].split('.');
+            options += '<option value="' + filename[0] + '">' + specialWidgets.files[index] + '</option>';
+        }
+    }
+    select.html(options);
+}
+
+function setSelectPackIcones(select, value) {
+    var options = '<option value="">{{Aucune}}</option>';
+    if (is_object(specialWidgets)) {
+        for(var index in specialWidgets.folders) {
+            if (specialWidgets.folders[index].folder === value) {
+                for(var icone in specialWidgets.folders[index].files) {
+                var filename = specialWidgets.folders[index].files[icone].split('.');
+                options += '<option value="' + specialWidgets.folders[index].files[icone] + '">' + filename[0] + '</option>';
+            }
+            }
+        }
+    }
+    select.html(options);
+}
+
 var editorOther = null;
 
 $('#bt_OtherActionAdd').on('click', function () {
@@ -497,7 +635,10 @@ $('#bt_OtherActionAdd').on('click', function () {
             viewportMargin: Infinity
         });
     }
-    var image1,image2;
+    $('#bsInfoBinaryCategory').hide();
+    $('#bsInfoNumericCategory').hide();
+    $('#bsOtherActionCategory').show();
+    var image1,image2,imageSpec1,imageSpec2;
     if($('#bsOtherImage1').val() !== undefined && $('#bsOtherImage1').val() !== null && $('#bsOtherImage1').val() !== '0')
         image1 = $('#bsOtherImage1').val();
     else
@@ -506,18 +647,28 @@ $('#bt_OtherActionAdd').on('click', function () {
         image2 = $('#bsOtherImage2').val();
     else
         image2 = '0';
+    if($('#bsOtherSpecialCat1').val() !== undefined && $('#bsOtherSpecialCat1').val() !== null && $('#bsOtherSpecialCat1').val() !== '0')
+        imageSpec1 = $('#bsOtherSpecialCat1').val();
+    else
+        imageSpec1 = '';
+    if($('#bsOtherSpecialCat2').val() !== undefined && $('#bsOtherSpecialCat2').val() !== null && $('#bsOtherSpecialCat2').val() !== '0')
+        imageSpec2 = $('#bsOtherSpecialCat2').val();
+    else
+        imageSpec2 = '';
     $('#bsOtherImage1').empty();
     setSelectImage($('#bsOtherImage1'));
     $('#bsOtherImage1').val(image1);
     $('#bsOtherImage2').empty();
     setSelectImage($('#bsOtherImage2'));    
     $('#bsOtherImage2').val(image2);
+    $('#bsOtherSpecialCat1').empty();
+    setSelectPack($('#bsOtherSpecialCat1'));    
+    $('#bsOtherSpecialCat1').val(imageSpec1);
+    $('#bsOtherSpecialCat2').empty();
+    setSelectPack($('#bsOtherSpecialCat2'));    
+    $('#bsOtherSpecialCat2').val(imageSpec2);
     bsOtherActionType();
-    $('#bsOtherImage1').val(image1);
     $('#bsCategory').hide();
-    $('#bsInfoBinaryCategory').hide();
-    $('#bsInfoNumericCategory').hide();
-    $('#bsOtherActionCategory').show();
 });
 
 var editorBinary = null;
@@ -534,7 +685,10 @@ $('#bt_InfoBinaryAdd').on('click', function () {
             viewportMargin: Infinity
         });
     }
-    var image1,image2;
+    $('#bsInfoNumericCategory').hide();
+    $('#bsOtherActionCategory').hide();
+    $('#bsInfoBinaryCategory').show();
+    var image1,image2,imageSpec1,imageSpec2;
     if($('#bsInfoBinaryImage1').val() !== undefined && $('#bsInfoBinaryImage1').val() !== null && $('#bsInfoBinaryImage1').val() !== '0')
         image1 = $('#bsInfoBinaryImage1').val();
     else
@@ -543,18 +697,29 @@ $('#bt_InfoBinaryAdd').on('click', function () {
         image2 = $('#bsInfoBinaryImage2').val();
     else
         image2 = '0';
+    if($('#bsInfoBinarySpecialCat1').val() !== undefined && $('#bsInfoBinarySpecialCat1').val() !== null && $('#bsInfoBinarySpecialCat1').val() !== '0')
+        imageSpec1 = $('#bsInfoBinarySpecialCat1').val();
+    else
+        imageSpec1 = '';
+    if($('#bsInfoBinarySpecialCat2').val() !== undefined && $('#bsInfoBinarySpecialCat2').val() !== null && $('#bsInfoBinarySpecialCat2').val() !== '0')
+        imageSpec2 = $('#bsInfoBinarySpecialCat2').val();
+    else
+        imageSpec2 = '';
     $('#bsInfoBinaryImage1').empty();
     setSelectImage($('#bsInfoBinaryImage1'));
     $('#bsInfoBinaryImage1').val(image1);
     $('#bsInfoBinaryImage2').empty();
     setSelectImage($('#bsInfoBinaryImage2'));
     $('#bsInfoBinaryImage2').val(image2);
+    $('#bsInfoBinarySpecialCat1').empty();
+    setSelectPack($('#bsInfoBinarySpecialCat1'));    
+    $('#bsInfoBinarySpecialCat1').val(imageSpec1);
+    $('#bsInfoBinarySpecialCat2').empty();
+    setSelectPack($('#bsInfoBinarySpecialCat2'));    
+    $('#bsInfoBinarySpecialCat2').val(imageSpec2);
     bsInfoBinaryType();
     $('#bsCategory').hide();
-    $('#bsInfoNumericCategory').hide();
-    $('#bsOtherActionCategory').hide();
-    $('#bsInfoBinaryCategory').show();
-});
+ });
 
 var editorNumeric = null;
 
@@ -569,21 +734,28 @@ $('#bt_InfoNumericAdd').on('click', function () {
             viewportMargin: Infinity
         });
     }
+    $('#bsInfoBinaryCategory').hide();
+    $('#bsOtherActionCategory').hide();
+    $('#bsInfoNumericCategory').show();
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     for (var index = 0; index < all; index++) {
-        var image;
+        var image, imageSpec;
         if ($('#bsInfoNumericImage' + index).val() !== undefined && $('#bsInfoNumericImage' + index).val() !== null && $('#bsInfoNumericImage' + index).val() !== '0')
             image = $('#bsInfoNumericImage' + index).val();
         else
             image = '0';
+        if ($('#bsInfoNumericSpecialCat' + index).val() !== undefined && $('#bsInfoNumericSpecialCat' + index).val() !== null && $('#bsInfoNumericSpecialCat' + index).val() !== '0')
+            imageSpec = $('#bsInfoNumericSpecialCat' + index).val();
+        else
+            imageSpec = '';
         $('#bsInfoNumericImage' + index).empty();
         setSelectImage($('#bsInfoNumericImage' + index));
         $('#bsInfoNumericImage' + index).val(image);
+        $('#bsInfoNumericSpecialCat' + index).empty();
+        setSelectPack($('#bsInfoNumericSpecialCat' + index));
+        $('#bsInfoNumericSpecialCat' + index).val(imageSpec);
     }
     $('#modalInfoNumericSave').prop('disabled',true);
     bsInfoNumericType();
     $('#bsCategory').hide();
-    $('#bsInfoBinaryCategory').hide();
-    $('#bsOtherActionCategory').hide();
-    $('#bsInfoNumericCategory').show();
 });

@@ -219,7 +219,7 @@ try {
         }
         $extension = strtolower(strrchr($_FILES['images']['name'], '.'));
         if (!in_array($extension, array('.png','.jpg'))) {
-            throw new Exception('{{Seul les images sont accepté (autorisé .jpg .png)}} : ' . $extension);
+            throw new Exception('{{Seul les images sont acceptées (autorisé .jpg .png)}} : ' . $extension);
         }
         if (filesize($_FILES['images']['tmp_name']) > 1000000) {
             throw new Exception(__('{{Le fichier est trop gros}} (maximum 8mo)', __FILE__));
@@ -232,8 +232,126 @@ try {
         }
         ajax::success();
     }
+
+    if (init('action') == 'listSvg') {
+        $uploaddir = dirname(__FILE__) . '/../special';
+        if (!file_exists($uploaddir)) {
+            mkdir($uploaddir);
+        }
+        if (!file_exists($uploaddir)) {
+            throw new Exception(__("{{Répertoire d'upload d'images non trouvé}} : ", __FILE__) . $uploaddir);
+        }
+        $return['files'] = ls($uploaddir, "*", false, array('files'));
+        $return['folders'] = ls($uploaddir, "*", false, array('folders'));
+        for( $index = 0; $index < count($return['folders']); $index++) {
+            $temp['folder'] = str_replace('/', '', $return['folders'][$index]);
+            $temp['files'] = ls($uploaddir . '/' . $temp['folder'], "*", false, array('files'));
+            $return['folders'][$index] = $temp;
+        }
+        ajax::success($return);
+    }
+
+    if (init('action') == 'removeSvg') {
+        $name = init('special');
+        $uploaddir = dirname(__FILE__) . '/../special/';
+        $extension = strtolower(strrchr($name, '.'));
+        if (in_array($extension, array('.zip'))) {
+            $base = basename( strtolower($name), ".zip");
+            if (is_dir($uploaddir . $base)) {
+                $files = ls($uploaddir . $base, "*", false, array('files'));
+                for ($index = 0; $index < count($files); $index++) {
+                    unlink($uploaddir . $base . '/' . $files[$index]);
+                }
+                rmdir($uploaddir . $base);
+            }
+            if (file_exists($uploaddir . $base)) {
+                throw new Exception(__("{{Impossible d'éffacer le pack}} : ", __FILE__) . init('special'));
+            }
+        }
+        ajax::success(unlink($uploaddir . $name));
+    }
+
+    if (init('action') == 'specialUpload') {
+        $uploaddir = dirname(__FILE__) . '/../special';
+        if (!file_exists($uploaddir)) {
+            mkdir($uploaddir);
+        }
+        if (!file_exists($uploaddir)) {
+            throw new Exception(__("{{Répertoire d'upload non trouvé}} : ", __FILE__) . $uploaddir);
+        }
+        if (!isset($_FILES['special'])) {
+            throw new Exception(__('{{Aucun fichier trouvé. Vérifié parametre PHP (post size limit}}', __FILE__));
+        }
+        $extension = strtolower(strrchr($_FILES['special']['name'], '.'));
+        if (!in_array($extension, array('.zip'))) {
+            throw new Exception('{{Seul les fichiers Zip sont acceptés (autorisé .zip)}} : ' . $extension);
+        }
+        if (filesize($_FILES['special']['tmp_name']) > 2000000) {
+            throw new Exception(__('{{Le fichier est trop gros}} (maximum 8mo)', __FILE__));
+        }
+        if (!move_uploaded_file($_FILES['special']['tmp_name'], $uploaddir . '/' . $_FILES['special']['name'])) {
+            throw new Exception(__('{{Impossible de déplacer le fichier temporaire}}', __FILE__));
+        }
+        if (!file_exists($uploaddir . '/' . $_FILES['special']['name'])) {
+            throw new Exception(__("{{Impossible d'uploader le fichier (limite du serveur web ?)}}", __FILE__));
+        }
+        if (!checkZipSvg($_FILES['special']['name'])) {
+            unlink($uploaddir . '/' . $_FILES['special']['name']);
+            throw new Exception('{{le fichier Zip contient des fichiers non autorisés ou de type différent (autorisé .svg, .png, .ico)}} ');
+        }
+        $base = basename( strtolower($_FILES['special']['name']), ".zip");
+        mkdir($uploaddir . '/' . $base);
+        if (!file_exists($uploaddir . '/' . $base)) {
+            throw new Exception(__("{{Impossible de créer le répertoire de l'archive}} : ", __FILE__) . $uploaddir . '/' . $_FILES['special']['name']);
+        }
+        if(!unZipSvg($_FILES['special']['name'])) {
+            throw new Exception(__("{{Impossible d'extraire l'archive}} : ", __FILE__) . $uploaddir . '/' . $_FILES['special']['name']);
+        }
+        //unlink($uploaddir . '/' . $_FILES['special']['name']);
+        ajax::success();
+    }
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
+
 } catch (Exception $e) {
     ajax::error(displayExeption($e), $e->getCode());
+}
+
+
+function unZipSvg($name) {
+    $base = basename(strtolower($name), ".zip");
+    $zip_dir = dirname(__FILE__) . '/../special/' . $base;
+    $arch = new ZipArchive();
+    if ($arch->open(dirname(__FILE__) . '/../special/' . $name) === true) {
+        if ($arch->extractTo($zip_dir) === false) {
+            return false;
+        }
+    } else {
+        return false;
+    }
+    $arch->close();
+    return true;
+}
+
+function checkZipSvg($name) {
+    $check = true;
+    $fileUse = null;
+    $zip_dir = dirname(__FILE__) . '/../special/';
+    $zip = zip_open($zip_dir . $name);
+    if ($zip) {
+        while ($zip_entry = zip_read($zip)) {
+            $file = basename(zip_entry_name($zip_entry));
+            $extension = strtolower(strrchr($file, '.'));
+            if($fileUse == null)
+                $fileUse = $extension;
+            if($fileUse != $extension)
+                $check = false;
+            if (!in_array($extension, array('.svg', '.png', '.ico')))
+                $check = false;
+            else
+                $fileUse = $extension;
+        }
+        zip_close($zip);
+    }
+    return $check;
 }
 ?>
