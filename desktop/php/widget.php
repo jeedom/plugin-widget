@@ -14,10 +14,14 @@ include_file('3rdparty', 'jquery.fileupload/jquery.iframe-transport', 'js');
 include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
 include_file('3rdparty', 'jquery.lazyload/jquery.lazyload', 'js');
 include_file('3rdparty', 'jquery.packery/jquery.packery', 'js');
+include_file('3rdparty', 'snap.svg', 'js', 'widget');
 
 $mobileWidget = widget::listWidget('mobile');
 $dashboardWidget = widget::listWidget('dashboard');
 
+$pathfile = dirname(__FILE__);
+sendVarToJS('pathFile', $pathfile);
+        
 function displayWidgetName($_name) {
     $result = '';
     $name = explode('.', $_name);
@@ -446,6 +450,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                 <h4>Bibliothèque d'images : Spécial<small><em><bold> - {{Pack d'icônes}}</bold></em></small></h4>
                             </div>
                             <div class="panel-body">
+                                <div id="bsSpecialSvgLoad" style=""></div>
                                 <div class="col-sm-12" id="bsSpecialView" style="min-height: 50px">
                                 </div>
                             </div>
@@ -510,7 +515,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <th style="text-align: center;" class="col-sm-4">Image</th>
                                                 <th style="text-align: center;" class="col-sm-4">Taille</th>
-                                                <th style="text-align: center;" class="col-sm-4">Aperçu</th>
+                                                <th style="text-align: center;" class="col-sm-4">Aperçu
+                                                    <input type="number" value="" class="pull-right col-sm-3 btn-xs specialView svgSpecView" id="bsOtherSvgSpecSize" min="32" max="128" step="16" disabled title="Modifier la Taille">
+                                                    <input type="color" value="" class="pull-right btn btn-xs btn-warning specialView svgSpecView" id="bsOtherSvgSpecColor" disabled title="Changer la Couleur">
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody id="bodyOtherAction">
@@ -526,10 +534,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                     <label class="col-sm-12 control-label widgetsView" id="bsOtherLabel1"></label>
                                                     <label class="col-sm-12 control-label specialView" id="bsOtherLabelSpec1"></label>
                                                 </td>
-                                                <td style="text-align: center; vertical-align: middle;">
+                                                <td style="text-align: center; vertical-align: middle;" id="bsOtherSvgPreview1">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsOtherActionIconCmd1"></span>
-                                                    <img src="" id="bsOtherPreview1" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 1">
-                                                    <img src="" id="bsOtherPreviewSpec1" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 1">
+                                                    <img src="" id="bsOtherPreview1" class="img-responsive widgetsView" style="margin: 0px auto;">
+                                                    <img src="" id="bsOtherPreviewSpec1" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -544,10 +552,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                     <label class="col-sm-12 control-label widgetsView" id="bsOtherLabel2"></label>
                                                     <label class="col-sm-12 control-label specialView" id="bsOtherLabelSpec2"></label>
                                                 </td>
-                                                <td style="text-align: center; vertical-align: middle;">
+                                                <td style="text-align: center; vertical-align: middle;" id="bsOtherSvgPreview2">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView" id="bsOtherActionIconCmd2"></span>
-                                                    <img src="" id="bsOtherPreview2" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 2">
-                                                    <img src="" id="bsOtherPreviewSpec2" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 2">
+                                                    <img src="" id="bsOtherPreview2" class="img-responsive widgetsView" style="margin: 0px auto;">
+                                                    <img src="" id="bsOtherPreviewSpec2" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -625,7 +633,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <th style="text-align: center;" class="col-sm-4">Image</th>
                                                 <th style="text-align: center;" class="col-sm-4">Taille</th>
-                                                <th style="text-align: center;" class="col-sm-4">Aperçu</th>
+                                                <th style="text-align: center;" class="col-sm-4">Aperçu
+                                                    <input type="number" value="" class="pull-right col-sm-3 btn-xs specialView svgSpecView" id="bsInfoBinarySvgSpecSize" min="32" max="128" step="16" disabled title="Modifier la Taille">
+                                                    <input type="color" value="" class="pull-right btn btn-xs btn-warning specialView svgSpecView" id="bsInfoBinarySvgSpecColor" disabled title="Changer la Couleur">
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody id="bodyInfoBinary">
@@ -641,10 +652,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                     <label class="col-sm-12 control-label widgetsView" id="bsInfoBinaryLabel1"></label>
                                                     <label class="col-sm-12 control-label specialView" id="bsInfoBinaryLabelSpec1"></label>
                                                 </td>
-                                                <td style="text-align: center; vertical-align: middle;">
+                                                <td style="text-align: center; vertical-align: middle;" id="bsInfoBinarySvgPreview1">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsInfoBinaryIconCmd1"></span>
-                                                    <img src="" id="bsInfoBinaryPreview1" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 1">
-                                                    <img src="" id="bsInfoBinaryPreviewSpec1" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 1">
+                                                    <img src="" id="bsInfoBinaryPreview1" class="img-responsive widgetsView" style="margin: 0px auto;">
+                                                    <img src="" id="bsInfoBinaryPreviewSpec1" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -659,10 +670,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                     <label class="col-sm-12 control-label widgetsView" id="bsInfoBinaryLabel2"></label>
                                                     <label class="col-sm-12 control-label specialView" id="bsInfoBinaryLabelSpec2"></label>
                                                 </td>
-                                                <td style="text-align: center; vertical-align: middle;">
+                                                <td style="text-align: center; vertical-align: middle;" id="bsInfoBinarySvgPreview2">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsInfoBinaryIconCmd2"></span>
-                                                    <img src="" id="bsInfoBinaryPreview2" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 2">
-                                                    <img src="" id="bsInfoBinaryPreviewSpec2" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 2">
+                                                    <img src="" id="bsInfoBinaryPreview2" class="img-responsive widgetsView" style="margin: 0px auto;">
+                                                    <img src="" id="bsInfoBinaryPreviewSpec2" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -721,7 +732,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                 <th style="text-align: center;" class="col-sm-2">Taille</th>
                                                 <th style="text-align: center;" class="col-sm-2">de</th>
                                                 <th style="text-align: center;" class="col-sm-2">à</th>
-                                                <th style="text-align: center;" class="col-sm-3">Aperçu</th>
+                                                <th style="text-align: center;" class="col-sm-3">Aperçu
+                                                    <input type="number" value="" class="pull-right col-sm-3 btn-xs specialView svgSpecView" id="bsInfoNumericSvgSpecSize" min="32" max="128" step="16" disabled title="Modifier la Taille">
+                                                    <input type="color" value="" class="pull-right btn btn-xs btn-warning specialView svgSpecView" id="bsInfoNumericSvgSpecColor" disabled title="Changer la Couleur">
+                                                </th>
                                                 <th style="text-align: center;" class="col-sm-1"></th>
                                             </tr>
                                         </thead>
@@ -744,10 +758,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control" value="100" max="100" data-index="0" name="bsInfoNumericEcartMax0" id="bsInfoNumericEcartMax0"/>
                                                 </td>
-                                                <td style="text-align: center; vertical-align: middle;">
+                                                <td style="text-align: center; vertical-align: middle;" id="bsInfoNumericSvgPreview0">
                                                     <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView" data-index="0" name="bsInfoNumericIconCmd0" id="bsInfoNumericIconCmd0"></span>
-                                                    <img src="" id="bsInfoNumericPreview0" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image 0">
-                                                    <img src="" id="bsInfoNumericPreviewSpec0" class="img-responsive specialView" style="margin: 0px auto;" alt="Image 0">
+                                                    <img src="" id="bsInfoNumericPreview0" class="img-responsive widgetsView" style="margin: 0px auto;">
+                                                    <img src="" id="bsInfoNumericPreviewSpec0" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
                                                 <td style=" vertical-align: middle;">
                                                 </td>

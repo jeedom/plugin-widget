@@ -43,18 +43,59 @@ $('#modalOtherActionCancel').on('click', function () {
     $('#bsCategory').show();
 });
 
+$('#bsOtherSvgSpecSize').on('change', function () {
+    var height, width = $(this).val();
+    if (myOtherSvgPreview1 !== null)
+        if (myOtherSvgPreview1.select('svg') !== null) {
+            height = myOtherSvgPreview1.select('svg').attr('height');
+            height = Math.round(height * (width / parseInt(myOtherSvgPreview1.select('svg').attr('height'))));
+            myOtherSvgPreview1.select('svg').attr({height: height, width: width});
+            var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
+            $('#bsOtherLabelSpec1').empty();
+            $('#bsOtherLabelSpec1').append(temp);
+        }
+    if (myOtherSvgPreview2 !== null)
+        if (myOtherSvgPreview2.select('svg') !== null) {
+            height = myOtherSvgPreview2.select('svg').attr('height');
+            height = Math.round(height * (width / parseInt(myOtherSvgPreview2.select('svg').attr('height'))));
+            myOtherSvgPreview2.select('svg').attr({height: height, width: width});
+            var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
+            $('#bsOtherLabelSpec2').empty();
+            $('#bsOtherLabelSpec2').append(temp);
+        }
+    bsOtherActionType();
+});
+
+$('#bsOtherSvgSpecColor').on('change', function () {
+    var color = $(this).val();
+    if (myOtherSvgPreview1 !== null)
+        if (myOtherSvgPreview1.select('svg') !== null) {
+            myOtherSvgPreview1.selectAll('path').attr({fill: color});
+        }
+    if (myOtherSvgPreview2 !== null)
+        if (myOtherSvgPreview2.select('svg') !== null) {
+            myOtherSvgPreview2.selectAll('path').attr({fill: color});
+        }
+    bsOtherActionType();
+});
+
 $('#bsOtherSpecialCat1').on('change', function () {
     if($(this).val() !== '')
         setSelectPackIcones($('#bsOtherSpecial1'),$(this).val());
     else {
         $('#bsOtherSpecial1').children(':gt(0)').remove();
+        $('#bsOtherSpecial1').val('');
         $('#bsOtherWidgetOff').empty();
         $('#bsOtherWidgetOn').empty();
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
+        $('.svgSpecView').prop('disabled', true);
         editorOther.setValue(" ");
         $('#bsOtherPreviewSpec1').attr('src', "");
         $('#bsOtherLabelSpec1').empty();
+        if (myOtherSvgPreview1 !== null)
+            if (myOtherSvgPreview1.select('svg') !== null)
+                myOtherSvgPreview1.select('svg').remove();
         $('#modalOtherActionSave').prop('disabled',true);
      }
 });
@@ -64,14 +105,19 @@ $('#bsOtherSpecialCat2').on('change', function () {
         setSelectPackIcones($('#bsOtherSpecial2'),$(this).val());
     else {
         $('#bsOtherSpecial2').children(':gt(0)').remove();
+        $('#bsOtherSpecial2').val('');
         $('#bsOtherWidgetOff').empty();
         $('#bsOtherWidgetOn').empty();
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
+        $('.svgSpecView').prop('disabled', true);
         editorOther.setValue(" ");
         $('#bsOtherPreviewSpec2').attr('src', "");
         $('#bsOtherLabelSpec2').empty();
         $('#modalOtherActionSave').prop('disabled',true);
+        if (myOtherSvgPreview2 !== null)
+            if (myOtherSvgPreview2.select('svg') !== null)
+                myOtherSvgPreview2.select('svg').remove();
      }
 });
 
@@ -104,7 +150,7 @@ function bsOtherActionType() {
 function checkOtherJeedomIcon() {
     if ($('#bsOtherActionIconCmd2').html() !== '' && $('#bsOtherActionIconCmd1').html() !== '') {
         var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
-        var text = getHtmlWidgetOtherAction(dashboard);
+        var text = getHtmlOtherJeedom(dashboard);
         editorOther.setValue(text);
         if ($('#bsOtherActionName').val() !== '')
             $('#modalOtherActionSave').prop('disabled', false);
@@ -130,7 +176,7 @@ function checkOtherWidgetImage() {
         var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
         $('#bsOtherLabel1').css("color","");
         $('#bsOtherLabel2').css("color","");
-        var text = getHtmlWidgetOtherAction(dashboard);
+        var text = getHtmlOtherImage(dashboard);
         editorOther.setValue(text);
         if ($('#bsOtherActionName').val() !== '')
             $('#modalOtherActionSave').prop('disabled', false);
@@ -152,11 +198,16 @@ function checkOtherWidgetImage() {
 }
 
 function checkOtherSpecial() {
-    if ($('#bsOtherLabelSpec1').text() === $('#bsOtherLabelSpec2').text() && $('#bsOtherSpecial1').val() !== '' && $('#bsOtherSpecial2').val() !== '') {
+    if (    $('#bsOtherLabelSpec1').text() === $('#bsOtherLabelSpec2').text() && 
+            $('#bsOtherSpecial1').val() !== '' &&
+            specialWidgets[$('#bsOtherSpecialCat1').val()].extension === specialWidgets[$('#bsOtherSpecialCat2').val()].extension &&
+            $('#bsOtherSpecial2').val() !== '') {
         var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
         $('#bsOtherLabelSpec1').css("color","");
         $('#bsOtherLabelSpec2').css("color","");
-        var text = getHtmlWidgetOtherAction(dashboard);
+        $('#bsOtherSpecialCat1').css("color", "");
+        $('#bsOtherSpecialCat2').css("color", "");
+        var text = getHtmlOtherSpecial(dashboard);
         editorOther.setValue(text);
         if ($('#bsOtherActionName').val() !== '')
             $('#modalOtherActionSave').prop('disabled', false);
@@ -180,10 +231,10 @@ function checkOtherSpecial() {
 $('#modalOtherActionSave').on('click', function () {
     var widget = {
         content: editorOther.getValue(),
-        logicalId: $('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile' + ".action.other." + $('#bsOtherActionName').val(),
+        logicalId: ($('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile') + ".action.other." + $('#bsOtherActionName').val(),
         name: $('#bsOtherActionName').val(),
         nbUsedBy: "0",
-        path: "plugins/widget/core/template/dashboard/cmd.action.other." + $('#bsOtherActionName').val() + ".html",
+        path: pathFile.replace('desktop/php','core/class') + "/../template/" + ($('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile') + "/cmd.action.other." + $('#bsOtherActionName').val() + ".html",
         subtype: "other",
         type: "action",
         version: $('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile'
@@ -192,7 +243,7 @@ $('#modalOtherActionSave').on('click', function () {
         type: "POST", 
         url: "plugins/widget/core/ajax/widget.ajax.php", 
         data: {
-            action: "create",
+            action: "save",
             widget: json_encode(widget)
         },
         dataType: 'json',
@@ -201,6 +252,7 @@ $('#modalOtherActionSave').on('click', function () {
             return;
         },
         success: function (data) { // si l'appel a bien fonctionné
+            console.log(data);
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -261,8 +313,11 @@ $('#bsOtherActionName').on('change', function () {
     bsOtherActionType();
 });
 
+var myOtherSvgPreview1 = null;
+
 $('#bsOtherSpecial1').on('change', function () {
     var image = $('#bsOtherSpecial1').val();
+    var list = $('#bsOtherSpecialCat1').val();
     if (image === "") {
         $('#bsOtherWidgetOff').empty();
         $('#bsOtherWidgetOn').empty();
@@ -274,21 +329,56 @@ $('#bsOtherSpecial1').on('change', function () {
         $('#modalOtherActionSave').prop('disabled',true);
         return;
     }
-    var img = new Image();
-    var dir = $('#bsOtherSpecialCat1').val().split('.');
-    img.src = "plugins/widget/core/special/" + dir + '/' + image;
-    $('#bsOtherPreviewSpec1').attr('src', img.src);
-    img.onload = function () {
-        var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+    if (specialWidgets[list].extension !== 'svg') {
+        var img = new Image();
+        $('.svgSpecView').prop('disabled', true);
+        img.src = "plugins/widget/core/special/" + specialWidgets[list].folder + specialWidgets[list].files[image];
+        $('#bsOtherPreviewSpec1').attr('src', img.src);
+        if (myOtherSvgPreview1 !== null)
+            if (myOtherSvgPreview1.select('svg') !== null)
+                myOtherSvgPreview1.select('svg').remove();
+       img.onload = function () {
+            var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+            $('#bsOtherLabelSpec1').empty();
+            $('#bsOtherLabelSpec1').append(temp);
+            if (!checkOtherSpecial() && $('#bsOtherLabelSpec2').text() !== '') {
+                if(specialWidgets[$('#bsOtherSpecialCat1').val()].extension === specialWidgets[$('#bsOtherSpecialCat2').val()].extension)
+                    $('#bsOtherLabelSpec1').css("color", "red");
+                else
+                    $('#bsOtherSpecialCat1').css("color", "red");
+            }
+        };
+    }
+    else {
+        $('.svgSpecView').prop('disabled', false);
+        $('#bsOtherPreviewSpec1').attr('src', "");
+        myOtherSvgPreview1 = Snap('#bsOtherSvgPreview1');
+        var snap = Snap.parse(specialWidgets[list].svg[image].snap);
+        if(myOtherSvgPreview1.select('svg') !== null)
+            myOtherSvgPreview1.select('svg').remove();
+        myOtherSvgPreview1.append(snap);
+        var width = $('#bsOtherSvgSpecSize').val();
+        var height = myOtherSvgPreview1.select('svg').attr('height');
+        height = Math.round(height * (width / parseInt(myOtherSvgPreview1.select('svg').attr('height'))));
+        myOtherSvgPreview1.select('svg').attr({height: height, width: width});
+        myOtherSvgPreview1.selectAll('path').attr({fill: $('#bsOtherSvgSpecColor').val()});
+        var temp = '<span class="col-sm-12 text-center">H:' + myOtherSvgPreview1.select('svg').attr('width') + 'px - L:' + myOtherSvgPreview1.select('svg').attr('height') + 'px</span>';
         $('#bsOtherLabelSpec1').empty();
-        $('#bsOtherLabelSpec1').append(temp);      
-        if(!checkOtherSpecial() && $('#bsOtherLabelSpec2').text() !== '')
-            $('#bsOtherLabelSpec1').css("color","red");
-    };
+        $('#bsOtherLabelSpec1').append(temp);
+        if (!checkOtherSpecial() && $('#bsOtherLabelSpec2').text() !== '') {
+            if (specialWidgets[$('#bsOtherSpecialCat1').val()].extension === specialWidgets[$('#bsOtherSpecialCat2').val()].extension)
+                $('#bsOtherLabelSpec1').css("color", "red");
+            else
+                $('#bsOtherSpecialCat1').css("color", "red");
+        }
+    }
 });
+
+var myOtherSvgPreview2 = null;
 
 $('#bsOtherSpecial2').on('change', function () {
     var image = $('#bsOtherSpecial2').val();
+    var list = $('#bsOtherSpecialCat2').val();
     if (image === "") {
         $('#bsOtherWidgetOff').empty();
         $('#bsOtherWidgetOn').empty();
@@ -300,17 +390,49 @@ $('#bsOtherSpecial2').on('change', function () {
         $('#modalOtherActionSave').prop('disabled',true);
         return;
     }
-    var img = new Image();
-    var dir = $('#bsOtherSpecialCat2').val().split('.');
-    img.src = "plugins/widget/core/special/" + dir + '/' + image;
-    $('#bsOtherPreviewSpec2').attr('src', img.src);
-    img.onload = function () {
-        var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+    if (specialWidgets[list].extension !== 'svg') {
+        var img = new Image();
+        $('.svgSpecView').prop('disabled', true);
+        img.src = "plugins/widget/core/special/" + specialWidgets[list].folder + specialWidgets[list].files[image];
+        $('#bsOtherPreviewSpec2').attr('src', img.src);
+        if (myOtherSvgPreview2 !== null)
+            if (myOtherSvgPreview2.select('svg') !== null)
+                myOtherSvgPreview2.select('svg').remove();
+        img.onload = function () {
+            var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+            $('#bsOtherLabelSpec2').empty();
+            $('#bsOtherLabelSpec2').append(temp);
+            if (!checkOtherSpecial() && $('#bsOtherLabelSpec1').text() !== '') {
+                if(specialWidgets[$('#bsOtherSpecialCat1').val()].extension === specialWidgets[$('#bsOtherSpecialCat2').val()].extension)
+                    $('#bsOtherLabelSpec2').css("color", "red");
+                else
+                    $('#bsOtherSpecialCat2').css("color", "red");
+            }
+        };
+    }
+    else {
+        $('.svgSpecView').prop('disabled', false);
+        $('#bsOtherPreviewSpec2').attr('src', "");
+        myOtherSvgPreview2 = Snap('#bsOtherSvgPreview2');
+        var snap = Snap.parse(specialWidgets[list].svg[image].snap);
+        if(myOtherSvgPreview2.select('svg') !== null)
+            myOtherSvgPreview2.select('svg').remove();
+        myOtherSvgPreview2.append(snap);
+        var width = $('#bsOtherSvgSpecSize').val();
+        var height = myOtherSvgPreview2.select('svg').attr('height');
+        height = Math.round(height * (width / parseInt(myOtherSvgPreview2.select('svg').attr('height'))));
+        myOtherSvgPreview2.select('svg').attr({height: height, width: width});
+        myOtherSvgPreview2.selectAll('path').attr({fill: $('#bsOtherSvgSpecColor').val()});
+        var temp = '<span class="col-sm-12 text-center">H:' + myOtherSvgPreview2.select('svg').attr('width') + 'px - L:' + myOtherSvgPreview2.select('svg').attr('height') + 'px</span>';
         $('#bsOtherLabelSpec2').empty();
-        $('#bsOtherLabelSpec2').append(temp);      
-        if(!checkOtherSpecial() && $('#bsOtherLabelSpec1').text() !== '')
-            $('#bsOtherLabelSpec2').css("color","red");
-    };
+        $('#bsOtherLabelSpec2').append(temp);
+        if (!checkOtherSpecial() && $('#bsOtherLabelSpec1').text() !== '') {
+            if (specialWidgets[$('#bsOtherSpecialCat1').val()].extension === specialWidgets[$('#bsOtherSpecialCat2').val()].extension)
+                $('#bsOtherLabelSpec2').css("color", "red");
+            else
+                $('#bsOtherSpecialCat2').css("color", "red");
+        }
+    }
 });
 
 $('#bsOtherActionInsertIcon1').on('click', function () {
@@ -384,109 +506,89 @@ $('#bsOtherImage2').on('change', function () {
     };
 });
 
-function getHtmlWidgetOtherAction(dashboard) {
+function getHtmlOtherJeedom(dashboard) {
     var html = "";
-    var width, height, image1, image2, dir1, dir2;
-    switch ($('#bsOtherActionType').val()) {
-        case "0":
-            width = $('#bsOtherActionIconSize1').val() * 20 + 15;
-            height = $('#bsOtherActionIconSize1').val() * 20 + 20;
-            break;
-        case "1":
-            width = $('#bsOtherPreview2').width() + 15;
-            height = $('#bsOtherPreview2').height() + 15;
-            image1 = $('#bsOtherImage1').val();
-            image2 = $('#bsOtherImage2').val();
-            break;
-        case "2":
-            width = $('#bsOtherPreviewSpec2').width() + 15;
-            height = $('#bsOtherPreviewSpec2').height() + 15;
-            image1 = $('#bsOtherSpecial1').val();
-            image2 = $('#bsOtherSpecial2').val();
-            dir1 = $('#bsOtherSpecialCat1').val().split('.');
-            dir2 = $('#bsOtherSpecialCat2').val().split('.');
-            break;
-    }
+    var width, height;
+    width = $('#bsOtherActionIconSize1').val() * 20 + 15;
+    height = $('#bsOtherActionIconSize1').val() * 20 + 20;
     if (dashboard) {
-        switch ($('#bsOtherActionType').val()) {
-            case "0":
-                html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="action" data-subtype="other" data-cmd_id="#id#">\n';
-                html += '\t<center>\n';
-                html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
-                html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
-                html += '\t</center>\n';
-                break;
-            case "1":
-            case "2":
-                html += '<div style="width:' + width + 'px; height:' + height + 'px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="action" data-subtype="other" data-cmd_id="#id#">\n';
-                html += '\t<div class="row">\n';
-                html += '\t\t<center><span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span></center>\n';
-                html += '\t\t<h5 class="action center-block" style="vertical-align:middle;" id="iconCmd#id#"></h5>\n';
-                html += '\t</div>\n';
-                break;
-        }      
+        html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="action" data-subtype="other" data-cmd_id="#id#">\n';
+        html += '\t<center>\n';
+        html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
+        html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t</center>\n';
     }
     else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        switch ($('#bsOtherActionType').val()) {
-            case "0":
-                html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
-                break;
-            case "1":
-            case "2":
-                html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
-                break;
-        }
+        html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
         html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
-        switch ($('#bsOtherActionType').val()) {
-             case "1":
-             case "2":
-                html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 20) + 'px");\n';
-                break;
-        }
         html += '\t\t} else {\n';
         html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
-        switch ($('#bsOtherActionType').val()) {
-            case "1":
-            case "2":
-                html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + height + 'px");\n';
-                break;
-        }
         html += '\t\t}\n';
     }
-    html += '\t\tif ("#state#" == "1" || "#state#" == 1) {\n';
-    switch ($('#bsOtherActionType').val()) {
-        case "0":
-            html += '\t\t\t$("#iconCmd#id#").append("' + $('#bsOtherActionIconCmd2').html().replace(/\"/g,"'") + '");\n';
-            break;
-        case "1":
-            html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + image2 + '\'>");\n';
-            break;
-        case "2":
-           html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + dir2 + '/' + image2 + '\'>");\n';
-            break;
-    }
+    html += '\t\tif ("#state#" == "1") {\n';
+    html += '\t\t\t$("#iconCmd#id#").append("' + $('#bsOtherActionIconCmd2').html().replace(/\"/g, "'") + '");\n';
     html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "on") {\n';
     html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
     html += '\t\t\t}\n';
     html += '\t\t} else {\n';
-    switch ($('#bsOtherActionType').val()) {
-        case "0":
-            html += '\t\t\t$("#iconCmd#id#").append("' + $('#bsOtherActionIconCmd1').html().replace(/\"/g,"'") + '");\n';
-            break;
-        case "1":
-            html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + image1 + '\'>");\n';
-            break;
-        case "2":
-            html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + dir1 + '/' + image1 + '\'>");\n';
-            break;
+    html += '\t\t\t$("#iconCmd#id#").append("' + $('#bsOtherActionIconCmd1').html().replace(/\"/g, "'") + '");\n';
+    html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "off") {\n';
+    html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+    html += '\t\t\t}\n';
+    html += '\t\t}\n';
+    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").off();\n';
+    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").on("click", function() {\n';
+    html += '\t\t\tjeedom.cmd.execute({id: "#id#"});\n';
+    html += '\t\t});\n';
+    html += "\t<\/script>\n";
+    html += '</div>\n';
+    return html;
+}
+
+function getHtmlOtherImage(dashboard) {
+    var html = "";
+    var width, height, image1, image2;
+    width = $('#bsOtherPreview2').width() + 15;
+    height = $('#bsOtherPreview2').height() + 15;
+    image1 = $('#bsOtherImage1').val();
+    image2 = $('#bsOtherImage2').val();
+    if (dashboard) {
+        html += '<div style="width:' + width + 'px; height:' + height + 'px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="action" data-subtype="other" data-cmd_id="#id#">\n';
+        html += '\t<div class="row">\n';
+        html += '\t\t<center><span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span></center>\n';
+        html += '\t\t<h5 class="action center-block" style="vertical-align:middle;" id="iconCmd#id#"></h5>\n';
+        html += '\t</div>\n';
     }
+    else {
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '\t<center>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t</center>\n';
+    }
+    html += '\t<script>\n';
+    if (dashboard) {
+        html += '\t\tif ("#displayName#" == "1") {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 20) + 'px");\n';
+        html += '\t\t} else {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + height + 'px");\n';
+        html += '\t\t}\n';
+    }
+    html += '\t\tif ("#state#" == "1") {\n';
+    html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + image2 + '\'>");\n';
+    html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "on") {\n';
+    html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+    html += '\t\t\t}\n';
+    html += '\t\t} else {\n';
+    html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + image1 + '\'>");\n';
     html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "off") {\n';
     html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
     html += '\t\t\t}\n';
@@ -501,30 +603,82 @@ function getHtmlWidgetOtherAction(dashboard) {
     return html;
 }
 
-/*function initOtherAction() {
-    if (editorOther === null) {
-        editorOther = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
-            lineNumbers: true,
-            mode: "text/html",
-            matchBrackets: true,
-            viewportMargin: Infinity
-        });
+function getHtmlOtherSpecial(dashboard) {
+    var html = "";
+    var width, height, image1, image2;
+    var svg1 = $('#bsOtherSpecial1').val();
+    var list1 = $('#bsOtherSpecialCat1').val();
+    var svg2 = $('#bsOtherSpecial2').val();
+    var list2 = $('#bsOtherSpecialCat2').val();
+    if (specialWidgets[list1].extension !== 'svg') {
+        width = $('#bsOtherPreviewSpec2').width() + 15;
+        height = $('#bsOtherPreviewSpec2').height() + 15;
     }
-    var image1,image2;
-    if($('#bsOtherImage1').val() !== undefined && $('#bsOtherImage1').val() !== null && $('#bsOtherImage1').val() !== '0')
-        image1 = $('#bsOtherImage1').val();
-    else
-        image1 = '0';
-    if($('#bsOtherImage2').val() !== undefined && $('#bsOtherImage2').val() !== null && $('#bsOtherImage2').val() !== '0')
-        image2 = $('#bsOtherImage2').val();
-    else
-        image2 = '0';
-    $('#bsOtherImage1').empty();
-    setSelectImage($('#bsOtherImage1'));
-    $('#bsOtherImage1').val(image1);
-    $('#bsOtherImage2').empty();
-    setSelectImage($('#bsOtherImage2'));    
-    $('#bsOtherImage2').val(image2);
-    bsOtherActionType();
-};*/
+    else {
+        width = parseInt(myOtherSvgPreview1.select('svg').attr('width')) + 15;
+        height = parseInt(myOtherSvgPreview1.select('svg').attr('height')) + 15;
+        image1 = myOtherSvgPreview1.select('svg').toString();
+        image2 = myOtherSvgPreview2.select('svg').toString();
+    }
+    if (dashboard) {
+        html += '<div style="width:' + width + 'px; height:' + height + 'px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="action" data-subtype="other" data-cmd_id="#id#">\n';
+        html += '\t<div class="row">\n';
+        html += '\t\t<center><span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span></center>\n';
+        html += '\t\t<div class="action center-block" style="vertical-align:middle;" id="iconCmd#id#">\n';
+        if (specialWidgets[list1].extension === 'svg') {
+            html += '\t\t\t<div id="cmdSvg1#id#">\n\t\t\t\t' + image1.replace(/\"/g, "'").replace(/(\r\n|\n|\r)/gm, "").replace(/>/g, ">\n\t\t\t\t") + '\n';
+            html += '\t\t\t</div>\n';
+            html += '\t\t\t<div id="cmdSvg2#id#" style="display:none;">\n\t\t\t\t' + image2.replace(/\"/g, "'").replace(/(\r\n|\n|\r)/gm, "").replace(/>/g, ">\n\t\t\t\t") + '\n';
+            html += '\t\t\t</div>\n';
+        }
+        html += '\t\t</div>\n';
+        html += '\t</div>\n';
+    }
+    else {
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '\t<center>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t</center>\n';
+    }
+    html += '\t<script>\n';
+    if (dashboard) {
+        html += '\t\tif ("#displayName#" == "1") {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 20) + 'px");\n';
+        html += '\t\t} else {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + height + 'px");\n';
+        html += '\t\t}\n';
+    }
+    html += '\t\tif ("#state#" == "1") {\n';
+    if (specialWidgets[list1].extension !== 'svg') {
+        html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + specialWidgets[list1].folder + specialWidgets[list1].files[svg1] + '\'>");\n';
+        html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "on") {\n';
+        html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+        html += '\t\t\t}\n';
+    }
+    else {
+        html += '\t\t\t$("#cmdSvg1#id#").hide();\n';
+        html += '\t\t\t$("#cmdSvg2#id#").show();\n';
+    }
+    html += '\t\t} else {\n';
+    if (specialWidgets[list2].extension !== 'svg') {
+        html += '\t\t\t$("#iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + specialWidgets[list2].folder + specialWidgets[list2].files[svg2] + '\'>");\n';
+        html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "off") {\n';
+        html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+        html += '\t\t\t}\n';
+    }
+    else {
+        html += '\t\t\t$("#cmdSvg2#id#").hide();\n';
+        html += '\t\t\t$("#cmdSvg1#id#").show();\n';
+    }
+    html += '\t\t}\n';
+    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").off();\n';
+    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").on("click", function() {\n';
+    html += '\t\t\tjeedom.cmd.execute({id: "#id#"});\n';
+    html += '\t\t});\n';
+    html += "\t<\/script>\n";
+    html += '</div>\n';
 
+    return html;
+}

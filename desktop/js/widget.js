@@ -134,6 +134,7 @@ $('.widgetAction[data-action=copy]').on('click', function () {
 });
 
 $('.widgetAction[data-action=create]').on('click', function () {
+    //setTimeout('createSpecialHtml()', 1000);
     $('.widgetListDisplay').hide();
     $('#bsListWidgets').hide();
     $('.widget').hide();
@@ -373,6 +374,7 @@ $('#bsSpecialFileload').fileupload({
         }
         updateListSvgs();
         notify("{{Ajout Spécial}}", '{{Pack ajouté avec succès}}', 'success');
+        //setTimeout('createSpecialHtml()', 1000);
     }
 });
 
@@ -388,6 +390,7 @@ $('#bsSpecialView').on('click', '.bsDelSvg', function () {
                 success: function (data) {
                     updateListSvgs();
                     notify("Suppression Spécial", '{{Pack supprimé avec succès}}', 'success');
+                    
                 }
             });
         }
@@ -400,41 +403,77 @@ function updateListSvgs() {
             $('#div_alert').showAlert({message: error.message, level: 'danger'});
         },
         success: function (data) {
-            var special = '';
-            console.log(data);
             specialWidgets = data;
-            for (var i in data.files) {
-                var filename = data.files[i].split('.');
-                special += '<div class="media-left col-sm-4" style="min-width: 100px">';
-                special += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noPaddingRight noMarginBottom">';
-                special += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelSvg" data-svg="' + data.files[i] + "\" title=\"{{Supprimer le Svg}}\"><i class='fa fa-trash-o'></i></button>";
-                special += '<strong class="col-sm-6 noPaddingLeft noPaddingRight text-right pull-right" id="bsVieSvgSize' + i + '">' + data.files[i] + '</strong>';
-                special += '</div>';
-                special += '<div class="col-sm-12 center-block" id="bsViewSvg' + i + '">';
-                for (var index in data.folders) {
-                    if (data.folders[index].folder === filename[0]) {
-                        var row = 0;
-                        for (var nbIcons in data.folders[index].files) {
-                            row++;
-                            if (row === 1)
-                                special += '<div class="row" style="padding-top: 5px;">';
-                            special += '<div class="col-sm-2 center-block"><img class="img-thumbnail center-block" src="plugins/widget/core/special/' + data.folders[index].folder + '/' + data.folders[index].files[nbIcons] + '" alt="' + data.folders[index].files[nbIcons] + '"></div>';
-                            if (row === 6) {
-                                special += '</div>';
-                                row = 0;
-                            }
-                        }
-                        if (row !== 6) {
-                            special += '</div>';
-                        }
+            for (var index in specialWidgets) {
+                var filename = specialWidgets[index].name.split('.');
+                specialWidgets[index].name = filename[0] + ' - ' + specialWidgets[index].extension.toUpperCase();
+                if (specialWidgets[index].extension === "svg")
+                    for (var nbIcons in specialWidgets[index].files) {
+                        specialWidgets[index].svg[nbIcons].snap = specialWidgets[index].svg[nbIcons].snap.replace(/<?[^>]*>/, "").replace(/<!DOCTYPE[^>]*>/, "").replace(/<!--[^>]*>/, "");
                     }
-                }
-                special += '</div>';
-                special += '</div>';
             }
-            $('#bsSpecialView').html('<div class="media">' + special + '</div>');
+            setTimeout('createSpecialHtml()', 1000);
         }
     });
+}
+
+function createSpecialHtml() {
+    var special = '<div class="media">';
+    var special = '';
+    for (var i in specialWidgets) {
+        special += '<div class="media-left col-sm-4" style="min-width: 100px">';
+        special += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noPaddingRight noMarginBottom">';
+        special += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelSvg" data-svg="' + specialWidgets[i].name + "\" title=\"{{Supprimer le Svg}}\"><i class='fa fa-trash-o'></i></button>";
+        special += '<strong class="col-sm-6 noPaddingLeft noPaddingRight text-right pull-right" id="bsVieSvgSize' + i + '">' + specialWidgets[i].name + '</strong>';
+        special += '</div>';
+        special += '<div class="col-sm-12 center-block" id="bsViewSvg' + i + '">';
+        var row = 0;
+        for (var nbIcons in specialWidgets[i].files) {
+            row++;
+            if (row === 1)
+                special += '<div class="row" style="padding-top: 5px;">';
+            if (specialWidgets[i].extension === 'svg') {
+                var filename = specialWidgets[i].files[nbIcons].split('.');
+                special += '<div class="col-sm-2 center-block" id="bsSvgLoadSpecial' + filename[0].replace(/[-:?().]/g,'') + nbIcons + '"></div>';
+            }
+            else
+                special += '<div class="col-sm-2 center-block"><img class="img-thumbnail center-block" src="plugins/widget/core/special/' + specialWidgets[i].folder + specialWidgets[i].files[nbIcons] + '" alt="' + specialWidgets[i].files[nbIcons] + '"></div>';
+            if (row === 6) {
+                special += '</div>';
+                row = 0;
+            }
+        }
+        if (row !== 6) {
+            special += '</div>';
+        }
+        special += '</div>';
+        special += '</div>';
+    }
+    special += '</div>';
+    $('#bsSpecialView').empty();
+    $('#bsSpecialView').html(special);
+    for (var index in specialWidgets) {
+        if (specialWidgets[index].extension === "svg")
+            for (var nbIcons in specialWidgets[index].files) {
+                var filename = specialWidgets[index].files[nbIcons].split('.');
+                var mySvg = Snap('#bsSvgLoadSpecial' + filename[0].replace(/[-:?().]/g,'') + nbIcons);
+                var snap = Snap.parse(specialWidgets[index].svg[nbIcons].snap);
+                mySvg.append(snap);
+                var width = mySvg.select('svg').attr("width");
+                var height = (mySvg.select('svg').attr("height") * 32) / width;
+                mySvg.select('svg').attr({width: "32"});
+                mySvg.selectAll('path').attr({fill: getRandomColor()});
+                mySvg.select('svg').attr({height: height});
+            }
+    }
+}
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 function listSvg(_params) {
@@ -598,35 +637,24 @@ function setSelectImage(select) {
 
 function setSelectPack(select) {
     var options = '<option value="">{{Aucune}}</option>';
-    if (is_object(specialWidgets)) {
-        for (var index in specialWidgets.files) {
-            var filename = specialWidgets.files[index].split('.');
-            options += '<option value="' + filename[0] + '">' + specialWidgets.files[index] + '</option>';
+        for (var index in specialWidgets) {
+            options += '<option value="' + index + '">' + specialWidgets[index].name + '</option>';
         }
-    }
     select.html(options);
 }
 
 function setSelectPackIcones(select, value) {
     var options = '<option value="">{{Aucune}}</option>';
-    if (is_object(specialWidgets)) {
-        for(var index in specialWidgets.folders) {
-            if (specialWidgets.folders[index].folder === value) {
-                for(var icone in specialWidgets.folders[index].files) {
-                var filename = specialWidgets.folders[index].files[icone].split('.');
-                options += '<option value="' + specialWidgets.folders[index].files[icone] + '">' + filename[0] + '</option>';
-            }
-            }
-        }
-    }
+        for(var index in specialWidgets[value].files) {
+                var filename = specialWidgets[value].files[index].split('.');
+                options += '<option value="' + index + '">' + filename[0] + '</option>';
+         }
     select.html(options);
 }
 
 var editorOther = null;
 
 $('#bt_OtherActionAdd').on('click', function () {
-    //$('#md_modalWidget').dialog({title: "Widget Oher.Action", width:1050});
-    //$('#md_modalWidget').load('index.php?v=d&plugin=widget&modal=other.widget' ).dialog('open');
     if (editorOther === null) {
         editorOther = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
             lineNumbers: true,
@@ -655,6 +683,8 @@ $('#bt_OtherActionAdd').on('click', function () {
         imageSpec2 = $('#bsOtherSpecialCat2').val();
     else
         imageSpec2 = '';
+    $('#bsOtherSvgSpecColor').val('#000');
+    $('#bsOtherSvgSpecSize').val('64');
     $('#bsOtherImage1').empty();
     setSelectImage($('#bsOtherImage1'));
     $('#bsOtherImage1').val(image1);
@@ -705,6 +735,8 @@ $('#bt_InfoBinaryAdd').on('click', function () {
         imageSpec2 = $('#bsInfoBinarySpecialCat2').val();
     else
         imageSpec2 = '';
+    $('#bsInfoBinarySvgSpecColor').val('#000');
+    $('#bsInfoBinarySvgSpecSize').val('64');
     $('#bsInfoBinaryImage1').empty();
     setSelectImage($('#bsInfoBinaryImage1'));
     $('#bsInfoBinaryImage1').val(image1);
@@ -737,6 +769,8 @@ $('#bt_InfoNumericAdd').on('click', function () {
     $('#bsInfoBinaryCategory').hide();
     $('#bsOtherActionCategory').hide();
     $('#bsInfoNumericCategory').show();
+    $('#bsInfoNumericSvgSpecColor').val('#000');
+    $('#bsInfoNumericSvgSpecSize').val('64');
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     for (var index = 0; index < all; index++) {
         var image, imageSpec;
