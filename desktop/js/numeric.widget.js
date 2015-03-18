@@ -23,6 +23,8 @@ $('#modalInfoNumericCancel').on('click', function () {
     $('#bsInfoNumericImage0').val('0');
     $('#bsInfoNumericDash').val('1');
     $('#bsInfoNumericType').val('0');
+    $('#bsInfoNumericSpecialCat0').val('');
+    $('#bsInfoNumericSpecialIcon0').val('');
     $('#bsInfoNumericEcartMax0').val('100');
     $('#bsInfoNumericIconSize0').val('2.5');
     $('#bsInfoNumericIconCmd0').html('');
@@ -39,19 +41,52 @@ $('#modalInfoNumericCancel').on('click', function () {
     $('#bsCategory').show();
 });
 
+$('#bsInfoNumericSvgSpecSize').on('change', function () {
+    var height, width = $(this).val();
+    for (var index = 0; index < myInfoNumericSvgPreview.length; index++) {
+        if (myInfoNumericSvgPreview[index] !== null)
+            if (myInfoNumericSvgPreview[index].select('svg') !== null) {
+                height = myInfoNumericSvgPreview[index].select('svg').attr('height');
+                height = Math.round(height * (width / parseInt(myInfoNumericSvgPreview[index].select('svg').attr('height'))));
+                myInfoNumericSvgPreview[index].select('svg').attr({height: height, width: width});
+                var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
+                $('#bsInfoNumericLabelSpec' + index).empty();
+                $('#bsInfoNumericLabelSpec' + index).append(temp);
+            }
+    }
+    bsInfoNumericType();
+});
+
+$('#bsInfoNumericSvgSpecColor').on('change', function () {
+    var color = $(this).val();
+    for (var index = 0; index < myInfoNumericSvgPreview.length; index++) {
+        if (myInfoNumericSvgPreview[index] !== null)
+            if (myInfoNumericSvgPreview[index].select('svg') !== null) {
+                myInfoNumericSvgPreview[index].selectAll('path').attr({fill: color});
+            }
+    }
+    bsInfoNumericType();
+});
+
 $('#bodyInfoNumeric').on('change', "select[name*='bsInfoNumericSpecialCat']", function () {
     var index = parseInt($(this).data('index'));
     if($(this).val() !== '')
         setSelectPackIcones($('#bsInfoNumericSpecialIcon' + index),$(this).val());
     else {
         $('#bsInfoNumericSpecialIcon' + index).children(':gt(0)').remove();
+        $('#bsInfoNumericSpecialIcon' + index).val('');
         $('#bsInfoNumericPreviewSpec' + index).attr('src', "");
         $('#bsInfoNumericLabelSpec' + index).empty();
         $('#modalInfoNumericSave').prop('disabled',true);
         $('#bsInfoNumericWidgetOff').empty();
         $('#bsInfoNumericWidgetOff').parent().parent().hide();
+        $('.svgSpecView').prop('disabled', true);
         editorNumeric.setValue(" ");
-    }
+        if (myInfoNumericSvgPreview[index] !== null)
+            if (myInfoNumericSvgPreview[index].select('svg') !== null)
+                myInfoNumericSvgPreview[index].select('svg').remove();
+        $('#modalInfoNumericActionSave').prop('disabled',true);
+   }
 });
 
 $('#bsInfoNumericType').on('change', function () {
@@ -90,7 +125,7 @@ function checkNumericJeedomIcon() {
     }
     if (check) {
         var dashboard = $('#bsInfoNumericDash').val() === "1" ? true : false;
-        var text = getHtmlWidgetInfoNumeric(dashboard);
+        var text = getHtmlInfoNumericJeedom(dashboard);
         editorNumeric.setValue(text);
         if($('#bsInfoNumericName').val() !== '')
             $('#modalInfoNumericSave').prop('disabled', false);
@@ -123,7 +158,7 @@ function checkNumericWidgetImage() {
     }
     if (check) {
         var dashboard = $('#bsInfoNumericDash').val() === "1" ? true : false;
-        var text = getHtmlWidgetInfoNumeric(dashboard);
+        var text = getHtmlInfoNumericImage(dashboard);
         editorNumeric.setValue(text);
         if($('#bsInfoNumericName').val() !== '')
             $('#modalInfoNumericSave').prop('disabled', false);
@@ -152,11 +187,19 @@ function checkNumericSpecial() {
             $('#bsInfoNumericLabelSpec' + index).css("color","red");
         }
         else
-            $('#bsInfoNumericLabelSpec' + index).css("color","");            
+            $('#bsInfoNumericLabelSpec' + index).css("color","");    
+        if ($('#bsInfoNumericSpecialCat0').val() !== "" && $('#bsInfoNumericSpecialCat' + index).val() !== "") {
+            if (specialWidgets[$('#bsInfoNumericSpecialCat0').val()].extension !== specialWidgets[$('#bsInfoNumericSpecialCat' + index).val()].extension) {
+                check = false;
+                $('#bsInfoNumericSpecialCat' + index).css("color", "red");
+            }
+            else
+                $('#bsInfoNumericSpecialCat' + index).css("color", "");
+        }
     }
     if (check) {
         var dashboard = $('#bsInfoNumericDash').val() === "1" ? true : false;
-        var text = getHtmlWidgetInfoNumeric(dashboard);
+        var text = getHtmlInfoNumericSpecial(dashboard);
         editorNumeric.setValue(text);
         if($('#bsInfoNumericName').val() !== '')
             $('#modalInfoNumericSave').prop('disabled', false);
@@ -176,12 +219,12 @@ function checkNumericSpecial() {
 $('#modalInfoNumericSave').on('click', function () {
     var widget = {
         content: editorNumeric.getValue(),
-        logicalId: "dashboard.action.other." + $('#bsInfoNumericName').val(),
+        logicalId: ($('#bsInfoNumericDash').val() === "1" ? 'dashboard' : 'mobile') + ".info.numeric." + $('#bsInfoNumericName').val(),
         name: $('#bsInfoNumericName').val(),
         nbUsedBy: "0",
-        path: "plugins/widget/core/template/dashboard/cmd.action.other." + $('#bsInfoNumericName').val() + ".html",
-        subtype: "info",
-        type: "numeric",
+        path: pathFile.replace('desktop/php','core/class') + "/../template/" + ($('#bsInfoNumericDash').val() === "1" ? 'dashboard' : 'mobile') + "/cmd.info.numeric." + $('#bsInfoNumericName').val() + ".html",
+        type: "info",
+        subtype: "numeric",
         version: $('#bsInfoNumericDash').val() === "1" ? 'dashboard' : 'mobile'
     };
     $.ajax({// fonction permettant de faire de l'ajax
@@ -217,6 +260,8 @@ $('#modalInfoNumericSave').on('click', function () {
     $('#bsInfoNumericLabel0').empty();
     $('#bsInfoNumericName').val('');
     $('#bsInfoNumericImage0').val('0');
+    $('#bsInfoNumericSpecialCat0').val('');
+    $('#bsInfoNumericSpecialIcon0').val('');
     $('#bsInfoNumericEcartMax0').val('100');
     $('#bsInfoNumericDash').val('1');
     $('#bsInfoNumericType').val('0');
@@ -241,9 +286,62 @@ $('#bsInfoNumericName').on('change', function () {
     bsInfoNumericType();
 });
 
+var myInfoNumericSvgPreview = [];
+myInfoNumericSvgPreview[0] = null;
+
+$('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericSpecialIcon']", function () {
+    var image = $(this).val();
+    var index = $(this).data('index');
+    var list = $('#bsInfoNumericSpecialCat' + index).val();
+    if (image === "") {
+        $('#bsInfoNumericPreviewSpec' + index).attr('src', "");
+        $('#bsInfoNumericLabelSpec' + index).empty();
+        $('#modalInfoNumericSave').prop('disabled',true);
+        $('#bsInfoNumericWidgetOff').empty();
+        $('#bsInfoNumericWidgetOff').parent().parent().hide();
+        $('#modalInfoNumericSave').prop('disabled',true);
+        editorNumeric.setValue(" ");
+        return;
+    }
+    if (specialWidgets[list].extension !== 'svg') {
+        var img = new Image();
+        img.src = "plugins/widget/core/special/" + specialWidgets[list].folder + specialWidgets[list].files[image];
+        $('#bsInfoNumericPreviewSpec' + index).attr('src', img.src);
+        if (myInfoNumericSvgPreview[index] !== null)
+            if (myInfoNumericSvgPreview[index].select('svg') !== null)
+                myInfoNumericSvgPreview[index].select('svg').remove();
+        img.onload = function () {
+            var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+            $('#bsInfoNumericLabelSpec' + index).empty();
+            $('#bsInfoNumericLabelSpec' + index).append(temp);
+            checkNumericSpecial();
+        };
+    }
+    else {
+        $('.svgSpecView').prop('disabled', false);
+        $('#bsInfoNumericPreviewSpec' + index).attr('src', "");
+        myInfoNumericSvgPreview[index] = Snap('#bsInfoNumericSvgPreview' + index);
+        var snap = Snap.parse(specialWidgets[list].svg[image].snap);
+        if(myInfoNumericSvgPreview[index].select('svg') !== null)
+            myInfoNumericSvgPreview[index].select('svg').remove();
+        myInfoNumericSvgPreview[index].append(snap);
+        var width = $('#bsInfoNumericSvgSpecSize').val();
+        var height = myInfoNumericSvgPreview[index].select('svg').attr('height');
+        height = Math.round(height * (width / parseInt(myInfoNumericSvgPreview[index].select('svg').attr('height'))));
+        myInfoNumericSvgPreview[index].select('svg').attr({height: height, width: width});
+        myInfoNumericSvgPreview[index].selectAll('path').attr({fill: $('#bsInfoNumericSvgSpecColor').val()});
+        var temp = '<span class="col-sm-12 text-center">H:' + myInfoNumericSvgPreview[index].select('svg').attr('width') + 'px - L:' + myInfoNumericSvgPreview[index].select('svg').attr('height') + 'px</span>';
+        $('#bsInfoNumericLabelSpec' + index).empty();
+        $('#bsInfoNumericLabelSpec' + index).append(temp);
+        checkNumericSpecial();
+    }
+});
+
 $('#bodyInfoNumeric').on('click',"button[name*='bsInfoNumericDel']", function () {
     var index = parseInt($(this).data('index'));
     $('#bodyInfoNumeric').children().eq(index).remove();
+    if(myInfoNumericSvgPreview !== null)
+        myInfoNumericSvgPreview.splice(index,1);
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     $('#bodyInfoNumeric').find('tr:gt(0)').each(function (indexTr) {
         $(this).find('td').each(function (index) {
@@ -281,6 +379,7 @@ $('#bodyInfoNumeric').on('click',"button[name*='bsInfoNumericDel']", function ()
                     $(this).find('input').attr('data-index', indexTrReal);
                     break;
                 case 4:
+                    $(this).attr('id', 'bsInfoNumericSvgPreview' + indexTrReal);
                     $(this).find('span').attr('name', 'bsInfoNumericIconCmd' + indexTrReal);
                     $(this).find('span').attr('id', 'bsInfoNumericIconCmd' + indexTrReal);
                     $(this).find('span').attr('data-index', indexTrReal);
@@ -333,30 +432,6 @@ $('#bodyInfoNumeric').on('click', "input[name*='bsInfoNumericIconSize']", functi
     checkNumericJeedomIcon();
 });
 
-$('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericSpecialIcon']", function () {
-    var image = $(this).val();
-    var index = $(this).data('index');
-    if (image === "") {
-        $('#bsInfoNumericPreviewSpec' + index).attr('src', "");
-        $('#bsInfoNumericLabelSpec' + index).empty();
-        $('#modalInfoNumericSave').prop('disabled',true);
-        $('#bsInfoNumericWidgetOff').empty();
-        $('#bsInfoNumericWidgetOff').parent().parent().hide();
-        editorNumeric.setValue(" ");
-        return;
-    }
-    var img = new Image();
-    var dir = $('#bsInfoNumericSpecialCat' + index).val().split('.');
-    img.src = "plugins/widget/core/special/" + dir + '/' + image;
-    $('#bsInfoNumericPreviewSpec' + index).attr('src', img.src);
-    img.onload = function () {
-        var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
-        $('#bsInfoNumericLabelSpec' + index).empty();
-        $('#bsInfoNumericLabelSpec' + index).append(temp);      
-        checkNumericSpecial();
-    };
-});
-
 $('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericImage']", function () {
     var image = $(this).val();
     var index = $(this).data('index');
@@ -401,10 +476,10 @@ $('#bsInfoNumericAddEntry').on('click', function () {
     html += '<td style="text-align: center; vertical-align: middle;">';
     html += '<input type="number" class="form-control" value="100" max="100" data-index="' + index + '" name="bsInfoNumericEcartMax' + index + '" id="bsInfoNumericEcartMax' + index + '"/>';
     html += '</td>';
-    html += '<td style="text-align: center; vertical-align: middle;">';
+    html += '<td style="text-align: center; vertical-align: middle;" id="bsInfoNumericSvgPreview' + index + '">';
     html += '<span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView" data-index="' + index + '" name="bsInfoNumericIconCmd' + index + '" id="bsInfoNumericIconCmd' + index + '"></span>';
-    html += '<img src="" id="bsInfoNumericPreview' + index + '" class="img-responsive widgetsView" style="margin: 0px auto;" alt="Image ' + index + '">';
-    html += '<img src="" id="bsInfoNumericPreviewSpec' + index + '" class="img-responsive specialView" style="margin: 0px auto;" alt="Image ' + index + '">';
+    html += '<img src="" id="bsInfoNumericPreview' + index + '" class="img-responsive widgetsView" style="margin: 0px auto;">';
+    html += '<img src="" id="bsInfoNumericPreviewSpec' + index + '" class="img-responsive specialView" style="margin: 0px auto;">';
     html += '</td>';
     html += '<td style=" vertical-align: middle;">';
     html += "<button type='button' class='form-control btn btn-danger' data-index='" + index + "' name='bsInfoNumericDel" + index + "' title=\"{{Supprimer l'éntrée}}\"><i class='fa fa-trash-o'></i></button>";
@@ -414,77 +489,34 @@ $('#bsInfoNumericAddEntry').on('click', function () {
     setSelectImage($('#bsInfoNumericImage' + index));
     setSelectPack($('#bsInfoNumericSpecialCat' + index));
     $('#modalInfoNumericSave').prop('disabled',true);
+    myInfoNumericSvgPreview.push(null);
     bsInfoNumericType();
 });
 
-function getHtmlWidgetInfoNumeric(dashboard) {
+function getHtmlInfoNumericJeedom(dashboard) {
     var html = "";
     var width, height;
-    switch ($('#bsInfoNumericType').val()) {
-        case "0":
-            width = $('#bsInfoNumericIconSize0').val() * 20 + 15;
-            height = $('#bsInfoNumericIconSize0').val() * 20 + 20;
-            break;
-        case "1":
-            width = $('#bsInfoNumericPreview0').width() + 15;
-            height = $('#bsInfoNumericPreview0').height() + 15;
-            break;
-        case "2":
-            width = $('#bsInfoNumericPreviewSpec0').width() + 15;
-            height = $('#bsInfoNumericPreviewSpec0').height() + 15;
-            break;
-    }
+    width = $('#bsInfoNumericIconSize0').val() * 20 + 15;
+    height = $('#bsInfoNumericIconSize0').val() * 20 + 20;
     if (dashboard) {
-        switch ($('#bsInfoNumericType').val()) {
-            case "0":
-                html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="action" data-subtype="other" data-cmd_id="#id#">\n';
-                html += '\t<center>\n';
-                html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
-                html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
-                html += '\t</center>\n';
-                break;
-            case "1":
-            case "2":
-                html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="#collectDate#">\n';
-                html += '\t<div class="row">\n';
-                html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
-                html += '\t\t<div class="center-block col-xs-12" id="iconCmd#id#"></div>\n';
-                html += '\t</div>\n';
-                break;
-        }
+        html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#">\n';
+        html += '\t<center>\n';
+        html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
+        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t</center>\n';
     }
     else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        switch ($('#bsInfoNumericType').val()) {
-            case "0":
-                html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
-                break;
-            case "1":
-            case "2":
-                html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
-                break;
-        }
+        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
         html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
-        switch ($('#bsInfoNumericType').val()) {
-             case "1":
-             case "2":
-                html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 30) + 'px");\n';
-                break;
-        }
         html += '\t\t} else {\n';
         html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
-        switch ($('#bsInfoNumericType').val()) {
-            case "1":
-            case "2":
-                html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 10) + 'px");\n';
-                break;
-        }
         html += '\t\t}\n';
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
@@ -494,19 +526,8 @@ function getHtmlWidgetInfoNumeric(dashboard) {
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
-        switch ($('#bsInfoNumericType').val()) {
-            case "0":
-                html += "\t\t\t$('#iconCmd#id#').append('" + $('#bsInfoNumericIconCmd' + index).html() + "');\n";
-                html += "\t\t\t$('#iconCmd#id#').parent().append('<span style=\"font-size: 12px;\" ><br>'+temp+'%</span>');\n";
-                break;
-            case "1":
-                html += "\t\t\t$('#iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/images/" + $('#bsInfoNumericImage' + index).val() + "\"><span>'+temp+'%</span>');\n";
-                break;
-            case "2":
-                var dir = $('#bsInfoNumericSpecialCat' + index).val().split('.');
-                html += "\t\t\t$('#iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/special/" + dir + '/' + $('#bsInfoNumericSpecialIcon' + index).val() + "\"><span>'+temp+'%</span>');\n";
-                break;
-        }
+        html += "\t\t\t$('#iconCmd#id#').append('" + $('#bsInfoNumericIconCmd' + index).html() + "');\n";
+        html += "\t\t\t$('#iconCmd#id#').parent().append('<span style=\"font-size: 12px;\" ><br>'+temp+'%</span>');\n";
         html += '\t\t}\n';
     }
     html += '\t</script>\n';
@@ -514,26 +535,115 @@ function getHtmlWidgetInfoNumeric(dashboard) {
     return html;
 }
 
-/*function initInfoNumeric() {
-    if (editorNumeric === null) {
-        editorNumeric = CodeMirror.fromTextArea(document.getElementById("bsViewInfoNumeric"), {
-            lineNumbers: true,
-            mode: "text/html",
-            matchBrackets: true,
-            viewportMargin: Infinity
-        });
+function getHtmlInfoNumericImage(dashboard) {
+    var html = "";
+    var width, height;
+    width = $('#bsInfoNumericPreview0').width() + 15;
+    height = $('#bsInfoNumericPreview0').height() + 15;
+    if (dashboard) {
+        html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '\t<div class="row">\n';
+        html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
+        html += '\t\t<div class="center-block col-xs-12" id="iconCmd#id#"></div>\n';
+        html += '\t</div>\n';
     }
+    else {
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '\t<center>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t</center>\n';
+    }
+    html += '\t<script>\n';
+    if (dashboard) {
+        html += '\t\tif ("#displayName#" == "1") {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 30) + 'px");\n';
+        html += '\t\t} else {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 10) + 'px");\n';
+        html += '\t\t}\n';
+    }
+    html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     for (var index = 0; index < all; index++) {
-        var image;
-        if ($('#bsInfoNumericImage' + index).val() !== undefined && $('#bsInfoNumericImage' + index).val() !== null && $('#bsInfoNumericImage' + index).val() !== '0')
-            image = $('#bsInfoNumericImage' + index).val();
+        var image = $('#bsInfoNumericImage' + index).val();
+        if (index === (all - 1))
+            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else
-            image = '0';
-        $('#bsInfoNumericImage' + index).empty();
-        setSelectImage($('#bsInfoNumericImage' + index));
-        $('#bsInfoNumericImage' + index).val(image);
+            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
+        html += "\t\t\t$('#iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/images/" + image + "\"><span>'+temp+'%</span>');\n";
+        html += '\t\t}\n';
     }
-    $('#modalInfoNumericSave').prop('disabled',true);
-    bsInfoNumericType();
-}*/
+    html += '\t</script>\n';
+    html += '</div>\n';
+    return html;
+}
+
+function getHtmlInfoNumericSpecial(dashboard) {
+    var html = "";
+    var width, height, image;
+    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
+    var list = $('#bsInfoNumericSpecialCat0').val();
+    if (specialWidgets[list].extension !== 'svg') {
+        width = $('#bsInfoNumericPreviewSpec0').width() + 15;
+        height = $('#bsInfoNumericPreviewSpec0').height() + 15;
+    }
+    else {
+        width = parseInt(myInfoNumericSvgPreview[0].select('svg').attr('width')) + 15;
+        height = parseInt(myInfoNumericSvgPreview[0].select('svg').attr('height')) + 15;
+    }
+    if (dashboard) {
+        html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '\t<div class="row">\n';
+        html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
+        html += '\t\t<div class="center-block col-xs-12" id="iconCmd#id#">\n';
+        if (specialWidgets[list].extension === 'svg') {
+            for (var index = 0; index < all; index++) {
+                image = myInfoNumericSvgPreview[index].select('svg').toString();
+                html += '\t\t\t<div name="cmdSvg#id#' + index + '">\n\t\t\t\t' + image.replace(/\"/g, "'").replace(/(\r\n|\n|\r)/gm, "").replace(/>/g, ">\n\t\t\t\t") + '\n';
+                html += '\t\t\t</div>\n';
+            }
+        }
+        html += '\t\t</div>\n';
+        if (specialWidgets[list].extension === 'svg')
+            html += '\t<span id="cmdTextSvg#id#"></span>\n';
+        html += '\t</div>\n';
+    }
+    else {
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '\t<center>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t</center>\n';
+    }
+    html += '\t<script>\n';
+    if (dashboard) {
+        html += '\t\tif ("#displayName#" == "1") {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 30) + 'px");\n';
+        html += '\t\t} else {\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
+        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 10) + 'px");\n';
+        html += '\t\t}\n';
+    }
+    html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
+    for (var index = 0; index < all; index++) {
+        var listItem = $('#bsInfoNumericSpecialCat' + index).val();
+        var svg = $('#bsInfoNumericSpecialIcon' + index).val();
+        if (index === (all - 1))
+            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
+        else
+            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
+        if (specialWidgets[list].extension !== 'svg')
+            html += "\t\t\t$('#iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/special/" + specialWidgets[listItem].folder + specialWidgets[listItem].files[svg] + "\"><span>'+temp+'%</span>');\n";
+        else {
+            html += "\t\t\t$('div[name*=\"cmdSvg#id#\"]').hide();\n";
+            html += "\t\t\t$('div[name=\"cmdSvg#id#" + index + "\"]').show();\n";
+            html += "\t\t\t$('#cmdTextSvg#id#').text(temp + \"%\");\n";
+        }
+
+        html += '\t\t}\n';
+    }
+    html += '\t</script>\n';
+    html += '</div>\n';
+    return html;
+}

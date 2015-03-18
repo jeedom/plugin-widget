@@ -50,6 +50,37 @@ class widget {
         return $return;
     }
 
+    public static function listSvgWidget() {
+        $uploaddir = dirname(__FILE__) . '/../special';
+        $data['files'] = ls($uploaddir, "*", false, array('files'));
+        $data['folders'] = ls($uploaddir, "*", false, array('folders'));
+        for( $index = 0; $index < count($data['folders']); $index++) {
+            $data['folders'][$index] = str_replace('/', '', $data['folders'][$index]);
+        }
+        for ($index = 0; $index < count($data['files']); $index++) {
+            $filename = pathinfo($data['files'][$index]);
+            for ($nbFolder = 0; $nbFolder < count($data['folders']); $nbFolder++) {
+                if ($data['folders'][$nbFolder] == strtolower($filename['filename'])) {
+                    $folders['name'] = $data['files'][$index];
+                    $folders['folder'] = strtolower($filename['filename']) . '/';
+                    $folders['files'] = ls($uploaddir . '/' . strtolower($filename['filename']), "*", false, array('files'));
+                    $extension = pathinfo(strtolower($folders['files'][0]));
+                    $folders['extension'] = $extension['extension'];
+                    //return $folders;.replace(/<?[^>]*>/, "").replace(/<!DOCTYPE[^>]*>/, "").replace(/<!--[^>]*>/, "")
+                    if (in_array($folders['extension'], array('svg'))) {
+                        for ($nbFile = 0; $nbFile < count($folders['files']); $nbFile++) {
+                            $filename = pathinfo($folders['files'][$nbFile]);
+                            $folders['svg'][$nbFile]['name'] = $filename['filename'];
+                            $folders['svg'][$nbFile]['snap'] = file_get_contents($uploaddir . '/' . $folders['folder'] . $folders['files'][$nbFile]);
+                        }
+                    }
+                    $return[] = $folders;
+                }
+            }
+        }
+        return $return;
+    }
+    
     public static function byPath($_pathfile) {
         if (!file_exists($_pathfile)) {
             throw new Exception(__('Chemin jusqu\'au widget non trouvé : ', __FILE__) . $_pathfile);
@@ -203,9 +234,6 @@ class widget {
                     $cmd->setTemplate($this->getVersion(),$this->getName());
                     $cmd->save();
                 }
-            }
-            else if($this->getPath() == NULL) {
-                $this->setPath($this->generatePath());
             }
             if (is_dir(str_replace('.html', '', $this->getPath()))) {
                 if (!rename(str_replace('.html', '', $this->getPath()), str_replace('.html', '', $this->generatePath()))) {

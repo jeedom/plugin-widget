@@ -59,7 +59,7 @@ try {
         $widget->setSubtype($widget_ajax['subtype']);
         $widget->setContent($widget_ajax['content']);
         $widget->setVersion($widget_ajax['version']);
-        $widget->setPath($widget->generatePath());
+        //$widget->setPath($widget->generatePath());
         $widget->save();
         ajax::success(utils::o2a($widget));
     }
@@ -233,6 +233,20 @@ try {
         ajax::success();
     }
 
+    if (init('action') == 'loadSvg') {
+        $folder = init('folder');
+        $uploaddir = dirname(__FILE__) . '/../special/' . $folder;
+        $files = ls($uploaddir, "*", false, array('files'));
+        for( $index = 0; $index < count($files); $index++) {
+            $extension = strtolower(strrchr($files[$index], '.'));
+            if (in_array($extension, array('.svg'))) {
+                $return[$index]['name'] = $files[$index];
+                $return[$index]['snap'] = file_get_contents ($uploaddir . '/' . $files[$index]);
+            }
+        }
+        ajax::success($return);
+    }
+
     if (init('action') == 'listSvg') {
         $uploaddir = dirname(__FILE__) . '/../special';
         if (!file_exists($uploaddir)) {
@@ -241,14 +255,7 @@ try {
         if (!file_exists($uploaddir)) {
             throw new Exception(__("{{Répertoire d'upload d'images non trouvé}} : ", __FILE__) . $uploaddir);
         }
-        $return['files'] = ls($uploaddir, "*", false, array('files'));
-        $return['folders'] = ls($uploaddir, "*", false, array('folders'));
-        for( $index = 0; $index < count($return['folders']); $index++) {
-            $temp['folder'] = str_replace('/', '', $return['folders'][$index]);
-            $temp['files'] = ls($uploaddir . '/' . $temp['folder'], "*", false, array('files'));
-            $return['folders'][$index] = $temp;
-        }
-        ajax::success($return);
+        ajax::success(widget::listSvgWidget());
     }
 
     if (init('action') == 'removeSvg') {
