@@ -16,15 +16,15 @@
  */
 
 if (!isConnect('admin')) {
-    throw new Exception('{{401 - Accès non autorisé}}');
+	throw new Exception('{{401 - Accès non autorisé}}');
 }
 
 if (init('path') == '') {
-    throw new Exception('{{Aucun widget fourni}}');
+	throw new Exception('{{Aucun widget fourni}}');
 }
 $widget = widget::byPath(init('path'));
 if (!is_object($widget)) {
-    throw new Exception('{{Widget non trouvé}}');
+	throw new Exception('{{Widget non trouvé}}');
 }
 include_file('3rdparty', 'jquery.tablesorter/theme.bootstrap', 'css');
 include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.min', 'js');
@@ -34,7 +34,7 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
 <div style="display: none;" id="md_applyWidgetAlert"></div>
 <div style="position: fixed;height: 50px;background-color: white;margin-top:-6px;padding-top: 6px;" id="div_boutons">
     <a class="btn btn-default" id="bt_applyWidgetToogle" data-state="0"><i class="fa fa-check-circle-o"></i> {{Basculer}}</a>
-    <a class="btn btn-success pull-right bt_applyWidgetToCmd" data-path="<?php echo $widget->getPath() ?>" style="color : white;" data-version=""><i class="fa fa-check"></i> {{Valider}}</a>
+    <a class="btn btn-success pull-right bt_applyWidgetToCmd" data-path="<?php echo $widget->getPath()?>" style="color : white;" data-version=""><i class="fa fa-check"></i> {{Valider}}</a>
 </div>
 <br/><br/>
 
@@ -46,48 +46,51 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
     </thead>
     <tbody>
         <?php
-        foreach (cmd::byTypeSubType($widget->getType(), $widget->getSubType()) as $cmd) {
-            $eqLogic = $cmd->getEqLogic();
-            if (is_object($eqLogic)) {
-                $object = $eqLogic->getObject();
-            } else {
-                $object = null;
-            }
-            echo '<tr data-cmd_id="' . $cmd->getId() . '">';
-            echo '<td>';
-            if ($widget->getName() == $cmd->getTemplate($widget->getVersion())) {
-                echo '<input class="applyWidget" type="checkbox" checked />';
-            } else {
-                echo '<input class="applyWidget" type="checkbox" />';
-            }
-            echo '</td>';
-            echo '<td>';
-            if (is_object($object)) {
-                echo $object->getName();
-            }
-            echo '</td>';
-            echo '<td>';
-            if (is_object($eqLogic)) {
-                echo $eqLogic->getName();
-            }
-            echo '</td>';
-            echo '<td>';
-            echo $cmd->getName();
-            echo '</td>';
-            echo '<td>';
-            echo $cmd->getUnite();
-            echo '</td>';
-            echo '</tr>';
-        }
-        ?>
+foreach (cmd::byTypeSubType($widget->getType(), $widget->getSubType()) as $cmd) {
+	$eqLogic = $cmd->getEqLogic();
+	if ($eqLogic->getIsEnable() == 0 || $eqLogic->getIsVisible() == 0 || $cmd->getIsVisible() == 0) {
+		continue;
+	}
+	if (is_object($eqLogic)) {
+		$object = $eqLogic->getObject();
+	} else {
+		$object = null;
+	}
+	echo '<tr data-cmd_id="' . $cmd->getId() . '">';
+	echo '<td>';
+	if ($widget->getName() == $cmd->getTemplate($widget->getVersion())) {
+		echo '<input class="applyWidget" type="checkbox" checked />';
+	} else {
+		echo '<input class="applyWidget" type="checkbox" />';
+	}
+	echo '</td>';
+	echo '<td>';
+	if (is_object($object)) {
+		echo $object->getName();
+	}
+	echo '</td>';
+	echo '<td>';
+	if (is_object($eqLogic)) {
+		echo $eqLogic->getName();
+	}
+	echo '</td>';
+	echo '<td>';
+	echo $cmd->getName();
+	echo '</td>';
+	echo '<td>';
+	echo $cmd->getUnite();
+	echo '</td>';
+	echo '</tr>';
+}
+?>
     </tbody>
 </table>
 
 
 <script>
    $('#div_boutons').width($('#div_boutons').parent().width() - 8);
-    
-    
+
+
     initTableSorter();
     $('#bt_applyWidgetToogle').on('click', function () {
         var state = false;
