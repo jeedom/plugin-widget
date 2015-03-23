@@ -4,6 +4,7 @@
         <span style="font-size: 3.5em;" class="iconCmd#id#"></span>
     </center>
     <script>
+        $('.iconCmd#id#').empty();
         if ('#state#' == '1') {
             $('.iconCmd#id#').append('<i class="fa fa-check"></i>');
             if ($('.cmd[data-cmd_id=#id#]').closest('.eqLogic').attr('data-bgColor') != undefined) {
