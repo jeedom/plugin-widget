@@ -121,7 +121,7 @@ class widget {
 		$cibDirs[1] = realpath(dirname(__FILE__) . '/../template/' . $informations[0]) . '/cmd.' . $informations[1] . '.' . $informations[2] . '.' . $informations[3];
 		if (file_exists($cibDirs[1])) {
 			mkdir($tmp_dir . '/cmd.' . $informations[1] . '.' . $informations[2] . '.' . $informations[3]);
-			if (!rcopy($cibDirs[1], $tmp_dir . '/cmd.' . $informations[1] . '.' . $informations[2] . '.' . $informations[3], false)) {
+			if (!rcopy($cibDirs[1], $tmp_dir . '/cmd.' . $informations[1] . '.' . $informations[2] . '.' . $informations[3], false, array(), true)) {
 				throw new Exception(__('Impossible de copier ', __FILE__) . $cibDirs[1] . ' => ' . $tmp_dir);
 			}
 		}
@@ -201,7 +201,7 @@ class widget {
 		$dep = realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $this->getName();
 		if (file_exists($dep)) {
 			mkdir(realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $_name);
-			if (!rcopy($dep, realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $_name, false)) {
+			if (!rcopy($dep, realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $_name, false, array(), true)) {
 				throw new Exception(__('Impossible de copier ', __FILE__) . $cibDirs[1] . ' => ' . $tmp_dir);
 			}
 		}
