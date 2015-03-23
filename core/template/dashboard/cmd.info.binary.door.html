@@ -4,10 +4,11 @@
         <span style="font-size: 3.5em;" id="iconCmd#id#"></span>
     </center>
     <script>
-        if ('#state#' == '1' || '#state#' == 1) {
+        $('.iconCmd#id#').empty();
+        if ('#state#' == '1') {
             $('#iconCmd#id#').append('<i class="icon jeedom-porte-ferme"></i>');
         }
-        if ('#state#' == '0' || '#state#' == 0) {
+        else {
             $('#iconCmd#id#').append('<i class="icon jeedom-porte-ouverte"></i>');
         }
     </script>
