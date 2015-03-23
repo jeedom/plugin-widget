@@ -3,7 +3,8 @@
         <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" class="action iconCmd#id#"></span>
     </center>
     <script>
-        if ('#state#' == '1' || '#state#' == 1 || '#state#' == '99' || '#state#' == 99 || '#state#' == 'on') {
+        $('.iconCmd#id#').empty();
+        if ('#state#' == '1' || '#state#' == '99' || '#state#' == 'on') {
             $('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/on.png" />');
             if (jeedom.cmd.normalizeName('#name#') == 'on') {
                 $('.cmd[data-cmd_id=#id#]').hide();
