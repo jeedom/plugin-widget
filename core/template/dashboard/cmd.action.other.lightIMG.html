@@ -1,15 +1,15 @@
 <div style="width:90px;min-height:80px;" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
     <center>
-        <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" class="action" id="iconCmd#id#"></span>
+        <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" class="action iconCmd#id#"></span>
     </center>
     <script>
         if ('#state#' == '1' || '#state#' == 1 || '#state#' == '99' || '#state#' == 99 || '#state#' == 'on') {
-            $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/on.png" />');
+            $('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/on.png" />');
             if (jeedom.cmd.normalizeName('#name#') == 'on') {
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
         } else {
-            $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/off.png" />');
+            $('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/off.png" />');
             if (jeedom.cmd.normalizeName('#name#') == 'off') {
                 $('.cmd[data-cmd_id=#id#]').hide();
             }
