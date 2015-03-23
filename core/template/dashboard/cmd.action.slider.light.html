@@ -4,7 +4,8 @@
         <div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#state#"></div>
     </center>
     <script>
-        if ('#state#' > '1' || '#state#' > 1) {
+        $('.iconCmd#id#').empty();
+        if (parseInt('#state#') > 1) {
             $('.iconCmd#id#').append('<i class="icon jeedom-lumiere-on"></i>');
             $('.iconCmd#id#').attr('data-state', 'on');
         }else {
