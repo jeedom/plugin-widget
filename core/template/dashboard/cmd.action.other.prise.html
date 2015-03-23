@@ -4,7 +4,8 @@
         <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" class="action iconCmd#id#"></span>
     </center>
     <script>
-        if ('#state#' == '1' || '#state#' == 1) {
+        $('.iconCmd#id#').empty();
+        if ('#state#' == '1') {
             $('.iconCmd#id#').append('<i class="icon jeedom-prise"></i>');
             if (jeedom.cmd.normalizeName('#name#') == 'on') {
                 $('.cmd[data-cmd_id=#id#]').hide();
