@@ -22,6 +22,8 @@ var specialWidgets = [];
 updateListImages();
 updateListSvgs();
 
+$('.pluginContainer').packery();
+
 $("img.lazy").each(function () {
     var el = $(this);
     if (el.attr('data-original2') !== undefined) {
