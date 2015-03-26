@@ -796,13 +796,11 @@ $('#bt_InfoNumericAdd').on('click', function () {
 /******************* filtragre *****************/
 
 $('#filterDesktop').on('change', function() {
-    var stateDesk = !$('#filterDesktop').prop('checked');
     filterWidget();
     filterViewWidget();
 });
 
 $('#filterMobile').on('change', function () {
-    var stateMob = !$('#filterMobile').prop('checked');
     filterWidget();
     filterViewWidget();
 });
