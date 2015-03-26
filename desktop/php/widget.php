@@ -64,6 +64,58 @@ function displayWidgetName($_name) {
     }
     return $result .= $name[2];
 }
+
+function displayWidgetType($_name) {
+    $result = '';
+    $name = explode('.', $_name);
+    if (count($name) != 3) {
+        return "";
+    }
+    switch ($name[0]) {
+        case 'info':
+            $result .= '<i class="fa fa-eye fa-fw" title="Widget de type information" style="position: absolute;top: 16px; left: -2px;"></i> ';
+            break;
+        case 'action':
+            $result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action" style="position: absolute;top: 16px; left: -2px;"></i> ';
+            break;
+        default:
+            $result .= $name[0];
+            break;
+    }
+    return $result;
+}
+
+function displayWidgetSubtype($_name) {
+    $result = '';
+    $name = explode('.', $_name);
+    if (count($name) != 3) {
+        return "";
+    }
+    switch ($name[1]) {
+        case 'other':
+            $result .= '<span class="label label-warning" style="text-shadow: none;position: absolute;top: 55px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">other</span> ';
+            break;
+        case 'color':
+            $result .= '<span class="label label-success" style="text-shadow: none;position: absolute;top: 55px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">color</span> ';
+            break;
+        case 'slider':
+            $result .= '<span class="label label-primary" style="text-shadow: none;position: absolute;top: 55px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">slider</span> ';
+            break;
+        case 'binary':
+            $result .= '<span class="label label-info" style="text-shadow: none;position: absolute;top: 55px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 44px 16px;">binary</span> ';
+            break;
+        case 'numeric':
+            $result .= '<span class="label label-danger" style="text-shadow: none;position: absolute;top: 55px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 53px 16px;">numeric</span> ';
+            break;
+        case 'string':
+            $result .= '<span class="label label-default" style="text-shadow: none;position: absolute;top: 55px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">string</span> ';
+            break;
+        default:
+            $result .= $name[1];
+            break;
+    }
+    return $result;
+}
 ?>
 <style>
     .divIconSel{
@@ -127,7 +179,46 @@ function displayWidgetName($_name) {
                 <a class="btn btn-default btn-sm tooltips" id="bt_getFromMarket" title="{{Récuperer du market}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Market}}</a>
                 <a class="btn btn-default widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter un widget}}</a>
                 <a class="btn btn-success widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="create"><i class="fa fa-picture-o"></i> {{Mode création facile}}</a>
+                <div class="panel panel-default expertModeVisible">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center"><strong>Filtre</strong></h3>
+                    </div>
+                    <div class="panel-body" style="padding : 0px 5px;">
+                        <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterDesktop" ><i class="fa fa-desktop fa-fw"></i>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterMobile"><i class="fa fa-mobile fa-fw"></i>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterAction"><i class="fa fa-exclamation-circle fa-fw"></i>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterInfo"><i class="fa fa-eye fa-fw"></i>
+                            </label>
+                        </div>    
+                        <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterOther"><span class="label label-warning" style="text-shadow: none;">other</span>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterSlider"><span class="label label-primary" style="text-shadow: none;">slider</span>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterBinary"><span class="label label-info" style="text-shadow: none;">binary</span>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterNumeric"><span class="label label-danger" style="text-shadow: none;">numeric</span>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" id="filterString"><span class="label label-default" style="text-shadow: none;">string</span>
+                            </label>
+                        </div>                
+                    </div>
+                </div>      
                 <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
+
                 <?php
                 foreach ($dashboardWidget as $widget) {
                     echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop fa-fw" title="Widget pour la version bureau"></i> ' . displayWidgetName($widget->getHumanName());
@@ -812,11 +903,11 @@ foreach (ls('core/css/icon', '*') as $dir) {
             <?php
             $widget_list = array_merge($dashboardWidget, $mobileWidget);
             foreach ($widget_list as $widget) {
-                echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
+                echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="position:relative;background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
                 if ($widget->getVersion() == 'mobile') {
-                    echo '<i class="fa fa-mobile pull-left" style="color:#c5c5c5"></i>';
+                    echo '<i class="fa fa-mobile" style="position: absolute;top: 0;left: 6px;" title="Widget pour la version bureau"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
                 } else {
-                    echo '<i class="fa fa-desktop pull-left" style="color:#c5c5c5"></i>';
+                    echo '<i class="fa fa-desktop" style="position: absolute;top: 0;left: 0;" title="Widget pour la version mobile"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
                 }
                 $urlPath = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
                 $urlPath2 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
@@ -824,7 +915,11 @@ foreach (ls('core/css/icon', '*') as $dir) {
                 echo "<center>";
                 echo '<img class="lazy" src="plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
                 echo "</center>";
-                echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getHumanName() . '</span>';
+                 if ($widget->getVersion() == 'mobile') {
+                    echo '<strong class="col-sm-12 text-center" style="font-size : 1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
+                } else {
+                    echo '<strong class="col-sm-12 text-center" style="font-size : 1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
+                }
                 echo '</div>';
             }
             ?>

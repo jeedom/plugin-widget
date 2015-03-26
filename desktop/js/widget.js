@@ -22,8 +22,6 @@ var specialWidgets = [];
 updateListImages();
 updateListSvgs();
 
-$('.pluginContainer').packery();
-
 $("img.lazy").each(function () {
     var el = $(this);
     if (el.attr('data-original2') !== undefined) {
@@ -793,3 +791,129 @@ $('#bt_InfoNumericAdd').on('click', function () {
     bsInfoNumericType();
     $('#bsCategory').hide();
 });
+
+
+/******************* filtragre *****************/
+
+$('#filterDesktop').on('change', function() {
+    var stateDesk = !$('#filterDesktop').prop('checked');
+    filterWidget();
+    filterViewWidget();
+});
+
+$('#filterMobile').on('change', function () {
+    var stateMob = !$('#filterMobile').prop('checked');
+    filterWidget();
+    filterViewWidget();
+});
+
+$('#filterAction').on('change', function () {
+    filterWidget();
+    filterViewWidget();
+});
+
+$('#filterInfo').on('change', function () {
+    filterWidget();
+    filterViewWidget();
+});
+
+$('#filterOther').on('change', function () {
+    filterWidget();
+    filterViewWidget();
+});
+
+$('#filterSlider').on('change', function () {
+    filterWidget();
+    filterViewWidget();
+});
+
+$('#filterBinary').on('change', function () {
+    filterWidget();
+    filterViewWidget();
+});
+
+$('#filterNumeric').on('change', function () {
+    filterWidget();
+    filterViewWidget();
+});
+
+$('#filterString').on('change', function () {
+    filterWidget();
+    filterViewWidget();
+});
+
+function filterWidget() {
+    var stateDesk = !$('#filterDesktop').prop('checked');
+    var stateMob = !$('#filterMobile').prop('checked');
+    var stateAction = !$('#filterAction').prop('checked');
+    var stateInfo = !$('#filterInfo').prop('checked');
+    var stateOther = !$('#filterOther').prop('checked');
+    var stateSlider = !$('#filterSlider').prop('checked');
+    var stateBinary = !$('#filterBinary').prop('checked');
+    var stateNumeric = !$('#filterNumeric').prop('checked');
+    var stateString = !$('#filterString').prop('checked');
+    var kids = $('#ul_widget').children(':gt(4)').filter(function () {
+        var isFind = true;
+        var desktop = $(this).find('.fa-desktop').length === 0 ? false : true;
+        var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
+        var subtype = $(this).find('.label').text();
+        if (stateDesk === false && stateMob === false)
+            isFind = false;
+        if((desktop === true && stateDesk === false) || (desktop === false && stateMob === false))
+            isFind = false;
+        if((type === 'info' && stateInfo === false) || (type === 'action' && stateAction === false))
+            isFind = false;
+        if(     (subtype === 'other' && stateOther === false) ||
+                (subtype === 'slider' && stateSlider === false) ||
+                (subtype === 'binary' && stateBinary === false) ||
+                (subtype === 'numeric' && stateNumeric === false) ||
+                (subtype === 'string' && stateString === false))
+            isFind = false;
+        return isFind;
+    });
+    $('#ul_widget').children(':gt(4)').hide();
+    kids.each(function () {
+            $(this).show();
+        });
+ }
+ 
+ function filterViewWidget() {
+    var stateDesk = !$('#filterDesktop').prop('checked');
+    var stateMob = !$('#filterMobile').prop('checked');
+    var stateAction = !$('#filterAction').prop('checked');
+    var stateInfo = !$('#filterInfo').prop('checked');
+    var stateOther = !$('#filterOther').prop('checked');
+    var stateSlider = !$('#filterSlider').prop('checked');
+    var stateBinary = !$('#filterBinary').prop('checked');
+    var stateNumeric = !$('#filterNumeric').prop('checked');
+    var stateString = !$('#filterString').prop('checked');
+    var kids = $('.pluginContainer').children().filter(function () {
+        var isFind = true;
+        var desktop = $(this).find('.fa-desktop').length === 0 ? false : true;
+        var text = $(this).find('strong').text().split('.');
+        //var type = init(text[0],"none");
+        //var subtype = init(text[1],"none");
+        var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
+        var subtype = $(this).find('.label').text();
+        if (stateDesk === false && stateMob === false)
+            isFind = false;
+        if((desktop === true && stateDesk === false) || (desktop === false && stateMob === false))
+            isFind = false;
+        if((type === 'info' && stateInfo === false) || (type === 'action' && stateAction === false))
+            isFind = false;
+        if(     (subtype === 'other' && stateOther === false) ||
+                (subtype === 'slider' && stateSlider === false) ||
+                (subtype === 'binary' && stateBinary === false) ||
+                (subtype === 'numeric' && stateNumeric === false) ||
+                (subtype === 'string' && stateString === false))
+            isFind = false;
+        return isFind;
+    });
+    $('.pluginContainer').children().hide();
+    kids.each(function () {
+            $(this).show();
+        });
+    $('.pluginContainer').packery();
+
+ }
+ 
