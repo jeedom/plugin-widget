@@ -905,7 +905,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
             foreach ($widget_list as $widget) {
                 echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="position:relative;background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
                 if ($widget->getVersion() == 'mobile') {
-                    echo '<i class="fa fa-mobile" style="position: absolute;top: 0;left: 6px;" title="Widget pour la version bureau"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
+                    echo '<i class="fa fa-mobile" style="position: absolute;top: 0;left: 4px;" title="Widget pour la version bureau"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
                 } else {
                     echo '<i class="fa fa-desktop" style="position: absolute;top: 0;left: 0;" title="Widget pour la version mobile"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
                 }
