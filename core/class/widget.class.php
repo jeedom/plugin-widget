@@ -150,7 +150,7 @@ class widget {
         } else {
             throw new Exception(__('Impossible de décompresser le zip : ', __FILE__) . $_path);
         }
-        $widgetDir = realpath(dirname(__FILE__) . '/../template/' . $informations[0] . '/cmd.' . $informations[1] . '.' . $informations[2] . '.' . $informations[3] . '.html');
+        $widgetDir = dirname(__FILE__) . '/../template/' . $informations[0] . '/cmd.' . $informations[1] . '.' . $informations[2] . '.' . $informations[3] . '.html';
         if (!file_exists($widgetDir)) {
             throw new Exception(__('Echec de l\'installation. Impossible de trouver le widget ', __FILE__) . $widgetDir);
         }

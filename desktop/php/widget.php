@@ -73,10 +73,10 @@ function displayWidgetType($_name) {
     }
     switch ($name[0]) {
         case 'info':
-            $result .= '<i class="fa fa-eye fa-fw" title="Widget de type information" style="position: absolute;top: 21px; left: -2px;"></i> ';
+            $result .= '<i class="fa fa-eye fa-fw" title="Widget de type information" style="position: absolute;top: 31px; left: 15px;"></i> ';
             break;
         case 'action':
-            $result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action" style="position: absolute;top: 21px; left: -2px;"></i> ';
+            $result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action" style="position: absolute;top: 31px; left: 15px;"></i> ';
             break;
         default:
             $result .= "";
@@ -93,22 +93,22 @@ function displayWidgetSubtype($_name) {
     }
     switch ($name[1]) {
         case 'other':
-            $result .= '<span class="label label-warning" style="text-shadow: none;position: absolute;top: 60px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">other</span> ';
+            $result .= '<span class="label label-warning" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">other</span> ';
             break;
         case 'color':
-            $result .= '<span class="label label-success" style="text-shadow: none;position: absolute;top: 60px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">color</span> ';
+            $result .= '<span class="label label-success" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">color</span> ';
             break;
         case 'slider':
-            $result .= '<span class="label label-primary" style="text-shadow: none;position: absolute;top: 60px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">slider</span> ';
+            $result .= '<span class="label label-primary" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">slider</span> ';
             break;
         case 'binary':
-            $result .= '<span class="label label-info" style="text-shadow: none;position: absolute;top: 60px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 44px 16px;">binary</span> ';
+            $result .= '<span class="label label-info" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 44px 16px;">binary</span> ';
             break;
         case 'numeric':
-            $result .= '<span class="label label-danger" style="text-shadow: none;position: absolute;top: 60px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 53px 16px;">numeric</span> ';
+            $result .= '<span class="label label-danger" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 53px 16px;">numeric</span> ';
             break;
         case 'string':
-            $result .= '<span class="label label-default" style="text-shadow: none;position: absolute;top: 60px; left: -38px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">string</span> ';
+            $result .= '<span class="label label-default" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">string</span> ';
             break;
         default:
             $result .= "";
@@ -903,17 +903,17 @@ foreach (ls('core/css/icon', '*') as $dir) {
             <?php
             $widget_list = array_merge($dashboardWidget, $mobileWidget);
             foreach ($widget_list as $widget) {
-                echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="position:relative;background-color : #ffffff; height : 180px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
+                echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="position:relative;border: 1px solid #C5C5C5;border-radius: 15px;background-color : #ffffff; height : 180px;margin-bottom : 10px;padding : 10px;width : 160px;margin-left : 10px;" >';
                 if ($widget->getVersion() == 'mobile') {
-                    echo '<i class="fa fa-mobile" style="position: absolute;top: 5px;left: 4px;" title="Widget pour la version bureau"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
+                    echo '<i class="fa fa-mobile" style="position: absolute;top: 15px;left: 21px;" title="Widget pour la version bureau"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
                 } else {
-                    echo '<i class="fa fa-desktop" style="position: absolute;top: 5px;left: 0;" title="Widget pour la version mobile"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
+                    echo '<i class="fa fa-desktop" style="position: absolute;top: 15px;left: 17px;" title="Widget pour la version mobile"></i>' .  displayWidgetType($widget->getHumanName())  .  displayWidgetSubtype($widget->getHumanName());
                 }
                 $urlPath = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
                 $urlPath2 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
                 $urlPath3 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.jpg';
                 echo "<center>";
-                echo '<img class="lazy" src="plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
+                echo '<img class="lazy" style="margin-left: 40px;border: 1px solid #C5C5C5;border-radius:5px; padding: 3px" src="plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
                 echo "</center>";
                  if ($widget->getVersion() == 'mobile') {
                     echo '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';

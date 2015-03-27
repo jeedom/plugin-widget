@@ -502,13 +502,13 @@ function getHtmlInfoNumericJeedom(dashboard) {
         html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#">\n';
         html += '\t<center>\n';
         html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
-        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
     else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize1').val() + 'em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
     html += '\t<script>\n';
@@ -520,14 +520,15 @@ function getHtmlInfoNumericJeedom(dashboard) {
         html += '\t\t}\n';
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
+    html += '\t\t\$(".iconCmd#id#").empty();\n';
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     for (var index = 0; index < all; index++) {
         if (index === (all - 1))
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
-        html += "\t\t\t$('#iconCmd#id#').append('" + $('#bsInfoNumericIconCmd' + index).html() + "');\n";
-        html += "\t\t\t$('#iconCmd#id#').parent().append('<span style=\"font-size: 12px;\" ><br>'+temp+'%</span>');\n";
+        html += "\t\t\t$('.iconCmd#id#').append('" + $('#bsInfoNumericIconCmd' + index).html() + "');\n";
+        html += "\t\t\t$('.iconCmd#id#').parent().append('<span style=\"font-size: 12px;\" ><br>'+temp+'%</span>');\n";
         html += '\t\t}\n';
     }
     html += '\t</script>\n';
@@ -544,13 +545,13 @@ function getHtmlInfoNumericImage(dashboard) {
         html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
         html += '\t<div class="row">\n';
         html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
-        html += '\t\t<div class="center-block col-xs-12" id="iconCmd#id#"></div>\n';
+        html += '\t\t<div class="center-block col-xs-12 iconCmd#id#"></div>\n';
         html += '\t</div>\n';
     }
     else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
     html += '\t<script>\n';
@@ -564,6 +565,7 @@ function getHtmlInfoNumericImage(dashboard) {
         html += '\t\t}\n';
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
+    html += '\t\t\$(".iconCmd#id#").empty();\n';
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     for (var index = 0; index < all; index++) {
         var image = $('#bsInfoNumericImage' + index).val();
@@ -571,7 +573,7 @@ function getHtmlInfoNumericImage(dashboard) {
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
-        html += "\t\t\t$('#iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/images/" + image + "\"><span>'+temp+'%</span>');\n";
+        html += "\t\t\t$('.iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/images/" + image + "\"><span>'+temp+'%</span>');\n";
         html += '\t\t}\n';
     }
     html += '\t</script>\n';
@@ -596,7 +598,7 @@ function getHtmlInfoNumericSpecial(dashboard) {
         html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
         html += '\t<div class="row">\n';
         html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
-        html += '\t\t<div class="center-block col-xs-12" id="iconCmd#id#">\n';
+        html += '\t\t<div class="center-block col-xs-12 iconCmd#id#">\n';
         if (specialWidgets[list].extension === 'svg') {
             for (var index = 0; index < all; index++) {
                 image = myInfoNumericSvgPreview[index].select('svg').toString();
@@ -606,13 +608,13 @@ function getHtmlInfoNumericSpecial(dashboard) {
         }
         html += '\t\t</div>\n';
         if (specialWidgets[list].extension === 'svg')
-            html += '\t<span id="cmdTextSvg#id#"></span>\n';
+            html += '\t<span class="cmdTextSvg#id#"></span>\n';
         html += '\t</div>\n';
     }
     else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
     html += '\t<script>\n';
@@ -626,6 +628,8 @@ function getHtmlInfoNumericSpecial(dashboard) {
         html += '\t\t}\n';
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
+    if (specialWidgets[list].extension !== 'svg')
+        html += '\t\t\$(".iconCmd#id#").empty();\n';
     for (var index = 0; index < all; index++) {
         var listItem = $('#bsInfoNumericSpecialCat' + index).val();
         var svg = $('#bsInfoNumericSpecialIcon' + index).val();
@@ -634,11 +638,11 @@ function getHtmlInfoNumericSpecial(dashboard) {
         else
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         if (specialWidgets[list].extension !== 'svg')
-            html += "\t\t\t$('#iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/special/" + specialWidgets[listItem].folder + specialWidgets[listItem].files[svg] + "\"><span>'+temp+'%</span>');\n";
+            html += "\t\t\t$('.iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/special/" + specialWidgets[listItem].folder + specialWidgets[listItem].files[svg] + "\"><span>'+temp+'%</span>');\n";
         else {
             html += "\t\t\t$('div[name*=\"cmdSvg#id#\"]').hide();\n";
             html += "\t\t\t$('div[name=\"cmdSvg#id#" + index + "\"]').show();\n";
-            html += "\t\t\t$('#cmdTextSvg#id#').text(temp + \"%\");\n";
+            html += "\t\t\t$('.cmdTextSvg#id#').text(temp + \"%\");\n";
         }
 
         html += '\t\t}\n';
