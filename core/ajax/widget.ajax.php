@@ -325,6 +325,10 @@ try {
 
 
 function unZipSvg($name) {
+    $bad = array_merge(
+            array_map('chr', range(0,31)),
+            array("<", ">", ":", '"', "/", "\\", "|", "?", "*"));
+    $result = str_replace($bad, "", $name);
     $base = basename(strtolower($name), ".zip");
     $zip_dir = dirname(__FILE__) . '/../special/' . $base;
     $arch = new ZipArchive();

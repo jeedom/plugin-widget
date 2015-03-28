@@ -45,43 +45,39 @@ $('#modalInfoBinaryCancel').on('click', function () {
 
 $('#bsInfoBinarySvgSpecSize').on('change', function () {
     var height, width = $(this).val();
-    if (myInfoBinarySvgPreview1 !== null)
-        if (myInfoBinarySvgPreview1.select('svg') !== null) {
-            height = myInfoBinarySvgPreview1.select('svg').attr('height');
-            height = Math.round(height * (width / parseInt(myInfoBinarySvgPreview1.select('svg').attr('height'))));
-            myInfoBinarySvgPreview1.select('svg').attr({height: height, width: width});
-            var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
-            $('#bsInfoBinaryLabelSpec1').empty();
-            $('#bsInfoBinaryLabelSpec1').append(temp);
-        }
-    if (myInfoBinarySvgPreview2 !== null)
-        if (myInfoBinarySvgPreview2.select('svg') !== null) {
-            height = myInfoBinarySvgPreview2.select('svg').attr('height');
-            height = Math.round(height * (width / parseInt(myInfoBinarySvgPreview2.select('svg').attr('height'))));
-            myInfoBinarySvgPreview2.select('svg').attr({height: height, width: width});
-            var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
-            $('#bsInfoBinaryLabelSpec2').empty();
-            $('#bsInfoBinaryLabelSpec2').append(temp);
+    if (myInfoBinarySvgPreview1.select('svg') !== null) {
+        height = myInfoBinarySvgPreview1.select('svg').attr('height');
+        height = Math.round(height * (width / parseInt(myInfoBinarySvgPreview1.select('svg').attr('height'))));
+        myInfoBinarySvgPreview1.select('svg').attr({height: height, width: width});
+        var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
+        $('#bsInfoBinaryLabelSpec1').empty();
+        $('#bsInfoBinaryLabelSpec1').append(temp);
+    }
+    if (myInfoBinarySvgPreview2.select('svg') !== null) {
+        height = myInfoBinarySvgPreview2.select('svg').attr('height');
+        height = Math.round(height * (width / parseInt(myInfoBinarySvgPreview2.select('svg').attr('height'))));
+        myInfoBinarySvgPreview2.select('svg').attr({height: height, width: width});
+        var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
+        $('#bsInfoBinaryLabelSpec2').empty();
+        $('#bsInfoBinaryLabelSpec2').append(temp);
         }
     bsInfoBinaryType();
 });
 
 $('#bsInfoBinarySvgSpecColor').on('change', function () {
     var color = $(this).val();
-    if (myInfoBinarySvgPreview1 !== null)
-        if (myInfoBinarySvgPreview1.select('svg') !== null) {
-            myInfoBinarySvgPreview1.selectAll('path').attr({fill: color});
-        }
-    if (myInfoBinarySvgPreview2 !== null)
-        if (myInfoBinarySvgPreview2.select('svg') !== null) {
-            myInfoBinarySvgPreview2.selectAll('path').attr({fill: color});
-        }
+    if (myInfoBinarySvgPreview1.select('svg') !== null) {
+        myInfoBinarySvgPreview1.selectAll('path').attr({fill: color});
+    }
+    if (myInfoBinarySvgPreview2.select('svg') !== null) {
+        myInfoBinarySvgPreview2.selectAll('path').attr({fill: color});
+    }
     bsInfoBinaryType();
 });
 
 $('#bsInfoBinarySpecialCat1').on('change', function () {
     if($(this).val() !== '')
-        setSelectPackIcones($('#bsInfoBinarySpecial1'),$(this).val());
+        setSelectPackIcones($('#bsInfoBinarySpecial1'),$(this));
     else {
         $('#bsInfoBinarySpecial1').children(':gt(0)').remove();
         $('#bsInfoBinarySpecial1').val('');
@@ -93,16 +89,15 @@ $('#bsInfoBinarySpecialCat1').on('change', function () {
         editorBinary.setValue(" ");
         $('#bsInfoBinaryPreviewSpec1').attr('src', "");
         $('#bsInfoBinaryLabelSpec1').empty();
-        if (myInfoBinarySvgPreview1 !== null)
-            if (myInfoBinarySvgPreview1.select('svg') !== null)
-                myInfoBinarySvgPreview1.select('svg').remove();
-        $('#modalInfoBinaryActionSave').prop('disabled',true);
+        if (myInfoBinarySvgPreview1.select('svg') !== null)
+            myInfoBinarySvgPreview1.select('svg').remove();
+        $('#modalInfoBinaryActionSave').prop('disabled', true);
     }
 });
 
 $('#bsInfoBinarySpecialCat2').on('change', function () {
     if($(this).val() !== '')
-        setSelectPackIcones($('#bsInfoBinarySpecial2'),$(this).val());
+        setSelectPackIcones($('#bsInfoBinarySpecial2'),$(this));
     else {
         $('#bsInfoBinarySpecial2').children(':gt(0)').remove();
         $('#bsInfoBinarySpecial2').val('');
@@ -115,9 +110,8 @@ $('#bsInfoBinarySpecialCat2').on('change', function () {
         $('#bsInfoBinaryPreviewSpec2').attr('src', "");
         $('#bsInfoBinaryLabelSpec2').empty();
         $('#modalInfoBinaryActionSave').prop('disabled',true);
-        if (myInfoBinarySvgPreview2 !== null)
-            if (myInfoBinarySvgPreview2.select('svg') !== null)
-                myInfoBinarySvgPreview2.select('svg').remove();
+        if (myInfoBinarySvgPreview2.select('svg') !== null)
+            myInfoBinarySvgPreview2.select('svg').remove();
     }
 });
 
@@ -130,6 +124,10 @@ function bsInfoBinaryType() {
             $('.widgetsView').hide();
             $('.specialView').hide();
             $('.JeedomView').show();
+            if (myInfoBinarySvgPreview1.select('svg') !== null)
+                myInfoBinarySvgPreview1.select('svg').clear();
+            if (myInfoBinarySvgPreview2.select('svg') !== null)
+                myInfoBinarySvgPreview2.select('svg').clear();
             checkInfoBinaryJeedomIcon();
             break;
         case "1":
@@ -137,11 +135,19 @@ function bsInfoBinaryType() {
             $('.JeedomView').hide();
             $('.widgetsView').show();
             checkInfoBinaryWidgetImage();
+            if (myInfoBinarySvgPreview1.select('svg') !== null)
+                myInfoBinarySvgPreview1.select('svg').clear();
+            if (myInfoBinarySvgPreview2.select('svg') !== null)
+                myInfoBinarySvgPreview2.select('svg').clear();
             break;
         case "2":
             $('.JeedomView').hide();
             $('.widgetsView').hide();
             $('.specialView').show();
+            if (myInfoBinarySvgPreview1.select('svg') !== null)
+                $('#bsInfoBinarySpecial1').change();
+            if (myInfoBinarySvgPreview2.select('svg') !== null)
+                $('#bsInfoBinarySpecial2').change();
             checkInfoBinarySpecial();
             break;
     }
@@ -200,7 +206,7 @@ function checkInfoBinaryWidgetImage() {
 function checkInfoBinarySpecial() {
     if (    $('#bsInfoBinaryLabelSpec1').text() === $('#bsInfoBinaryLabelSpec2').text() &&
             $('#bsInfoBinarySpecial2').val() !== '' &&
-            specialWidgets[$('#bsInfoBinarySpecialCat1').val()].extension === specialWidgets[$('#bsInfoBinarySpecialCat2').val()].extension &&
+            specialWidgets[$('#bsInfoBinarySpecialCat1').find(':selected').index() - 1].extension === specialWidgets[$('#bsInfoBinarySpecialCat2').find(':selected').index() - 1].extension &&
             $('#bsInfoBinarySpecial2').val() !== '') {
         var dashboard = $('#bsInfoBinaryDash').val() === "1" ? true : false;
         $('#bsInfoBinaryLabelSpec1').css("color","");
@@ -252,7 +258,6 @@ $('#modalInfoBinarySave').on('click', function () {
             return;
         },
         success: function (data) { 
-            console.log(data);
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -313,11 +318,11 @@ $('#bsInfoBinaryName').on('change', function () {
     bsInfoBinaryType();
 });
 
-var myInfoBinarySvgPreview1 = null;
+var myInfoBinarySvgPreview1 = Snap('#bsInfoBinarySvgPreview1');
 
 $('#bsInfoBinarySpecial1').on('change', function () {
-    var image = $('#bsInfoBinarySpecial1').val();
-    var list = $('#bsInfoBinarySpecialCat1').val();
+    var image = $('#bsInfoBinarySpecial1').find(':selected').index() - 1;
+    var list = $('#bsInfoBinarySpecialCat1').find(':selected').index() - 1;
     if (image === "") {
         $('#bsInfoBinaryWidgetOff').empty();
         $('#bsInfoBinaryWidgetOn').empty();
@@ -333,9 +338,8 @@ $('#bsInfoBinarySpecial1').on('change', function () {
         var img = new Image();
         img.src = "plugins/widget/core/special/" + specialWidgets[list].folder + specialWidgets[list].files[image];
         $('#bsInfoBinaryPreviewSpec1').attr('src', img.src);
-        if (myInfoBinarySvgPreview1 !== null)
-            if (myInfoBinarySvgPreview1.select('svg') !== null)
-                myInfoBinarySvgPreview1.select('svg').remove();
+        if (myInfoBinarySvgPreview1.select('svg') !== null)
+            myInfoBinarySvgPreview1.select('svg').remove();
         img.onload = function () {
             var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
             $('#bsInfoBinaryLabelSpec1').empty();
@@ -351,7 +355,6 @@ $('#bsInfoBinarySpecial1').on('change', function () {
     else {
         $('.svgSpecView').prop('disabled', false);
         $('#bsInfoBinaryPreviewSpec1').attr('src', "");
-        myInfoBinarySvgPreview1 = Snap('#bsInfoBinarySvgPreview1');
         var snap = Snap.parse(specialWidgets[list].svg[image].snap);
         if(myInfoBinarySvgPreview1.select('svg') !== null)
             myInfoBinarySvgPreview1.select('svg').remove();
@@ -373,11 +376,11 @@ $('#bsInfoBinarySpecial1').on('change', function () {
     }
 });
 
-var myInfoBinarySvgPreview2 = null;
+var myInfoBinarySvgPreview2 = Snap('#bsInfoBinarySvgPreview2');
 
 $('#bsInfoBinarySpecial2').on('change', function () {
-    var image = $('#bsInfoBinarySpecial2').val();
-    var list = $('#bsInfoBinarySpecialCat2').val();
+    var image = $('#bsInfoBinarySpecial2').find(':selected').index() - 1;
+    var list = $('#bsInfoBinarySpecialCat2').find(':selected').index() - 1;
     if (image === "") {
         $('#bsInfoBinaryWidgetOff').empty();
         $('#bsInfoBinaryWidgetOn').empty();
@@ -393,9 +396,8 @@ $('#bsInfoBinarySpecial2').on('change', function () {
         var img = new Image();
         img.src = "plugins/widget/core/special/" + specialWidgets[list].folder + specialWidgets[list].files[image];
         $('#bsInfoBinaryPreviewSpec2').attr('src', img.src);
-        if (myInfoBinarySvgPreview2 !== null)
-            if (myInfoBinarySvgPreview2.select('svg') !== null)
-                myInfoBinarySvgPreview2.select('svg').remove();
+        if (myInfoBinarySvgPreview2.select('svg') !== null)
+            myInfoBinarySvgPreview2.select('svg').remove();
         img.onload = function () {
             var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
             $('#bsInfoBinaryLabelSpec2').empty();
@@ -411,7 +413,6 @@ $('#bsInfoBinarySpecial2').on('change', function () {
     else {
         $('.svgSpecView').prop('disabled', false);
         $('#bsInfoBinaryPreviewSpec2').attr('src', "");
-        myInfoBinarySvgPreview2 = Snap('#bsInfoBinarySvgPreview2');
         var snap = Snap.parse(specialWidgets[list].svg[image].snap);
         if(myInfoBinarySvgPreview2.select('svg') !== null)
             myInfoBinarySvgPreview2.select('svg').remove();
@@ -506,6 +507,16 @@ $('#bsInfoBinaryImage2').on('change', function () {
 
 function getHtmlInfoBinaryJeedom(dashboard) {
     var html = "";
+    var cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "0", 
+                version: $('#bsInfoBinaryDash').val(),
+                size: $('#bsInfoBinaryIconSize1').val(), 
+                icon1: $('#bsInfoBinaryIconCmd1').html().replace(/\"/g, "'"), 
+                icon2: $('#bsInfoBinaryIconCmd2').html().replace(/\"/g, "'")}) + 
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
     var width, height;
     width = $('#bsInfoBinaryActionIconSize1').val() * 20 + 15;
     height = $('#bsInfoBinaryActionIconSize1').val() * 20 + 20;
@@ -522,6 +533,7 @@ function getHtmlInfoBinaryJeedom(dashboard) {
         html += '\t\t<span style="font-size: ' + $('#bsInfoBinaryIconSize1').val() + 'em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
@@ -543,6 +555,15 @@ function getHtmlInfoBinaryJeedom(dashboard) {
 
 function getHtmlInfoBinaryImage(dashboard) {
     var html = "";
+    var cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "1", 
+                version: $('#bsInfoBinaryDash').val(),
+                image1: $('#bsInfoBinaryImage1').val(), 
+                image2: $('#bsInfoBinaryImage2').val()}) + 
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
     var width, height, image1, image2;
     width = $('#bsInfoBinaryPreview2').width() + 15;
     height = $('#bsInfoBinaryPreview2').height() + 15;
@@ -561,6 +582,7 @@ function getHtmlInfoBinaryImage(dashboard) {
         html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
@@ -584,11 +606,22 @@ function getHtmlInfoBinaryImage(dashboard) {
 
 function getHtmlInfoBinarySpecial(dashboard) {
     var html = "";
-    var width, height, image1, image2;
-    var svg1 = $('#bsInfoBinarySpecial1').val();
-    var list1 = $('#bsInfoBinarySpecialCat1').val();
-    var svg2 = $('#bsInfoBinarySpecial2').val();
-    var list2 = $('#bsInfoBinarySpecialCat2').val();
+    var width, height, image1, image2, cdata;
+    var svg1 = $('#bsInfoBinarySpecial1').find(':selected').index() - 1;
+    var list1 = $('#bsInfoBinarySpecialCat1').find(':selected').index() - 1;
+    var svg2 = $('#bsInfoBinarySpecial2').find(':selected').index() - 1;
+    var list2 = $('#bsInfoBinarySpecialCat2').find(':selected').index() - 1;
+    cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "2",
+                version: $('#bsInfoBinaryDash').val(),
+                list1: $('#bsInfoBinarySpecialCat1').val(),
+                special1: $('#bsInfoBinarySpecial1').val(),
+                list2: $('#bsInfoBinarySpecialCat2').val(),
+                special2: $('#bsInfoBinarySpecial2').val()}) +
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
     if (specialWidgets[list1].extension !== 'svg') {
         width = $('#bsInfoBinaryPreviewSpec2').width() + 15;
         height = $('#bsInfoBinaryPreviewSpec2').height() + 15;
@@ -619,6 +652,7 @@ function getHtmlInfoBinarySpecial(dashboard) {
         html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';

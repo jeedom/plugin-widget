@@ -71,7 +71,7 @@ $('#bsInfoNumericSvgSpecColor').on('change', function () {
 $('#bodyInfoNumeric').on('change', "select[name*='bsInfoNumericSpecialCat']", function () {
     var index = parseInt($(this).data('index'));
     if($(this).val() !== '')
-        setSelectPackIcones($('#bsInfoNumericSpecialIcon' + index),$(this).val());
+        setSelectPackIcones($('#bsInfoNumericSpecialIcon' + index),$(this));
     else {
         $('#bsInfoNumericSpecialIcon' + index).children(':gt(0)').remove();
         $('#bsInfoNumericSpecialIcon' + index).val('');
@@ -94,23 +94,39 @@ $('#bsInfoNumericType').on('change', function () {
 });
 
 function bsInfoNumericType() {
+    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     switch ($('#bsInfoNumericType').val()) {
         case "0":
             $('.widgetsView').hide();
             $('.specialView').hide();
             $('.JeedomView').show();
+            for (var index = 0; index < all; index++) {
+                if (myInfoNumericSvgPreview[index] !== null)
+                    if (myInfoNumericSvgPreview[index].select('svg') !== null)
+                        myInfoNumericSvgPreview[index].select('svg').hide();
+            }
             checkNumericJeedomIcon();
             break;
         case "1":
             $('.JeedomView').hide();
             $('.specialView').hide();
             $('.widgetsView').show();
+            for (var index = 0; index < all; index++) {
+                if (myInfoNumericSvgPreview[index] !== null)
+                    if (myInfoNumericSvgPreview[index].select('svg') !== null)
+                        myInfoNumericSvgPreview[index].select('svg').hide();
+            }
             checkNumericWidgetImage();
             break;
          case "2":
            $('.JeedomView').hide();
             $('.widgetsView').hide();
             $('.specialView').show();
+            for (var index = 0; index < all; index++) {
+                if (myInfoNumericSvgPreview[index] !== null)
+                    if (myInfoNumericSvgPreview[index].select('svg') !== null)
+                        myInfoNumericSvgPreview[index].select('svg').show();
+            }
             checkNumericSpecial();
             break;
     }
@@ -189,7 +205,7 @@ function checkNumericSpecial() {
         else
             $('#bsInfoNumericLabelSpec' + index).css("color","");    
         if ($('#bsInfoNumericSpecialCat0').val() !== "" && $('#bsInfoNumericSpecialCat' + index).val() !== "") {
-            if (specialWidgets[$('#bsInfoNumericSpecialCat0').val()].extension !== specialWidgets[$('#bsInfoNumericSpecialCat' + index).val()].extension) {
+            if (specialWidgets[$('#bsInfoNumericSpecialCat0').find(':selected').index() - 1].extension !== specialWidgets[$('#bsInfoNumericSpecialCat' + index).find(':selected').index() - 1].extension) {
                 check = false;
                 $('#bsInfoNumericSpecialCat' + index).css("color", "red");
             }
@@ -290,9 +306,9 @@ var myInfoNumericSvgPreview = [];
 myInfoNumericSvgPreview[0] = null;
 
 $('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericSpecialIcon']", function () {
-    var image = $(this).val();
+    var image = $(this).find(':selected').index() - 1;
     var index = $(this).data('index');
-    var list = $('#bsInfoNumericSpecialCat' + index).val();
+    var list = $('#bsInfoNumericSpecialCat' + index).find(':selected').index() - 1;
     if (image === "") {
         $('#bsInfoNumericPreviewSpec' + index).attr('src', "");
         $('#bsInfoNumericLabelSpec' + index).empty();
@@ -494,7 +510,24 @@ $('#bsInfoNumericAddEntry').on('click', function () {
 });
 
 function getHtmlInfoNumericJeedom(dashboard) {
-    var html = "";
+    var html = "", ecartMin = [], ecartMax = [], icons = [];
+    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
+    for (var index = 0; index < all; index++) {
+        ecartMin.push($('#bsInfoNumericEcartMin' + index).val());
+        ecartMax.push($('#bsInfoNumericEcartMax' + index).val());
+        icons.push($('#bsInfoNumericIconCmd' + index).html());
+    }
+    var cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "0", 
+                version: $('#bsInfoNumericDash').val(),
+                size: $('#bsOtherActionIconSize0').val(), 
+                min: ecartMin,
+                max: ecartMax,
+                icons: icons}) + 
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
     var width, height;
     width = $('#bsInfoNumericIconSize0').val() * 20 + 15;
     height = $('#bsInfoNumericIconSize0').val() * 20 + 20;
@@ -508,9 +541,10 @@ function getHtmlInfoNumericJeedom(dashboard) {
     else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize1').val() + 'em;" class="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
@@ -521,7 +555,6 @@ function getHtmlInfoNumericJeedom(dashboard) {
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
     html += '\t\t\$(".iconCmd#id#").empty();\n';
-    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     for (var index = 0; index < all; index++) {
         if (index === (all - 1))
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
@@ -537,7 +570,24 @@ function getHtmlInfoNumericJeedom(dashboard) {
 }
 
 function getHtmlInfoNumericImage(dashboard) {
-    var html = "";
+    var html = "", ecartMin = [], ecartMax = [], icons = [];
+    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
+    for (var index = 0; index < all; index++) {
+        ecartMin.push($('#bsInfoNumericEcartMin' + index).val());
+        ecartMax.push($('#bsInfoNumericEcartMax' + index).val());
+        icons.push($('#bsInfoNumericImage' + index).val());
+    }
+    var cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "1",
+                version: $('#bsInfoNumericDash').val(),
+                size: $('#bsInfoNumericIconSize0').val(), 
+                min: ecartMin,
+                max: ecartMax,
+                images: icons}) + 
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
     var width, height;
     width = $('#bsInfoNumericPreview0').width() + 15;
     height = $('#bsInfoNumericPreview0').height() + 15;
@@ -554,6 +604,7 @@ function getHtmlInfoNumericImage(dashboard) {
         html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
@@ -566,7 +617,6 @@ function getHtmlInfoNumericImage(dashboard) {
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
     html += '\t\t\$(".iconCmd#id#").empty();\n';
-    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
     for (var index = 0; index < all; index++) {
         var image = $('#bsInfoNumericImage' + index).val();
         if (index === (all - 1))
@@ -583,9 +633,26 @@ function getHtmlInfoNumericImage(dashboard) {
 
 function getHtmlInfoNumericSpecial(dashboard) {
     var html = "";
-    var width, height, image;
+    var html = "", ecartMin = [], ecartMax = [], icons = [];
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
-    var list = $('#bsInfoNumericSpecialCat0').val();
+    for (var index = 0; index < all; index++) {
+        ecartMin.push($('#bsInfoNumericEcartMin' + index).val());
+        ecartMax.push($('#bsInfoNumericEcartMax' + index).val());
+        icons.push({list: $('#bsInfoNumericSpecialCat' + index).val(), icon: $('#bsInfoNumericSpecialIcon' + index).val()});
+    }
+    var cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "2",
+                version: $('#bsInfoNumericDash').val(),        
+                size: $('#bsInfoNumericIconSize0').val(), 
+                min: ecartMin,
+                max: ecartMax,
+                specials: icons}) + 
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
+    var width, height, image;
+    var list = $('#bsInfoNumericSpecialCat0').find(':selected').index() - 1;
     if (specialWidgets[list].extension !== 'svg') {
         width = $('#bsInfoNumericPreviewSpec0').width() + 15;
         height = $('#bsInfoNumericPreviewSpec0').height() + 15;
@@ -617,6 +684,7 @@ function getHtmlInfoNumericSpecial(dashboard) {
         html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
@@ -631,8 +699,8 @@ function getHtmlInfoNumericSpecial(dashboard) {
     if (specialWidgets[list].extension !== 'svg')
         html += '\t\t\$(".iconCmd#id#").empty();\n';
     for (var index = 0; index < all; index++) {
-        var listItem = $('#bsInfoNumericSpecialCat' + index).val();
-        var svg = $('#bsInfoNumericSpecialIcon' + index).val();
+        var listItem = $('#bsInfoNumericSpecialCat' + index).find(':selected').index() - 1;
+        var svg = $('#bsInfoNumericSpecialIcon' + index).find(':selected').index() - 1;
         if (index === (all - 1))
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else

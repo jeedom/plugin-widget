@@ -150,6 +150,112 @@ $('.widgetAction[data-action=add]').on('click', function () {
     });
 });
 
+$('#bt_editWidget').on('click', function () {
+    var textWidget = null;
+    if (editor !== null)
+        textWidget = editor.getValue().match(/\[CDATA\[(.*)\]]/);
+    else
+        textWidget = $('#ta_script').val().match(/\[CDATA\[(.*)\]]/);
+    if(!is_array(textWidget))
+        return; //erreur impossible normalement
+    var widgetDetails = JSON.parse(textWidget[1]);
+    var widget = $('.widget').getValues('.widgetAttr');
+    ;
+    widget = widget[0];
+    widgetDetails.name = widget.name;
+    console.log(widgetDetails);
+    $('.widgetListDisplay').hide();
+    $('#bsListWidgets').hide();
+    $('.widget').hide();
+    $('.widgetImageView').show();
+    switch (widget.type + '.' + widget.subtype) {
+        case "action.other":
+            if (editorOther === null) {
+                editorOther = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
+                    lineNumbers: true,
+                    mode: "text/html",
+                    matchBrackets: true,
+                    viewportMargin: Infinity
+                });
+            }
+            $('#bsInfoBinaryCategory').hide();
+            $('#bsInfoNumericCategory').hide();
+            $('#bsCategory').hide();
+            $('#bsOtherActionCategory').show();
+            $('#bsOtherSvgSpecColor').val('#000');
+            $('#bsOtherSvgSpecSize').val('64');
+            setSelectImage($('#bsOtherImage1'));
+            setSelectImage($('#bsOtherImage2'));
+            setSelectPack($('#bsOtherSpecialCat1'));
+            setSelectPack($('#bsOtherSpecialCat2'));
+            $('#bsOtherActionCategory').setValues(widgetDetails, '.actionOtherAttr');
+            bsOtherActionType();
+            break;
+        case "info.binary":
+            if (editorBinary === null) {
+                editorBinary = CodeMirror.fromTextArea(document.getElementById("bsViewInfoBinary"), {
+                    lineNumbers: true,
+                    mode: "text/html",
+                    matchBrackets: true,
+                    viewportMargin: Infinity
+                });
+            }
+            $('#bsInfoNumericCategory').hide();
+            $('#bsOtherActionCategory').hide();
+            $('#bsInfoBinaryCategory').show();
+            $('#bsInfoBinarySvgSpecColor').val('#000');
+            $('#bsInfoBinarySvgSpecSize').val('64');
+            setSelectImage($('#bsInfoBinaryImage1'));
+            setSelectImage($('#bsInfoBinaryImage2'));
+            setSelectPack($('#bsInfoBinarySpecialCat1'));
+            setSelectPack($('#bsInfoBinarySpecialCat2'));
+            $('#bsInfoBinaryCategory').setValues(widgetDetails, '.infoBinaryAttr');
+            bsInfoBinaryType();
+            $('#bsCategory').hide();
+            break;
+        case "info.numeric":
+            if (editorNumeric === null) {
+                editorNumeric = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
+                    lineNumbers: true,
+                    mode: "text/html",
+                    matchBrackets: true,
+                    viewportMargin: Infinity
+                });
+            }
+            $('#bsInfoBinaryCategory').hide();
+            $('#bsOtherActionCategory').hide();
+            $('#bsInfoNumericCategory').show();
+            $('#bsInfoNumericSvgSpecColor').val('#000');
+            $('#bsInfoNumericSvgSpecSize').val('64');
+            var all = widgetDetails.min.length;
+            setSelectImage($('#bsInfoNumericImage0'));
+            setSelectPack($('#bsInfoNumericSpecialCat0'));
+            for (var index = 0; index < all; index++) {
+                if(index > 0)
+                    $('#bsInfoNumericAddEntry').click();
+                $('#bsInfoNumericEcartMin' + index).val(widgetDetails.min[index]);
+                $('#bsInfoNumericEcartMax' + index).val(widgetDetails.max[index]);
+                switch (widgetDetails.type) {
+                    case "0":
+                        $('#bsInfoNumericIconCmd' + index).html(widgetDetails.icons[index]);
+                        break;
+                    case "1":
+                        $('#bsInfoNumericImage' + index).val(widgetDetails.images[index]);
+                        break;
+                    case "2":
+                        $('#bsInfoNumericSpecialCat' + index).val(widgetDetails.specials[index].list);
+                        $('#bsInfoNumericSpecialIcon' + index).val(widgetDetails.specials[index].icon);
+                        break;
+                }
+            }
+            $('#bsInfoNumericCategory').setValues(widgetDetails, '.infoNumericAttr');
+            bsInfoNumericType();
+            $('#bsCategory').hide();
+            break;
+    }
+    
+ });
+
 $('#bt_shareOnMarket').on('click', function () {
     $('#md_modal').dialog({title: "Partager sur le market"});
     $('#md_modal').load('index.php?v=d&modal=market.send&type=widget&logicalId=' + encodeURI($('.widgetAttr[data-l1key=logicalId]').value()) + '&name=' + encodeURI($('.widgetAttr[data-l1key=logicalId]').value())).dialog('open');
@@ -208,7 +314,7 @@ function printWidget(_path) {
                 return;
             }
             $('.widget').setValues(data.result, '.widgetAttr');
-
+            $('#bt_editWidget').hide();
             if (editor === null) {
                 if (isset(data.result.content)) {
                     $('#ta_script').val(data.result.content);
@@ -220,10 +326,20 @@ function printWidget(_path) {
                         matchBrackets: true,
                         viewportMargin: Infinity
                     });
+                    if (editor !== null) {
+                        var textWidget = editor.getValue().match(/\[CDATA\[(.*)\]]/);
+                        if (is_array(textWidget)) {
+                            $('#bt_editWidget').show();
+                        }
+                    }
                 }, 1);
             } else {
                 if (isset(data.result.content)) {
                     editor.setValue(data.result.content);
+                    var textWidget = data.result.content.match(/\[CDATA\[(.*)\]]/);
+                    if (is_array(textWidget)) {
+                        $('#bt_editWidget').show();
+                    }
                 }
             }
             initTooltips();
@@ -266,6 +382,9 @@ function saveWidget() {
             }
             url += 'id=' + data.result.path + '&saveSuccessFull=1';
             modifyWithoutSave = false;
+            $('.pluginContainer').children().show();
+            $('.pluginContainer').packery();
+            $('#ul_widget').children(':gt(4)').show();
             window.location.href = url;
         }
     });
@@ -297,6 +416,9 @@ function addWidget(_name) {
                 }
             }
             url += 'id=' + data.result.path + '&saveSuccessFull=1';
+            $('.pluginContainer').children().show();
+            $('.pluginContainer').packery();
+            $('#ul_widget').children(':gt(4)').show();
             window.location.href = url;
         }
     });
@@ -328,6 +450,9 @@ function removeWidget(_path) {
             }
             url += 'removeSuccessFull=1';
             modifyWithoutSave = false;
+            $('.pluginContainer').children().show();
+            $('.pluginContainer').packery();
+            $('#ul_widget').children(':gt(4)').show();
             window.location.href = url;
         }
     });
@@ -359,6 +484,9 @@ function copyWidget(_path, _name) {
                 }
             }
             url += 'id=' + data.result.path + '&saveSuccessFull=1';
+            $('.pluginContainer').children().show();
+            $('.pluginContainer').packery();
+            $('#ul_widget').children(':gt(4)').show();
             window.location.href = url;
         }
     });
@@ -638,16 +766,17 @@ function setSelectImage(select) {
 function setSelectPack(select) {
     var options = '<option value="">{{Aucune}}</option>';
         for (var index in specialWidgets) {
-            options += '<option value="' + index + '">' + specialWidgets[index].name + '</option>';
+            options += '<option value="' + specialWidgets[index].name + '">' + specialWidgets[index].name + '</option>';
         }
     select.html(options);
 }
 
 function setSelectPackIcones(select, value) {
     var options = '<option value="">{{Aucune}}</option>';
-        for(var index in specialWidgets[value].files) {
-                var filename = specialWidgets[value].files[index].split('.');
-                options += '<option value="' + index + '">' + filename[0] + '</option>';
+    var list = value.find(':selected').index() - 1;
+        for(var index in specialWidgets[list].files) {
+                var filename = specialWidgets[list].files[index].split('.');
+                options += '<option value="' + specialWidgets[list].files + '">' + filename[0] + '</option>';
          }
     select.html(options);
 }
@@ -683,18 +812,15 @@ $('#bt_OtherActionAdd').on('click', function () {
         imageSpec2 = $('#bsOtherSpecialCat2').val();
     else
         imageSpec2 = '';
+    console.log(image1,image2);
     $('#bsOtherSvgSpecColor').val('#000');
     $('#bsOtherSvgSpecSize').val('64');
-    $('#bsOtherImage1').empty();
     setSelectImage($('#bsOtherImage1'));
     $('#bsOtherImage1').val(image1);
-    $('#bsOtherImage2').empty();
     setSelectImage($('#bsOtherImage2'));    
     $('#bsOtherImage2').val(image2);
-    $('#bsOtherSpecialCat1').empty();
     setSelectPack($('#bsOtherSpecialCat1'));    
     $('#bsOtherSpecialCat1').val(imageSpec1);
-    $('#bsOtherSpecialCat2').empty();
     setSelectPack($('#bsOtherSpecialCat2'));    
     $('#bsOtherSpecialCat2').val(imageSpec2);
     bsOtherActionType();
@@ -737,16 +863,12 @@ $('#bt_InfoBinaryAdd').on('click', function () {
         imageSpec2 = '';
     $('#bsInfoBinarySvgSpecColor').val('#000');
     $('#bsInfoBinarySvgSpecSize').val('64');
-    $('#bsInfoBinaryImage1').empty();
     setSelectImage($('#bsInfoBinaryImage1'));
     $('#bsInfoBinaryImage1').val(image1);
-    $('#bsInfoBinaryImage2').empty();
     setSelectImage($('#bsInfoBinaryImage2'));
     $('#bsInfoBinaryImage2').val(image2);
-    $('#bsInfoBinarySpecialCat1').empty();
     setSelectPack($('#bsInfoBinarySpecialCat1'));    
     $('#bsInfoBinarySpecialCat1').val(imageSpec1);
-    $('#bsInfoBinarySpecialCat2').empty();
     setSelectPack($('#bsInfoBinarySpecialCat2'));    
     $('#bsInfoBinarySpecialCat2').val(imageSpec2);
     bsInfoBinaryType();
@@ -782,10 +904,8 @@ $('#bt_InfoNumericAdd').on('click', function () {
             imageSpec = $('#bsInfoNumericSpecialCat' + index).val();
         else
             imageSpec = '';
-        $('#bsInfoNumericImage' + index).empty();
         setSelectImage($('#bsInfoNumericImage' + index));
         $('#bsInfoNumericImage' + index).val(image);
-        $('#bsInfoNumericSpecialCat' + index).empty();
         setSelectPack($('#bsInfoNumericSpecialCat' + index));
         $('#bsInfoNumericSpecialCat' + index).val(imageSpec);
     }
@@ -797,110 +917,189 @@ $('#bt_InfoNumericAdd').on('click', function () {
 
 /******************* filtragre *****************/
 
-$('#filterDesktop').on('change', function() {
-    filterWidget();
-    filterViewWidget();
+$('.filterAcionWidget').on('change', function() {
+    filterWidget($('#ul_widget').children(':gt(4)'));
+    filterWidget($('.pluginContainer').children());
+    //filterViewWidget();
+    $('.pluginContainer').packery();
 });
 
-$('#filterMobile').on('change', function () {
-    filterWidget();
-    filterViewWidget();
-});
-
-$('#filterAction').on('change', function () {
-    filterWidget();
-    filterViewWidget();
-});
-
-$('#filterInfo').on('change', function () {
-    filterWidget();
-    filterViewWidget();
-});
-
-$('#filterOther').on('change', function () {
-    filterWidget();
-    filterViewWidget();
-});
-
-$('#filterSlider').on('change', function () {
-    filterWidget();
-    filterViewWidget();
-});
-
-$('#filterBinary').on('change', function () {
-    filterWidget();
-    filterViewWidget();
-});
-
-$('#filterNumeric').on('change', function () {
-    filterWidget();
-    filterViewWidget();
-});
-
-$('#filterString').on('change', function () {
-    filterWidget();
-    filterViewWidget();
-});
-
-function filterWidget() {
-    var stateDesk = !$('#filterDesktop').prop('checked');
-    var stateMob = !$('#filterMobile').prop('checked');
-    var stateAction = !$('#filterAction').prop('checked');
-    var stateInfo = !$('#filterInfo').prop('checked');
-    var stateOther = !$('#filterOther').prop('checked');
-    var stateSlider = !$('#filterSlider').prop('checked');
-    var stateBinary = !$('#filterBinary').prop('checked');
-    var stateNumeric = !$('#filterNumeric').prop('checked');
-    var stateString = !$('#filterString').prop('checked');
-    var kids = $('#ul_widget').children(':gt(4)').filter(function () {
+function filterWidget(view) {
+    var stateDesk = $('#filterDesktop').prop('checked');
+    var stateMob = $('#filterMobile').prop('checked');
+    var stateAction = $('#filterAction').prop('checked');
+    var stateInfo = $('#filterInfo').prop('checked');
+    var stateOther = $('#filterOther').prop('checked');
+    var stateSlider = $('#filterSlider').prop('checked');
+    var stateBinary = $('#filterBinary').prop('checked');
+    var stateNumeric = $('#filterNumeric').prop('checked');
+    var stateString = $('#filterString').prop('checked');
+    if(stateDesk === false && stateMob === false && stateAction === false && stateInfo === false && stateOther === false && stateSlider === false && stateBinary === false && stateNumeric === false && stateString === false) {
+        view.show();
+        return;
+    }
+    
+    var kids = view.filter(function () {
         var isFind = true;
         var desktop = $(this).find('.fa-desktop').length === 0 ? false : true;
-        var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
-        var subtype = $(this).find('.label').text();
         if (stateDesk === false && stateMob === false)
             isFind = false;
         if((desktop === true && stateDesk === false) || (desktop === false && stateMob === false))
             isFind = false;
-        if((type === 'info' && stateInfo === false) || (type === 'action' && stateAction === false))
+        if((stateDesk === false && stateMob === false) && (stateAction === true || stateOther === true || stateSlider === true || stateInfo === true  || stateBinary === true || stateNumeric === true || stateString === true))
+            isFind = true;
+        return isFind;
+    });
+    
+    var kidsAtion = kids.filter(function () {
+        var isFind = true;
+        var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
+        var subtype = $(this).find('.label').text();
+        if(type === 'info')
+            return false;
+        if((stateAction === false && stateOther === false && stateSlider === false) && (stateInfo === true  || stateBinary === true || stateNumeric === true || stateString === true))
+            return false;
+        if((stateDesk === true || stateMob === true) && (stateAction === false && stateOther === false && stateSlider === false))
+            return isFind;
+        if(stateDesk === false && stateMob === false && stateAction === true && stateOther === false && stateSlider === false)
+            return (type === 'action' && stateAction === true);
+        if(type === 'action' && stateAction === false)
             isFind = false;
-        if(     (subtype === 'other' && stateOther === false) ||
-                (subtype === 'slider' && stateSlider === false) ||
-                (subtype === 'binary' && stateBinary === false) ||
-                (subtype === 'numeric' && stateNumeric === false) ||
-                (subtype === 'string' && stateString === false))
+        if(stateAction === true && stateOther === false && stateSlider === false)
+            return isFind;
+        if((subtype === 'other' && stateOther === false) || (subtype === 'slider' && stateSlider === false))
             isFind = false;
         return isFind;
     });
-    $('#ul_widget').children(':gt(4)').hide();
-    kids.each(function () {
-            $(this).show();
-        });
+    
+    var kidsInfo = kids.filter(function () {
+        var isFind = true;
+        var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
+        var subtype = $(this).find('.label').text();
+        if(type === 'action')
+            return false;
+        if((stateAction === true || stateOther === true || stateSlider === true) && (stateInfo === false  && stateBinary === false && stateNumeric === false && stateString === false))
+            return false;
+        if((stateDesk === true || stateMob === true) && (stateInfo === false && stateBinary === false && stateNumeric === false && stateString === false))
+            return isFind;
+        if(stateDesk === false && stateMob === false && stateInfo === true && stateBinary === false && stateNumeric === false && stateString === false)
+            return (type === 'info' && stateInfo === true);
+        if(type === 'info' && stateInfo === false)
+            isFind = false;
+        if(stateInfo === true  && stateBinary === false && stateNumeric === false && stateString === false)
+            return isFind;
+        if((subtype === 'binary' && stateBinary === false) || (subtype === 'numeric' && stateNumeric === false) || (subtype === 'string' && stateString === false))
+            isFind = false;
+        return isFind;
+    });
+
+    view.hide();
+    kidsAtion.each(function () {
+        $(this).show();
+    });
+    kidsInfo.each(function () {
+        $(this).show();
+    });
  }
  
  function filterViewWidget() {
-    var stateDesk = !$('#filterDesktop').prop('checked');
-    var stateMob = !$('#filterMobile').prop('checked');
-    var stateAction = !$('#filterAction').prop('checked');
-    var stateInfo = !$('#filterInfo').prop('checked');
-    var stateOther = !$('#filterOther').prop('checked');
-    var stateSlider = !$('#filterSlider').prop('checked');
-    var stateBinary = !$('#filterBinary').prop('checked');
-    var stateNumeric = !$('#filterNumeric').prop('checked');
-    var stateString = !$('#filterString').prop('checked');
+    var stateDesk = $('#filterDesktop').prop('checked');
+    var stateMob = $('#filterMobile').prop('checked');
+    var stateAction = $('#filterAction').prop('checked');
+    var stateInfo = $('#filterInfo').prop('checked');
+    var stateOther = $('#filterOther').prop('checked');
+    var stateSlider = $('#filterSlider').prop('checked');
+    var stateBinary = $('#filterBinary').prop('checked');
+    var stateNumeric = $('#filterNumeric').prop('checked');
+    var stateString = $('#filterString').prop('checked');
+    if(stateDesk === false && stateMob === false && stateAction === false && stateInfo === false && stateOther === false && stateSlider === false && stateBinary === false && stateNumeric === false && stateString === false) {
+        $('.pluginContainer').children().show();
+        $('.pluginContainer').packery();
+        return;
+    }
+
+    
     var kids = $('.pluginContainer').children().filter(function () {
         var isFind = true;
         var desktop = $(this).find('.fa-desktop').length === 0 ? false : true;
-        var text = $(this).find('strong').text().split('.');
-        //var type = init(text[0],"none");
-        //var subtype = init(text[1],"none");
+        if (stateDesk === false && stateMob === false)
+            isFind = false;
+        if((desktop === true && stateDesk === false) || (desktop === false && stateMob === false))
+            isFind = false;
+        if(stateAction === true || stateOther === true || stateSlider === true || stateInfo === true  || stateBinary === true || stateNumeric === true || stateString === true)
+            isFind = true;
+        return isFind;
+    });
+    
+    var kidsAtion = kids.filter(function () {
+        var isFind = true;
+        var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
+        var subtype = $(this).find('.label').text();
+        if(type === 'info')
+            return false;
+        if((stateAction === false && stateOther === false && stateSlider === false) && (stateInfo === true  || stateBinary === true || stateNumeric === true || stateString === true))
+            return false;
+        if((stateDesk === true || stateMob === true) && (stateAction === false && stateOther === false && stateSlider === false))
+            return isFind;
+        if(stateDesk === false && stateMob === false && stateAction === true && stateOther === false && stateSlider === false)
+            return (type === 'action' && stateAction === true);
+        if(type === 'action' && stateAction === false)
+            isFind = false;
+        if(stateAction === true && stateOther === false && stateSlider === false)
+            return isFind;
+        if((subtype === 'other' && stateOther === false) || (subtype === 'slider' && stateSlider === false))
+            isFind = false;
+        return isFind;
+    });
+    
+    var kidsInfo = kids.filter(function () {
+        var isFind = true;
+        var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
+        var subtype = $(this).find('.label').text();
+        if(type === 'action')
+            return false;
+        if((stateAction === true || stateOther === true || stateSlider === true) && (stateInfo === false  && stateBinary === false && stateNumeric === false && stateString === false))
+            return false;
+        if((stateDesk === true || stateMob === true) && (stateInfo === false && stateBinary === false && stateNumeric === false && stateString === false))
+            return isFind;
+        if(stateDesk === false && stateMob === false && stateInfo === true && stateBinary === false && stateNumeric === false && stateString === false)
+            return (type === 'action' && stateInfo === true);
+        if(type === 'info' && stateInfo === false)
+            isFind = false;
+        if(stateInfo === true  && stateBinary === false && stateNumeric === false && stateString === false)
+            return isFind;
+        if((subtype === 'binary' && stateBinary === false) || (subtype === 'numeric' && stateNumeric === false) || (subtype === 'string' && stateString === false))
+            isFind = false;
+        return isFind;
+    });
+    
+    $('.pluginContainer').children().hide();
+    kidsAtion.each(function () {
+        $(this).show();
+    });
+    kidsInfo.each(function () {
+        $(this).show();
+    });
+    $('.pluginContainer').packery();
+/*     var kids = $('.pluginContainer').children().filter(function () {
+        var isFind = true;
+        var desktop = $(this).find('.fa-desktop').length === 0 ? false : true;
         var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
         var subtype = $(this).find('.label').text();
         if (stateDesk === false && stateMob === false)
             isFind = false;
         if((desktop === true && stateDesk === false) || (desktop === false && stateMob === false))
             isFind = false;
+        if((stateDesk === true || stateMob === true) && (stateAction === false && stateInfo === false && stateOther === false && stateSlider === false && stateBinary === false && stateNumeric === false && stateString === false))
+            return isFind;
+        if(stateDesk === false && stateMob === false && stateAction === true && stateInfo === false && stateOther === false && stateSlider === false && stateBinary === false && stateNumeric === false && stateString === false)
+            return (type === 'action' && stateAction === true);
+        if(stateDesk === false && stateMob === false && stateAction === false && stateInfo === true && stateOther === false && stateSlider === false && stateBinary === false && stateNumeric === false && stateString === false)
+            return (type === 'info' && stateInfo === true);
         if((type === 'info' && stateInfo === false) || (type === 'action' && stateAction === false))
             isFind = false;
+        if((stateInfo === true || stateAction === true) && (stateOther === false && stateSlider === false && stateBinary === false && stateNumeric === false && stateString === false))
+            return isFind;
         if(     (subtype === 'other' && stateOther === false) ||
                 (subtype === 'slider' && stateSlider === false) ||
                 (subtype === 'binary' && stateBinary === false) ||
@@ -913,7 +1112,6 @@ function filterWidget() {
     kids.each(function () {
             $(this).show();
         });
-    $('.pluginContainer').packery();
+    $('.pluginContainer').packery();*/
 
  }
- 
