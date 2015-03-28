@@ -1,7 +1,0 @@
-==== 19/01/2015
-
-- Possibilité de dupliquer un widget
-
-==== 04/12/2014
-
-- Amélioration globale de l'interface
