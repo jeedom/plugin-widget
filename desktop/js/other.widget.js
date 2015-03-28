@@ -33,55 +33,51 @@ $('#modalOtherActionCancel').on('click', function () {
     $('#bsOtherLabel1').empty();
     $('#bsOtherLabel2').empty();
     $('#bsOtherActionName').val('');
+    //$('#md_modalWidget').dialog('close');
     if (editorOther !== null) {
         editorOther.toTextArea();
+        $('#bsViewInfoBinary').empty();
         editorOther = null;
-        $('#bsViewOther').empty();
     }
-    //$('#md_modalWidget').dialog('close');
     $('#bsOtherActionCategory').hide();
     $('#bsCategory').show();
 });
 
 $('#bsOtherSvgSpecSize').on('change', function () {
     var height, width = $(this).val();
-    if (myOtherSvgPreview1 !== null)
-        if (myOtherSvgPreview1.select('svg') !== null) {
-            height = myOtherSvgPreview1.select('svg').attr('height');
-            height = Math.round(height * (width / parseInt(myOtherSvgPreview1.select('svg').attr('height'))));
-            myOtherSvgPreview1.select('svg').attr({height: height, width: width});
-            var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
-            $('#bsOtherLabelSpec1').empty();
-            $('#bsOtherLabelSpec1').append(temp);
-        }
-    if (myOtherSvgPreview2 !== null)
-        if (myOtherSvgPreview2.select('svg') !== null) {
-            height = myOtherSvgPreview2.select('svg').attr('height');
-            height = Math.round(height * (width / parseInt(myOtherSvgPreview2.select('svg').attr('height'))));
-            myOtherSvgPreview2.select('svg').attr({height: height, width: width});
-            var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
-            $('#bsOtherLabelSpec2').empty();
-            $('#bsOtherLabelSpec2').append(temp);
-        }
+    if (myOtherSvgPreview1.select('svg') !== null) {
+        height = myOtherSvgPreview1.select('svg').attr('height');
+        height = Math.round(height * (width / parseInt(myOtherSvgPreview1.select('svg').attr('height'))));
+        myOtherSvgPreview1.select('svg').attr({height: height, width: width});
+        var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
+        $('#bsOtherLabelSpec1').empty();
+        $('#bsOtherLabelSpec1').append(temp);
+    }
+    if (myOtherSvgPreview2.select('svg') !== null) {
+        height = myOtherSvgPreview2.select('svg').attr('height');
+        height = Math.round(height * (width / parseInt(myOtherSvgPreview2.select('svg').attr('height'))));
+        myOtherSvgPreview2.select('svg').attr({height: height, width: width});
+        var temp = '<span class="col-sm-12 text-center">H:' + width + 'px - L:' + height + 'px</span>';
+        $('#bsOtherLabelSpec2').empty();
+        $('#bsOtherLabelSpec2').append(temp);
+    }
     bsOtherActionType();
 });
 
 $('#bsOtherSvgSpecColor').on('change', function () {
     var color = $(this).val();
-    if (myOtherSvgPreview1 !== null)
-        if (myOtherSvgPreview1.select('svg') !== null) {
-            myOtherSvgPreview1.selectAll('path').attr({fill: color});
-        }
-    if (myOtherSvgPreview2 !== null)
-        if (myOtherSvgPreview2.select('svg') !== null) {
-            myOtherSvgPreview2.selectAll('path').attr({fill: color});
-        }
+    if (myOtherSvgPreview1.select('svg') !== null) {
+        myOtherSvgPreview1.selectAll('path').attr({fill: color});
+    }
+    if (myOtherSvgPreview2.select('svg') !== null) {
+        myOtherSvgPreview2.selectAll('path').attr({fill: color});
+    }
     bsOtherActionType();
 });
 
 $('#bsOtherSpecialCat1').on('change', function () {
     if($(this).val() !== '')
-        setSelectPackIcones($('#bsOtherSpecial1'),$(this).val());
+        setSelectPackIcones($('#bsOtherSpecial1'),$(this));
     else {
         $('#bsOtherSpecial1').children(':gt(0)').remove();
         $('#bsOtherSpecial1').val('');
@@ -90,19 +86,18 @@ $('#bsOtherSpecialCat1').on('change', function () {
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
         $('.svgSpecView').prop('disabled', true);
-        editorOther.setValue(" ");
+        editorOther.setValue('');
         $('#bsOtherPreviewSpec1').attr('src', "");
         $('#bsOtherLabelSpec1').empty();
-        if (myOtherSvgPreview1 !== null)
-            if (myOtherSvgPreview1.select('svg') !== null)
-                myOtherSvgPreview1.select('svg').remove();
+        if (myOtherSvgPreview1.select('svg') !== null)
+            myOtherSvgPreview1.select('svg').remove();
         $('#modalOtherActionSave').prop('disabled',true);
      }
 });
 
 $('#bsOtherSpecialCat2').on('change', function () {
     if($(this).val() !== '')
-        setSelectPackIcones($('#bsOtherSpecial2'),$(this).val());
+        setSelectPackIcones($('#bsOtherSpecial2'),$(this));
     else {
         $('#bsOtherSpecial2').children(':gt(0)').remove();
         $('#bsOtherSpecial2').val('');
@@ -111,13 +106,12 @@ $('#bsOtherSpecialCat2').on('change', function () {
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
         $('.svgSpecView').prop('disabled', true);
-        editorOther.setValue(" ");
+        editorOther.setValue('');
         $('#bsOtherPreviewSpec2').attr('src', "");
         $('#bsOtherLabelSpec2').empty();
         $('#modalOtherActionSave').prop('disabled',true);
-        if (myOtherSvgPreview2 !== null)
-            if (myOtherSvgPreview2.select('svg') !== null)
-                myOtherSvgPreview2.select('svg').remove();
+        if (myOtherSvgPreview2.select('svg') !== null)
+            myOtherSvgPreview2.select('svg').remove();
      }
 });
 
@@ -130,18 +124,30 @@ function bsOtherActionType() {
             $('.widgetsView').hide();
             $('.specialView').hide();
             $('.JeedomView').show();
+            if (myOtherSvgPreview1.select('svg') !== null)
+                myOtherSvgPreview1.select('svg').clear();
+            if (myOtherSvgPreview2.select('svg') !== null)
+                myOtherSvgPreview2.select('svg').clear();
             checkOtherJeedomIcon();
             break;
         case "1":
             $('.specialView').hide();
             $('.JeedomView').hide();
             $('.widgetsView').show();
+            if (myOtherSvgPreview1.select('svg') !== null)
+                myOtherSvgPreview1.select('svg').clear();
+            if (myOtherSvgPreview2.select('svg') !== null)
+                myOtherSvgPreview2.select('svg').clear();
             checkOtherWidgetImage();
             break;
         case "2":
             $('.JeedomView').hide();
             $('.widgetsView').hide();
             $('.specialView').show();
+            if (myOtherSvgPreview1.select('svg') !== null)
+               $('#bsOtherSpecial1').change();
+            if (myOtherSvgPreview2.select('svg') !== null)
+                $('#bsOtherSpecial2').change();
             checkOtherSpecial();
             break;
     }
@@ -200,7 +206,7 @@ function checkOtherWidgetImage() {
 function checkOtherSpecial() {
     if (    $('#bsOtherLabelSpec1').text() === $('#bsOtherLabelSpec2').text() && 
             $('#bsOtherSpecial1').val() !== '' &&
-            specialWidgets[$('#bsOtherSpecialCat1').val()].extension === specialWidgets[$('#bsOtherSpecialCat2').val()].extension &&
+            specialWidgets[$('#bsOtherSpecialCat1').find(':selected').index() - 1].extension === specialWidgets[$('#bsOtherSpecialCat2').find(':selected').index() - 1].extension &&
             $('#bsOtherSpecial2').val() !== '') {
         var dashboard = $('#bsOtherActionDash').val() === "1" ? true : false;
         $('#bsOtherLabelSpec1').css("color","");
@@ -252,7 +258,6 @@ $('#modalOtherActionSave').on('click', function () {
             return;
         },
         success: function (data) { // si l'appel a bien fonctionné
-            console.log(data);
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -295,12 +300,12 @@ $('#modalOtherActionSave').on('click', function () {
     $('#bsOtherLabel1').empty();
     $('#bsOtherLabel2').empty();
     $('#bsOtherActionName').val('');
+    //$('#md_modalWidget').dialog('close');
     if (editorOther !== null) {
         editorOther.toTextArea();
+        $('#bsViewInfoBinary').empty();
         editorOther = null;
-        $('#bsViewOther').empty();
     }
-    //$('#md_modalWidget').dialog('close');
     $('#bsOtherActionCategory').hide();
     $('#bsCategory').show();
 });
@@ -313,17 +318,17 @@ $('#bsOtherActionName').on('change', function () {
     bsOtherActionType();
 });
 
-var myOtherSvgPreview1 = null;
+var myOtherSvgPreview1 = Snap('#bsOtherSvgPreview1');
 
 $('#bsOtherSpecial1').on('change', function () {
-    var image = $('#bsOtherSpecial1').val();
-    var list = $('#bsOtherSpecialCat1').val();
+    var image = $('#bsOtherSpecial1').find(':selected').index() - 1;
+    var list = $('#bsOtherSpecialCat1').find(':selected').index() - 1;
     if (image === "") {
         $('#bsOtherWidgetOff').empty();
         $('#bsOtherWidgetOn').empty();
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
-        editorOther.setValue(" ");
+        editorOther.setValue('');
         $('#bsOtherPreviewSpec1').attr('src', "");
         $('#bsOtherLabelSpec1').empty();
         $('#modalOtherActionSave').prop('disabled',true);
@@ -334,9 +339,8 @@ $('#bsOtherSpecial1').on('change', function () {
         $('.svgSpecView').prop('disabled', true);
         img.src = "plugins/widget/core/special/" + specialWidgets[list].folder + specialWidgets[list].files[image];
         $('#bsOtherPreviewSpec1').attr('src', img.src);
-        if (myOtherSvgPreview1 !== null)
-            if (myOtherSvgPreview1.select('svg') !== null)
-                myOtherSvgPreview1.select('svg').remove();
+        if (myOtherSvgPreview1.select('svg') !== null)
+            myOtherSvgPreview1.select('svg').remove();
        img.onload = function () {
             var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
             $('#bsOtherLabelSpec1').empty();
@@ -352,7 +356,6 @@ $('#bsOtherSpecial1').on('change', function () {
     else {
         $('.svgSpecView').prop('disabled', false);
         $('#bsOtherPreviewSpec1').attr('src', "");
-        myOtherSvgPreview1 = Snap('#bsOtherSvgPreview1');
         var snap = Snap.parse(specialWidgets[list].svg[image].snap);
         if(myOtherSvgPreview1.select('svg') !== null)
             myOtherSvgPreview1.select('svg').remove();
@@ -374,17 +377,17 @@ $('#bsOtherSpecial1').on('change', function () {
     }
 });
 
-var myOtherSvgPreview2 = null;
+var myOtherSvgPreview2 = Snap('#bsOtherSvgPreview2');
 
 $('#bsOtherSpecial2').on('change', function () {
-    var image = $('#bsOtherSpecial2').val();
-    var list = $('#bsOtherSpecialCat2').val();
+    var image = $('#bsOtherSpecial2').find(':selected').index() - 1;
+    var list = $('#bsOtherSpecialCat2').find(':selected').index() - 1;
     if (image === "") {
         $('#bsOtherWidgetOff').empty();
         $('#bsOtherWidgetOn').empty();
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
-        editorOther.setValue(" ");
+        editorOther.setValue('');
         $('#bsOtherPreviewSpec2').attr('src', "");
         $('#bsOtherLabelSpec2').empty();
         $('#modalOtherActionSave').prop('disabled',true);
@@ -395,9 +398,8 @@ $('#bsOtherSpecial2').on('change', function () {
         $('.svgSpecView').prop('disabled', true);
         img.src = "plugins/widget/core/special/" + specialWidgets[list].folder + specialWidgets[list].files[image];
         $('#bsOtherPreviewSpec2').attr('src', img.src);
-        if (myOtherSvgPreview2 !== null)
-            if (myOtherSvgPreview2.select('svg') !== null)
-                myOtherSvgPreview2.select('svg').remove();
+        if (myOtherSvgPreview2.select('svg') !== null)
+            myOtherSvgPreview2.select('svg').remove();
         img.onload = function () {
             var temp = '<span class="col-sm-12 text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
             $('#bsOtherLabelSpec2').empty();
@@ -413,7 +415,6 @@ $('#bsOtherSpecial2').on('change', function () {
     else {
         $('.svgSpecView').prop('disabled', false);
         $('#bsOtherPreviewSpec2').attr('src', "");
-        myOtherSvgPreview2 = Snap('#bsOtherSvgPreview2');
         var snap = Snap.parse(specialWidgets[list].svg[image].snap);
         if(myOtherSvgPreview2.select('svg') !== null)
             myOtherSvgPreview2.select('svg').remove();
@@ -463,7 +464,7 @@ $('#bsOtherImage1').on('change', function () {
         $('#bsOtherWidgetOn').empty();
         $('#bsOtherWidgetOff').parent().parent().hide();
         $('#bsOtherWidgetOn').parent().parent().hide();
-        editorOther.setValue(" ");
+        editorOther.setValue('');
         $('#bsOtherPreview1').attr('src', "");
         $('#bsOtherLabel1').empty();
         $('#modalOtherActionSave').prop('disabled',true);
@@ -491,7 +492,7 @@ $('#bsOtherImage2').on('change', function () {
         $('#bsOtherPreview2').attr('src', "");
         $('#bsOtherLabel2').empty();
         $('#modalOtherActionSave').prop('disabled',true);
-        editorOther.setValue(" ");
+        editorOther.setValue('');
         return;
     }
     var img = new Image();
@@ -509,6 +510,16 @@ $('#bsOtherImage2').on('change', function () {
 function getHtmlOtherJeedom(dashboard) {
     var html = "";
     var width, height;
+    var cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "0", 
+                version: $('#bsOtherActionDash').val(),
+                size: $('#bsOtherActionIconSize1').val(), 
+                icon1: $('#bsOtherActionIconCmd1').html().replace(/\"/g, "'"), 
+                icon2: $('#bsOtherActionIconCmd2').html().replace(/\"/g, "'")}) + 
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
     width = $('#bsOtherActionIconSize1').val() * 20 + 15;
     height = $('#bsOtherActionIconSize1').val() * 20 + 20;
     if (dashboard) {
@@ -524,6 +535,7 @@ function getHtmlOtherJeedom(dashboard) {
         html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action" id="iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
@@ -555,6 +567,15 @@ function getHtmlOtherJeedom(dashboard) {
 
 function getHtmlOtherImage(dashboard) {
     var html = "";
+    var cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "1", 
+                version: $('#bsOtherActionDash').val(),
+                image1: $('#bsOtherImage1').val(), 
+                image2: $('#bsOtherImage2').val()}) + 
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
     var width, height, image1, image2;
     width = $('#bsOtherPreview2').width() + 15;
     height = $('#bsOtherPreview2').height() + 15;
@@ -573,6 +594,7 @@ function getHtmlOtherImage(dashboard) {
         html += '\t\t<span style="font-size: 1.1em;" class="action iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
@@ -601,17 +623,28 @@ function getHtmlOtherImage(dashboard) {
     html += '\t\t});\n';
     html += "\t<\/script>\n";
     html += '</div>\n';
-
     return html;
 }
 
 function getHtmlOtherSpecial(dashboard) {
     var html = "";
-    var width, height, image1, image2;
-    var svg1 = $('#bsOtherSpecial1').val();
-    var list1 = $('#bsOtherSpecialCat1').val();
-    var svg2 = $('#bsOtherSpecial2').val();
-    var list2 = $('#bsOtherSpecialCat2').val();
+            ']]></script>\n';
+    var width, height, image1, image2, cdata;
+    var svg1 = $('#bsOtherSpecial1').find(':selected').index() - 1;
+    var list1 = $('#bsOtherSpecialCat1').find(':selected').index() - 1;
+    var svg2 = $('#bsOtherSpecial2').find(':selected').index() - 1;
+    var list2 = $('#bsOtherSpecialCat2').find(':selected').index() - 1;
+    cdata = '<!-- Ne Pas Supprimer -->\n' +
+            '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
+            JSON.stringify({
+                type: "2",
+                version: $('#bsOtherActionDash').val(),
+                list1: $('#bsOtherSpecialCat1').val(),
+                special1: $('#bsOtherSpecial1').val(),
+                list2: $('#bsOtherSpecialCat2').val(),
+                special2: $('#bsOtherSpecial2').val()}) +
+            ']]></script>\n' +
+            '<!-- Ne Pas Supprimer -->\n';
     if (specialWidgets[list1].extension !== 'svg') {
         width = $('#bsOtherPreviewSpec2').width() + 15;
         height = $('#bsOtherPreviewSpec2').height() + 15;
@@ -642,6 +675,7 @@ function getHtmlOtherSpecial(dashboard) {
         html += '\t\t<span style="font-size: 1.1em;" class="action iconCmd#id#"></span>\n';
         html += '\t</center>\n';
     }
+    html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
@@ -656,7 +690,7 @@ function getHtmlOtherSpecial(dashboard) {
         html += '\t\t\$(".iconCmd#id#").empty();\n';
     html += '\t\tif ("#state#" == "1") {\n';
     if (specialWidgets[list1].extension !== 'svg') {
-        html += '\t\t\t$(".iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + specialWidgets[list1].folder + specialWidgets[list1].files[svg1] + '\'>");\n';
+        html += '\t\t\t$(".iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + specialWidgets[list2].folder + specialWidgets[list1].files[svg2] + '\'>");\n';
         html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "on") {\n';
         html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
         html += '\t\t\t}\n';
@@ -667,7 +701,7 @@ function getHtmlOtherSpecial(dashboard) {
     }
     html += '\t\t} else {\n';
     if (specialWidgets[list2].extension !== 'svg') {
-        html += '\t\t\t$(".iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + specialWidgets[list2].folder + specialWidgets[list2].files[svg2] + '\'>");\n';
+        html += '\t\t\t$(".iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + specialWidgets[list1].folder + specialWidgets[list2].files[svg1] + '\'>");\n';
         html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "off") {\n';
         html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
         html += '\t\t\t}\n';
@@ -683,6 +717,5 @@ function getHtmlOtherSpecial(dashboard) {
     html += '\t\t});\n';
     html += "\t<\/script>\n";
     html += '</div>\n';
-
     return html;
 }

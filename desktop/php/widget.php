@@ -14,7 +14,10 @@ include_file('3rdparty', 'jquery.fileupload/jquery.iframe-transport', 'js');
 include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
 include_file('3rdparty', 'jquery.lazyload/jquery.lazyload', 'js');
 include_file('3rdparty', 'jquery.packery/jquery.packery', 'js');
-include_file('3rdparty', 'snap.svg', 'js', 'widget');
+//include_file('3rdparty', 'snap.svg', 'js', 'widget');
+?>
+<script src="3rdparty/snap.svg/snap.svg-min.js"></script>
+<?php
 
 $mobileWidget = widget::listWidget('mobile');
 $dashboardWidget = widget::listWidget('dashboard');
@@ -186,33 +189,35 @@ function displayWidgetSubtype($_name) {
                     <div class="panel-body" style="padding : 0px 5px;">
                         <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
                             <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterDesktop" ><i class="fa fa-desktop fa-fw"></i>
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterDesktop" ><i class="fa fa-desktop fa-fw"></i>
                             </label>
                             <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterMobile"><i class="fa fa-mobile fa-fw"></i>
-                            </label>
-                            <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterAction"><i class="fa fa-exclamation-circle fa-fw"></i>
-                            </label>
-                            <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterInfo"><i class="fa fa-eye fa-fw"></i>
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterMobile"><i class="fa fa-mobile fa-fw"></i>
                             </label>
                         </div>    
                         <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
                             <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterOther"><span class="label label-warning" style="text-shadow: none;">other</span>
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterAction"><i class="fa fa-exclamation-circle fa-fw"></i>
                             </label>
                             <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterSlider"><span class="label label-primary" style="text-shadow: none;">slider</span>
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterOther"><span class="label label-warning" style="text-shadow: none;">other</span>
                             </label>
                             <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterBinary"><span class="label label-info" style="text-shadow: none;">binary</span>
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterSlider"><span class="label label-primary" style="text-shadow: none;">slider</span>
+                            </label>
+                        </div>    
+                        <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterInfo"><i class="fa fa-eye fa-fw"></i>
                             </label>
                             <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterNumeric"><span class="label label-danger" style="text-shadow: none;">numeric</span>
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterBinary"><span class="label label-info" style="text-shadow: none;">binary</span>
                             </label>
                             <label class="btn btn-xs btn-default">
-                                <input type="checkbox" autocomplete="off" id="filterString"><span class="label label-default" style="text-shadow: none;">string</span>
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterNumeric"><span class="label label-danger" style="text-shadow: none;">numeric</span>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterString"><span class="label label-default" style="text-shadow: none;">string</span>
                             </label>
                         </div>                
                     </div>
@@ -556,18 +561,18 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                         <div class="form-group form-group-sm">
                                             <label class="col-sm-2 control-label" for="bsOtherActionName">{{Nom}}</label>
                                             <div class="col-sm-2">
-                                                <input type="text" class="form-control" id="bsOtherActionName" placeholder="{{Nom}}..."/>
+                                                <input type="text" class="form-control actionOtherAttr" data-l1key="name" id="bsOtherActionName" placeholder="{{Nom}}..."/>
                                             </div>
                                             <label class="col-sm-2 control-label" for="bsOtherActionDash">{{Interfaces}}</label>
                                             <div class="col-sm-2">
-                                                <select class="form-control" id="bsOtherActionDash">
+                                                <select class="form-control actionOtherAttr" data-l1key="version" id="bsOtherActionDash">
                                                     <option value="1">Dashboard</option>
                                                     <option value="0">Mobile</option>
                                                 </select>
                                             </div>
                                             <label class="col-sm-2 control-label" for="bsOtherActionDash">{{Biblithèques}}</label>
                                             <div class="col-sm-2">
-                                                <select class="form-control" id="bsOtherActionType">
+                                                <select class="form-control actionOtherAttr" data-l1key="type" id="bsOtherActionType">
                                                     <option value="0">Jeedom</option>
                                                     <option value="1">Widgets</option>
                                                     <option value="2">Spécial</option>
@@ -616,17 +621,17 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" id="bsOtherActionInsertIcon1" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" id="bsOtherImage1" ></select>
-                                                    <select class="form-control specialView" value="" id="bsOtherSpecialCat1" ><option value="">{{Aucune}}</option></select>
-                                                    <select class="form-control specialView" value="" id="bsOtherSpecial1" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control widgetsView actionOtherAttr" data-l1key="image1" value="" id="bsOtherImage1" ></select>
+                                                    <select class="form-control specialView actionOtherAttr" data-l1key="list1" value="" id="bsOtherSpecialCat1" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView actionOtherAttr" data-l1key="special1" value="" id="bsOtherSpecial1" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
-                                                    <input type="number" class="form-control JeedomView" style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsOtherActionIconSize1"/>
+                                                    <input type="number" class="form-control JeedomView actionOtherAttr" data-l1key="size" style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsOtherActionIconSize1"/>
                                                     <label class="col-sm-12 control-label widgetsView" id="bsOtherLabel1"></label>
                                                     <label class="col-sm-12 control-label specialView" id="bsOtherLabelSpec1"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;" id="bsOtherSvgPreview1">
-                                                    <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsOtherActionIconCmd1"></span>
+                                                    <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView actionOtherAttr" data-l1key="icon1" id="bsOtherActionIconCmd1"></span>
                                                     <img src="" id="bsOtherPreview1" class="img-responsive widgetsView" style="margin: 0px auto;">
                                                     <img src="" id="bsOtherPreviewSpec1" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
@@ -634,9 +639,9 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" id="bsOtherActionInsertIcon2" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" id="bsOtherImage2" ></select>
-                                                    <select class="form-control specialView" value="" id="bsOtherSpecialCat2" ><option value="">{{Aucune}}</option></select>
-                                                    <select class="form-control specialView" value="" id="bsOtherSpecial2" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control widgetsView actionOtherAttr" data-l1key="image2" value="" id="bsOtherImage2" ></select>
+                                                    <select class="form-control specialView actionOtherAttr" data-l1key="list2" value="" id="bsOtherSpecialCat2" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView actionOtherAttr" data-l1key="special2" value="" id="bsOtherSpecial2" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control JeedomView" disabled style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsOtherActionIconSize2"/>
@@ -644,7 +649,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                     <label class="col-sm-12 control-label specialView" id="bsOtherLabelSpec2"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;" id="bsOtherSvgPreview2">
-                                                    <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView" id="bsOtherActionIconCmd2"></span>
+                                                    <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView actionOtherAttr" data-l1key="icon2" id="bsOtherActionIconCmd2"></span>
                                                     <img src="" id="bsOtherPreview2" class="img-responsive widgetsView" style="margin: 0px auto;">
                                                     <img src="" id="bsOtherPreviewSpec2" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
@@ -674,18 +679,18 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                         <div class="form-group form-group-sm">
                                             <label class="col-sm-2 control-label" for="bsInfoBinaryName">{{Nom}}</label>
                                             <div class="col-sm-2">
-                                                <input type="text" class="form-control" id="bsInfoBinaryName" placeholder="{{Nom}}..."/>
+                                                <input type="text" class="form-control infoBinaryAttr" data-l1key="name" id="bsInfoBinaryName" placeholder="{{Nom}}..."/>
                                             </div>
                                             <label class="col-sm-2 control-label" for="bsInfoBinaryDash">{{Interfaces}}</label>
                                             <div class="col-sm-2">
-                                                <select class="form-control" id="bsInfoBinaryDash">
+                                                <select class="form-control infoBinaryAttr" data-l1key="version" id="bsInfoBinaryDash">
                                                     <option value="1">Dashboard</option>
                                                     <option value="0">Mobile</option>
                                                 </select>
                                             </div>
                                             <label class="col-sm-2 control-label" for="bsInfoBinaryDash">{{Biblithèques}}</label>
                                             <div class="col-sm-2">
-                                                <select class="form-control" id="bsInfoBinaryType">
+                                                <select class="form-control infoBinaryAttr" data-l1key="type" id="bsInfoBinaryType">
                                                     <option value="0">Jeedom</option>
                                                     <option value="1">Widgets</option>
                                                     <option value="2">Spécial</option>
@@ -734,17 +739,17 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" id="bsInfoBinaryInsertIcon1" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" id="bsInfoBinaryImage1" ></select>
-                                                    <select class="form-control specialView" value="" id="bsInfoBinarySpecialCat1" ><option value="">{{Aucune}}</option></select>
-                                                    <select class="form-control specialView" value="" id="bsInfoBinarySpecial1" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control widgetsView infoBinaryAttr" data-l1key="image1" value="" id="bsInfoBinaryImage1" ></select>
+                                                    <select class="form-control specialView infoBinaryAttr" data-l1key="list1" value="" id="bsInfoBinarySpecialCat1" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView infoBinaryAttr" data-l1key="special1" value="" id="bsInfoBinarySpecial1" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
-                                                    <input type="number" class="form-control JeedomView" style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsInfoBinaryIconSize1"/>
-                                                    <label class="col-sm-12 control-label widgetsView" id="bsInfoBinaryLabel1"></label>
-                                                    <label class="col-sm-12 control-label specialView" id="bsInfoBinaryLabelSpec1"></label>
+                                                    <input type="number" class="form-control JeedomView infoBinaryAttr" data-l1key="size" style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsInfoBinaryIconSize1"/>
+                                                    <label class="col-sm-12 control-label widgetsView " id="bsInfoBinaryLabel1"></label>
+                                                    <label class="col-sm-12 control-label specialView " id="bsInfoBinaryLabelSpec1"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;" id="bsInfoBinarySvgPreview1">
-                                                    <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsInfoBinaryIconCmd1"></span>
+                                                    <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView infoBinaryAttr" data-l1key="icon1" id="bsInfoBinaryIconCmd1"></span>
                                                     <img src="" id="bsInfoBinaryPreview1" class="img-responsive widgetsView" style="margin: 0px auto;">
                                                     <img src="" id="bsInfoBinaryPreviewSpec1" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
@@ -752,9 +757,9 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                             <tr>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <a class="btn btn-default btn-xs JeedomView" id="bsInfoBinaryInsertIcon2" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>
-                                                    <select class="form-control widgetsView" value="" id="bsInfoBinaryImage2" ></select>
-                                                    <select class="form-control specialView" value="" id="bsInfoBinarySpecialCat2" ><option value="">{{Aucune}}</option></select>
-                                                    <select class="form-control specialView" value="" id="bsInfoBinarySpecial2" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control widgetsView infoBinaryAttr" data-l1key="image2" value="" id="bsInfoBinaryImage2" ></select>
+                                                    <select class="form-control specialView infoBinaryAttr" data-l1key="list2" value="" id="bsInfoBinarySpecialCat2" ><option value="">{{Aucune}}</option></select>
+                                                    <select class="form-control specialView infoBinaryAttr" data-l1key="special2" value="" id="bsInfoBinarySpecial2" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control JeedomView" disabled style=display:none" value="2.5" min="1" max="5" step="0.2" id="bsInfoBinaryIconSize1"/>
@@ -762,7 +767,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                     <label class="col-sm-12 control-label specialView" id="bsInfoBinaryLabelSpec2"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;" id="bsInfoBinarySvgPreview2">
-                                                    <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView" id="bsInfoBinaryIconCmd2"></span>
+                                                    <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class="JeedomView infoBinaryAttr" data-l1key="icon2" id="bsInfoBinaryIconCmd2"></span>
                                                     <img src="" id="bsInfoBinaryPreview2" class="img-responsive widgetsView" style="margin: 0px auto;">
                                                     <img src="" id="bsInfoBinaryPreviewSpec2" class="img-responsive specialView" style="margin: 0px auto;">
                                                 </td>
@@ -792,18 +797,18 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                         <div class="form-group form-group-sm">
                                             <label class="col-sm-1 control-label" for="bsInfoNumericName">{{Nom}}</label>
                                             <div class="col-sm-2">
-                                                <input type="text" class="form-control" id="bsInfoNumericName" placeholder="{{Nom}}..."/>
+                                                <input type="text" class="form-control infoNumericAttr" data-l1key="name" id="bsInfoNumericName" placeholder="{{Nom}}..."/>
                                             </div>
                                             <label class="col-sm-1 control-label" for="bsInfoNumericDash">{{Interfaces}}</label>
                                             <div class="col-sm-2">
-                                                <select class="form-control" id="bsInfoNumericDash">
+                                                <select class="form-control infoNumericAttr" data-l1key="version" id="bsInfoNumericDash">
                                                     <option value="1">Dashboard</option>
                                                     <option value="0">Mobile</option>
                                                 </select>
                                             </div>
                                             <label class="col-sm-2 control-label" for="bsInfoNumericDash">{{Biblithèques}}</label>
                                             <div class="col-sm-2">
-                                                <select class="form-control" id="bsInfoNumericType">
+                                                <select class="form-control infoNumericAttr" data-l1key="type" id="bsInfoNumericType">
                                                     <option value="0">Jeedom</option>
                                                     <option value="1">Widgets</option>
                                                     <option value="2">Spécial</option>
@@ -839,12 +844,12 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                     <select class="form-control specialView" value="" data-index="0" name="bsInfoNumericSpecialIcon0" id="bsInfoNumericSpecialIcon0" ><option value="">{{Aucune}}</option></select>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
-                                                    <input type="number" class="form-control JeedomView" data-index="0" style=display:none" value="2.5" min="1" max="5" step="0.2" name="bsInfoNumericIconSize0" id="bsInfoNumericIconSize0"/>
+                                                    <input type="number" class="form-control JeedomView infoNumericAttr" data-l1key="size" data-index="0" style=display:none" value="2.5" min="1" max="5" step="0.2" name="bsInfoNumericIconSize0" id="bsInfoNumericIconSize0"/>
                                                     <label class="col-sm-12 control-label widgetsView" id="bsInfoNumericLabel0"></label>
                                                     <label class="col-sm-12 control-label specialView" id="bsInfoNumericLabelSpec0"></label>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
-                                                    <input type="number" class="form-control" value="0" max="100" data-index="0" name="bsInfoNumericEcartMin0" id="bsInfoNumericEcartMin0" disabled/>
+                                                    <input type="number" class="form-control" value="0" max="100" data-index="0" name="" id="bsInfoNumericEcartMin0" disabled/>
                                                 </td>
                                                 <td style="text-align: center; vertical-align: middle;">
                                                     <input type="number" class="form-control" value="100" max="100" data-index="0" name="bsInfoNumericEcartMax0" id="bsInfoNumericEcartMax0"/>
@@ -997,6 +1002,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                 <legend>{{Apercu}}
                     <a class="btn btn-xs btn-default pull-right" id="bt_applyWidget"><i class="fa fa-fire"></i> {{Appliquer sur des commandes}}</a>
                     <a class="btn btn-xs btn-warning pull-right" id="bt_shareOnMarket"><i class="fa fa-cloud-upload"></i> {{Partager}}</a>
+                    <a class="btn btn-xs btn-success pull-right" id="bt_editWidget" style="display:none"><i class="fa fa-cloud-upload"></i> {{Editer}}</a>
                 </legend>
                 <div class="col-sm-6" id='div_widgetResult'style="height: 350px;"></div>
             </div>
