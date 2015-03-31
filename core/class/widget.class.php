@@ -82,6 +82,9 @@ class widget {
 	}
 
 	public static function byPath($_pathfile) {
+		if (strpos($_pathfile, '.html') === false) {
+			$_pathfile .= '.html';
+		}
 		if (!file_exists($_pathfile)) {
 			throw new Exception(__('Chemin jusqu\'au widget non trouvé : ', __FILE__) . $_pathfile);
 		}
