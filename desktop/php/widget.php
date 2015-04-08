@@ -300,7 +300,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                 $number++;
             }
         }
-        if (number != 1) {
+        if ($number != 1) {
             echo '</div>';
         }
         echo "</div><br/>";
