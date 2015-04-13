@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+/* global specialWidgets, editorNumeric, pathFile, Snap */
+
 //initInfoNumeric();
 
 $('#bsInfoNumeric').bootstrapSlider({
@@ -37,8 +39,8 @@ $('#modalInfoNumericCancel').on('click', function () {
         $('#bsViewInfoNumeric').empty();
     }
     //$('#md_modalWidget').dialog('close');
-    $('#bsInfoNumericCategory').hide();
-    $('#bsCategory').show();
+    $('#bsInfoNumericCategory').hide('fade');
+    $('#bsPanelWidgetImages').show('fade');
 });
 
 $('#bsInfoNumericSvgSpecSize').on('change', function () {
@@ -290,8 +292,8 @@ $('#modalInfoNumericSave').on('click', function () {
         $('#bsViewInfoNumeric').empty();
     }
     //$('#md_modalWidget').dialog('close');
-    $('#bsInfoNumericCategory').hide();
-    $('#bsCategory').show();
+    $('#bsInfoNumericCategory').hide('fade');
+    $('#bsPanelWidgetImages').show('fade');
 });
 
 $('#bsInfoNumericDash').on('change', function () {

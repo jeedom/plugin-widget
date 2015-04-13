@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+/* global editorOther */
+
 //initOtherAction();
 
 $('#modalOtherActionCancel').on('click', function () {
@@ -39,8 +41,8 @@ $('#modalOtherActionCancel').on('click', function () {
         $('#bsViewInfoBinary').empty();
         editorOther = null;
     }
-    $('#bsOtherActionCategory').hide();
-    $('#bsCategory').show();
+    $('#bsOtherActionCategory').hide('fade');
+    $('#bsPanelWidgetImages').show('fade');
 });
 
 $('#bsOtherSvgSpecSize').on('change', function () {
@@ -306,8 +308,8 @@ $('#modalOtherActionSave').on('click', function () {
         $('#bsViewInfoBinary').empty();
         editorOther = null;
     }
-    $('#bsOtherActionCategory').hide();
-    $('#bsCategory').show();
+    $('#bsOtherActionCategory').hide('fade');
+    $('#bsPanelWidgetImages').show('fade');
 });
 
 $('#bsOtherActionDash').on('change', function () {

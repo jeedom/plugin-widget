@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+/* global editorBinary, pathFile, specialWidgets, Snap */
+
 //initInfoBinary();
 
 $('#modalInfoBinaryCancel').on('click', function () {
@@ -39,8 +41,8 @@ $('#modalInfoBinaryCancel').on('click', function () {
         editorBinary = null;
     }
     //$('#md_modalWidget').dialog('close');
-    $('#bsInfoBinaryCategory').hide();
-    $('#bsCategory').show();
+    $('#bsInfoBinaryCategory').hide('fade');
+    $('#bsPanelWidgetImages').show('fade');
 });
 
 $('#bsInfoBinarySvgSpecSize').on('change', function () {
@@ -306,8 +308,8 @@ $('#modalInfoBinarySave').on('click', function () {
         editorBinary = null;
     }
     //$('#md_modalWidget').dialog('close');
-    $('#bsInfoBinaryCategory').hide();
-    $('#bsCategory').show();
+    $('#bsInfoBinaryCategory').hide('fade');
+    $('#bsPanelWidgetImages').show('fade');
 });
 
 $('#bsInfoBinaryDash').on('change', function () {
