@@ -109,9 +109,9 @@ function getHtmlSelectStyle(_select, _style) {
             var classe = '';
             init(_style, false);
             for (var i in data.result) {
+                var filename = data.result[i].split('.');
                 if(_style)
                     classe = ' class="' + filename[0] + '"';
-                var filename = data.result[i].split('.');
                 fontsWidgets.push({'file': data.result[i],'name': filename[0], 'extension': filename[1], 'html':htmlFontFace(data.result[i])});
                 options += '<option' + classe +' value="' + filename[0] + '">' + data.result[i] + '</option>';
             }
