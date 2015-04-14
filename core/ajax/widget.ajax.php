@@ -317,12 +317,75 @@ try {
         //unlink($uploaddir . '/' . $_FILES['special']['name']);
         ajax::success();
     }
+
+    if (init('action') == 'checkStyleCss') {
+        ajax::success(file_exists(dirname(__FILE__) . '/../../../../core/css/icon/custom/style.css'));
+    }
+
+    if (init('action') == 'removeStyleCss') {
+        ajax::success(unlink(dirname(__FILE__) . '/../../../../core/css/icon/custom/style.css'));
+    }
+
+    if (init('action') == 'createStyleCss') {
+        $html = init('html');
+        $file = dirname(__FILE__) . '/../../../../core/css/icon/custom/style.css';
+        ajax::success(file_put_contents ($file ,$html));
+    }
+
+    if (init('action') == 'listFont') {
+        $uploaddir = dirname(__FILE__) . '/../../../../core/css/icon/custom/fonts';
+        if (!file_exists($uploaddir)) {
+            $result = mkdir($uploaddir, 0777, true);
+        }
+        if (!file_exists($uploaddir)) {
+            throw new Exception(__("{{Répertoire d'upload de fonts non trouvé}} : ", __FILE__) . $uploaddir);
+        }
+        ajax::success(ls($uploaddir, "*", false, array('files')));
+    }
+
+    if (init('action') == 'removeFont') {
+        ajax::success(unlink(dirname(__FILE__) . '/../../../../core/css/icon/custom/fonts/' . init('font')));
+    }
+
+    if (init('action') == 'fontUpload') {
+        $uploaddir = dirname(__FILE__) . '/../../../../core/css/icon/custom/fonts';
+        if (!file_exists($uploaddir)) {
+            $result = mkdir($uploaddir, 0777, true);
+        }
+        if (!file_exists($uploaddir)) {
+            throw new Exception(__("{{Répertoire d'upload non trouvé}} : ", __FILE__) . ' ' . $uploaddir);
+        }
+        if (!isset($_FILES['fonts'])) {
+            throw new Exception(__('{{Aucun fichier trouvé. Vérifié parametre PHP (post size limit}}', __FILE__));
+        }
+        $extension = strtolower(strrchr($_FILES['fonts']['name'], '.'));
+        if (!in_array($extension, array('.ttf','.woff'))) {
+            throw new Exception('{{Seul les fonts True Type et Web Open Font Format sont accepté (autorisé .ttf,.woff)}} : ' . $extension);
+        }
+        if (filesize($_FILES['fonts']['tmp_name']) > 1000000) {
+            throw new Exception(__('{{Le fichier est trop gros}} (maximum 1mo)', __FILE__));
+        }
+        $filename = explode('.', $_FILES['fonts']['name']);
+        if (!move_uploaded_file($_FILES['fonts']['tmp_name'], $uploaddir . '/' . clean($filename[0]) . '.' . $filename[1])) {
+            throw new Exception(__('{{Impossible de déplacer le fichier temporaire}}', __FILE__) . $uploaddir . '/' . clean($filename[0]) . '.' . $filename[1]);
+        }
+        if (!file_exists($uploaddir . '/' . clean($filename[0]) . '.' . $filename[1])) {
+            throw new Exception(__("{{Aucun fichier trouvé. Vérifié parametre PHP (post size limit}}", __FILE__));
+        }
+        ajax::success();
+    }
+
     throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
 
 } catch (Exception $e) {
     ajax::error(displayExeption($e), $e->getCode());
 }
 
+function clean($string) {
+   $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+}
 
 function unZipSvg($name) {
     $bad = array_merge(
@@ -352,17 +415,22 @@ function checkZipSvg($name) {
         while ($zip_entry = zip_read($zip)) {
             $file = basename(zip_entry_name($zip_entry));
             $extension = strtolower(strrchr($file, '.'));
-            if($fileUse == null)
+            if($fileUse == null) {
                 $fileUse = $extension;
-            if($fileUse != $extension)
+            }
+            if ($fileUse != $extension) {
                 $check = false;
-            if (!in_array($extension, array('.svg', '.png', '.ico')))
+            }
+            if (!in_array($extension, array('.svg', '.png', '.ico'))) {
                 $check = false;
-            else
+            }
+            else {
                 $fileUse = $extension;
+            }
         }
         zip_close($zip);
     }
     return $check;
 }
+
 ?>
