@@ -86,7 +86,7 @@ function htmlFontFace(font) {
 }
 
 
-function getHtmlSelectStyle(select) {
+function getHtmlSelectStyle(_select, _style) {
     $.ajax({
         type: "POST",
         url: "plugins/widget/core/ajax/widget.ajax.php",
@@ -101,14 +101,22 @@ function getHtmlSelectStyle(select) {
             var options = '<option value="">{{Aucune}}</option>';
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                select.html(options);
+                if(init(_select) !== "")
+                    _select.html(options);
                 return;
             }
+            fontsWidgets = [];
+            var classe = '';
+            init(_style, false);
             for (var i in data.result) {
+                if(_style)
+                    classe = ' class="' + filename[0] + '"';
                 var filename = data.result[i].split('.');
-                options += '<option value="' + filename[0] + '">' + data.result[i] + '</option>';
+                fontsWidgets.push({'file': data.result[i],'name': filename[0], 'extension': filename[1], 'html':htmlFontFace(data.result[i])});
+                options += '<option' + classe +' value="' + filename[0] + '">' + data.result[i] + '</option>';
             }
-            select.html(options);
+            if(init(_select) !== "")
+                _select.html(options);
         }
     });
 }
