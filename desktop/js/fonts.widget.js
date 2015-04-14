@@ -240,9 +240,6 @@ function createStyleCss() {
                 }
             }
             url = url.substring(0, url.length - 1);
-            $('.pluginContainer').children().show();
-            $('.pluginContainer').packery();
-            $('#ul_widget').children(':gt(4)').show();
             window.location.href = url;
         }
     });
