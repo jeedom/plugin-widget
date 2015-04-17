@@ -104,9 +104,7 @@ function getHtmlSelectStyle(select) {
                 select.html(options);
                 return;
             }
-            fontsWidgets = [];
             for (var i in data.result) {
-                fontsWidgets.push({'file': data.result[i],'name': filename[0], 'extension': filename[1], 'html':htmlFontFace(data.result[i])});
                 var filename = data.result[i].split('.');
                 options += '<option value="' + filename[0] + '">' + data.result[i] + '</option>';
             }
