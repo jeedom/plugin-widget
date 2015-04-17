@@ -76,7 +76,7 @@ function htmlFontFace(font) {
     html += "\tfont-variant: normal;\n";
     html += "\tfont-style: normal;\n";
     html += "}\n";
-    html += '[class="' + filename[0] + '"] {\n';
+    html += '[class^="' + filename[0] + '"], [class*=" ' + filename[0] + '"] {\n';
     html += "\tfont-family: '" + filename[0] + "';\n";
     html += "\tspeak: none;\n";
     html += "\ttext-transform: none;\n";
