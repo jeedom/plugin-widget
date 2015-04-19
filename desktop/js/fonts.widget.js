@@ -19,7 +19,7 @@ $('#bt_WidgetFont').fileupload({
             return;
         }
         notify("{{Ajout d'une Font}}", "{{Font ajoutée avec succès}}", 'success');
-        updateListFonts();
+        updateListFonts($('#bsFontsView'));
     }
 });
 
@@ -48,7 +48,7 @@ $('#bsFontsView').on('click', '.bsDelFont', function (event) {
                         return;
                     }
                     if (data.result === true) {
-                        updateListFonts();
+                        updateListFonts($('#bsFontsView'));
                     }
                     else {
                         notify("{{Suppression d'une Font}}", "{{Impossible de supprimer la Font: }}" + fontsWidgets[delFont].file, 'warning');
@@ -122,7 +122,7 @@ function getHtmlSelectStyle(_select, _value, _callback) {
     });
 }
 
-function updateListFonts() {
+function updateListFonts(_view) {
     $.ajax({
         type: "POST",
         url: "plugins/widget/core/ajax/widget.ajax.php",
@@ -155,7 +155,9 @@ function updateListFonts() {
                 fonts += "<div class=\"text-center\" style=\"font-family: '" + filename[0] + "'; font-size: 2.5em\">abcdef</div>";
                 fonts += '</div>';
             }
-            $('#bsFontsView').html('<div class="media">' + fonts + '</div>');
+            var view = init(_view);
+            if(view !== '')
+                view.html('<div class="media">' + fonts + '</div>');
             if (firstCheckStyleCss === true) {
                 firstCheckStyleCss = false;
                 checkStyleCss();
@@ -249,6 +251,9 @@ function createStyleCss() {
                 }
             }
             url = url.substring(0, url.length - 1);
+//            $('.pluginContainer').children().show();
+//            $('.pluginContainer').packery();
+//            $('#ul_widget').children(':gt(4)').show();
             window.location.href = url;
         }
     });
