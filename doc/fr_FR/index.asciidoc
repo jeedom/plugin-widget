@@ -2,7 +2,7 @@
 == Widget
 
 === Description
-Plugin permetant de recuperer et/ou de creer de nouveaux widget
+Plugin permettant de récupérer et/ou de créer de nouveaux widgets.
 
 '''
 === Configuration
