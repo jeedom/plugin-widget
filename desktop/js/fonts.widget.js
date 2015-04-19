@@ -19,7 +19,7 @@ $('#bt_WidgetFont').fileupload({
             return;
         }
         notify("{{Ajout d'une Font}}", "{{Font ajoutée avec succès}}", 'success');
-        updateListFonts();
+        updateListFonts($('#bsFontsView'));
     }
 });
 
@@ -48,7 +48,7 @@ $('#bsFontsView').on('click', '.bsDelFont', function (event) {
                         return;
                     }
                     if (data.result === true) {
-                        updateListFonts();
+                        updateListFonts($('#bsFontsView'));
                     }
                     else {
                         notify("{{Suppression d'une Font}}", "{{Impossible de supprimer la Font: }}" + fontsWidgets[delFont].file, 'warning');
@@ -122,7 +122,7 @@ function getHtmlSelectStyle(_select, _value, _callback) {
     });
 }
 
-function updateListFonts() {
+function updateListFonts(_view) {
     $.ajax({
         type: "POST",
         url: "plugins/widget/core/ajax/widget.ajax.php",
@@ -134,6 +134,7 @@ function updateListFonts() {
             handleAjaxError(request, status, error);
         },
         success: function (data) {
+            var view = init(_view);
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -147,7 +148,8 @@ function updateListFonts() {
                 fontsWidgets.push({'file': data.result[i],'name': filename[0], 'extension': filename[1], 'html':htmlFontFace(data.result[i])});
                 fonts += '<div class="media-left col-sm-3" style="min-width: 105px">';
                 fonts += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noMarginBottom">';
-                fonts += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelFont" data-font="' + i + "\" title=\"{{Supprimer la Font}}\"><i class='fa fa-trash-o'></i></button>";
+                if(view !== '' && view.attr('id') === "bsFontsView")
+                    fonts += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelFont" data-font="' + i + "\" title=\"{{Supprimer la Font}}\"><i class='fa fa-trash-o'></i></button>";
                 fonts += "<span class=\"pull-right\" style=\"font-family: '" + filename[0] + "';\">" + filename[0] + "</span>";
                 fonts += '</div>';
                 fonts += "<div class=\"text-center\" style=\"font-family: '" + filename[0] + "'; font-size: 2.5em\">012345</div>";
@@ -155,7 +157,8 @@ function updateListFonts() {
                 fonts += "<div class=\"text-center\" style=\"font-family: '" + filename[0] + "'; font-size: 2.5em\">abcdef</div>";
                 fonts += '</div>';
             }
-            $('#bsFontsView').html('<div class="media">' + fonts + '</div>');
+            if(view !== '')
+                view.html('<div class="media">' + fonts + '</div>');
             if (firstCheckStyleCss === true) {
                 firstCheckStyleCss = false;
                 checkStyleCss();
