@@ -23,7 +23,7 @@ var imagesWidgets = [];
 var specialWidgets = [];
 updateListImages();
 updateListSvgs();
-updateListFonts();
+updateListFonts($('#bsFontsView'));
 
 $('.pluginContainer').packery();
 
