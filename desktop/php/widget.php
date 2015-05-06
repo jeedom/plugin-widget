@@ -1,6 +1,6 @@
 <?php
 if (!isConnect('admin')) {
-    throw new Exception('{{401 - Accès non autorisé}}');
+	throw new Exception('{{401 - Accès non autorisé}}');
 }
 include_file('3rdparty', 'codemirror/lib/codemirror', 'js');
 include_file('3rdparty', 'codemirror/lib/codemirror', 'css');
@@ -23,96 +23,96 @@ $dashboardWidget = widget::listWidget('dashboard');
 $pathfile = dirname(__FILE__);
 sendVarToJS('pathFile', $pathfile);
 function displayWidgetName($_name) {
-    $result = '';
-    $name = explode('.', $_name);
-    if (count($name) != 3) {
-        return $name;
-    }
-    switch ($name[0]) {
-        case 'info':
-            $result .= '<i class="fa fa-eye fa-fw" title="Widget de type information"></i> ';
-            break;
-        case 'action':
-            $result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action"></i> ';
-            break;
-        default:
-            $result .= $name[0];
-            break;
-    }
-    switch ($name[1]) {
-        case 'other':
-            $result .= '<span class="label label-warning" style="text-shadow: none;">other</span> ';
-            break;
-        case 'color':
-            $result .= '<span class="label label-success" style="text-shadow: none;">color</span> ';
-            break;
-        case 'slider':
-            $result .= '<span class="label label-primary" style="text-shadow: none;">slider</span> ';
-            break;
-        case 'binary':
-            $result .= '<span class="label label-info" style="text-shadow: none;">binary</span> ';
-            break;
-        case 'numeric':
-            $result .= '<span class="label label-danger" style="text-shadow: none;">numeric</span> ';
-            break;
-        case 'string':
-            $result .= '<span class="label label-default" style="text-shadow: none;">string</span> ';
-            break;
-        default:
-            $result .= $name[1];
-            break;
-    }
-    return $result .= $name[2];
+	$result = '';
+	$name = explode('.', $_name);
+	if (count($name) != 3) {
+		return $name;
+	}
+	switch ($name[0]) {
+		case 'info':
+			$result .= '<i class="fa fa-eye fa-fw" title="Widget de type information"></i> ';
+			break;
+		case 'action':
+			$result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action"></i> ';
+			break;
+		default:
+			$result .= $name[0];
+			break;
+	}
+	switch ($name[1]) {
+		case 'other':
+			$result .= '<span class="label label-warning" style="text-shadow: none;">other</span> ';
+			break;
+		case 'color':
+			$result .= '<span class="label label-success" style="text-shadow: none;">color</span> ';
+			break;
+		case 'slider':
+			$result .= '<span class="label label-primary" style="text-shadow: none;">slider</span> ';
+			break;
+		case 'binary':
+			$result .= '<span class="label label-info" style="text-shadow: none;">binary</span> ';
+			break;
+		case 'numeric':
+			$result .= '<span class="label label-danger" style="text-shadow: none;">numeric</span> ';
+			break;
+		case 'string':
+			$result .= '<span class="label label-default" style="text-shadow: none;">string</span> ';
+			break;
+		default:
+			$result .= $name[1];
+			break;
+	}
+	return $result .= $name[2];
 }
 function displayWidgetType($_name) {
-    $result = '';
-    $name = explode('.', $_name);
-    if (count($name) != 3) {
-        return "";
-    }
-    switch ($name[0]) {
-        case 'info':
-            $result .= '<i class="fa fa-eye fa-fw" title="Widget de type information" style="position: absolute;top: 31px; left: 15px;"></i> ';
-            break;
-        case 'action':
-            $result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action" style="position: absolute;top: 31px; left: 15px;"></i> ';
-            break;
-        default:
-            $result .= "";
-            break;
-    }
-    return $result;
+	$result = '';
+	$name = explode('.', $_name);
+	if (count($name) != 3) {
+		return "";
+	}
+	switch ($name[0]) {
+		case 'info':
+			$result .= '<i class="fa fa-eye fa-fw" title="Widget de type information" style="position: absolute;top: 31px; left: 15px;"></i> ';
+			break;
+		case 'action':
+			$result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action" style="position: absolute;top: 31px; left: 15px;"></i> ';
+			break;
+		default:
+			$result .= "";
+			break;
+	}
+	return $result;
 }
 function displayWidgetSubtype($_name) {
-    $result = '';
-    $name = explode('.', $_name);
-    if (count($name) != 3) {
-        return "";
-    }
-    switch ($name[1]) {
-        case 'other':
-            $result .= '<span class="label label-warning" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">other</span> ';
-            break;
-        case 'color':
-            $result .= '<span class="label label-success" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">color</span> ';
-            break;
-        case 'slider':
-            $result .= '<span class="label label-primary" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">slider</span> ';
-            break;
-        case 'binary':
-            $result .= '<span class="label label-info" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 44px 16px;">binary</span> ';
-            break;
-        case 'numeric':
-            $result .= '<span class="label label-danger" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 53px 16px;">numeric</span> ';
-            break;
-        case 'string':
-            $result .= '<span class="label label-default" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">string</span> ';
-            break;
-        default:
-            $result .= "";
-            break;
-    }
-    return $result;
+	$result = '';
+	$name = explode('.', $_name);
+	if (count($name) != 3) {
+		return "";
+	}
+	switch ($name[1]) {
+		case 'other':
+			$result .= '<span class="label label-warning" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">other</span> ';
+			break;
+		case 'color':
+			$result .= '<span class="label label-success" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">color</span> ';
+			break;
+		case 'slider':
+			$result .= '<span class="label label-primary" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">slider</span> ';
+			break;
+		case 'binary':
+			$result .= '<span class="label label-info" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 44px 16px;">binary</span> ';
+			break;
+		case 'numeric':
+			$result .= '<span class="label label-danger" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 53px 16px;">numeric</span> ';
+			break;
+		case 'string':
+			$result .= '<span class="label label-default" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">string</span> ';
+			break;
+		default:
+			$result .= "";
+			break;
+	}
+	return $result;
 }
 ?>
 <style>
@@ -187,7 +187,7 @@ function displayWidgetSubtype($_name) {
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterMobile"><i class="fa fa-mobile fa-fw"></i>
                             </label>
-                        </div>    
+                        </div>
                         <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterAction"><i class="fa fa-exclamation-circle fa-fw"></i>
@@ -198,7 +198,7 @@ function displayWidgetSubtype($_name) {
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterSlider"><span class="label label-primary" style="text-shadow: none;">slider</span>
                             </label>
-                        </div>    
+                        </div>
                         <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterInfo"><i class="fa fa-eye fa-fw"></i>
@@ -212,23 +212,23 @@ function displayWidgetSubtype($_name) {
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterString"><span class="label label-default" style="text-shadow: none;">string</span>
                             </label>
-                        </div>                
+                        </div>
                     </div>
-                </div>      
+                </div>
                 <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 
                 <?php
-                foreach ($dashboardWidget as $widget) {
-                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop fa-fw" title="Widget pour la version bureau"></i> ' . displayWidgetName($widget->getHumanName());
-                    echo '<span class="badge pull-right">' . count($widget->getUsedBy()) . '</span>';
-                    echo '</a></li>';
-                }
-                foreach ($mobileWidget as $widget) {
-                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-mobile fa-fw" title="Widget pour la version mobile"></i> ' . displayWidgetName($widget->getHumanName());
-                    echo '<span class="badge pull-right">' . count($widget->getUsedBy()) . '</span>';
-                    echo '</a></li>';
-                }
-                ?>
+foreach ($dashboardWidget as $widget) {
+	echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop fa-fw" title="Widget pour la version bureau"></i> ' . displayWidgetName($widget->getHumanName());
+	echo '<span class="badge pull-right">' . count($widget->getUsedBy()) . '</span>';
+	echo '</a></li>';
+}
+foreach ($mobileWidget as $widget) {
+	echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-mobile fa-fw" title="Widget pour la version mobile"></i> ' . displayWidgetName($widget->getHumanName());
+	echo '<span class="badge pull-right">' . count($widget->getUsedBy()) . '</span>';
+	echo '</a></li>';
+}
+?>
             </ul>
         </div>
     </div>
@@ -239,7 +239,7 @@ function displayWidgetSubtype($_name) {
                 <div class="container-fluid" id="bsMenuImagesView">
                     <div class="form-horizontal col-sm-3" style="min-width: 225px">
                         <div class="well col-sm-12">
-                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Images}}</strong>    
+                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Images}}</strong>
                             <div class="form-group form-group-sm">
                                 <div class="col-sm-12">
                                     <span class="form-control btn-info fileinput-button">
@@ -247,7 +247,7 @@ function displayWidgetSubtype($_name) {
                                         <span> {{Ajouter ses images...}}</span>
                                         <input class="form-control" type="file" id="bsImagesFileload" name="images" data-url="plugins/widget/core/ajax/widget.ajax.php?action=imageUpload"/>
                                     </span>
-                                </div>    
+                                </div>
                             </div>
                         </div>
                         <div class="well col-sm-12">
@@ -260,7 +260,7 @@ function displayWidgetSubtype($_name) {
                                 </div>
                             </div>
                         </div>
-                    </div>                
+                    </div>
                     <div class="well col-sm-9" id="bsPanelWidgetImages" style="min-width: 725px;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -269,37 +269,37 @@ function displayWidgetSubtype($_name) {
                                 <div class="col-sm-12" id="bsIconView">
 
                                     <?php
-                                    foreach (ls('core/css/icon', '*') as $dir) {
-                                        if (is_dir('core/css/icon/' . $dir) && file_exists('core/css/icon/' . $dir . '/style.css')) {
-                                            $css = file_get_contents('core/css/icon/' . $dir . '/style.css');
-                                            $research = strtolower(str_replace('/', '', $dir));
-                                            preg_match_all("/\." . $research . "-(.*?):/", $css, $matches, PREG_SET_ORDER);
-                                            $height = (ceil(count($matches) / 12) * 80) + 80;
-                                            echo '<div style="height : ' . $height . 'px;"><legend>{{' . str_replace('/', '', $dir) . '}}</legend>';
-                                            $number = 1;
-                                            foreach ($matches as $match) {
-                                                if (isset($match[0])) {
-                                                    if ($number == 1) {
-                                                        echo '<div class="row">';
-                                                    }
-                                                    echo '<div class="col-sm-1 divIconSel">';
-                                                    $icon = str_replace(array(':', '.'), '', $match[0]);
-                                                    echo '<center><span class="iconSel"><i class=\'icon ' . $icon . '\'></i></span><br/><span class="iconDesc">' . $icon . '</span></center>';
-                                                    echo '</div>';
-                                                    if ($number == 12) {
-                                                        echo '</div>';
-                                                        $number = 0;
-                                                    }
-                                                    $number++;
-                                                }
-                                            }
-                                            if ($number != 1) {
-                                                echo '</div>';
-                                            }
-                                            echo "</div><br/>";
-                                        }
-                                    }
-                                    ?>
+foreach (ls('core/css/icon', '*') as $dir) {
+	if (is_dir('core/css/icon/' . $dir) && file_exists('core/css/icon/' . $dir . '/style.css')) {
+		$css = file_get_contents('core/css/icon/' . $dir . '/style.css');
+		$research = strtolower(str_replace('/', '', $dir));
+		preg_match_all("/\." . $research . "-(.*?):/", $css, $matches, PREG_SET_ORDER);
+		$height = (ceil(count($matches) / 12) * 80) + 80;
+		echo '<div style="height : ' . $height . 'px;"><legend>{{' . str_replace('/', '', $dir) . '}}</legend>';
+		$number = 1;
+		foreach ($matches as $match) {
+			if (isset($match[0])) {
+				if ($number == 1) {
+					echo '<div class="row">';
+				}
+				echo '<div class="col-sm-1 divIconSel">';
+				$icon = str_replace(array(':', '.'), '', $match[0]);
+				echo '<center><span class="iconSel"><i class=\'icon ' . $icon . '\'></i></span><br/><span class="iconDesc">' . $icon . '</span></center>';
+				echo '</div>';
+				if ($number == 12) {
+					echo '</div>';
+					$number = 0;
+				}
+				$number++;
+			}
+		}
+		if ($number != 1) {
+			echo '</div>';
+		}
+		echo "</div><br/>";
+	}
+}
+?>
                                     <div style="height: 650px;">
                                         <legend>{{Générale}}</legend>
                                         <div class="row">
@@ -521,8 +521,8 @@ function displayWidgetSubtype($_name) {
                                             $('#mod_selectIcon').dialog("option", "buttons")['Valider'].apply($('#mod_selectIcon'));
                                         });
                                     </script>
-                                </div> 
-                            </div> 
+                                </div>
+                            </div>
                         </div>
                         <div class="panel panel-warning" id="bsImagesPanel">
                             <div class="panel-heading">
@@ -532,7 +532,7 @@ function displayWidgetSubtype($_name) {
                                 <div class="col-sm-12" id="bsImagesView" style="min-height: 50px">
                                 </div>
                             </div>
-                        </div>                    
+                        </div>
                         <div class="panel panel-success" id="bsSpecialPanel">
                             <input class="form-control" type="file" id="bsSpecialFileload" name="special" style="display: none;" data-url="plugins/widget/core/ajax/widget.ajax.php?action=specialUpload"/>
                             <div class="panel-heading">
@@ -543,7 +543,7 @@ function displayWidgetSubtype($_name) {
                                 <div class="col-sm-12" id="bsSpecialView" style="min-height: 50px">
                                 </div>
                             </div>
-                        </div>                    
+                        </div>
                     </div>
                     <div class="col-sm-9" id="bsOtherActionCategory" style="display: none;">
                         <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Other.Action</strong>
@@ -583,7 +583,7 @@ function displayWidgetSubtype($_name) {
                                                     <center id="bsOtherWidgetOff">
                                                     </center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="well col-sm-6 noPaddingLeft noPaddingRight">
@@ -594,7 +594,7 @@ function displayWidgetSubtype($_name) {
                                                     <center id="bsOtherWidgetOn">
                                                     </center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -662,7 +662,7 @@ function displayWidgetSubtype($_name) {
                                 <button type="button" class="btn btn-success pull-right" id="modalOtherActionSave">{{Valider}}</button>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                     <div class="col-sm-9" id="bsInfoBinaryCategory" style="display: none;">
                         <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Info.Binary</strong>
                         <div class="col-sm-12">
@@ -701,7 +701,7 @@ function displayWidgetSubtype($_name) {
                                                     <center id="bsInfoBinaryWidgetOff">
                                                     </center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="well col-sm-6 noPaddingLeft noPaddingRight">
@@ -712,7 +712,7 @@ function displayWidgetSubtype($_name) {
                                                     <center id="bsInfoBinaryWidgetOn">
                                                     </center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -780,7 +780,7 @@ function displayWidgetSubtype($_name) {
                                 <button type="button" class="btn btn-success pull-right" id="modalInfoBinarySave">{{Valider}}</button>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                     <div class="col-sm-9" id="bsInfoNumericCategory" style="display: none;">
                         <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Info.Numeric</strong>
                         <div class="col-sm-12">
@@ -869,10 +869,10 @@ function displayWidgetSubtype($_name) {
                                                 <div class="verticalAlign">
                                                     <center id="bsInfoNumericWidgetOff"></center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
-                                    </div>       
-                                </div>       
+                                    </div>
+                                </div>
                                 <div class="col-sm-9">
                                     <textarea class="form-control" id="bsViewInfoNumeric"></textarea>
                                 </div>
@@ -885,9 +885,9 @@ function displayWidgetSubtype($_name) {
                                 <button type="button" class="btn btn-success pull-right" id="modalInfoNumericSave">{{Valider}}</button>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
-            </fieldset>        
+            </fieldset>
         </form>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 widgetFontsView" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
@@ -897,7 +897,7 @@ function displayWidgetSubtype($_name) {
                 <div class="container-fluid" id="bsMenuFontsView">
                     <div class="col-sm-3" style="min-width: 225px">
                         <div class="well col-sm-12">
-                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Fonts}}</strong>    
+                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Fonts}}</strong>
                             <div class="form-group form-group-sm">
                                 <div class="col-sm-12">
                                     <span class="form-control btn-info fileinput-button">
@@ -905,18 +905,18 @@ function displayWidgetSubtype($_name) {
                                         <span> {{Ajouter une font...}}</span>
                                         <input class="form-control" type="file" id="bt_WidgetFont" name="fonts" data-url="plugins/widget/core/ajax/widget.ajax.php?action=fontUpload"/>
                                     </span>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="well col-sm-12">
-                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Expert}}</strong>    
-                            <div class="form-group form-group-sm">
-                                <div class="col-sm-12">
-                                    <button type="button" class="btn btn-block btn-danger expertModeVisible" id="bt_WidgetFontInit" title="{{ré-initialiser les Fonts}}"><i class="fa fa-square"></i> {{Reset}}</button>                                    
                                 </div>
                             </div>
                         </div>
-                    </div>                
+                        <div class="well col-sm-12">
+                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Expert}}</strong>
+                            <div class="form-group form-group-sm">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-block btn-danger expertModeVisible" id="bt_WidgetFontInit" title="{{ré-initialiser les Fonts}}"><i class="fa fa-square"></i> {{Reset}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="well col-sm-9" style="min-width: 725px;" id="bsPanelWidgetFonts">
                         <div class="panel panel-success">
                             <div class="panel-heading">
@@ -924,12 +924,12 @@ function displayWidgetSubtype($_name) {
                             </div>
                             <div class="panel-body" style="height: 250px; overflow: auto">
                                 <div class="col-sm-12" id="bsFontsView">
-                                </div> 
-                            </div> 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </fieldset>        
+            </fieldset>
         </form>
     </div>
     <div class="col-lg-9 col-md-8 col-sm-8 widgetListDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
@@ -941,28 +941,28 @@ function displayWidgetSubtype($_name) {
         </legend>
         <div class="pluginContainer">
             <?php
-            $widget_list = array_merge($dashboardWidget, $mobileWidget);
-            foreach ($widget_list as $widget) {
-                echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="position:relative;border: 1px solid #C5C5C5;border-radius: 15px;background-color : #ffffff; height : 180px;margin-bottom : 10px;padding : 10px;width : 160px;margin-left : 10px;" >';
-                if ($widget->getVersion() == 'mobile') {
-                    echo '<i class="fa fa-mobile" style="position: absolute;top: 15px;left: 21px;" title="Widget pour la version bureau"></i>' . displayWidgetType($widget->getHumanName()) . displayWidgetSubtype($widget->getHumanName());
-                } else {
-                    echo '<i class="fa fa-desktop" style="position: absolute;top: 15px;left: 17px;" title="Widget pour la version mobile"></i>' . displayWidgetType($widget->getHumanName()) . displayWidgetSubtype($widget->getHumanName());
-                }
-                $urlPath = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
-                $urlPath2 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
-                $urlPath3 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.jpg';
-                echo "<center>";
-                echo '<img class="lazy" style="margin-left: 40px;border: 1px solid #C5C5C5;border-radius:5px; padding: 3px" src="plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
-                echo "</center>";
-                if ($widget->getVersion() == 'mobile') {
-                    echo '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
-                } else {
-                    echo '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
-                }
-                echo '</div>';
-            }
-            ?>
+$widget_list = array_merge($dashboardWidget, $mobileWidget);
+foreach ($widget_list as $widget) {
+	echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="position:relative;border: 1px solid #C5C5C5;border-radius: 15px;background-color : #ffffff; height : 180px;margin-bottom : 10px;padding : 10px;width : 160px;margin-left : 10px;" >';
+	if ($widget->getVersion() == 'mobile') {
+		echo '<i class="fa fa-mobile" style="position: absolute;top: 15px;left: 21px;" title="Widget pour la version bureau"></i>' . displayWidgetType($widget->getHumanName()) . displayWidgetSubtype($widget->getHumanName());
+	} else {
+		echo '<i class="fa fa-desktop" style="position: absolute;top: 15px;left: 17px;" title="Widget pour la version mobile"></i>' . displayWidgetType($widget->getHumanName()) . displayWidgetSubtype($widget->getHumanName());
+	}
+	$urlPath = config::byKey('market::address') . '/filestore/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
+	$urlPath2 = config::byKey('market::address') . '/filestore/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
+	$urlPath3 = config::byKey('market::address') . '/filestore/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.jpg';
+	echo "<center>";
+	echo '<img class="lazy" style="margin-left: 40px;border: 1px solid #C5C5C5;border-radius:5px; padding: 3px" src="plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
+	echo "</center>";
+	if ($widget->getVersion() == 'mobile') {
+		echo '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
+	} else {
+		echo '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
+	}
+	echo '</div>';
+}
+?>
         </div>
     </div>
 
@@ -1001,10 +1001,10 @@ function displayWidgetSubtype($_name) {
                                 <select class="widgetAttr form-control" data-l1key='type'>
                                     <option value='none'>{{Aucun}}</option>
                                     <?php
-                                    foreach (cmd::allType() as $type) {
-                                        echo '<option value="' . $type['type'] . '">' . $type['type'] . '</option>';
-                                    }
-                                    ?>
+foreach (cmd::allType() as $type) {
+	echo '<option value="' . $type['type'] . '">' . $type['type'] . '</option>';
+}
+?>
                                 </select>
                             </div>
                         </div>
@@ -1014,10 +1014,10 @@ function displayWidgetSubtype($_name) {
                                 <select class="widgetAttr form-control" data-l1key='subtype'>
                                     <option value='none'>{{Aucun}}</option>
                                     <?php
-                                    foreach (cmd::allSubType() as $subtype) {
-                                        echo '<option value="' . $subtype['subtype'] . '">' . $subtype['subtype'] . '</option>';
-                                    }
-                                    ?>
+foreach (cmd::allSubType() as $subtype) {
+	echo '<option value="' . $subtype['subtype'] . '">' . $subtype['subtype'] . '</option>';
+}
+?>
                                 </select>
                             </div>
                         </div>
