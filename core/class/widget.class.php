@@ -269,7 +269,7 @@ class widget {
 				$html = $cmd->toHtml($this->getVersion());
 				if (trim($html) != '') {
 					$color = $cmd->getEqLogic()->getBackgroundColor($this->getVersion());
-					return '<div class="eqLogic-widget" style="background-color : ' . $color . ';">' . $html . '</div>';
+					return array('html' => '<div class="eqLogic-widget" style="background-color : ' . $color . ';">' . $html . '</div>', 'cmd_humanname' => $cmd->getHumanName());
 				}
 			}
 
@@ -279,7 +279,7 @@ class widget {
 			$html = $cmd->toHtml($this->getVersion());
 			if (trim($html) != '') {
 				$color = $cmd->getEqLogic()->getBackgroundColor($this->getVersion());
-				return '<div class="eqLogic-widget" style="background-color : ' . $color . ';">' . $html . '</div>';
+				return array('html' => '<div class="eqLogic-widget" style="background-color : ' . $color . ';">' . $html . '</div>', 'cmd_id' => $cmd->getId(), 'cmd_humanname' => $cmd->getHumanName());
 			}
 		}
 	}
