@@ -1,4 +1,4 @@
--:icons:
+:icons:
 == Widget
 
 === Description
@@ -15,4 +15,3 @@ include::faq.asciidoc[]
 '''
 === Changelog
 include::changelog.asciidoc[]
-
