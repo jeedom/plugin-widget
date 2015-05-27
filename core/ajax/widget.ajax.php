@@ -59,7 +59,6 @@ try {
         $widget->setSubtype($widget_ajax['subtype']);
         $widget->setContent($widget_ajax['content']);
         $widget->setVersion($widget_ajax['version']);
-        //$widget->setPath($widget->generatePath());
         $widget->save();
         ajax::success(utils::o2a($widget));
     }
@@ -86,10 +85,7 @@ try {
             throw new Exception(__('Widget non trouvé : ', __FILE__) . init('path'));
         }
         $widget->setName(init('name'));
-        //$result['path'] = realpath($widget->generatePath());
-        //$result['copy2'] = 
-        $result = utils::o2a($widget->copy(init('name',$widget->getName().'_copy')));
-        $result['path'] = realpath(init('path'));
+        utils::o2a($widget->copy(init('name',$widget->getName().'_copy')));
         ajax::success($widget->generatePath());
     }
 
