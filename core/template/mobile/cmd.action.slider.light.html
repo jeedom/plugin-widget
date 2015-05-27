@@ -23,8 +23,9 @@
             }
         });
 
-        $('.cmd[data-cmd_id=#id#] .slider').on("slidestop", function(event, ui) {
-            jeedom.cmd.execute({id: '#id#', value: {slider: $(this).find('input').value()}});
+        $("body").undelegate(".cmd[data-cmd_id=#id#] .slider");
+        $("body").delegate(".cmd[data-cmd_id=#id#] .slider",'slidestop', function (event, ui) {
+            jeedom.cmd.execute({id: '#id#', value: {slider: $(".cmd[data-cmd_id=#id#] .slider input").value()}});
         });
     </script>
 </div>

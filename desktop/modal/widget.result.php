@@ -19,17 +19,16 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 include_file('core', 'authentification', 'php');
 if (!isConnect('admin')) {
-    throw new Exception('{{401 - Accès non autorisé}}');
+	throw new Exception('{{401 - Accès non autorisé}}');
 }
 
 if (init('path') == '') {
-    throw new Exception('{{Aucun widget fourni}}');
+	throw new Exception('{{Aucun widget fourni}}');
 }
 $widget = widget::byPath(init('path'));
 if (!is_object($widget)) {
-    throw new Exception('{{Widget non trouvé}}');
+	throw new Exception('{{Widget non trouvé}}');
 }
-
 
 include_file('core', 'icon.inc', 'php');
 include_file('3rdparty', 'php.js/php.min', 'js');
@@ -38,27 +37,30 @@ include_file('3rdparty', 'highstock/highstock', 'js');
 include_file('3rdparty', 'highstock/highcharts-more', 'js');
 
 if ($widget->getVersion() == 'mobile') {
-    include_file('3rdparty', 'jquery.mobile/jquery.mobile.min', 'css');
-    include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid', 'css');
-    include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid.dark', 'css');
-    include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid.color.green', 'css');
-    include_file('mobile', 'commun', 'css');
-    include_file('3rdparty', 'jquery.mobile/jquery.mobile.min', 'js');
+	include_file('3rdparty', 'jquery.mobile/jquery.mobile.min', 'css');
+	include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid', 'css');
+	include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid.dark', 'css');
+	include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid.color.green', 'css');
+	include_file('mobile', 'commun', 'css');
+	include_file('3rdparty', 'jquery.mobile/jquery.mobile.min', 'js');
 } else {
-    include_file('desktop', 'commun', 'css');
-    include_file('3rdparty', 'bootstrap/css/bootstrap.min', 'css');
-    include_file('3rdparty', 'jquery.ui/jquery-ui-bootstrap/jquery-ui', 'css');
-    include_file('3rdparty', 'bootstrap.slider/css/slider', 'css');
-    include_file('3rdparty', 'bootstrap/bootstrap.min', 'js');
-    include_file('3rdparty', 'jquery.ui/jquery-ui.min', 'js');
-    include_file('3rdparty', 'bootstrap.slider/js/bootstrap-slider', 'js');
+	include_file('desktop', 'commun', 'css');
+	include_file('3rdparty', 'bootstrap/css/bootstrap.min', 'css');
+	include_file('3rdparty', 'jquery.ui/jquery-ui-bootstrap/jquery-ui', 'css');
+	include_file('3rdparty', 'bootstrap.slider/css/slider', 'css');
+	include_file('3rdparty', 'bootstrap/bootstrap.min', 'js');
+	include_file('3rdparty', 'jquery.ui/jquery-ui.min', 'js');
+	include_file('3rdparty', 'bootstrap.slider/js/bootstrap-slider', 'js');
 }
 include_file('3rdparty', 'jquery.utils/jquery.utils', 'js');
 include_file('core', 'js.inc', 'php');
+$widget_display = $widget->displayExemple();
+echo $widget_display['cmd_humanname'];
+echo '<br/>';
 echo '<div class="eqLogic eqLogic-widget">';
 echo '<div class="verticalAlign">';
 echo '<center>';
-echo $widget->displayExemple();
+echo $widget_display['html'];
 echo '</center>';
 echo '</div>';
 echo '</div>';

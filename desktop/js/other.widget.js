@@ -4,11 +4,50 @@
  * and open the template in the editor.
  */
 
-/* global editorOther */
+/* global editorOther, specialWidgets, pathFile, Snap, widgetCallback */
 
 //initOtherAction();
 
-$('#modalOtherActionCancel').on('click', function () {
+function otherActionSave(_callback) {
+    var widget = {
+        content: editorOther.getValue(),
+        logicalId: ($('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile') + ".action.other." + $('#bsOtherActionName').val(),
+        name: $('#bsOtherActionName').val(),
+        nbUsedBy: "0",
+        path: pathFile.replace('desktop/php','core/class') + "/../template/" + ($('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile') + "/cmd.action.other." + $('#bsOtherActionName').val() + ".html",
+        subtype: "other",
+        type: "action",
+        version: $('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile'
+    };
+    $.ajax({
+        type: "POST", 
+        url: "plugins/widget/core/ajax/widget.ajax.php", 
+        data: {
+            action: "save",
+            widget: json_encode(widget)
+        },
+        dataType: 'json',
+        error: function (request, status, error) {
+            handleAjaxError(request, status, error);
+            return;
+        },
+        success: function (data) { // si l'appel a bien fonctionné
+            if (data.state !== 'ok') {
+                $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                return;
+            }
+            notify("Créateur de Widget", 'widget de type action.other ' + $('#bsOtherActionName').val() + ' créé avec succès', 'success');
+            if(_callback !== undefined)
+                _callback(data.result.path);
+        }
+    });
+}
+$('#modalOtherActionSave').on('click', function () {
+    otherActionSave(widgetCallback);
+    $('#modalOtherActionCancel').click();
+});
+
+function otherActionCancel() {
     $('#bsOtherWidgetOff').empty();
     $('#bsOtherWidgetOn').empty();
     $('#bsOtherWidgetOff').parent().parent().hide();
@@ -35,12 +74,14 @@ $('#modalOtherActionCancel').on('click', function () {
     $('#bsOtherLabel1').empty();
     $('#bsOtherLabel2').empty();
     $('#bsOtherActionName').val('');
-    //$('#md_modalWidget').dialog('close');
     if (editorOther !== null) {
         editorOther.toTextArea();
         $('#bsViewInfoBinary').empty();
         editorOther = null;
     }
+}
+$('#modalOtherActionCancel').on('click', function () {
+    otherActionCancel();
     $('#bsOtherActionCategory').hide('fade');
     $('#bsPanelWidgetImages').show('fade');
 });
@@ -235,82 +276,6 @@ function checkOtherSpecial() {
         return false;
     }
 }
-
-$('#modalOtherActionSave').on('click', function () {
-    var widget = {
-        content: editorOther.getValue(),
-        logicalId: ($('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile') + ".action.other." + $('#bsOtherActionName').val(),
-        name: $('#bsOtherActionName').val(),
-        nbUsedBy: "0",
-        path: pathFile.replace('desktop/php','core/class') + "/../template/" + ($('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile') + "/cmd.action.other." + $('#bsOtherActionName').val() + ".html",
-        subtype: "other",
-        type: "action",
-        version: $('#bsOtherActionDash').val() === "1" ? 'dashboard' : 'mobile'
-    };
-    $.ajax({
-        type: "POST", 
-        url: "plugins/widget/core/ajax/widget.ajax.php", 
-        data: {
-            action: "save",
-            widget: json_encode(widget)
-        },
-        dataType: 'json',
-        error: function (request, status, error) {
-            handleAjaxError(request, status, error);
-            return;
-        },
-        success: function (data) { // si l'appel a bien fonctionné
-            if (data.state !== 'ok') {
-                $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                return;
-            }
-            notify("Créateur de Widget", 'widget de type action.other ' + $('#bsOtherActionName').val() + ' créé avec succès', 'success');
-            var vars = getUrlVars();
-            var url = 'index.php?';
-            for (var i in vars) {
-                if (i !== 'id' && i !== 'saveSuccessFull' && i !== 'removeSuccessFull') {
-                    url += i + '=' + vars[i].replace('#', '') + '&';
-                }
-            }
-            url += 'id=' + data.result.path + '&saveSuccessFull=1';
-            window.location.href = url;
-        }
-    });
-    $('#bsOtherWidgetOff').empty();
-    $('#bsOtherWidgetOn').empty();
-    $('#bsOtherWidgetOff').parent().parent().hide();
-    $('#bsOtherWidgetOn').parent().parent().hide();
-    $('#modalOtherActionSave').prop('disabled',true);
-    $('#bsOtherPreview1').attr('src', "");
-    $('#bsOtherPreview2').attr('src', "");
-    $('#bsOtherImage1').val('0');
-    $('#bsOtherImage2').val('0');
-    $('#bsOtherSpecialCat1').val('');
-    $('#bsOtherSpecial1').val('');
-    $('#bsOtherSpecialCat2').val('');
-    $('#bsOtherSpecial2').val('');
-    $('#bsOtherActionDash').val('1');
-    $('#bsOtherActionType').val('0');
-    $('#bsOtherActionIconSize1').val('2.5');
-    $('#bsOtherActionIconSize2').val('2.5');
-    $('#bsOtherActionIconCmd1').html('');
-    $('#bsOtherActionIconCmd2').html('');
-    $('#bsOtherPreviewSpec1').attr('src', "");
-    $('#bsOtherPreviewSpec2').attr('src', "");
-    $('#bsOtherLabelSpec1').empty();
-    $('#bsOtherLabelSpec2').empty();
-    $('#bsOtherLabel1').empty();
-    $('#bsOtherLabel2').empty();
-    $('#bsOtherActionName').val('');
-    //$('#md_modalWidget').dialog('close');
-    if (editorOther !== null) {
-        editorOther.toTextArea();
-        $('#bsViewInfoBinary').empty();
-        editorOther = null;
-    }
-    $('#bsOtherActionCategory').hide('fade');
-    $('#bsPanelWidgetImages').show('fade');
-});
 
 $('#bsOtherActionDash').on('change', function () {
     bsOtherActionType();

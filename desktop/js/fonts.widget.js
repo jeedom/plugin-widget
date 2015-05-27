@@ -19,7 +19,7 @@ $('#bt_WidgetFont').fileupload({
             return;
         }
         notify("{{Ajout d'une Font}}", "{{Font ajoutée avec succès}}", 'success');
-        updateListFonts();
+        updateListFonts($('#bsFontsView'));
     }
 });
 
@@ -48,7 +48,7 @@ $('#bsFontsView').on('click', '.bsDelFont', function (event) {
                         return;
                     }
                     if (data.result === true) {
-                        updateListFonts();
+                        updateListFonts($('#bsFontsView'));
                     }
                     else {
                         notify("{{Suppression d'une Font}}", "{{Impossible de supprimer la Font: }}" + fontsWidgets[delFont].file, 'warning');
@@ -76,7 +76,7 @@ function htmlFontFace(font) {
     html += "\tfont-variant: normal;\n";
     html += "\tfont-style: normal;\n";
     html += "}\n";
-    html += '[class="' + filename[0] + '"] {\n';
+    html += '[class^="' + filename[0] + '"], [class*=" ' + filename[0] + '"] {\n';
     html += "\tfont-family: '" + filename[0] + "';\n";
     html += "\tspeak: none;\n";
     html += "\ttext-transform: none;\n";
@@ -85,8 +85,7 @@ function htmlFontFace(font) {
     return html;
 }
 
-
-function getHtmlSelectStyle(select) {
+function getHtmlSelectStyle(_select, _value, _callback) {
     $.ajax({
         type: "POST",
         url: "plugins/widget/core/ajax/widget.ajax.php",
@@ -101,19 +100,30 @@ function getHtmlSelectStyle(select) {
             var options = '<option value="">{{Aucune}}</option>';
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                select.html(options);
+                if(init(_select) !== "")
+                    _select.html(options);
                 return;
             }
+            fontsWidgets = [];
+            init(_value);
             for (var i in data.result) {
                 var filename = data.result[i].split('.');
+                fontsWidgets.push({'file': data.result[i],'name': filename[0], 'extension': filename[1], 'html':htmlFontFace(data.result[i])});
                 options += '<option value="' + filename[0] + '">' + data.result[i] + '</option>';
             }
-            select.html(options);
-        }
+            if(init(_select) !== "") {
+                _select.html(options);
+                _select.val(_value);
+            }
+             if ('function' === typeof (_callback)) {
+                _callback();
+            }
+       }
     });
 }
 
-function updateListFonts() {
+var fontsColByLine;
+function updateListFonts(_view) {
     $.ajax({
         type: "POST",
         url: "plugins/widget/core/ajax/widget.ajax.php",
@@ -125,6 +135,7 @@ function updateListFonts() {
             handleAjaxError(request, status, error);
         },
         success: function (data) {
+            var view = init(_view);
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -133,12 +144,15 @@ function updateListFonts() {
             var fonts = '';
             for (var i in data) {
             }
+            if( fontsColByLine === undefined)
+                fontsColByLine = 4;
             for (var i in data.result) {
                 var filename = data.result[i].split('.');
                 fontsWidgets.push({'file': data.result[i],'name': filename[0], 'extension': filename[1], 'html':htmlFontFace(data.result[i])});
-                fonts += '<div class="media-left col-sm-3" style="min-width: 105px">';
+                fonts += '<div class="media-left col-sm-' + fontsColByLine + '" style="min-width: 105px">';
                 fonts += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noMarginBottom">';
-                fonts += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelFont" data-font="' + i + "\" title=\"{{Supprimer la Font}}\"><i class='fa fa-trash-o'></i></button>";
+                if(view !== '' && view.attr('id') === "bsFontsView")
+                    fonts += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelFont" data-font="' + i + "\" title=\"{{Supprimer la Font}}\"><i class='fa fa-trash-o'></i></button>";
                 fonts += "<span class=\"pull-right\" style=\"font-family: '" + filename[0] + "';\">" + filename[0] + "</span>";
                 fonts += '</div>';
                 fonts += "<div class=\"text-center\" style=\"font-family: '" + filename[0] + "'; font-size: 2.5em\">012345</div>";
@@ -146,7 +160,8 @@ function updateListFonts() {
                 fonts += "<div class=\"text-center\" style=\"font-family: '" + filename[0] + "'; font-size: 2.5em\">abcdef</div>";
                 fonts += '</div>';
             }
-            $('#bsFontsView').html('<div class="media">' + fonts + '</div>');
+            if(view !== '')
+                view.html('<div class="media">' + fonts + '</div>');
             if (firstCheckStyleCss === true) {
                 firstCheckStyleCss = false;
                 checkStyleCss();
@@ -240,9 +255,6 @@ function createStyleCss() {
                 }
             }
             url = url.substring(0, url.length - 1);
-            $('.pluginContainer').children().show();
-            $('.pluginContainer').packery();
-            $('#ul_widget').children(':gt(4)').show();
             window.location.href = url;
         }
     });

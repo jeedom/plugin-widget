@@ -14,14 +14,14 @@ include_file('3rdparty', 'jquery.fileupload/jquery.iframe-transport', 'js');
 include_file('3rdparty', 'jquery.fileupload/jquery.fileupload', 'js');
 include_file('3rdparty', 'jquery.lazyload/jquery.lazyload', 'js');
 include_file('3rdparty', 'jquery.packery/jquery.packery', 'js');
-//include_file('3rdparty', 'snap.svg', 'js', 'widget');
 ?>
-<script src="3rdparty/snap.svg/snap.svg-min.js"></script>
+<!--script src="3rdparty/snap.svg/snap.svg-min.js"></script-->
 <?php
 $mobileWidget = widget::listWidget('mobile');
 $dashboardWidget = widget::listWidget('dashboard');
 $pathfile = dirname(__FILE__);
 sendVarToJS('pathFile', $pathfile);
+
 function displayWidgetName($_name) {
     $result = '';
     $name = explode('.', $_name);
@@ -64,6 +64,7 @@ function displayWidgetName($_name) {
     }
     return $result .= $name[2];
 }
+
 function displayWidgetType($_name) {
     $result = '';
     $name = explode('.', $_name);
@@ -83,6 +84,7 @@ function displayWidgetType($_name) {
     }
     return $result;
 }
+
 function displayWidgetSubtype($_name) {
     $result = '';
     $name = explode('.', $_name);
@@ -166,15 +168,14 @@ function displayWidgetSubtype($_name) {
         cursor: pointer;
     }
 </style>
-<div id="md_modalWidget"></div>
 <div class="row row-overflow">
     <div class="col-lg-3 col-md-4 col-sm-4" id="bsListWidgets">
         <div class="bs-sidebar">
-            <ul id="ul_widget" class="nav nav-list bs-sidenav">
-                <a class="btn btn-primary tooltips" id="bt_getFromMarket" title="{{Récuperer du market}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Market}}</a>
+            <ul id="" class="nav nav-list bs-sidenav">
+                <a class="btn btn-default tooltips" id="bt_getFromMarket" title="{{Récuperer du market}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Market}}</a>
                 <a class="btn btn-primary widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter un widget}}</a>
-                <a class="btn btn-primary widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="fonts"><i class="icon divers-numbers"></i> {{Fonts}}</a>
                 <a class="btn btn-success widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="create"><i class="fa fa-picture-o"></i> {{Mode création facile}}</a>
+                <a class="btn btn-success widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="fonts"><i class="icon divers-numbers"></i> {{Fonts}}</a>
                 <div class="panel panel-default expertModeVisible">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center"><strong>Filtre</strong></h3>
@@ -187,7 +188,7 @@ function displayWidgetSubtype($_name) {
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterMobile"><i class="fa fa-mobile fa-fw"></i>
                             </label>
-                        </div>    
+                        </div>
                         <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterAction"><i class="fa fa-exclamation-circle fa-fw"></i>
@@ -198,7 +199,7 @@ function displayWidgetSubtype($_name) {
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterSlider"><span class="label label-primary" style="text-shadow: none;">slider</span>
                             </label>
-                        </div>    
+                        </div>
                         <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterInfo"><i class="fa fa-eye fa-fw"></i>
@@ -212,24 +213,12 @@ function displayWidgetSubtype($_name) {
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterString"><span class="label label-default" style="text-shadow: none;">string</span>
                             </label>
-                        </div>                
+                        </div>
                     </div>
-                </div>      
+                </div>
                 <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
-
-                <?php
-                foreach ($dashboardWidget as $widget) {
-                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop fa-fw" title="Widget pour la version bureau"></i> ' . displayWidgetName($widget->getHumanName());
-                    echo '<span class="badge pull-right">' . count($widget->getUsedBy()) . '</span>';
-                    echo '</a></li>';
-                }
-                foreach ($mobileWidget as $widget) {
-                    echo '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-mobile fa-fw" title="Widget pour la version mobile"></i> ' . displayWidgetName($widget->getHumanName());
-                    echo '<span class="badge pull-right">' . count($widget->getUsedBy()) . '</span>';
-                    echo '</a></li>';
-                }
-                ?>
             </ul>
+            <ul id="ul_widget" class="nav nav-pills nav-stacked"></ul>
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 widgetImageView" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
@@ -239,7 +228,7 @@ function displayWidgetSubtype($_name) {
                 <div class="container-fluid" id="bsMenuImagesView">
                     <div class="form-horizontal col-sm-3" style="min-width: 225px">
                         <div class="well col-sm-12">
-                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Images}}</strong>    
+                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Images}}</strong>
                             <div class="form-group form-group-sm">
                                 <div class="col-sm-12">
                                     <span class="form-control btn-info fileinput-button">
@@ -247,7 +236,7 @@ function displayWidgetSubtype($_name) {
                                         <span> {{Ajouter ses images...}}</span>
                                         <input class="form-control" type="file" id="bsImagesFileload" name="images" data-url="plugins/widget/core/ajax/widget.ajax.php?action=imageUpload"/>
                                     </span>
-                                </div>    
+                                </div>
                             </div>
                         </div>
                         <div class="well col-sm-12">
@@ -260,290 +249,308 @@ function displayWidgetSubtype($_name) {
                                 </div>
                             </div>
                         </div>
-                    </div>                
+                    </div>
                     <div class="well col-sm-9" id="bsPanelWidgetImages" style="min-width: 725px;">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>{{Bibliothèque d'images : Jeedom}}<small><em><bold> - {{Les divers icônes de Jeedom disponibles}}</bold></em></small></h4></div>
-                            <div class="panel-body" style="height: 250px; overflow: auto">
-                                <div class="col-sm-12" id="bsIconView">
-
-                                    <?php
-                                    foreach (ls('core/css/icon', '*') as $dir) {
-                                        if (is_dir('core/css/icon/' . $dir) && file_exists('core/css/icon/' . $dir . '/style.css')) {
-                                            $css = file_get_contents('core/css/icon/' . $dir . '/style.css');
-                                            $research = strtolower(str_replace('/', '', $dir));
-                                            preg_match_all("/\." . $research . "-(.*?):/", $css, $matches, PREG_SET_ORDER);
-                                            $height = (ceil(count($matches) / 12) * 80) + 80;
-                                            echo '<div style="height : ' . $height . 'px;"><legend>{{' . str_replace('/', '', $dir) . '}}</legend>';
-                                            $number = 1;
-                                            foreach ($matches as $match) {
-                                                if (isset($match[0])) {
-                                                    if ($number == 1) {
-                                                        echo '<div class="row">';
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            {{Bibliothèque d'images : Jeedom}}<small><em><bold> - {{Les divers icônes de Jeedom disponibles}}</bold></em></small>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body" style="height: 250px; overflow: auto">
+                                        <div class="col-sm-12" id="bsIconView">
+                                            <?php
+                                            foreach (ls('core/css/icon', '*') as $dir) {
+                                                if (is_dir('core/css/icon/' . $dir) && file_exists('core/css/icon/' . $dir . '/style.css')) {
+                                                    $css = file_get_contents('core/css/icon/' . $dir . '/style.css');
+                                                    $research = strtolower(str_replace('/', '', $dir));
+                                                    preg_match_all("/\." . $research . "-(.*?):/", $css, $matches, PREG_SET_ORDER);
+                                                    $height = (ceil(count($matches) / 12) * 80) + 80;
+                                                    echo '<div style="height : ' . $height . 'px;"><legend>{{' . str_replace('/', '', $dir) . '}}</legend>';
+                                                    $number = 1;
+                                                    foreach ($matches as $match) {
+                                                        if (isset($match[0])) {
+                                                            if ($number == 1) {
+                                                                echo '<div class="row">';
+                                                            }
+                                                            echo '<div class="col-sm-1 divIconSel">';
+                                                            $icon = str_replace(array(':', '.'), '', $match[0]);
+                                                            echo '<center><span class="iconSel"><i class=\'icon ' . $icon . '\'></i></span><br/><span class="iconDesc">' . $icon . '</span></center>';
+                                                            echo '</div>';
+                                                            if ($number == 12) {
+                                                                echo '</div>';
+                                                                $number = 0;
+                                                            }
+                                                            $number++;
+                                                        }
                                                     }
-                                                    echo '<div class="col-sm-1 divIconSel">';
-                                                    $icon = str_replace(array(':', '.'), '', $match[0]);
-                                                    echo '<center><span class="iconSel"><i class=\'icon ' . $icon . '\'></i></span><br/><span class="iconDesc">' . $icon . '</span></center>';
-                                                    echo '</div>';
-                                                    if ($number == 12) {
+                                                    if ($number != 1) {
                                                         echo '</div>';
-                                                        $number = 0;
                                                     }
-                                                    $number++;
+                                                    echo "</div><br/>";
                                                 }
                                             }
-                                            if ($number != 1) {
-                                                echo '</div>';
-                                            }
-                                            echo "</div><br/>";
-                                        }
-                                    }
-                                    ?>
-                                    <div style="height: 650px;">
-                                        <legend>{{Générale}}</legend>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-glass'></i></span><br/><span class="iconDesc">fa-glass</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-music'></i></span><br/><span class="iconDesc">fa-music</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-search'></i></span><br/><span class="iconDesc">fa-search</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-envelope-o'></i></span><br/><span class="iconDesc">fa-envelope-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-heart'></i></span><br/><span class="iconDesc">fa-heart</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-star'></i></span><br/><span class="iconDesc">fa-star</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-star-o'></i></span><br/><span class="iconDesc">fa-star-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-user'></i></span><br/><span class="iconDesc">fa-user</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-film'></i></span><br/><span class="iconDesc">fa-film</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-th-large'></i></span><br/><span class="iconDesc">fa-th-large</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-check'></i></span><br/><span class="iconDesc">fa-check</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-times'></i></span><br/><span class="iconDesc">fa-times</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-power-off'></i></span><br/><span class="iconDesc">fa-power-off</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-signal'></i></span><br/><span class="iconDesc">fa-signal</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-cog'></i></span><br/><span class="iconDesc">fa-cog</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-trash-o'></i></span><br/><span class="iconDesc">fa-trash-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-home'></i></span><br/><span class="iconDesc">fa-home</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-file-o'></i></span><br/><span class="iconDesc">fa-file-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-clock-o'></i></span><br/><span class="iconDesc">fa-clock-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-road'></i></span><br/><span class="iconDesc">fa-road</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-download'></i></span><br/><span class="iconDesc">fa-download</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-inbox'></i></span><br/><span class="iconDesc">fa-inbox</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-play-circle-o'></i></span><br/><span class="iconDesc">fa-play-circle-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-refresh'></i></span><br/><span class="iconDesc">fa-refresh</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-list-alt'></i></span><br/><span class="iconDesc">fa-list-alt</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-lock'></i></span><br/><span class="iconDesc">fa-lock</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-flag'></i></span><br/><span class="iconDesc">fa-flag</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-headphones'></i></span><br/><span class="iconDesc">fa-headphones</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-volume-down'></i></span><br/><span class="iconDesc">fa-volume-down</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-qrcode'></i></span><br/><span class="iconDesc">fa-qrcode</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-barcode'></i></span><br/><span class="iconDesc">fa-barcode</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-tag'></i></span><br/><span class="iconDesc">fa-tag</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-book'></i></span><br/><span class="iconDesc">fa-book</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-print'></i></span><br/><span class="iconDesc">fa-print</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-camera'></i></span><br/><span class="iconDesc">fa-camera</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-video-camera'></i></span><br/><span class="iconDesc">fa-video-camera</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-picture-o'></i></span><br/><span class="iconDesc">fa-picture-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-pencil'></i></span><br/><span class="iconDesc">fa-pencil</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-map-marker'></i></span><br/><span class="iconDesc">fa-map-marker</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-tint'></i></span><br/><span class="iconDesc">fa-tint</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-pencil-square-o'></i></span><br/><span class="iconDesc">fa-pencil-square-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-check-square-o'></i></span><br/><span class="iconDesc">fa-check-square-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrows'></i></span><br/><span class="iconDesc">fa-arrows</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-step-backward'></i></span><br/><span class="iconDesc">fa-step-backward</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-fast-backward'></i></span><br/><span class="iconDesc">fa-fast-backward</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-backward'></i></span><br/><span class="iconDesc">fa-backward</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-play'></i></span><br/><span class="iconDesc">fa-play</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-pause'></i></span><br/><span class="iconDesc">fa-pause</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-stop'></i></span><br/><span class="iconDesc">fa-stop</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-forward'></i></span><br/><span class="iconDesc">fa-forward</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-fast-forward'></i></span><br/><span class="iconDesc">fa-fast-forward</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-step-forward'></i></span><br/><span class="iconDesc">fa-step-forward</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-eject'></i></span><br/><span class="iconDesc">fa-eject</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-chevron-left'></i></span><br/><span class="iconDesc">fa-chevron-left</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-chevron-right'></i></span><br/><span class="iconDesc">fa-chevron-right</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-plus-circle'></i></span><br/><span class="iconDesc">fa-plus-circle</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-minus-circle'></i></span><br/><span class="iconDesc">fa-minus-circle</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-times-circle'></i></span><br/><span class="iconDesc">fa-times-circle</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-check-circle'></i></span><br/><span class="iconDesc">fa-check-circle</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-question-circle'></i></span><br/><span class="iconDesc">fa-question-circle</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-info-circle'></i></span><br/><span class="iconDesc">fa-info-circle</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-crosshairs'></i></span><br/><span class="iconDesc">fa-crosshairs</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-times-circle-o'></i></span><br/><span class="iconDesc">fa-times-circle-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-check-circle-o'></i></span><br/><span class="iconDesc">fa-check-circle-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-ban'></i></span><br/><span class="iconDesc">fa-ban</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrow-left'></i></span><br/><span class="iconDesc">fa-arrow-left</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrow-right'></i></span><br/><span class="iconDesc">fa-arrow-right</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrow-up'></i></span><br/><span class="iconDesc">fa-arrow-up</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrow-down'></i></span><br/><span class="iconDesc">fa-arrow-down</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-plus'></i></span><br/><span class="iconDesc">fa-plus</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-minus'></i></span><br/><span class="iconDesc">fa-minus</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-asterisk'></i></span><br/><span class="iconDesc">fa-asterisk</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-exclamation-circle'></i></span><br/><span class="iconDesc">fa-exclamation-circle</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-gift'></i></span><br/><span class="iconDesc">fa-gift</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-leaf'></i></span><br/><span class="iconDesc">fa-leaf</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-fire'></i></span><br/><span class="iconDesc">fa-fire</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-eye'></i></span><br/><span class="iconDesc">fa-eye</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-eye-slash'></i></span><br/><span class="iconDesc">fa-slash</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-exclamation-triangle'></i></span><br/><span class="iconDesc">fa-exclamation-triangle</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-plane'></i></span><br/><span class="iconDesc">fa-plane</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-calendar'></i></span><br/><span class="iconDesc">fa-calendar</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-random'></i></span><br/><span class="iconDesc">fa-random</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-comment'></i></span><br/><span class="iconDesc">fa-comment</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-magnet'></i></span><br/><span class="iconDesc">fa-magnet</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-chevron-up'></i></span><br/><span class="iconDesc">fa-chevron-up</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-chevron-down'></i></span><br/><span class="iconDesc">fa-chevron-down</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-shopping-cart'></i></span><br/><span class="iconDesc">fa-shopping-cart</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-folder'></i></span><br/><span class="iconDesc">fa-folder</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-folder-open'></i></span><br/><span class="iconDesc">fa-folder-open</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-bar-chart-o'></i></span><br/><span class="iconDesc">fa-bar-chart-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-key'></i></span><br/><span class="iconDesc">fa-key</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-heart-o'></i></span><br/><span class="iconDesc">fa-heart-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-sign-out'></i></span><br/><span class="iconDesc">fa-sign-out</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-thumb-tack'></i></span><br/><span class="iconDesc">fa-thumb-tack</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-sign-in'></i></span><br/><span class="iconDesc">fa-sign-in</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-phone'></i></span><br/><span class="iconDesc">fa-phone</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-unlock'></i></span><br/><span class="iconDesc">fa-unlock</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-credit-card'></i></span><br/><span class="iconDesc">fa-credit-card</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-rss'></i></span><br/><span class="iconDesc">fa-rss</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-hdd-o'></i></span><br/><span class="iconDesc">fa-hdd-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-bullhorn'></i></span><br/><span class="iconDesc">fa-bullhorn</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-bell'></i></span><br/><span class="iconDesc">fa-bell</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-globe'></i></span><br/><span class="iconDesc">fa-globe</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-wrench'></i></span><br/><span class="iconDesc">fa-wrench</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-filter'></i></span><br/><span class="iconDesc">fa-filter</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-briefcase'></i></span><br/><span class="iconDesc">fa-briefcase</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-cloud'></i></span><br/><span class="iconDesc">fa-cloud</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-flask'></i></span><br/><span class="iconDesc">fa-flask</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-scissors'></i></span><br/><span class="iconDesc">fa-scissors</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-paperclip'></i></span><br/><span class="iconDesc">fa-paperclip</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-floppy-o'></i></span><br/><span class="iconDesc">fa-floppy-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-table'></i></span><br/><span class="iconDesc">fa-table</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-magic'></i></span><br/><span class="iconDesc">fa-magic</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-truck'></i></span><br/><span class="iconDesc">fa-truck</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-money'></i></span><br/><span class="iconDesc">fa-money</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-columns'></i></span><br/><span class="iconDesc">fa-columns</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-envelope'></i></span><br/><span class="iconDesc">fa-envelope</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-gavel'></i></span><br/><span class="iconDesc">fa-gavel</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-tachometer'></i></span><br/><span class="iconDesc">fa-tachometer</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-bolt'></i></span><br/><span class="iconDesc">fa-bolt</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-sitemap'></i></span><br/><span class="iconDesc">fa-sitemap</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-umbrella'></i></span><br/><span class="iconDesc">fa-umbrella</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-lightbulb-o'></i></span><br/><span class="iconDesc">fa-lightbulb-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-stethoscope'></i></span><br/><span class="iconDesc">fa-stethoscope</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-suitcase'></i></span><br/><span class="iconDesc">fa-suitcase</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-coffee'></i></span><br/><span class="iconDesc">fa-coffee</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-cutlery'></i></span><br/><span class="iconDesc">fa-cutlery</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-building-o'></i></span><br/><span class="iconDesc">fa-building-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-medkit'></i></span><br/><span class="iconDesc">fa-medkit</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-beer'></i></span><br/><span class="iconDesc">fa-beer</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-h-square'></i></span><br/><span class="iconDesc">fa-square</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-desktop'></i></span><br/><span class="iconDesc">fa-desktop</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-laptop'></i></span><br/><span class="iconDesc">fa-laptop</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-tablet'></i></span><br/><span class="iconDesc">fa-tablet</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-mobile'></i></span><br/><span class="iconDesc">fa-mobile</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-circle-o'></i></span><br/><span class="iconDesc">fa-circle-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-spinner'></i></span><br/><span class="iconDesc">fa-spinner</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-circle'></i></span><br/><span class="iconDesc">fa-circle</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-smile-o'></i></span><br/><span class="iconDesc">fa-smile-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-frown-o'></i></span><br/><span class="iconDesc">fa-frown-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-meh-o'></i></span><br/><span class="iconDesc">fa-meh-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-gamepad'></i></span><br/><span class="iconDesc">fa-gamepad</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-keyboard-o'></i></span><br/><span class="iconDesc">fa-keyboard-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-terminal'></i></span><br/><span class="iconDesc">fa-terminal</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-location-arrow'></i></span><br/><span class="iconDesc">fa-location-arrow</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-microphone'></i></span><br/><span class="iconDesc">fa-microphone</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-microphone-slash'></i></span><br/><span class="iconDesc">fa-microphone-slash</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-shield'></i></span><br/><span class="iconDesc">fa-shield</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-calendar-o'></i></span><br/><span class="iconDesc">fa-calendar-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-fire-extinguisher'></i></span><br/><span class="iconDesc">fa-fire-extinguisher</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-rocket'></i></span><br/><span class="iconDesc">fa-rocket</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-anchor'></i></span><br/><span class="iconDesc">fa-anchor</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-unlock-alt'></i></span><br/><span class="iconDesc">fa-unlock-alt</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-compass'></i></span><br/><span class="iconDesc">fa-compass</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-apple'></i></span><br/><span class="iconDesc">fa-apple</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-windows'></i></span><br/><span class="iconDesc">fa-windows</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-android'></i></span><br/><span class="iconDesc">fa-android</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-linux'></i></span><br/><span class="iconDesc">fa-linux</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-dribbble'></i></span><br/><span class="iconDesc">fa-dribbble</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-trello'></i></span><br/><span class="iconDesc">fa-trello</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-female'></i></span><br/><span class="iconDesc">fa-female</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-male'></i></span><br/><span class="iconDesc">fa-male</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-gittip'></i></span><br/><span class="iconDesc">fa-sun-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-sun-o'></i></span><br/><span class="iconDesc">fa-glass</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-moon-o'></i></span><br/><span class="iconDesc">fa-moon-o</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-archive'></i></span><br/><span class="iconDesc">fa-archive</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-pagelines'></i></span><br/><span class="iconDesc">fa-pagelines</span></div>
-                                            <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-wheelchair'></i></span><br/><span class="iconDesc">fa-wheelchair</span></div>
-                                        </div>
-                                    </div>
-                                    <script>
-                                        $('#in_iconSelectorSearch').on('keyup', function () {
-                                            $('.divIconSel').show();
-                                            var search = $(this).value();
-                                            if (search !== '') {
-                                                $('.iconDesc').each(function () {
-                                                    if ($(this).text().indexOf(search) === -1) {
-                                                        $(this).closest('.divIconSel').hide();
+                                            ?>
+                                            <div style="height: 650px;">
+                                                <legend>{{Générale}}</legend>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-glass'></i></span><br/><span class="iconDesc">fa-glass</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-music'></i></span><br/><span class="iconDesc">fa-music</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-search'></i></span><br/><span class="iconDesc">fa-search</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-envelope-o'></i></span><br/><span class="iconDesc">fa-envelope-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-heart'></i></span><br/><span class="iconDesc">fa-heart</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-star'></i></span><br/><span class="iconDesc">fa-star</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-star-o'></i></span><br/><span class="iconDesc">fa-star-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-user'></i></span><br/><span class="iconDesc">fa-user</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-film'></i></span><br/><span class="iconDesc">fa-film</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-th-large'></i></span><br/><span class="iconDesc">fa-th-large</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-check'></i></span><br/><span class="iconDesc">fa-check</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-times'></i></span><br/><span class="iconDesc">fa-times</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-power-off'></i></span><br/><span class="iconDesc">fa-power-off</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-signal'></i></span><br/><span class="iconDesc">fa-signal</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-cog'></i></span><br/><span class="iconDesc">fa-cog</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-trash-o'></i></span><br/><span class="iconDesc">fa-trash-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-home'></i></span><br/><span class="iconDesc">fa-home</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-file-o'></i></span><br/><span class="iconDesc">fa-file-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-clock-o'></i></span><br/><span class="iconDesc">fa-clock-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-road'></i></span><br/><span class="iconDesc">fa-road</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-download'></i></span><br/><span class="iconDesc">fa-download</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-inbox'></i></span><br/><span class="iconDesc">fa-inbox</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-play-circle-o'></i></span><br/><span class="iconDesc">fa-play-circle-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-refresh'></i></span><br/><span class="iconDesc">fa-refresh</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-list-alt'></i></span><br/><span class="iconDesc">fa-list-alt</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-lock'></i></span><br/><span class="iconDesc">fa-lock</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-flag'></i></span><br/><span class="iconDesc">fa-flag</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-headphones'></i></span><br/><span class="iconDesc">fa-headphones</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-volume-down'></i></span><br/><span class="iconDesc">fa-volume-down</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-qrcode'></i></span><br/><span class="iconDesc">fa-qrcode</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-barcode'></i></span><br/><span class="iconDesc">fa-barcode</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-tag'></i></span><br/><span class="iconDesc">fa-tag</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-book'></i></span><br/><span class="iconDesc">fa-book</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-print'></i></span><br/><span class="iconDesc">fa-print</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-camera'></i></span><br/><span class="iconDesc">fa-camera</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-video-camera'></i></span><br/><span class="iconDesc">fa-video-camera</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-picture-o'></i></span><br/><span class="iconDesc">fa-picture-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-pencil'></i></span><br/><span class="iconDesc">fa-pencil</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-map-marker'></i></span><br/><span class="iconDesc">fa-map-marker</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-tint'></i></span><br/><span class="iconDesc">fa-tint</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-pencil-square-o'></i></span><br/><span class="iconDesc">fa-pencil-square-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-check-square-o'></i></span><br/><span class="iconDesc">fa-check-square-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrows'></i></span><br/><span class="iconDesc">fa-arrows</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-step-backward'></i></span><br/><span class="iconDesc">fa-step-backward</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-fast-backward'></i></span><br/><span class="iconDesc">fa-fast-backward</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-backward'></i></span><br/><span class="iconDesc">fa-backward</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-play'></i></span><br/><span class="iconDesc">fa-play</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-pause'></i></span><br/><span class="iconDesc">fa-pause</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-stop'></i></span><br/><span class="iconDesc">fa-stop</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-forward'></i></span><br/><span class="iconDesc">fa-forward</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-fast-forward'></i></span><br/><span class="iconDesc">fa-fast-forward</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-step-forward'></i></span><br/><span class="iconDesc">fa-step-forward</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-eject'></i></span><br/><span class="iconDesc">fa-eject</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-chevron-left'></i></span><br/><span class="iconDesc">fa-chevron-left</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-chevron-right'></i></span><br/><span class="iconDesc">fa-chevron-right</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-plus-circle'></i></span><br/><span class="iconDesc">fa-plus-circle</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-minus-circle'></i></span><br/><span class="iconDesc">fa-minus-circle</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-times-circle'></i></span><br/><span class="iconDesc">fa-times-circle</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-check-circle'></i></span><br/><span class="iconDesc">fa-check-circle</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-question-circle'></i></span><br/><span class="iconDesc">fa-question-circle</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-info-circle'></i></span><br/><span class="iconDesc">fa-info-circle</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-crosshairs'></i></span><br/><span class="iconDesc">fa-crosshairs</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-times-circle-o'></i></span><br/><span class="iconDesc">fa-times-circle-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-check-circle-o'></i></span><br/><span class="iconDesc">fa-check-circle-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-ban'></i></span><br/><span class="iconDesc">fa-ban</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrow-left'></i></span><br/><span class="iconDesc">fa-arrow-left</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrow-right'></i></span><br/><span class="iconDesc">fa-arrow-right</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrow-up'></i></span><br/><span class="iconDesc">fa-arrow-up</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-arrow-down'></i></span><br/><span class="iconDesc">fa-arrow-down</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-plus'></i></span><br/><span class="iconDesc">fa-plus</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-minus'></i></span><br/><span class="iconDesc">fa-minus</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-asterisk'></i></span><br/><span class="iconDesc">fa-asterisk</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-exclamation-circle'></i></span><br/><span class="iconDesc">fa-exclamation-circle</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-gift'></i></span><br/><span class="iconDesc">fa-gift</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-leaf'></i></span><br/><span class="iconDesc">fa-leaf</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-fire'></i></span><br/><span class="iconDesc">fa-fire</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-eye'></i></span><br/><span class="iconDesc">fa-eye</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-eye-slash'></i></span><br/><span class="iconDesc">fa-slash</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-exclamation-triangle'></i></span><br/><span class="iconDesc">fa-exclamation-triangle</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-plane'></i></span><br/><span class="iconDesc">fa-plane</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-calendar'></i></span><br/><span class="iconDesc">fa-calendar</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-random'></i></span><br/><span class="iconDesc">fa-random</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-comment'></i></span><br/><span class="iconDesc">fa-comment</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-magnet'></i></span><br/><span class="iconDesc">fa-magnet</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-chevron-up'></i></span><br/><span class="iconDesc">fa-chevron-up</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-chevron-down'></i></span><br/><span class="iconDesc">fa-chevron-down</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-shopping-cart'></i></span><br/><span class="iconDesc">fa-shopping-cart</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-folder'></i></span><br/><span class="iconDesc">fa-folder</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-folder-open'></i></span><br/><span class="iconDesc">fa-folder-open</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-bar-chart-o'></i></span><br/><span class="iconDesc">fa-bar-chart-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-key'></i></span><br/><span class="iconDesc">fa-key</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-heart-o'></i></span><br/><span class="iconDesc">fa-heart-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-sign-out'></i></span><br/><span class="iconDesc">fa-sign-out</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-thumb-tack'></i></span><br/><span class="iconDesc">fa-thumb-tack</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-sign-in'></i></span><br/><span class="iconDesc">fa-sign-in</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-phone'></i></span><br/><span class="iconDesc">fa-phone</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-unlock'></i></span><br/><span class="iconDesc">fa-unlock</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-credit-card'></i></span><br/><span class="iconDesc">fa-credit-card</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-rss'></i></span><br/><span class="iconDesc">fa-rss</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-hdd-o'></i></span><br/><span class="iconDesc">fa-hdd-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-bullhorn'></i></span><br/><span class="iconDesc">fa-bullhorn</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-bell'></i></span><br/><span class="iconDesc">fa-bell</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-globe'></i></span><br/><span class="iconDesc">fa-globe</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-wrench'></i></span><br/><span class="iconDesc">fa-wrench</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-filter'></i></span><br/><span class="iconDesc">fa-filter</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-briefcase'></i></span><br/><span class="iconDesc">fa-briefcase</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-cloud'></i></span><br/><span class="iconDesc">fa-cloud</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-flask'></i></span><br/><span class="iconDesc">fa-flask</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-scissors'></i></span><br/><span class="iconDesc">fa-scissors</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-paperclip'></i></span><br/><span class="iconDesc">fa-paperclip</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-floppy-o'></i></span><br/><span class="iconDesc">fa-floppy-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-table'></i></span><br/><span class="iconDesc">fa-table</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-magic'></i></span><br/><span class="iconDesc">fa-magic</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-truck'></i></span><br/><span class="iconDesc">fa-truck</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-money'></i></span><br/><span class="iconDesc">fa-money</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-columns'></i></span><br/><span class="iconDesc">fa-columns</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-envelope'></i></span><br/><span class="iconDesc">fa-envelope</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-gavel'></i></span><br/><span class="iconDesc">fa-gavel</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-tachometer'></i></span><br/><span class="iconDesc">fa-tachometer</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-bolt'></i></span><br/><span class="iconDesc">fa-bolt</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-sitemap'></i></span><br/><span class="iconDesc">fa-sitemap</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-umbrella'></i></span><br/><span class="iconDesc">fa-umbrella</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-lightbulb-o'></i></span><br/><span class="iconDesc">fa-lightbulb-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-stethoscope'></i></span><br/><span class="iconDesc">fa-stethoscope</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-suitcase'></i></span><br/><span class="iconDesc">fa-suitcase</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-coffee'></i></span><br/><span class="iconDesc">fa-coffee</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-cutlery'></i></span><br/><span class="iconDesc">fa-cutlery</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-building-o'></i></span><br/><span class="iconDesc">fa-building-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-medkit'></i></span><br/><span class="iconDesc">fa-medkit</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-beer'></i></span><br/><span class="iconDesc">fa-beer</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-h-square'></i></span><br/><span class="iconDesc">fa-square</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-desktop'></i></span><br/><span class="iconDesc">fa-desktop</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-laptop'></i></span><br/><span class="iconDesc">fa-laptop</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-tablet'></i></span><br/><span class="iconDesc">fa-tablet</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-mobile'></i></span><br/><span class="iconDesc">fa-mobile</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-circle-o'></i></span><br/><span class="iconDesc">fa-circle-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-spinner'></i></span><br/><span class="iconDesc">fa-spinner</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-circle'></i></span><br/><span class="iconDesc">fa-circle</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-smile-o'></i></span><br/><span class="iconDesc">fa-smile-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-frown-o'></i></span><br/><span class="iconDesc">fa-frown-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-meh-o'></i></span><br/><span class="iconDesc">fa-meh-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-gamepad'></i></span><br/><span class="iconDesc">fa-gamepad</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-keyboard-o'></i></span><br/><span class="iconDesc">fa-keyboard-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-terminal'></i></span><br/><span class="iconDesc">fa-terminal</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-location-arrow'></i></span><br/><span class="iconDesc">fa-location-arrow</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-microphone'></i></span><br/><span class="iconDesc">fa-microphone</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-microphone-slash'></i></span><br/><span class="iconDesc">fa-microphone-slash</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-shield'></i></span><br/><span class="iconDesc">fa-shield</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-calendar-o'></i></span><br/><span class="iconDesc">fa-calendar-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-fire-extinguisher'></i></span><br/><span class="iconDesc">fa-fire-extinguisher</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-rocket'></i></span><br/><span class="iconDesc">fa-rocket</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-anchor'></i></span><br/><span class="iconDesc">fa-anchor</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-unlock-alt'></i></span><br/><span class="iconDesc">fa-unlock-alt</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-compass'></i></span><br/><span class="iconDesc">fa-compass</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-apple'></i></span><br/><span class="iconDesc">fa-apple</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-windows'></i></span><br/><span class="iconDesc">fa-windows</span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-android'></i></span><br/><span class="iconDesc">fa-android</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-linux'></i></span><br/><span class="iconDesc">fa-linux</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-dribbble'></i></span><br/><span class="iconDesc">fa-dribbble</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-trello'></i></span><br/><span class="iconDesc">fa-trello</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-female'></i></span><br/><span class="iconDesc">fa-female</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-male'></i></span><br/><span class="iconDesc">fa-male</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-gittip'></i></span><br/><span class="iconDesc">fa-sun-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-sun-o'></i></span><br/><span class="iconDesc">fa-glass</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-moon-o'></i></span><br/><span class="iconDesc">fa-moon-o</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-archive'></i></span><br/><span class="iconDesc">fa-archive</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-pagelines'></i></span><br/><span class="iconDesc">fa-pagelines</span></div>
+                                                    <div class="col-sm-1 divIconSel"><center><span class="iconSel"><i class='fa fa-wheelchair'></i></span><br/><span class="iconDesc">fa-wheelchair</span></div>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                $('#in_iconSelectorSearch').on('keyup', function () {
+                                                    $('.divIconSel').show();
+                                                    var search = $(this).value();
+                                                    if (search !== '') {
+                                                        $('.iconDesc').each(function () {
+                                                            if ($(this).text().indexOf(search) === -1) {
+                                                                $(this).closest('.divIconSel').hide();
+                                                            }
+                                                        });
                                                     }
                                                 });
-                                            }
-                                        });
-                                        $('.divIconSel').on('click', function () {
-                                            $('.divIconSel').removeClass('iconSelected');
-                                            $(this).closest('.divIconSel').addClass('iconSelected');
-                                         });
-                                        $('.divIconSel').on('dblclick', function () {
-                                            $('.divIconSel').removeClass('iconSelected');
-                                            $(this).closest('.divIconSel').addClass('iconSelected');
-                                            $('#mod_selectIcon').dialog("option", "buttons")['Valider'].apply($('#mod_selectIcon'));
-                                        });
-                                    </script>
-                                </div> 
-                            </div> 
-                        </div>
-                        <div class="panel panel-warning" id="bsImagesPanel">
-                            <div class="panel-heading">
-                                <h4>Bibliothèque d'images : Widgets<small><em><bold> - {{Vos images personnelles}}</bold></em></small></h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="col-sm-12" id="bsImagesView" style="min-height: 50px">
+                                                $('.divIconSel').on('click', function () {
+                                                    $('.divIconSel').removeClass('iconSelected');
+                                                    $(this).closest('.divIconSel').addClass('iconSelected');
+                                                });
+                                                $('.divIconSel').on('dblclick', function () {
+                                                    $('.divIconSel').removeClass('iconSelected');
+                                                    $(this).closest('.divIconSel').addClass('iconSelected');
+                                                    $('#mod_selectIcon').dialog("option", "buttons")['Valider'].apply($('#mod_selectIcon'));
+                                                });
+                                            </script>
+                                        </div> 
+                                    </div>
                                 </div>
                             </div>
-                        </div>                    
-                        <div class="panel panel-success" id="bsSpecialPanel">
-                            <input class="form-control" type="file" id="bsSpecialFileload" name="special" style="display: none;" data-url="plugins/widget/core/ajax/widget.ajax.php?action=specialUpload"/>
-                            <div class="panel-heading">
-                                <h4>Bibliothèque d'images : Spécial<small><em><bold> - {{Pack d'icônes}}</bold></em></small></h4>
-                            </div>
-                            <div class="panel-body">
-                                <div id="bsSpecialSvgLoad" style=""></div>
-                                <div class="col-sm-12" id="bsSpecialView" style="min-height: 50px">
+                            <div class="panel panel-warning">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Bibliothèque d'images : Widgets<small><em><bold> - {{Vos images personnelles}}</bold></em></small>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body" id="bsImagesPanel">
+                                        <div class="col-sm-12" id="bsImagesView" style="min-height: 50px"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>                    
+                            <div class="panel panel-success" id="bsSpecialPanel">
+                                <input class="form-control" type="file" id="bsSpecialFileload" name="special" style="display: none;" data-url="plugins/widget/core/ajax/widget.ajax.php?action=specialUpload"/>
+                                <div class="panel-heading" role="tab" id="headingThree">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Bibliothèque d'images : Spécial<small><em><bold> - {{Pack d'icônes}}</bold></em></small>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                        <div id="bsSpecialSvgLoad" style=""></div>
+                                        <div class="col-sm-12" id="bsSpecialView" style="min-height: 50px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
                     <div class="col-sm-9" id="bsOtherActionCategory" style="display: none;">
                         <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Other.Action</strong>
@@ -583,7 +590,7 @@ function displayWidgetSubtype($_name) {
                                                     <center id="bsOtherWidgetOff">
                                                     </center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="well col-sm-6 noPaddingLeft noPaddingRight">
@@ -594,7 +601,7 @@ function displayWidgetSubtype($_name) {
                                                     <center id="bsOtherWidgetOn">
                                                     </center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -662,7 +669,7 @@ function displayWidgetSubtype($_name) {
                                 <button type="button" class="btn btn-success pull-right" id="modalOtherActionSave">{{Valider}}</button>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                     <div class="col-sm-9" id="bsInfoBinaryCategory" style="display: none;">
                         <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Info.Binary</strong>
                         <div class="col-sm-12">
@@ -701,7 +708,7 @@ function displayWidgetSubtype($_name) {
                                                     <center id="bsInfoBinaryWidgetOff">
                                                     </center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="well col-sm-6 noPaddingLeft noPaddingRight">
@@ -712,7 +719,7 @@ function displayWidgetSubtype($_name) {
                                                     <center id="bsInfoBinaryWidgetOn">
                                                     </center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -780,7 +787,7 @@ function displayWidgetSubtype($_name) {
                                 <button type="button" class="btn btn-success pull-right" id="modalInfoBinarySave">{{Valider}}</button>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                     <div class="col-sm-9" id="bsInfoNumericCategory" style="display: none;">
                         <strong class="col-sm-12 h2" style="border-bottom: 1px groove; margin-bottom: 8px;">Widget Info.Numeric</strong>
                         <div class="col-sm-12">
@@ -869,10 +876,10 @@ function displayWidgetSubtype($_name) {
                                                 <div class="verticalAlign">
                                                     <center id="bsInfoNumericWidgetOff"></center>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
-                                    </div>       
-                                </div>       
+                                    </div>
+                                </div>
                                 <div class="col-sm-9">
                                     <textarea class="form-control" id="bsViewInfoNumeric"></textarea>
                                 </div>
@@ -885,9 +892,9 @@ function displayWidgetSubtype($_name) {
                                 <button type="button" class="btn btn-success pull-right" id="modalInfoNumericSave">{{Valider}}</button>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
-            </fieldset>        
+            </fieldset>
         </form>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 widgetFontsView" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
@@ -897,7 +904,7 @@ function displayWidgetSubtype($_name) {
                 <div class="container-fluid" id="bsMenuFontsView">
                     <div class="col-sm-3" style="min-width: 225px">
                         <div class="well col-sm-12">
-                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Fonts}}</strong>    
+                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Fonts}}</strong>
                             <div class="form-group form-group-sm">
                                 <div class="col-sm-12">
                                     <span class="form-control btn-info fileinput-button">
@@ -905,18 +912,18 @@ function displayWidgetSubtype($_name) {
                                         <span> {{Ajouter une font...}}</span>
                                         <input class="form-control" type="file" id="bt_WidgetFont" name="fonts" data-url="plugins/widget/core/ajax/widget.ajax.php?action=fontUpload"/>
                                     </span>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="well col-sm-12">
-                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Expert}}</strong>    
-                            <div class="form-group form-group-sm">
-                                <div class="col-sm-12">
-                                    <button type="button" class="btn btn-block btn-danger expertModeVisible" id="bt_WidgetFontInit" title="{{ré-initialiser les Fonts}}"><i class="fa fa-square"></i> {{Reset}}</button>                                    
                                 </div>
                             </div>
                         </div>
-                    </div>                
+                        <div class="well col-sm-12">
+                            <strong class="col-sm-12 noPaddingLeft noPaddingRight" style="border-bottom: 1px groove; margin-bottom: 8px;">{{Expert}}</strong>
+                            <div class="form-group form-group-sm">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-block btn-danger expertModeVisible" id="bt_WidgetFontInit" title="{{ré-initialiser les Fonts}}"><i class="fa fa-square"></i> {{Reset}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="well col-sm-9" style="min-width: 725px;" id="bsPanelWidgetFonts">
                         <div class="panel panel-success">
                             <div class="panel-heading">
@@ -924,12 +931,12 @@ function displayWidgetSubtype($_name) {
                             </div>
                             <div class="panel-body" style="height: 250px; overflow: auto">
                                 <div class="col-sm-12" id="bsFontsView">
-                                </div> 
-                            </div> 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </fieldset>        
+            </fieldset>
         </form>
     </div>
     <div class="col-lg-9 col-md-8 col-sm-8 widgetListDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
@@ -937,37 +944,10 @@ function displayWidgetSubtype($_name) {
             <span style="font-size: 0.7em;color:#c5c5c5">
                 Vous devez être connecté à internet pour voir les prévisualisation
             </span>
-
         </legend>
-        <div class="pluginContainer">
-            <?php
-            $widget_list = array_merge($dashboardWidget, $mobileWidget);
-            foreach ($widget_list as $widget) {
-                echo '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="position:relative;border: 1px solid #C5C5C5;border-radius: 15px;background-color : #ffffff; height : 180px;margin-bottom : 10px;padding : 10px;width : 160px;margin-left : 10px;" >';
-                if ($widget->getVersion() == 'mobile') {
-                    echo '<i class="fa fa-mobile" style="position: absolute;top: 15px;left: 21px;" title="Widget pour la version bureau"></i>' . displayWidgetType($widget->getHumanName()) . displayWidgetSubtype($widget->getHumanName());
-                } else {
-                    echo '<i class="fa fa-desktop" style="position: absolute;top: 15px;left: 17px;" title="Widget pour la version mobile"></i>' . displayWidgetType($widget->getHumanName()) . displayWidgetSubtype($widget->getHumanName());
-                }
-                $urlPath = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
-                $urlPath2 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
-                $urlPath3 = config::byKey('market::address') . '/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.jpg';
-                echo "<center>";
-                echo '<img class="lazy" style="margin-left: 40px;border: 1px solid #C5C5C5;border-radius:5px; padding: 3px" src="plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
-                echo "</center>";
-                if ($widget->getVersion() == 'mobile') {
-                    echo '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
-                } else {
-                    echo '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
-                }
-                echo '</div>';
-            }
-            ?>
-        </div>
+        <div class="pluginContainer"></div>
     </div>
-
     <div class="col-lg-9 col-md-8 col-sm-8 widget" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
-
         <div class="row">
             <div class="col-sm-6">
                 <legend>
@@ -1039,12 +1019,11 @@ function displayWidgetSubtype($_name) {
                     <a class="btn btn-xs btn-warning pull-right" id="bt_shareOnMarket"><i class="fa fa-cloud-upload"></i> {{Partager}}</a>
                     <a class="btn btn-xs btn-success pull-right" id="bt_editWidget" style="display:none"><i class="fa fa-cloud-upload"></i> {{Editer}}</a>
                 </legend>
-                <div class="col-sm-6" id='div_widgetResult'style="height: 350px;"></div>
+                <div class="col-sm-6" id='div_widgetResult'></div>
             </div>
         </div>
         <a class="btn btn-default btn-xs" id="bt_insertIcon"><i class="fa fa-flag"></i> Rechercher une icone</a><br/><br/>
         <textarea class='form-control widgetAttr' data-l1key='content' id='ta_widgetContent' style='height: 500px;'></textarea>
-
         <form class="form-horizontal">
             <fieldset>
                 <div class="form-actions">
@@ -1053,7 +1032,6 @@ function displayWidgetSubtype($_name) {
                 </div>
             </fieldset>
         </form>
-
     </div>
 </div>
 

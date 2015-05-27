@@ -85,7 +85,20 @@ try {
         if (!is_object($widget)) {
             throw new Exception(__('Widget non trouvé : ', __FILE__) . init('path'));
         }
-        ajax::success(utils::o2a($widget->copy(init('name',$widget->getName().'_copy'))));
+        $widget->setName(init('name'));
+        //$result['path'] = realpath($widget->generatePath());
+        //$result['copy2'] = 
+        $result = utils::o2a($widget->copy(init('name',$widget->getName().'_copy')));
+        $result['path'] = realpath(init('path'));
+        ajax::success($widget->generatePath());
+    }
+
+    if (init('action') == 'sidebar') {
+        ajax::success(widget::getSideBarList());
+    }
+
+    if (init('action') == 'container') {
+        ajax::success(widget::getContainer());
     }
 
     if (init('action') == 'applyWidget') {
@@ -121,6 +134,27 @@ try {
         }
 
         ajax::success();
+    }
+
+    if (init('action') == 'exemple') {
+        if (init('path') == '') {
+            throw new Exception(__('{{Aucun widget fourni}} : ', __FILE__) . init('path'));
+        }
+        $widget = widget::byPath(init('path'));
+        if (!is_object($widget)) {
+            throw new Exception(__('{{Widget non trouvé}} : ', __FILE__) . init('path'));
+        }
+        $widget_display = $widget->displayExemple();
+        $return = '<center>';
+        $return .= $widget_display['cmd_humanname'];
+        $return .= '<div class="verticalAlign">';
+        $return .= '<center>';
+        $return .= $widget_display['html'];
+        $return .= '</center>';
+        $return .= '</div>';
+        //$return .= '</div>';
+        $return .= '</center>';
+        ajax::success($return);
     }
 
     if (init('action') == 'fileupload') {
@@ -433,4 +467,3 @@ function checkZipSvg($name) {
     return $check;
 }
 
-?>
