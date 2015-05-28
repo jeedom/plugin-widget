@@ -180,6 +180,142 @@ class widget {
 		return $return;
 	}
 
+	public static function getSideBarList() {
+		$return = '';
+		foreach (self::listWidget('dashboard') as $widget) {
+			$return .= '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-desktop fa-fw" title="Widget pour la version bureau"></i> ' . $widget->displayWidgetName();
+			$return .= '<span class="badge pull-right">' . count($widget->getUsedBy()) . '</span>';
+			$return .= '</a></li>';
+		}
+		foreach (self::listWidget('mobile') as $widget) {
+			$return .= '<li class="cursor li_widget" data-path="' . $widget->getPath() . '"><a><i class="fa fa-mobile fa-fw" title="Widget pour la version mobile"></i> ' . $widget->displayWidgetName();
+			$return .= '<span class="badge pull-right">' . count($widget->getUsedBy()) . '</span>';
+			$return .= '</a></li>';
+		}
+		return $return;
+	}
+
+	public static function getContainer() {
+		$return = '';
+		$widget_list = array_merge(self::listWidget('dashboard'), self::listWidget('mobile'));
+		foreach ($widget_list as $widget) {
+			$return .= '<div class="widgetDisplayCard cursor" data-path="' . $widget->getPath() . '" style="position:relative;border: 1px solid #C5C5C5;border-radius: 15px;background-color : #ffffff; height : 180px;margin-bottom : 10px;padding : 10px;width : 160px;margin-left : 10px;" >';
+			if ($widget->getVersion() == 'mobile') {
+				$return .= '<i class="fa fa-mobile" style="position: absolute;top: 15px;left: 21px;" title="Widget pour la version bureau"></i>' . $widget->displayWidgetType() . $widget->displayWidgetSubtype();
+			} else {
+				$return .= '<i class="fa fa-desktop" style="position: absolute;top: 15px;left: 17px;" title="Widget pour la version mobile"></i>' . $widget->displayWidgetType() . $widget->displayWidgetSubtype();
+			}
+			$urlPath = config::byKey('market::address') . '/filestore/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '.jpg';
+			$urlPath2 = config::byKey('market::address') . '/filestore/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
+			$urlPath3 = config::byKey('market::address') . '/filestore/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.jpg';
+			$return .= "<center>";
+			$return .= '<img class="lazy" style="margin-left: 40px;border: 1px solid #C5C5C5;border-radius:5px; padding: 3px" src="plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
+			$return .= "</center>";
+			if ($widget->getVersion() == 'mobile') {
+				$return .= '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
+			} else {
+				$return .= '<strong class="well col-sm-12 text-center" style="font-size : 1em;position:relative;padding: 5px; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;">' . $widget->getName() . '</strong>';
+			}
+			$return .= '</div>';
+		}
+		return $return;
+	}
+
+	public function displayWidgetName() {
+		$result = '';
+		$name = explode('.', $this->getHumanName());
+		if (count($name) != 3) {
+			return $name;
+		}
+		switch ($name[0]) {
+			case 'info':
+				$result .= '<i class="fa fa-eye fa-fw" title="Widget de type information"></i> ';
+				break;
+			case 'action':
+				$result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action"></i> ';
+				break;
+			default:
+				$result .= $name[0];
+				break;
+		}
+		switch ($name[1]) {
+			case 'other':
+				$result .= '<span class="label label-warning" style="text-shadow: none;">other</span> ';
+				break;
+			case 'color':
+				$result .= '<span class="label label-success" style="text-shadow: none;">color</span> ';
+				break;
+			case 'slider':
+				$result .= '<span class="label label-primary" style="text-shadow: none;">slider</span> ';
+				break;
+			case 'binary':
+				$result .= '<span class="label label-info" style="text-shadow: none;">binary</span> ';
+				break;
+			case 'numeric':
+				$result .= '<span class="label label-danger" style="text-shadow: none;">numeric</span> ';
+				break;
+			case 'string':
+				$result .= '<span class="label label-default" style="text-shadow: none;">string</span> ';
+				break;
+			default:
+				$result .= $name[1];
+				break;
+		}
+		return $result .= $name[2];
+	}
+
+	public function displayWidgetType() {
+		$result = '';
+		$name = explode('.', $this->getHumanName());
+		if (count($name) != 3) {
+			return "";
+		}
+		switch ($name[0]) {
+			case 'info':
+				$result .= '<i class="fa fa-eye fa-fw" title="Widget de type information" style="position: absolute;top: 31px; left: 15px;"></i> ';
+				break;
+			case 'action':
+				$result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action" style="position: absolute;top: 31px; left: 15px;"></i> ';
+				break;
+			default:
+				$result .= "";
+				break;
+		}
+		return $result;
+	}
+
+	public function displayWidgetSubtype() {
+		$result = '';
+		$name = explode('.', $this->getHumanName());
+		if (count($name) != 3) {
+			return "";
+		}
+		switch ($name[1]) {
+			case 'other':
+				$result .= '<span class="label label-warning" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">other</span> ';
+				break;
+			case 'color':
+				$result .= '<span class="label label-success" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">color</span> ';
+				break;
+			case 'slider':
+				$result .= '<span class="label label-primary" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">slider</span> ';
+				break;
+			case 'binary':
+				$result .= '<span class="label label-info" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 44px 16px;">binary</span> ';
+				break;
+			case 'numeric':
+				$result .= '<span class="label label-danger" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 53px 16px;">numeric</span> ';
+				break;
+			case 'string':
+				$result .= '<span class="label label-default" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">string</span> ';
+				break;
+			default:
+				$result .= "";
+				break;
+		}
+		return $result;
+	}
+
 	/*     * *********************Methode d'instance************************* */
 
 	public function getHumanName() {
@@ -272,7 +408,6 @@ class widget {
 					return array('html' => '<div class="eqLogic-widget" style="background-color : ' . $color . ';">' . $html . '</div>', 'cmd_humanname' => $cmd->getHumanName());
 				}
 			}
-
 		}
 		foreach ($cmds as $cmd) {
 			$cmd->setTemplate($this->getVersion(), $this->getName());
@@ -292,7 +427,7 @@ class widget {
 		return cmd::searchTemplate('"' . $this->getVersion() . '":"' . $this->getName() . '"', null, $this->getType(), $this->getSubtype());
 	}
 
-/*     * **********************Getteur Setteur*************************** */
+	/*     * **********************Getteur Setteur*************************** */
 
 	public function getType() {
 		return $this->type;

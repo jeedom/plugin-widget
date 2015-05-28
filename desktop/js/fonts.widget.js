@@ -122,6 +122,7 @@ function getHtmlSelectStyle(_select, _value, _callback) {
     });
 }
 
+var fontsColByLine;
 function updateListFonts(_view) {
     $.ajax({
         type: "POST",
@@ -143,10 +144,12 @@ function updateListFonts(_view) {
             var fonts = '';
             for (var i in data) {
             }
+            if( fontsColByLine === undefined)
+                fontsColByLine = 4;
             for (var i in data.result) {
                 var filename = data.result[i].split('.');
                 fontsWidgets.push({'file': data.result[i],'name': filename[0], 'extension': filename[1], 'html':htmlFontFace(data.result[i])});
-                fonts += '<div class="media-left col-sm-3" style="min-width: 105px">';
+                fonts += '<div class="media-left col-sm-' + fontsColByLine + '" style="min-width: 105px">';
                 fonts += '<div class="well col-sm-12 noPaddingWell noPaddingLeft noMarginBottom">';
                 if(view !== '' && view.attr('id') === "bsFontsView")
                     fonts += '<button type="button" class="pull-left btn btn-xs btn-danger bsDelFont" data-font="' + i + "\" title=\"{{Supprimer la Font}}\"><i class='fa fa-trash-o'></i></button>";
