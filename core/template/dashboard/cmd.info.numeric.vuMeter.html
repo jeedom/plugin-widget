@@ -1,0 +1,107 @@
+<div class="cmd #history# container-fluid tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" style="min-width:90px;min-height:105px;padding:0px !important;">
+    <div class="vuMeter"></div>
+    <div style="#displayHistory# font-size: 0.8em;" class="col-xs-12 center-block">
+        <span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> <i class="#tendance#"></i>
+    </div>
+    <script>
+        if (is_numeric('#state#')) {
+            $('.cmd[data-cmd_id=#id#] .vuMeter').highcharts({
+                chart: {
+                    events: {
+                        click: function (event) {
+                            if (!$.mobile && '#history#' == 'history cursor') {
+                                $('#md_modal').dialog({title: "Historique"});
+                                $("#md_modal").load('index.php?v=d&modal=cmd.history&id=#id#').dialog('open');
+                            }
+                        }
+                    },
+                    type: 'gauge',
+                    plotBackgroundColor: null,
+                    plotBackgroundImage: null,
+                    backgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: false,
+                    height: 90,
+                    spacingTop: 0,
+                    spacingLeft: 0,
+                    spacingRight: 0,
+                    spacingBottom: 0
+                },
+                credits: {
+                    text: '',
+                    href: '',
+                },
+                title: {
+                    text: ''
+                },
+                navigation: {
+                    buttonOptions: {
+                        enabled: false
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                },
+                exporting : {
+                    enabled: false
+                },
+                pane: [{
+                    startAngle: - 60,
+                    endAngle: 60,
+                    background: null,
+                    center: ['50%', '80%'],
+                    size: 100
+                }],
+                yAxis: [{
+                    min: #minValue#,
+                    max: #maxValue#,
+                    tickWidth: 2,
+                    tickLength: 10,
+                    lineWidth: 3,
+                    minorTickPosition: 'outside',
+                    tickPosition: 'outside',
+                    tickColor: '#FFFFFF',
+                    lineColor: '#FFFFFF',
+                    labels: {
+                        rotation: 'auto',
+                        style: {
+                            color: '#FFFFFF',
+                            fontWeight: 'bold'
+                        },
+                        distance: - 14
+                    },
+                    pane: 0,
+                    title: {
+                        useHTML: true,
+                        style: {
+                            color:'white',
+                            zIndex: 999,
+                            'font-weight': 'bold',
+                        },
+                        align: 'middle',
+                        y: 20,
+                        text: '#state# #unite#',
+                    }
+                }],
+                plotOptions: {
+                    gauge: {
+                        dataLabels: {
+                            y: - 95,
+                            borderWidth: 0
+                        },
+                    },
+                    series: {
+                        animation: false
+                    }
+                },
+                series: [{
+                    data: [parseInt('#state#')]
+                }]
+
+            });
+} else {
+    $('.cmd[data-cmd_id=#id#] .vuMeter').append('<center><span class="label label-danger" style="margin-top : 5px;">#state#</span></center>');
+}
+</script>
+
+</div>

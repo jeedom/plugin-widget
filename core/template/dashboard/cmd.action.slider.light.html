@@ -1,0 +1,32 @@
+<div style="width:90px;min-height:90px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+    <center>
+        <span class="cursor iconCmd#id#" style="font-size: 5.3em;"></span>
+        <div class="slider" style="margin : 5px 10px 8px 10px;width: 80px;" value="#state#"></div>
+    </center>
+    <script>
+        $('.iconCmd#id#').empty();
+        if (parseInt('#state#') > 1) {
+            $('.iconCmd#id#').append('<i class="icon jeedom-lumiere-on"></i>');
+            $('.iconCmd#id#').attr('data-state', 'on');
+        }else {
+            $('.iconCmd#id#').append('<i class="icon jeedom-lumiere-off"></i>');
+            $('.iconCmd#id#').attr('data-state', 'off');
+        }
+
+        $('.iconCmd#id#').on('click', function() {
+            if ($(this).attr('data-state') == 'on') {
+                jeedom.cmd.execute({id: '#id#', value: {slider: 0}});
+            } else {
+                jeedom.cmd.execute({id: '#id#', value: {slider: 99}});
+            }
+        });
+
+        $(".cmd[data-cmd_id=#id#] .slider").bootstrapSlider({
+            min: ('#minValue#' == '') ? 0 : parseInt('#minValue#'),
+            max: ('#maxValue#' == '') ? 100 : parseInt('#maxValue#'),
+            value: ('#state#' == '') ? 0 : parseInt('#state#')
+        }).on('slideStop', function (ev) {
+            jeedom.cmd.execute({id: '#id#', value: {slider: ev.value}});
+        });
+    </script>
+</div>

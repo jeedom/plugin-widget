@@ -1,0 +1,47 @@
+Le plugin widget est un plugin un peu particulier, car il ne permet pas de faire des équipements mais de modifier le rendu d’une commande :
+
+image::../images/widget_screenshot1.JPG[]
+
+Sur la droite on ajoute un nouveau widget, sur la gauche on peut définir la version pour laquelle le widget est fait (dashboard ou mobile), le type (action ou info) et le sous-type. Tout à gauche on a le résultat et en-dessous le code à proprement parlé (html/CSS et JS).
+
+Le principe pour le code du widget est relativement simple ça marche par remplacement de “tag” lors de la génération du widget, voici la liste des “tags” :
+
+Ensuite pour affecter un widget à une commande, on peut passer par la page Général –> Affichage sinon il existe un système pour affecter les widgets dans le plugin widget :
+
+- Info
+* \#id# => ID de la commande
+* \#logicalId# => ID logique de la commande (peut être vide)
+* \#name# => Nom de la commande
+* \#name_display# => Nom de la commande avec retour à la ligne et vide si le nom de la commande ne doit pas être affiché
+* \#unite# => Unité de la commande
+* \#collectDate# => Date exacte ou de la valeur de la commande
+* \#state# => Valeur de la commande 
+** Si la commande est binaire l'état peut être "green" ou "red"
+* \#displayHistory# => Si la commande est historisée alors la valeur est de '' sinon 'display : none;'
+* \#averageHistoryValue# => Valeur moyenne sur les x dernières heures de la commande
+* \#minHistoryValue# => Minimum sur les x dernières heures de la commande
+* \#maxHistoryValue# => Maximum sur les x dernières heures de la commande
+* \#tendance# => Tendance soit 'fa fa-minus', 'fa fa-arrow-up' ou 'fa fa-arrow-down'
+* \#minValue# => Valeur minimum que peut prendre la commande
+* \#maxValue# => Valeur maximum que peut prendre la commande
+* \#history# => si la commande est historisée historize vaudra : 'history cursor' et le widget 'jeedom.cmd.info.history.default' sera ajouté (pour permettre d'afficher l'historique)
+
+- Action
+* \#id# => ID de la commande
+* \#logicalId# => ID logique de la commande (peut être vide)
+* \#name# => Nom de la commande
+* \#valueName# => Nom de la commande info, si la commande action est liée à une commande info
+* \#lastValue# => Dernière valeur de la commande (peut être vide)
+* \#minValue# => Valeur minimum que peut prendre la commande
+* \#maxValue# => Valeur maximum que peut prendre la commande
+* Pour que l'action soit exécutée il faut appeler la fonction : jeedom.cmd.execute(ID,options) avec
+** ID => ID de la commande
+** options => objet contenant les options de la commande
+
+** Exemple pour une commande de type slider :
+    jeedom.cmd.execute({id :'#id#', value : {slider : 30}})
+
+** Exemple pour une commande de type color :
+     jeedom.cmd.execute({id :'#id#', { color: '#000000'}})
+
+Voilà ce plugin permet de modifier facilement le rendu des commandes pour pouvoir configurer son tableau de bord exactement comme on le souhaite.
