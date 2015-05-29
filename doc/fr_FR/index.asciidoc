@@ -1,0 +1,17 @@
+:icons:
+== Widget
+
+=== Description
+Plugin permetant de recuperer et/ou de creer de nouveaux widget
+
+'''
+=== Configuration
+include::configuration.asciidoc[]
+
+'''
+=== FAQ
+include::faq.asciidoc[]
+
+'''
+=== Changelog
+include::changelog.asciidoc[]

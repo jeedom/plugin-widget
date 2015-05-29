@@ -1,0 +1,5 @@
+[panel,primary]
+.Comment apprendre à faire un widget
+--
+Le systeme de widget s'appui sur les langage HTML et Javascript, il est donc conseillé de regarder les cours (très nombreux) sur ces langages. De plus il est interessant de lire aussi des cours sur Jquery (et Jquery mobile pour la version mobile des widgets)
+--
