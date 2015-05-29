@@ -1,0 +1,24 @@
+<div style="width:90px;height:100%;vertical-align: top;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span style="font-size: 2.5em;" class="action" id="iconCmd#id#"></span>
+    </center>
+</div>
+
+<script>
+    var cmdName = '#name#';
+    if ('#state#' == '1' || '#state#' == 1) {
+        $('#iconCmd#id#').append('<i class="icon jeedom-lock-ferme"></i>');
+        if (jeedom.cmd.normalizeName('#name#') == 'on') {
+            $('.cmd[data-cmd_id=#id#]').hide();
+        }
+    } else {
+        $('#iconCmd#id#').append('<i class="icon jeedom-lock-ouvert"></i>');
+        if (jeedom.cmd.normalizeName('#name#') == 'off') {
+            $('.cmd[data-cmd_id=#id#]').hide();
+        }
+    }
+    $('.cmd[data-cmd_id=#id#] .action').off();
+    $('.cmd[data-cmd_id=#id#] .action').on('click', function () {
+        jeedom.cmd.execute({id: '#id#'});
+    });
+</script>

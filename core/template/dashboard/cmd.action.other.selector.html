@@ -1,0 +1,33 @@
+<div style="width:100px;height:85px;" class="cmd tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+	<style>
+	.on {
+		-webkit-transform:rotate(331deg);
+  		transform:rotate(321deg);
+	}
+	.off {
+		-webkit-transform:rotate(331deg);
+  		transform:rotate(331deg);
+	}
+	.eco {
+	}
+	.confort {
+		-webkit-transform:rotate(39deg);
+  		transform:rotate(39deg);
+	}
+	</style>
+  	<div class="row">
+		<strong id="offCmd#id#" class="col-xs-4 off cursor" style="font-size:9px;top: 16px;left: 3px;">Off</strong>
+		<strong id="ecoCmd#id#" class="col-xs-4 eco cursor" style="font-size:9px;left: -7px;top: 2px;">Eco</strong>
+		<strong id="confortCmd#id#" class="col-xs-4 confort cursor" style="font-size:9px;left: -16px;top: 6px;">Confort</strong>
+		<div class="center-block col-xs-12"><img src="plugins/widget/core/template/dashboard/cmd.action.other.selector/bandeau-48.png"></div>
+		<div class="center-block col-xs-12" id="iconCmd#id#"></div>
+	</div>
+	<script>
+  		temp = '#name#';
+  		sens ="class='"+temp.toLowerCase()+"' ";
+		$('#iconCmd#id#').append('<img '+sens+'src="plugins/widget/core/template/dashboard/cmd.action.other.selector/selector-48.png">');
+    	$('.cmd[data-cmd_id=#id#] .action').on('click', function() {
+	        jeedom.cmd.execute({id: '#id#'});
+	    });
+	</script>
+</div>

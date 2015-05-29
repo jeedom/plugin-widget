@@ -1,0 +1,29 @@
+<div style="width:90px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span class='cmdName' style="font-weight: bold;font-size : 12px;">#name_display#</span>
+        <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" class="iconCmd#id#"></span><br/>
+      	<span class="timeCmd#id# label label-default"></span>
+    </center>
+    <script>
+        $('.iconCmd#id#').empty();
+        var timeInMillis = Date.parse('#collectDate#');
+        $('.timeCmd#id#').attr('data-time',timeInMillis);
+      	if(timeInMillis < Date.now()){
+          	 var d = (Date.now() - $('.timeCmd#id#').attr('data-time')) / 1000;
+          	 var h = Math.floor(d / 3600);
+			 var m = Math.floor(d % 3600 / 60);
+        	 $('.timeCmd#id#').empty().append(((h > 0 ? h + " h " : "") + (m > 0 ? (h > 0 && m < 10 ? "0" : "") + m + " min" : "0 min")));
+          	 setInterval(function(){ 
+             	 var d = (Date.now() - $('.timeCmd#id#').attr('data-time')) / 1000;
+          	 	 var h = Math.floor(d / 3600);
+			     var m = Math.floor(d % 3600 / 60);
+        	     $('.timeCmd#id#').empty().append(((h > 0 ? h + " h " : "") + (m > 0 ? (h > 0 && m < 10 ? "0" : "") + m + " min" : "0 min")));
+             }, 60000);
+      	}
+        if ('#state#' == '1') {
+            $('.iconCmd#id#').append('<i class="fa fa-check"></i>');
+        }else {
+            $('.iconCmd#id#').append('<i class="icon jeedom-mouvement"></i>');
+        }
+    </script>
+</div>

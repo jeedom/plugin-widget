@@ -1,0 +1,39 @@
+<div style="width:100px;height:100px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+	<div class="row">
+    	<strong class='cmdName center-block col-xs-12 small'>#name#</strong>
+    	<div class='col-xs-6 iconCmd#id#'></div>
+		<div class="col-xs-6">
+    		<div class="row">
+     			<div class='col-xs-12 center-block' >
+        			<span class="anemoText#id#" style="font-size: 1.6em;"></span><br/>
+          			<span style="font-size: 0.8em;font-weight: bold;">#unite#</span>
+	      		</div>
+  			</div>
+  		</div>
+	    <div style="#displayHistory#;font-size: 0.8em;" class="col-xs-12">
+    		<span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> <i class="#tendance#"></i>
+		</div>
+	</div>
+  	<script>
+        if ('#displayName#' == 1 || '#displayName#' == '1') {
+            $('.cmd[data-cmd_id=#id#] .cmdName').show();
+        }
+		var temp;
+     	temp = parseInt('#state#'); 
+     	temp = temp.toFixed(0); 
+      	$('.iconCmd#id#').empty();
+      	if ( temp <= 9) {
+           	$('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Anemometre/manche-0.png">');
+        }
+     	if (temp > 9 && temp <= 36) {
+           	$('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Anemometre/manche-45.png">');
+        }
+     	if (temp > 36 && temp <= 46) {
+           	$('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Anemometre/manche-90.png">');
+        }
+     	if (temp > 46) {
+          	$('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Anemometre/manche-over.png">');
+        }
+       	$('.anemoText#id#').text(temp);
+    </script>
+</div>

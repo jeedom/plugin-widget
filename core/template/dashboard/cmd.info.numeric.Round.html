@@ -1,0 +1,214 @@
+<div class="#history# tooltips cmd cmd-widget roundWidget#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" >
+    <span class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</span>
+    <div class="DisplayRound#id#">
+   		<div class="DisplayRoundIMG#id#" id="iconRound#id#">
+      	</div>
+		<div class="roundState#id#">
+        	<span class="intRound#id#" id="intRoundValue#id#"></span>
+          	<span class="decRound#id#" id="decRoundValue#id#"></span>
+      	</div>
+        <div class="roundUnite#id#">#unite#</div>
+  		<div style="#displayHistory#;" class="history#id# col-xs-12 center-block">
+          	<span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> 
+          	<br><i class="#tendance#"></i>
+      	</div>
+  	</div>
+  	
+<style>
+
+  @font-face {
+    font-family: stateFont;
+    src:url("plugins/widget/core/template/dashboard/cmd.info.numeric.Round/fonts/appleberry.eot?") format("eot"),
+      	url("plugins/widget/core/template/dashboard/cmd.info.numeric.Round/fonts/appleberry.woff") format("woff"),
+      	url("plugins/widget/core/template/dashboard/cmd.info.numeric.Round/fonts/appleberry.ttf") format("truetype"),
+      	url("plugins/widget/core/template/dashboard/cmd.info.numeric.Round/fonts/appleberry.svg#appleberry") format("svg");
+    font-weight:normal;font-style:normal;
+  }
+
+  @font-face {
+    font-family: stateFont2;
+    src: url('plugins/widget/core/template/dashboard/cmd.info.numeric.Round/fonts/jennifer.ttf');
+  }
+ 
+  @font-face {
+    font-family: uniteFont;
+    src: url('plugins/widget/core/template/dashboard/cmd.info.numeric.Round/fonts/erasdust.ttf');
+  }
+  
+  div.roundWidget#id# {
+       width: 90px;
+       min-height: 90px;
+  }
+  
+  div.DisplayRound#id# {
+    position: relative;
+  	}
+  
+  div.DisplayRoundIMG#id# {
+    position:absolute;
+    width: 100%;
+    z-index:1;
+
+  }
+  
+  span.intRound#id# {
+    font-family: stateFont; 
+    font-size:20px;
+  	color: white;
+  }
+  
+  span.decRound#id# {
+    font-family: stateFont; 
+    font-size:15px;
+  	color: white;
+  }
+    
+  div.roundState#id# {
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    top: 25px;
+    z-index:2;
+  }
+  
+  div.roundUnite#id# {
+    font-family: uniteFont; 
+    font-size:12px;
+    color: white;
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    top: 47px;
+    z-index:2;
+  }
+  
+  img.roundImg#id# {
+    width: 80px;
+    height: 80px;
+  }
+  
+  div.history#id# {
+    font-size:8px;
+  	color: white;
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    top: 80px;
+    z-index:2;
+  }
+  
+
+</style>
+  
+<script>
+  	function TypeCouleur(valeur){
+        var typeCouleur;
+      	console.log('Valeur : '+valeur);
+        if(/true|false/.test(valeur)){
+          typeCouleur = 'bool';
+        }else if(/^#[a-zA-Z0-9]{3,6}$/.test(valeur)){
+          typeCouleur = 'html';
+        }else if(/^rgb\(?[012]?\d\d,?[012]?\d\d,?[012]?\d\d\)$/i.test(valeur)){
+          typeCouleur = 'rgb';
+        }else if(/^[a-zA-Z]{3,}$/i.test(valeur)){
+          typeCouleur = 'nom';
+        }else if(/[-+]?\d+:.+\&?/i.test(valeur)){
+          typeCouleur = 'objet';
+        }else if(/^[a-zA-Z0-9#\(\),\-]+\&/i.test(valeur)){
+          typeCouleur = 'array';
+        }else{
+          typeCouleur = 'inconnu';
+        }
+        return typeCouleur;
+    }
+  
+  	valeur2 = "#couleur#";
+  	var test = TypeCouleur(valeur2);
+  	console.log('Test : '+test);
+	if(test == 'objet'){
+      	var arrayVal = valeur2.split('&'), cleVal;
+    	para = new Object();
+    	for(var cle in arrayVal){
+    		cleVal = arrayVal[cle].split(':');
+        	para[cleVal[0]] = cleVal[1];
+        	if(parseFloat("#state#") >= parseFloat(cleVal[0])){
+            	couleur2 = para[cleVal[0]];
+        	}
+    	}
+    } else if (test == 'nom'){
+        couleur2 = "#couleur#";
+
+    } else {
+      	couleur2 = "grey";
+    }
+  	//Récupération des décimales
+  	var valeur = "#state#";
+  	var intNum = Math.floor(valeur);
+	var decNum = Math.round((valeur - intNum) * 10);
+  	
+  	//Calcul du nombre de chiffres
+  	var valeurChaineInt = intNum + "";
+  	longueurint = valeurChaineInt.length;	
+  	
+  	if (longueurint > 3) {
+      	if (decNum != 0) {
+      		$('span.intRound#id#').css('font-size','15px');
+      		$('span.decRound#id#').css('font-size','10px');
+      		$('div.roundState#id#').css('top','28px');
+        }
+      	else if (longueurint > 5) {
+          	$('span.intRound#id#').css('font-size','15px');
+      		$('span.decRound#id#').css('font-size','10px');
+      		$('div.roundState#id#').css('top','28px');
+        }
+    }
+  	
+  	testfontcolor = ("#fontcolor#" == '#'+'fontcolor#');
+  	fontcolor2 = "#fontcolor#";
+    if (testfontcolor == false) {
+      	$('span.intRound#id#').css('color',fontcolor2);
+      	$('span.decRound#id#').css('color',fontcolor2);
+      	$('div.roundUnite#id#').css('color',fontcolor2);
+       	console.log('Font color2 : '+ fontcolor2);
+    }
+  
+   	$('#intRoundValue#id#').text(intNum);
+  	if (decNum != 0) {
+    	$('#decRoundValue#id#').text('. '+decNum);
+    }
+  	
+  	if( '#reflet#'  == 'yes' ) {
+        if ( couleur2  == 'red' || couleur2  == 'blue' || couleur2  == 'lightblue' || couleur2  == 'orange' || couleur2  == 'black' || couleur2  == 'green' || couleur2  == 'purple' || couleur2  == 'brown' || couleur2  == 'pink' || couleur2  == 'sand' || couleur2  == 'slategrey' || couleur2  == 'yellow' ) {
+            $('#iconRound#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Round/'+couleur2+'_wr.png" class="roundImg#id#">');
+        }
+        else {
+            $('#iconRound#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Round/grey_wr.png" class="roundImg#id#">');
+        }
+    }
+  	else {
+        if( couleur2  == 'red' || couleur2  == 'blue' || couleur2  == 'lightblue' || couleur2  == 'orange' || couleur2  == 'black' || couleur2  == 'green' || couleur2  == 'purple' || couleur2  == 'brown' || couleur2  == 'pink' || couleur2  == 'sand' || couleur2  == 'slategrey' || couleur2  == 'yellow') {
+            $('#iconRound#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Round/'+couleur2+'.png" class="roundImg#id#">');
+        }
+        else {
+            $('#iconRound#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Round/grey.png" class="roundImg#id#">');
+        } 
+    }
+
+  	tailleRound = (is_numeric('#taille#')) ? parseFloat('#taille#') : 1.0;
+	widthRound = Math.round ( 90*tailleRound );
+	heightRound = Math.round ( 90*tailleRound );
+  	ecart = Math.abs(Math.round((90 - widthRound)/2));
+  	if ( '#textshadow#'  == 'yes' ) {
+  		$('span.intRound#id#').css('text-shadow','1px 1px 1px #000000');
+  		$('span.decRound#id#').css('text-shadow','1px 1px 1px #000000');
+  		$('div.roundUnite#id#').css('text-shadow','1px 1px 1px #000000');
+    }
+ 	$('div.roundWidget#id#').css('width',''+widthRound+'px');
+  	$('div.roundWidget#id#').css('min-height',''+heightRound+'px');
+  	$('div.DisplayRound#id#').css({'transform':'scale('+tailleRound+')','-webkit-transform':'scale('+tailleRound+')','-moz-transform':'scale('+tailleRound+')','-ms-transform':'scale('+tailleRound+')','-o-transform':'scale('+tailleRound+')'});
+  	if ( tailleRound < 1.0 ) {
+          $('div.DisplayRoundIMG#id#').css('left','-'+(ecart-5)+'px');
+   	}
+          
+  </script> 
+</div>

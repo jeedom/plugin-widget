@@ -1,0 +1,35 @@
+<div style="margin-left: 5px;width:110px;min-height:75px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+    <div class='cmdName' style="font-weight: bold;font-size : 0.8em;left: 32px;width: 100px;height: 17px;overflow: hidden;" title="#name#">#name#</div>
+  	<div style="position:relative;width:21px;height:60px;float: left;">
+  		<div style="position:absolute;width:21px;height:60px;">
+    		<div id="recipient#id#" style="border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; width: 12px; height: 75px;top: 21px; left: 5px; background: url(plugins/widget/core/template/mobile/cmd.info.numeric.humidite/eau.png) no-repeat;position: absolute;">
+    			<div id="eprouvette#id#" style="position: absolute;width: 21px;float:left; left: -5px;height: 60px;background:url('plugins/widget/core/template/mobile/cmd.info.numeric.humidite/eprouvette.png') no-repeat;background-size: 21px 60px;"></div>
+			</div>
+	  	</div>
+  	</div>
+	<div id="couleur#id#" style="font-weight: bold; color: black;float: left;position: relative;top :6px; width: 80px; height: 44px;background: url('plugins/widget/core/template/mobile/cmd.info.numeric.humidite/Marker-Board-Azure-80.png') no-repeat;">
+      <center style="padding: 7px 6px 1px 26px;line-height: 16px;">
+		<span style="font-size: 1.2em;">#state#</span><br/>
+      	<span style="font-size: 0.8em;">#unite#</span>
+      </center>
+  	</div>
+<script>
+ 	if( '#eprouvette#' == 'Black' ) {
+   		$('#eprouvette#id#').css('background-image','url("plugins/widget/core/template/dashboard/cmd.info.numeric.humidite/eprouvette-noir.png")');
+    }
+ 	if( '#couleur#' == 'Pink' ) {
+   		$('#couleur#id#').css('background-image','url("plugins/widget/core/template/mobile/cmd.info.numeric.humidite/Marker-Board-Green-80.png")');
+    }
+ 	else if( '#couleur#' == 'Green' ) {
+   		$('#couleur#id#').css('background-image','url("plugins/widget/core/template/mobile/cmd.info.numeric.humidite/Marker-Board-Pink-80.png")');
+    }
+ 	else {
+   		$('#couleur#id#').css('background-image','url("plugins/widget/core/template/mobile/cmd.info.numeric.humidite/Marker-Board-Azure-80.png")');
+    }
+  	height = parseInt( (#state#*60)/#maxValue# );
+    topPosition = 60 - height;
+    $('#recipient#id#').css('top',topPosition+'px');
+    $('#eprouvette#id#').css('top','-'+topPosition+'px');
+    $('#recipient#id#').css('height',height+'px');
+</script>
+</div>

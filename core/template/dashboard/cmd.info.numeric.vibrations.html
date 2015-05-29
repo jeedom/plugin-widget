@@ -1,0 +1,26 @@
+<div style="width:120px;height:110px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+	<div class="row">  	
+    	<strong class='cmdName col-xs-12' style="font-size : 0.8em;margin-bottom:5px;" title="#name#">#name#</strong>
+      	<div class="col-xs-6">
+		    <div style="background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.vibrations/graduation.png') no-repeat;width: 21px;float:left;height: 85px;">
+				<span  class="topMarker#id#" style="top:91px;left: 9px; position: relative;"></span>
+  			</div>
+		</div>
+      	<div class="col-xs-6" style="padding:0;">
+	  		<div class="center-block iconCmd#id#" style="margin-top:10px;"></div>
+		</div>
+  	</div>
+	<script>
+  	var topMarker = parseInt( (#state#*81)/#maxValue# );
+    topMarker = 47 - topMarker; 
+    $('.topMarker#id#').css('top',topMarker.toString()+'px');
+  	if ( topMarker == -34 ) {
+    	$('.topMarker#id#').append('<span style="font-size: 0.6em;left: -24px;position: relative;top: 24px;">#state#</span><img src="plugins/widget/core/template/dashboard/cmd.info.numeric.vibrations/Marker-Pink.png">');
+    	$('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.vibrations/alert-60.png">');
+    }
+  	else {
+    	$('.topMarker#id#').append('<span style="font-size: 0.6em;left: -24px;position: relative;top: 24px;">#state#</span><img src="plugins/widget/core/template/dashboard/cmd.info.numeric.vibrations/Marker-Chartreuse.png">');
+    	$('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.vibrations/clean-60.png">');
+  	}
+</script>
+</div>

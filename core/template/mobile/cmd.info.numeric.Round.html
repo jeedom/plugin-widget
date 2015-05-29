@@ -1,0 +1,200 @@
+<div class="#history# tooltips cmd cmd-widget roundMobileWidget#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" >
+    <div class="DisplayMobileRound#id#">
+   		<div class="DisplayMobileRoundIMG#id#" id="iconRound#id#">
+      	</div>
+		<div class="roundMobileState#id#">
+        	<span class="intMobileRound#id#" id="intRoundValue#id#"></span>
+          	<span class="decMobileRound#id#" id="decRoundValue#id#"></span>
+      	</div>
+        <div class="roundMobileUnite#id#">#unite#</div>
+  	</div>
+<style>
+
+  @font-face {
+    font-family: stateFont;
+    src:url("plugins/widget/core/template/mobile/cmd.info.numeric.Round/fonts/appleberry.eot?") format("eot"),
+      	url("plugins/widget/core/template/mobile/cmd.info.numeric.Round/fonts/appleberry.woff") format("woff"),
+      	url("plugins/widget/core/template/mobile/cmd.info.numeric.Round/fonts/appleberry.ttf") format("truetype"),
+      	url("plugins/widget/core/template/mobile/cmd.info.numeric.Round/fonts/appleberry.svg#appleberry") format("svg");
+    font-weight:normal;font-style:normal;
+  }
+
+  @font-face {
+    font-family: stateFont2;
+    src: url('plugins/widget/core/template/mobile/cmd.info.numeric.Round/fonts/jennifer.ttf');
+  }
+ 
+  @font-face {
+    font-family: uniteFont;
+    src: url('plugins/widget/core/template/mobile/cmd.info.numeric.Round/fonts/erasdust.ttf');
+  }
+
+  div.roundMobileWidget#id# {
+       	width: 80px;
+       	min-height: 80px;
+    	display:inline-block;
+  }
+  
+  div.DisplayMobileRound#id# {
+    position: relative;
+  	}
+  
+  div.DisplayMobileRoundIMG#id# {
+    position:absolute;
+    width: 100%;
+    z-index:1;
+
+  }
+  
+  span.intMobileRound#id# {
+    font-family: stateFont; 
+    font-size:20px;
+  	color: white;
+  }
+  
+  span.decMobileRound#id# {
+    font-family: stateFont; 
+    font-size:15px;
+  	color: white;
+  }
+    
+  div.roundMobileState#id# {
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    top: 25px;
+    z-index:2;
+  }
+  
+  div.roundMobileUnite#id# {
+    font-family: uniteFont; 
+    font-size:12px;
+    color: white;
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    top: 47px;
+    z-index:2;
+  }
+  
+  img.roundMobileImg#id# {
+    width: 80px;
+    height: 80px;
+  }
+
+</style>
+  
+<script>  
+  	function TypeCouleur(valeur){
+        var typeCouleur;
+        if(/true|false/.test(valeur)){
+          typeCouleur = 'bool';
+        }else if(/^#[a-zA-Z0-9]{3,6}$/.test(valeur)){
+          typeCouleur = 'html';
+        }else if(/^rgb\(?[012]?\d\d,?[012]?\d\d,?[012]?\d\d\)$/i.test(valeur)){
+          typeCouleur = 'rgb';
+        }else if(/^[a-zA-Z]{3,}$/i.test(valeur)){
+          typeCouleur = 'nom';
+        }else if(/^\d{1,}:.+\&?/i.test(valeur)){
+          typeCouleur = 'objet';
+        }else if(/^[a-zA-Z0-9#\(\),\-]+\&/i.test(valeur)){
+          typeCouleur = 'array';
+        }else{
+          typeCouleur = 'inconnu';
+        }
+        return typeCouleur;
+    }
+  
+  	valeur2 = "#couleur#";
+  	var test = TypeCouleur(valeur2);
+  	//console.log('Test : '+test);
+	if(test == 'objet'){
+      	var arrayVal = valeur2.split('&'), cleVal;
+    	para = new Object();
+    	for(var cle in arrayVal){
+    		cleVal = arrayVal[cle].split(':');
+        	para[cleVal[0]] = cleVal[1];
+        	if(parseFloat("#state#") >= parseFloat(cleVal[0])){
+            	couleur2 = para[cleVal[0]];
+  				//console.log('Couleur : '+couleur2);
+        	}
+    	}
+    } else if (test == 'nom'){
+        couleur2 = "#couleur#";
+      	//console.log('Couleur nom : '+couleur2);
+
+    } else {
+      	couleur2 = "grey";
+      	//console.log('Couleur autre : '+couleur2);
+    }
+	//console.log('Couleur : '+couleur2);
+  	//Récupération des décimales
+  	var valeur = #state#;
+  	var intNum = Math.floor(valeur);
+	var decNum = Math.round((valeur - intNum) * 10);
+  	
+  	//Calcul du nombre de chiffres
+  	var valeurChaineInt = intNum + "";
+  	longueurint = valeurChaineInt.length;	
+  	
+  	if (longueurint > 3) {
+      	if (decNum != 0) {
+      		$('span.intMobileRound#id#').css('font-size','15px');
+      		$('span.decMobileRound#id#').css('font-size','10px');
+      		$('div.roundState#id#').css('top','28px');
+        }
+      	else if (longueurint > 5) {
+          	$('span.intMobileRound#id#').css('font-size','15px');
+      		$('span.decMobileRound#id#').css('font-size','10px');
+      		$('div.roundMobileState#id#').css('top','28px');
+        }
+    }
+  	
+  	testfontcolor = ("#fontcolor#" == '#'+'fontcolor#');
+  	fontcolor2 = "#fontcolor#";
+    if (testfontcolor == false) {
+      	$('span.intMobileRound#id#').css('color',fontcolor2);
+      	$('span.decMobileRound#id#').css('color',fontcolor2);
+      	$('div.roundMobileUnite#id#').css('color',fontcolor2);
+       	console.log('Font color2 : '+ fontcolor2);
+    }
+  
+   	$('#intRoundValue#id#').text(intNum);
+  	if (decNum != 0) {
+    	$('#decRoundValue#id#').text('. '+decNum);
+    }
+  	
+  	if( '#reflet#'  == 'yes' ) {
+        if ( couleur2  == 'red' || couleur2  == 'blue' || couleur2  == 'lightblue' || couleur2  == 'orange' || couleur2  == 'black' || couleur2  == 'green' || couleur2  == 'purple' || couleur2  == 'brown' || couleur2  == 'pink' || couleur2  == 'sand' || couleur2  == 'slategrey' || couleur2  == 'yellow' ) {
+            $('#iconRound#id#').append('<img src="plugins/widget/core/template/mobile/cmd.info.numeric.Round/'+couleur2+'_wr.png" class="roundMobileImg#id#">');
+        }
+        else {
+            $('#iconRound#id#').append('<img src="plugins/widget/core/template/mobile/cmd.info.numeric.Round/grey_wr.png" class="roundMobileImg#id#">');
+        }
+    }
+  	else {
+        if( couleur2  == 'red' || couleur2  == 'blue' || couleur2  == 'lightblue' || couleur2  == 'orange' || couleur2  == 'black' || couleur2  == 'green' || couleur2  == 'purple' || couleur2  == 'brown' || couleur2  == 'pink' || couleur2  == 'sand' || couleur2  == 'slategrey' || couleur2  == 'yellow') {
+            $('#iconRound#id#').append('<img src="plugins/widget/core/template/mobile/cmd.info.numeric.Round/'+couleur2+'.png" class="roundMobileImg#id#">');
+        }
+        else {
+            $('#iconRound#id#').append('<img src="plugins/widget/core/template/mobile/cmd.info.numeric.Round/grey.png" class="roundMobileImg#id#">');
+        } 
+    }
+
+  	tailleRound = (is_numeric('#taille#')) ? parseFloat('#taille#') : 1.0;
+	widthRound = Math.round ( 80*tailleRound );
+  	ecart = Math.abs(Math.round((80 - widthRound)/2));
+  	if ( '#textshadow#'  == 'yes' ) {
+  		$('span.intMobileRound#id#').css('text-shadow','1px 1px 1px #000000');
+  		$('span.decMobileRound#id#').css('text-shadow','1px 1px 1px #000000');
+  		$('div.roundMobileUnite#id#').css('text-shadow','1px 1px 1px #000000');
+    }
+ 	$('div.roundMobileWidget#id#').css('width',''+widthRound+'px');
+  	$('div.roundMobileWidget#id#').css('min-height',''+widthRound+'px');
+  	$('div.DisplayMobileRound#id#').css({'transform':'scale('+tailleRound+')','-webkit-transform':'scale('+tailleRound+')','-moz-transform':'scale('+tailleRound+')','-ms-transform':'scale('+tailleRound+')','-o-transform':'scale('+tailleRound+')'});
+  	if ( tailleRound < 1.0 ) {
+          $('div.DisplayMobileRoundIMG#id#').css('left','-'+(ecart-5)+'px');
+   	}
+          
+  </script> 
+</div>

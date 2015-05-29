@@ -1,0 +1,50 @@
+<div style="width:64px;height:64px;" class="#history# tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" >
+<style> 
+.testAnim {
+    width: 64px;
+    height: 64px;
+    background-repeat: no-repeat;
+  
+    position: relative;
+    /* Chrome, Safari, Opera */
+    -webkit-animation-name: myfirst;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-delay: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-play-state: running;
+    /* Standard syntax */
+    animation-name: myfirst;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst {
+    0%   {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-low-64.png');}
+    25%  {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-mid-64.png');}
+    50%  {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-high-64.png');}
+    75%  {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-full-64.png');}
+    100% {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-charge-64.png');}
+}
+
+/* Standard syntax */
+@keyframes myfirst {
+    0%   {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-low-64.png');}
+    25%  {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-mid-64.png');}
+    50%  {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-high-64.png');}
+    75%  {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-full-64.png');}
+    100% {background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.animTest/battery-charge-64.png');}
+}
+</style>
+
+  <center><div class="testAnim"></div></center>
+
+
+<script>
+</script>
+
+</div>

@@ -1,0 +1,203 @@
+<div class="#history# tooltips cmd cmd-widget squareWidget#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" >
+    <span class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</span>
+    <div class="DisplaySquare#id#">
+   		<div class="DisplaySquareIMG#id#" id="iconSquare#id#">
+      	</div>
+		<div class="squareState#id#">
+        	<span class="intSquare#id#" id="intSquareValue#id#"></span>
+          	<span class="decSquare#id#" id="decSquareValue#id#"></span>
+      	</div>
+        <div class="squareUnite#id#">#unite#</div>
+  		<div style="#displayHistory#;" class="history#id# col-xs-12 center-block">
+          	<span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> 
+          	<br><i class="#tendance#"></i>
+      	</div>
+  	</div>
+<style>
+
+  @font-face {
+    font-family: stateFontSquare;
+    src:url("plugins/widget/core/template/dashboard/cmd.info.numeric.Square/fonts/appleberry.eot?") format("eot"),
+      	url("plugins/widget/core/template/dashboard/cmd.info.numeric.Square/fonts/appleberry.woff") format("woff"),
+      	url("plugins/widget/core/template/dashboard/cmd.info.numeric.Square/fonts/appleberry.ttf") format("truetype"),
+      	url("plugins/widget/core/template/dashboard/cmd.info.numeric.Square/fonts/appleberry.svg#appleberry") format("svg");
+    font-weight:normal;font-style:normal;
+  }
+ 
+  @font-face {
+    font-family: uniteFontSquare;
+    src: url('plugins/widget/core/template/dashboard/cmd.info.numeric.Square/fonts/erasdust.ttf');
+  }
+
+  div.squareWidget#id# {
+       width: 90px;
+       min-height: 90px;
+  }
+  
+  div.DisplaySquare#id# {
+    position: relative;
+  	}
+  
+  div.DisplaySquareIMG#id# {
+    position:absolute;
+    width: 100%;
+    z-index:1;
+  }
+  
+  span.intSquare#id# {
+    font-family: stateFontSquare; 
+    font-size:20px;
+  	color: white;
+  }
+  
+  span.decSquare#id# {
+    font-family: stateFontSquare; 
+    font-size:15px;
+  	color: white;
+  }
+    
+  div.squareState#id# {
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    top: 25px;
+    z-index:2;
+  }
+  
+  div.squareUnite#id# {
+    font-family: uniteFontSquare; 
+    font-size:12px;
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    top: 47px;
+    z-index:2;
+  }
+  
+  img.squareImg#id# {
+    width: 80px;
+    height: 80px;
+  }
+
+  div.history#id# {
+    font-size:8px;
+  	color: white;
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    top: 80px;
+    z-index:2;
+  }
+  
+</style>
+  
+<script>
+  	function TypeCouleur(valeur){
+        var typeCouleur;
+        if(/true|false/.test(valeur)){
+          typeCouleur = 'bool';
+        }else if(/^#[a-zA-Z0-9]{3,6}$/.test(valeur)){
+          typeCouleur = 'html';
+        }else if(/^rgb\(?[012]?\d\d,?[012]?\d\d,?[012]?\d\d\)$/i.test(valeur)){
+          typeCouleur = 'rgb';
+        }else if(/^[a-zA-Z]{3,}$/i.test(valeur)){
+          typeCouleur = 'nom';
+        }else if(/^\d{1,}:.+\&?/i.test(valeur)){
+          typeCouleur = 'objet';
+        }else if(/^[a-zA-Z0-9#\(\),\-]+\&/i.test(valeur)){
+          typeCouleur = 'array';
+        }else{
+          typeCouleur = 'inconnu';
+        }
+        return typeCouleur;
+    }
+  
+  	valeur2 = "#couleur#";
+  	var test = TypeCouleur(valeur2);
+	if(test == 'objet'){
+      	var arrayVal = valeur2.split('&'), cleVal;
+    	para = new Object();
+    	for(var cle in arrayVal){
+    		cleVal = arrayVal[cle].split(':');
+        	para[cleVal[0]] = cleVal[1];
+        	if(parseFloat("#state#") >= parseFloat(cleVal[0])){
+            	couleur2 = para[cleVal[0]];
+        	}
+    	}
+    } else if (test == 'nom'){
+        couleur2 = "#couleur#";
+
+    } else {
+      	couleur2 = "grey";
+    }
+
+  	var valeur="#state#";
+	var intNum = Math.floor(valeur);
+	var decNum = Math.round((valeur - intNum) * 10);
+	var valeurChaineInt = intNum + "";
+  	longueurint = valeurChaineInt.length;	
+  	
+  	if (longueurint > 3) {
+      	if (decNum != 0) {
+      		$('span.intSquare#id#').css('font-size','15px');
+      		$('span.decSquare#id#').css('font-size','10px');
+      		$('div.squareState#id#').css('top','28px');
+        }
+      	else if (longueurint > 5) {
+      		$('span.intSquare#id#').css('font-size','15px');
+      		$('span.decSquare#id#').css('font-size','10px');
+      		$('div.squareState#id#').css('top','28px');
+        }
+    }  	
+    
+  	testfontcolor = ("#fontcolor#" == '#'+'fontcolor#');
+  	fontcolor2 = "#fontcolor#";
+    if (testfontcolor == false) {
+      	$('span.intSquare#id#').css('color',fontcolor2);
+      	$('span.decSquare#id#').css('color',fontcolor2);
+      	$('div.squareUnite#id#').css('color',fontcolor2);
+    }
+	
+  
+  
+  	$('#intSquareValue#id#').text(intNum);
+  	if (decNum != 0) {
+    	$('#decSquareValue#id#').text('.'+decNum);
+    }
+  	
+    if( '#reflet#'  == 'yes' ) {
+        if( couleur2  == 'red' || couleur2  == 'blue' || couleur2  == 'lightblue' || couleur2  == 'orange' || couleur2  == 'black' || couleur2  == 'green' || couleur2  == 'purple' || couleur2  == 'brown' || couleur2  == 'pink' || couleur2  == 'sand' || couleur2  == 'slategrey' || couleur2  == 'yellow' ) {
+            $('#iconSquare#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Square/'+couleur2+'_wr.png" class="squareImg#id#">');
+        }
+        else {
+            $('#iconSquare#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Square/grey_wr.png" class="squareImg#id#">');
+        }
+    }
+  	else {
+    	if( couleur2  == 'red' || couleur2  == 'blue' || couleur2  == 'lightblue' || couleur2  == 'orange' || couleur2  == 'black' || couleur2  == 'green' || couleur2  == 'purple' || couleur2  == 'brown' || couleur2  == 'pink' || couleur2  == 'sand' || couleur2  == 'slategrey' || couleur2  == 'yellow') {
+	    	$('#iconSquare#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Square/'+couleur2+'.png" class="squareImg#id#">');
+        }
+        else {
+            $('#iconSquare#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Square/grey.png" class="squareImg#id#">');
+        }
+    }
+  
+  	tailleSquare = (is_numeric('#taille#')) ? parseFloat('#taille#') : 1.0;
+	widthSquare = Math.round ( 90*tailleSquare );
+	heightSquare = Math.round ( 90*tailleSquare );
+  	ecart = Math.abs(Math.round((90 - widthSquare)/2));
+    if ( '#textshadow#'  == 'yes' ) {
+  		$('span.intSquare#id#').css('text-shadow','1px 1px 1px #000000');
+  		$('span.decSquare#id#').css('text-shadow','1px 1px 1px #000000');
+  		$('div.squareUnite#id#').css('text-shadow','1px 1px 1px #000000');
+    }
+
+ 	$('div.squareWidget#id#').css('width',''+widthSquare+'px');
+  	$('div.squareWidget#id#').css('min-height',''+heightSquare+'px');
+  	$('div.DisplaySquare#id#').css({'transform':'scale('+tailleSquare+')','-webkit-transform':'scale('+tailleSquare+')','-moz-transform':'scale('+tailleSquare+')','-ms-transform':'scale('+tailleSquare+')','-o-transform':'scale('+tailleSquare+')'});
+  	if ( tailleSquare < 1.0 ) {
+          $('div.DisplaySquareIMG#id#').css('left','-'+(ecart-5)+'px');
+   	}
+  
+  </script> 
+</div>

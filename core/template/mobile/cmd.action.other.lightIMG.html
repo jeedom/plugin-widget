@@ -1,0 +1,25 @@
+<div style="width:90px;height:90px;vertical-align: top;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span style="font-size: 2.5em;" class="action" id="iconCmd#id#"></span>
+    </center>
+</div>
+    <script>
+        var stringState = '#name#';  
+     	stringState = stringState.toLowerCase(); 
+      
+      	if ('#state#' == '1' || '#state#' == 1 || '#state#' == '99' || '#state#' == 99 ) {
+          	 $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/on.png" />');
+            if (stringState.search('on') != -1 ) { 
+                $('.cmd[data-cmd_id=#id#]').hide();
+            }
+        } else {
+          	 $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/off.png" />');
+            if (stringState.search('off') != -1 ) { 
+                $('.cmd[data-cmd_id=#id#]').hide();
+            }
+        }
+        $('.cmd[data-cmd_id=#id#] .action').off();
+        $('.cmd[data-cmd_id=#id#] .action').on('click', function() {
+            jeedom.cmd.execute({id: '#id#'});
+        });
+    </script>

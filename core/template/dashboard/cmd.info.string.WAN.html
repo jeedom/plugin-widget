@@ -1,0 +1,21 @@
+<div style="width:90px;min-height:90px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span class="cmdName" style="font-weight: bold;font-size : 0.8em;" id="cmdName#id#"></span><br/>
+        <span style="font-size: 3em;font-weight: bold;" id="iconCmd#id#"></span>
+   </center>
+    <script>
+        if ('#displayName#' == 1 || '#displayName#' == '1') {
+            $('.cmd#id# .cmdName').show();
+        }
+        if ('#state#'== '' || '#state#' == 0) {
+            $('#iconCmd#id#').append('<img style="display: block;" src="plugins/widget/core/template/dashboard/cmd.info.string.WAN/access_point-60-off.png">');
+            $('#cmdName#id#').css('color','red');
+            $('#cmdName#id#').append('No IP');
+            $('#cmdName#id#').fadeOut(800).fadeIn(800).fadeOut(400).fadeIn(400);
+        }
+        else  {
+            $('#iconCmd#id#').append('<img style="display: block;" src="plugins/widget/core/template/dashboard/cmd.info.string.WAN/access_point-60.png">');
+            $('#cmdName#id#').append('#state#');
+      }
+    </script>
+</div>

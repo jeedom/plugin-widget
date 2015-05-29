@@ -1,0 +1,15 @@
+
+<div style="width:120px;height:100%;vertical-align: top;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span style="font-size: 1.1em;" id="iconCmd#id#"></span>
+    </center>
+</div>
+
+<script>
+    if ('#state#' == '1' || '#state#' == 1) {
+        $('#iconCmd#id#').append('<img style="vertical-align: middle;" src="plugins/widget/core/template/mobile/cmd.action.other.interrupteur/inter-on.png"><span style="margin-left: 11px;padding: 3px;border-radius:4px;box-shadow: 2px 2px 4px white;border: 1px groove;">On</span>');
+    }
+    if ('#state#' == '0' || '#state#' == 0) {
+        $('#iconCmd#id#').append('<img style="vertical-align: middle;" src="plugins/widget/core/template/mobile/cmd.action.other.interrupteur/inter-off.png"><span style="margin-left: 11px;padding: 3px;border-radius:4px;box-shadow: 2px 2px 4px white;border: 1px groove;">Off</span>');
+    }
+</script>

@@ -1,0 +1,20 @@
+<div style="width:90px;min-height:62px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</span><br/>
+        <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" id="iconCmd#id#"></span>
+    </center>
+  <style>
+    img.DBimg {
+  	width: 80px;
+  	height: 80px;
+	} 
+  </style>
+    <script>
+        if ('#state#' == '1' || '#state#' == 1) {
+            $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.binary.DB Securité Etat Alarme/al_activee.png" class="DBimg" />');
+        }
+        if ('#state#' == '0' || '#state#' == 0) {
+            $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.binary.DB Securité Etat Alarme/al_desactivee.png" class="DBimg" />');
+        }
+    </script>
+</div>

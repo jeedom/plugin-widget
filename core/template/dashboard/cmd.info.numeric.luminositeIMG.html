@@ -1,0 +1,23 @@
+<div style="width:130px;height:115px;" class="#history# tooltips cmd cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" >
+    <span class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</span>
+    <div style="position:relative; height:100px">
+   		<div style="position:absolute;width: 100%;text-align: center;z-index:1"; id="iconCmd#id#"></div>
+    	<center>
+			<div style="position:relative; z-index:2;">
+        		<span style="font-size: 2em;font-weight: bold;margin-top: 5px;">#state#</span> 
+        		<span style="font-size: 1em;font-weight: bold;margin-top: 5px;">#unite#</span>
+    		</div>
+    	</center>
+  	</div>
+</div>
+  <script>
+     if( #state#  < 20 ) {
+	    $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.luminositeIMG/moon.png">');
+    }
+ 	else if ( #state#  < 100 ){
+	    $('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.luminositeIMG/cloud.png">');
+	}
+    else {
+      	$('#iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.luminositeIMG/sun.png">');
+    }
+  </script> 

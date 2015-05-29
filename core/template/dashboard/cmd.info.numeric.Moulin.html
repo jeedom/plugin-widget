@@ -1,0 +1,99 @@
+<div style="width:100px;min-height : 120px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span class='cmdName' style="font-weight: bold;font-size : 12px;">#name#</span><br/>
+        <span class='label label-info' style="font-size: 10px;">#state# #unite#</span>
+
+
+<div style="float: center; position: relative ;">
+<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.Moulin/Moulin.png"alt="Moulin" width="75" height="95">
+</div>
+  
+
+<div id="moulin#id#" class=" helice"></div>
+    
+<style>
+  #moulin#id#{
+    width:75px;
+    height:75px;
+    background : url("./plugins/widget/core/template/dashboard/cmd.info.numeric.Moulin/Helice.png") no-repeat scroll center transparent;
+    margin-left:0px;
+    margin-top:-92px;
+    
+    -webkit-transform-origin:center center;
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 120s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-direction: normal;
+    -webkit-animation-timing-function: linear;
+    -webkit-transform:scale (2, 2);
+
+    
+    -moz-transform-origin:center center;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 120s;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-direction: normal;
+    -moz-animation-timing-function: linear;
+    -moz-transform:scale (2, 2);
+
+    
+    -ms-transform-origin:center center;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 120s;
+    -ms-animation-iteration-count:infinite;
+    -ms-animation-direction: normal;
+    -ms-animation-timing-function: linear;
+    -ms-transform:scale (2, 2);
+    
+    -o-transform-origin:center center;
+    -o-animation-name: spin;
+    -o-animation-duration: 120s;
+    -o-animation-iteration-count:infinite;
+    -o-animation-direction: normal;
+    -o-animation-timing-function: linear;
+    -o-transform:scale (2, 2);
+    
+    transform-origin:center center;
+    animation-name: spin;
+    animation-duration: 120s;
+    animation-iteration-count:infinite;
+    animation-direction: normal;
+    animation-timing-function: linear;
+    transform:scale (2, 2);
+    
+  }
+  @-webkit-keyframes spin {
+          0%{-webkit-transform:rotate(0deg);}
+       100%{-webkit-transform:rotate(360deg);
+
+  @-moz-keyframes spin {
+          0%{-webkit-transform:rotate(0deg);}
+       100%{-webkit-transform:rotate(360deg);        
+
+  @-ms-keyframes spin {
+          0%{transform:rotate(0deg);}
+       100%{transform:rotate(360deg);     
+         
+  @-o-keyframes spin {
+          0%{transform:rotate(0deg);}
+       100%{transform:rotate(360deg); 
+         
+   @keyframes spin {
+          0%{transform:rotate(0deg);}
+       100%{transform:rotate(360deg); 
+         
+    }
+</style>
+<script>
+   $('#moulin#id#.helice').css('-webkit-animation-duration' , (1/parseInt('#state#')*30 )+'s');
+   
+   $('#moulin#id#.helice').css('-moz-animation-duration' , (1/parseInt('#state#')*30 )+'s');
+  
+   $('#moulin#id#.helice').css('-ms-animation-duration' , (1/parseInt('#state#')*30 )+'s');
+  
+   $('#moulin#id#.helice').css('-o-animation-duration' , (1/parseInt('#state#')*30 )+'s');
+  
+   $('#moulin#id#.helice').css('animation-duration' , (1/parseInt('#state#')*30 )+'s');
+  
+</script>
+</div>

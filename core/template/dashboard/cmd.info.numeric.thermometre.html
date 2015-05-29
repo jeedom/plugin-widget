@@ -1,0 +1,35 @@
+<div style="width:110px;height:110px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+	<div class="row">
+    	<strong class='cmdName center-block col-xs-12 small' title="#name#">#name#</strong>
+    	<div class='col-xs-3 iconCmd#id#' style="padding:0px;height:90px;">
+		<div class="row">
+		  	<div class='col-xs-offset-1 col-xs-3' style="font-size: 0.6em;">
+				<strong style="position: relative;top: 4px;">#maxValue#</strong>
+				<strong style="position: relative;top: 46px;">#minValue#</strong>
+  			</div>
+		  	<div class='col-xs-8' id="thermo#id#" style="padding:0;margin:0;width:22px;height:90px;background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.thermometre/thermo-2-0.png') no-repeat;background-size: 22px 90px;">
+	    		<div style="position: absolute;width: 3px;height: 61px;border: none;border-radius: 3px;background-color: white;left: 10px;top: 10px;">
+    				<div class="height#id#" style="position:absolute;bottom:0;width:100%;height: 0%;background-image: linear-gradient(to bottom, #fb0e0e, #1515b9);"></div>
+  				</div>
+  			</div>
+      	</div>
+      	</div>
+		<div class="col-xs-offset-1 col-xs-8" id="stat#id#" style="padding-top:5px;line-height:18px;">
+			<strong style="font-size: 1.5em;">#state#</strong><br/>
+			<strong style="font-size: 0.8em;">#unite#</strong>
+			<div class='' style="line-height:10px;font-size: 0.7em;font-weight: bold;#displayHistory#">
+				<span title='Min' class='tooltips pull-right'>#minHistoryValue# #unite#</span><br/>
+            	<span title='Moyenne' class='tooltips pull-right'>#averageHistoryValue# #unite#</span><br/>
+            	<span title='Max' class='tooltips pull-right'>#maxHistoryValue# #unite#</span><br/> <i class="#tendance#"></i>
+        	</div>
+  		</div>
+	</div>
+	<script>
+  		height = Math.round( (#state# - (#minValue#)) * (68/(#maxValue# - (#minValue#))) ) + 6;
+        if ('#displayName#' == 1 || '#displayName#' == '1') {
+            $('.cmd[data-cmd_id=#id#] .cmdName').show();
+        }
+	    $('.height#id#').css('height',height+'px');
+
+	</script>
+</div>

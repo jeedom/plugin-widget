@@ -1,0 +1,16 @@
+<div style="width:30px;min-height:90px;vertical-align:middle;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+	<div class="slider" style="vertical-align:middle;display:block;margin : 5px 10px 5px 10px;width: 10px;float:left;height:90px;" value="#state#"></div>
+   <script>
+ 
+        $(".cmd[data-cmd_id=#id#] .slider").slider({
+          	orientation:'vertical',
+            range: "min",
+            min: ('#minValue#' == '') ? 0 : parseInt('#minValue#'),
+            max: ('#maxValue#' == '') ? 100 : parseInt('#maxValue#'),
+            value: ('#state#' == '') ? 0 : parseInt('#state#'),
+            change: function(event, ui) {
+                jeedom.cmd.execute({id: '#id#', value: {slider: ui.value}});
+            }
+        });
+    </script>
+</div>

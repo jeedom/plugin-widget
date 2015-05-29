@@ -1,0 +1,31 @@
+<div style="width:120px;height:110px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+	<div class="row">
+    	<strong class='cmdName center-block col-xs-12 small'>#name#</strong>
+    	<div class='col-xs-6 iconCmd#id#' style="height:80px;">
+	    	<div class="recipient#id#" style="width: 46px;height: 80px; position: absolute; z-index: 1; background: url('plugins/widget/core/template/dashboard/cmd.info.numeric.GoutteEau/goutteeau.png') no-repeat;background-size:46px 80px;"></div>
+    		<div style="width: 46px;height: 80px; background: url('plugins/widget/core/template/dashboard/cmd.info.numeric.GoutteEau/goutteeaumask.png') no-repeat;background-size:46px 80px;"></div>
+  		</div>
+		<div class="col-xs-6">
+			<div class="row">
+      			<div class='col-xs-12 center-block' >
+        			<span class="humidite#id#" style="font-size: 2em;"></span><br/>
+          			<strong style="font-size: 1em;">#unite#</strong>
+      			</div>
+	   		</div>
+   		</div>
+    	<div style="#displayHistory#;font-size: 0.8em;" class="col-xs-12">
+    		<span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> <i class="#tendance#"></i>
+		</div>
+	</div>
+	<script>
+        if ('#displayName#' == 1 || '#displayName#' == '1') {
+            $('.cmd[data-cmd_id=#id#] .cmdName').show();
+        }
+  		height = parseInt( 80*(#state#/#maxValue#) );
+		if( height > 80) { height = 80; }
+    	topPosition = 80 - height;
+                          
+        $('.recipient#id#').css({'height':height+'px','top':topPosition+'px','background-position':'0 -'+topPosition+'px'});
+    	$('.humidite#id#').append(Math.round((#state#*100)/#maxValue#));
+	</script>
+</div>

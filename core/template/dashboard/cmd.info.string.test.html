@@ -1,0 +1,36 @@
+<div style="width:200px;height:200px;" class="cmd #history# tooltips cmd cmd-widget" data-type="info" data-subtype="other" data-cmd_id="#id#" title="#collectDate#">
+    <center class="zoom cursor">
+        <span style="font-weight: bold;font-size : 12px;">#name#</span><br/>
+        <img src="https://jeedom.darkserver.fr/core/img/logo-jeedom-grand-nom-couleur.svg"  width="160" height="120"/>
+    </center>
+
+
+   <div class="md_imageZoom" data-cmd_id="#id#">
+     <center>
+        <div class="display"></div>
+     </center>
+   </div>
+   <script>
+      $(function() {
+         $(".md_imageZoom[data-cmd_id=#id#]").dialog({
+            autoOpen: false,
+            modal: true,
+            resizable: false,
+            height: ((jQuery(window).width() - 50) < 600) ? (jQuery(window).width() - 50) : 600,
+            width: ((jQuery(window).width() - 50) < 700) ? (jQuery(window).width() - 50) : 700,
+            open: function() {
+               $("body").css({overflow: 'hidden'})
+            },
+            beforeClose: function(event, ui) {
+               $("body").css({overflow: 'inherit'})
+            }
+         });
+
+        
+         $('.cmd[data-cmd_id=#id#] .zoom').on('click', function() {
+            $(".md_imageZoom[data-cmd_id=#id#] .display").empty().append("<center><img src='https://jeedom.darkserver.fr/core/img/logo-jeedom-grand-nom-couleur.svg'/></center>");
+            $(".md_imageZoom[data-cmd_id=#id#]").dialog("open");
+         });
+      });
+   </script>
+</div>

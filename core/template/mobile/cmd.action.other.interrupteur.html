@@ -1,0 +1,23 @@
+<div style="width:120px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+    <center>
+        <span style="font-size: 1.1em;" class="action" id="iconCmd#id#"></span>
+    </center>
+</div>
+
+<script>
+    if ('#state#' == '1' || '#state#' == 1) {
+        $('#iconCmd#id#').append('<img style="vertical-align: middle;" src="plugins/widget/core/template/mobile/cmd.action.other.interrupteur/inter-on.png"><span style="margin-left: 11px;padding: 3px;border-radius:4px;box-shadow: 2px 2px 4px white;border: 1px groove;">#name#</span>');
+        if ('#name#' == 'ON' || '#name#' == 'on' || '#name#' == 'On' || '#name#' == 'on2' || '#name#' == 'On2') {
+            $('.cmd[data-cmd_id=#id#]').hide();
+        }
+    } else {
+        $('#iconCmd#id#').append('<img style="vertical-align: middle;" src="plugins/widget/core/template/mobile/cmd.action.other.interrupteur/inter-off.png"><span style="margin-left: 11px;padding: 3px;border-radius:4px;box-shadow: 2px 2px 4px white inset;border: 1px groove;">#name#</span>');
+        if ('#name#' == 'OFF' || '#name#' == 'off' || '#name#' == 'Off' || '#name#' == 'off2' || '#name#' == 'Off2') {
+            $('.cmd[data-cmd_id=#id#]').hide();
+        }
+    }
+    $('.cmd[data-cmd_id=#id#] .action').off();
+    $('.cmd[data-cmd_id=#id#] .action').on('click', function() {
+        jeedom.cmd.execute({id: '#id#'});
+    });
+</script>

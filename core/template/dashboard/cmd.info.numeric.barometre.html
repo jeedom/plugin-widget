@@ -1,0 +1,108 @@
+<div style="width:285px;height:285px;" class="cmd #history# tooltips cmd-widget barometre#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">
+<style>
+@font-face {
+    font-family: gauge;
+    src: url('plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/digital-7 (mono).ttf');
+}
+ 
+/* Chrome, Safari, Opera */
+
+.stateBarometre {
+    font-family: gauge; 
+    font-size:36px;
+  	color:black;
+  	position: absolute;
+  	top: 226px;
+  	left: 94px;
+  	width:82px;
+  	height:51px;
+  	text-align:end;
+  }
+  
+.decimalBarometre {
+    font-family: gauge; 
+    font-size:28px;
+  	color:darkgray;
+  	position: absolute;
+  	top: 234px;
+  	left: 176px;
+ }
+  
+.uniteBarometre {
+    font-size:14px;
+  	color: #F0F0F0;
+  	position: absolute;
+  	top: 206px;
+  	left: 125px;
+  }
+.tempsBarometre {
+    font-size:14px;
+  	color: #F0F0F0;
+  	position: absolute;
+  	top: 161px;
+  	left: 121px;
+  }
+
+  
+#aiguille#id# {
+    position: absolute;
+    width:170px;
+    height:170px;
+    background : url("plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/aiguibaro-blanc.png") no-repeat scroll center transparent;
+    left:59px;
+    top:60px;
+  	z-index: 2;
+    -webkit-transform: rotate(0deg);
+</style>
+      
+		<div class="cadran#id#" style="z-index:1;width:285px;height:285px;background:url('plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/barometre-blanc.png') no-repeat">
+    		<span class="tempsBarometre tempsBarometre#id#"></span> 
+    		<span class="stateBarometre stateBarometre#id#"></span> 
+    		<span class="decimalBarometre decimalBarometre#id#"></span> 
+    		<span class="uniteBarometre uniteBarometre#id#">#unite#</span>
+		</div>
+		<div id="aiguille#id#" class="indicator"></div>
+
+<script>         
+ 	if( '#couleur#' == 'Black' ) {
+	    $('.cadran#id#').css('background-image',"url('plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/barometre.png')");
+	    $('.aiguille#id#').css('background-image',"url('plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/aiguibaro.png')");
+	  	$('.stateBarometre#id#').css('color','white');
+	  	$('.uniteBarometre#id#').css('color','black');
+    }
+  	temp = parseInt('#state#');
+     	if ( temp < 975) {
+           	$('.tempsBarometre#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/weather-storm-48.png">');
+        }
+     	if (temp >= 975 && temp < 1005) {
+           	$('.tempsBarometre#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/weather-showers-scattered-48.png">');
+        }
+     	if (temp >= 1005 && temp < 1025) {
+           	$('.tempsBarometre#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/weather-few-var-48.png">');
+        }
+     	if (temp >= 1025 && temp < 1050) {
+           	$('.tempsBarometre#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/weather-few-clouds-48.png">');
+        }
+     	if (temp >= 1050 ) {
+           	$('.tempsBarometre#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.info.numeric.barometre/weather-clear-48.png">');
+        }
+
+  	angle = Math.round( ((#state# - 950)/130 ) * 286 )-143;
+	
+   	decimal = Math.round( (parseFloat('#state#') - parseInt('#state#'))*10);
+   	$('.stateBarometre#id#').text(parseInt('#state#')+'.');
+   	$('.decimalBarometre#id#').text(decimal);
+	
+	$('.aiguille#id#.indicator').css( {'-webkit-transform':'rotate('+angle+'deg)','-moz-transform':'rotate('+angle+'deg)','-ms-transform':'rotate('+angle+'deg)','-o-transform':'rotate('+angle+'deg)','transform':'rotate('+angle+'deg)'});
+
+  	tailleTemp = (is_numeric('#taille#')) ? parseFloat('#taille#') : 1.0;
+  	if ( tailleTemp < 0.42 ) { tailleTemp = 0.42; }
+ 	if ( tailleTemp > 1.0 ) { tailleTemp = 1.0; }
+    	widthTemp = Math.round ( 285*tailleTemp );
+   	ecart = Math.round((285 - widthTemp)/4)-1;
+    $('.barometre#id#').css( {'width':widthTemp,'height':widthTemp});
+    $('.barometre#id#').css( {'-webkit-transform':'scale('+tailleTemp+')','-moz-transform':'scale('+tailleTemp+')','-ms-transform':'scale('+tailleTemp+')','-o-transform':'scale('+tailleTemp+')','transform':'scale('+tailleTemp+')'});
+    $('.barometre#id#').css( {'top':'-'+ecart+'px','left':'-'+(ecart-4)+'px'});
+    
+</script>
+</div>    

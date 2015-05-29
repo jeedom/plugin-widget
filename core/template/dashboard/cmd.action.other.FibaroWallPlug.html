@@ -1,0 +1,54 @@
+<div  class="cmd #history# tooltips cmd-widget wallplug#id#" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+    <span class='cmdName' style="font-weight: bold;font-size : 12px;">#valueName#</span>
+    <div class="wallplugDisplay#id#">
+      <span class="action_wallplug#id#" id="iconWallPlugCmd#id#"></span>
+    </div>
+
+<style>
+
+div.wallplug#id# {
+   	width: 90px;
+  	min-height: 90px;
+}
+
+img.WPimg#id# {
+  	width: 80px;
+  	height: 80px;
+} 
+
+div.wallplugDisplay#id# {
+  position:relative;
+}
+
+span.action_wallplug#id# {
+    width: 100%;
+  	top: 0px;
+    z-index:1;
+}
+</style>
+
+<script>
+	
+    if ('#state#' == '1' || '#state#' == 1) {
+      	$('#iconWallPlugCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.FibaroWallPlug/FibaroWallPlugOnNew.png" class="WPimg#id#" />');
+        if (jeedom.cmd.normalizeName('#name#') == 'on') {
+    		$('.cmd[data-cmd_id=#id#]').hide();
+        }
+    } else {
+      	$('#iconWallPlugCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.FibaroWallPlug/FibaroWallPlugOffNew.png" class="WPimg#id#" />');
+    	if (jeedom.cmd.normalizeName('#name#') == 'off') {
+        	$('.cmd[data-cmd_id=#id#]').hide();
+        }
+    }
+  	if ('#isbig#' == 1) {
+    	$('div.wallplug#id#').css('width','140px');
+      	$('div.wallplug#id#').css('min-height','120px');
+      	$('img.WPimg#id#').css('width','120px');
+      	$('img.WPimg#id#').css('height','120px');
+    }
+    $('.cmd[data-cmd_id=#id#] .action_wallplug#id#').off();
+    $('.cmd[data-cmd_id=#id#] .action_wallplug#id#').on('click', function() {
+    jeedom.cmd.execute({id: '#id#'});
+    });
+</script>
+</div>
