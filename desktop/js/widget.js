@@ -26,6 +26,8 @@ updateListSvgs();
 updateListFonts($('#bsFontsView'));
 getSideBarList();
 
+var modifyContainer = true;
+
 function getSideBarList(_path) {
     $.ajax({
         type: "POST",
@@ -47,11 +49,10 @@ function getSideBarList(_path) {
             modifyWithoutSave = false;
             if (_path !== undefined && _path !== '') {
                 if ($('#ul_widget .li_widget[data-path="' + _path + '"]').length !== 0)
-                    $('#ul_widget .li_widget[data-path="' + _path + '"]').click()
+                    $('#ul_widget .li_widget[data-path="' + _path + '"]').click();
             }
             else {
                 $('.bt_displayWidgetList').click();
-                getContainer();
             }
         }
     });
@@ -76,6 +77,13 @@ function getContainer() {
             $('.pluginContainer').remove();
             $('.widgetListDisplay legend').after($('<div class="pluginContainer">').html(data.result));
             $('.pluginContainer').packery();
+            $('.filterAcionWidget').change();
+            $("img.lazy").lazyload({
+                container: $(".pluginContainer"),
+                event : "sporty",
+                skip_invisible : false
+            });
+            $("img.lazy").trigger("sporty");
             $("img.lazy").each(function () {
                 var el = $(this);
                 if (el.attr('data-original2') !== undefined) {
@@ -143,6 +151,10 @@ $('.bt_displayWidgetList').on('click', function () {
     $('#bsListWidgets').show('fade');
     $('.widgetListDisplay').show('fade');
     $('.li_widget').removeClass('active');
+    if(modifyContainer === true) {
+        getContainer();
+        modifyContainer = false;
+    }
 });
 
 $("#ul_widget").on('click', ".li_widget", function (event) {
@@ -178,15 +190,68 @@ $('.widgetAction[data-action=remove]').on('click', function () {
     bootbox.confirm('{{Etes-vous sûr de vouloir supprimer le widget}} <span style="font-weight: bold ;">' + $('.widgetAttr[data-l1key=name]').value() + '</span> ?', function (result) {
         if (result) {
             removeWidget($('.widgetAttr[data-l1key=path]').value(), widgetCallback);
-            setTimeout('getContainer()', 500);
+            getContainer();
         }
     });
 });
 
 $('.widgetAction[data-action=copy]').on('click', function () {
-    bootbox.prompt("{{Nom la copie du widget ?}}", function (result) {
-        if (result) {
-            copyWidget($('.widgetAttr[data-l1key=path]').value(), result, widgetCallback);
+   bootbox.dialog({
+        title: "{{Choisissez vos paramètres}}",
+        message: '<div class="row">' +
+                '<div class="col-md-12"> ' +
+                '<form class="form-horizontal">' +
+                        '<div class="form-group">' +
+                        '<label class="col-sm-4 control-label">{{Nom du widget}}</label>' +
+                        '<div class="col-sm-6">' +
+                        '<input type="text" class="form-control" id="widgetNameCopy" placeholder="{{Nom du widget}}"/>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label class="col-sm-4 control-label">{{Version}}</label>' +
+                        '<div class="col-sm-6">' +
+                        '<select class=" form-control" id="widgetVersionCopy" value="' + $('.widgetAttr[data-l1key="version"]').val() + '">' +
+                        '<option value="dashboard">{{Dashboard}}</option>' +
+                        '<option value="mobile">{{Mobile}}</option>' +
+                        '</select>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label class="col-sm-4 control-label">{{Type}}</label>' +
+                        '<div class="col-sm-6">' +
+                        '<select class="form-control" id="widgetTypeCopy" value="' + $('.widgetAttr[data-l1key="type"]').val() + '">' +
+                        $('.widgetAttr[data-l1key="type"]').html() +
+                        '</select>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                        '<label class="col-sm-4 control-label">{{Sous-type}}</label>' +
+                        '<div class="col-sm-6">' +
+                        '<select class="form-control" id="widgetSubtypeCopy" value="' + $('.widgetAttr[data-l1key="subtype"]').val() + '">' +
+                        $('.widgetAttr[data-l1key="subtype"]').html() +
+                        '</select>' +
+                        '</div>' +
+                        '</div>' +
+                        '</form>' +
+                        '</div>' +
+                        '</div>',
+        buttons: {
+            cancel: {
+                label: "{{Annuler}}",
+                className: "btn-default"
+            },
+            success: {
+                label: "{{Ajouter}}",
+                className: "btn-success",
+                callback: function () {
+                    var result = {};
+                    result.name = $('#widgetNameCopy').value();
+                    result.version = $('#widgetVersionCopy').value();
+                    result.type = $('#widgetTypeCopy').value();
+                    result.subtype = $('#widgetSubtypeCopy').value();
+                    copyWidget($('.widgetAttr[data-l1key=path]').value(), result, widgetCallback);
+                }
+            }
         }
     });
 });
@@ -209,11 +274,76 @@ $('.widgetAction[data-action=fonts]').on('click', function () {
 
 $('.widgetAction[data-action=add]').on('click', function () {
     $.hideAlert();
-    bootbox.prompt("Nom du widget ?", function (result) {
-        if (result !== null) {
-            addWidget(result, widgetCallback);
-        }
-    });
+    if ($('#bt_expertMode').attr('state') !== '1') {
+        bootbox.prompt("Nom du widget ?", function (result) {
+            if (result !== null) {
+                result.name = result;
+                addWidget(result, widgetCallback);
+            }
+        });
+    }
+    else {
+        bootbox.dialog({
+            title: "{{Choisissez vos paramètres}}",
+            message: '<div class="row">' +
+                    '<div class="col-md-12"> ' +
+                    '<form class="form-horizontal">' +
+                    '<div class="form-group">' +
+                    '<label class="col-sm-4 control-label">{{Nom du widget}}</label>' +
+                    '<div class="col-sm-6">' +
+                    '<input type="text" class="form-control" id="widgetNameAdd" placeholder="{{Nom du widget}}"/>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                    '<label class="col-sm-4 control-label">{{Version}}</label>' +
+                    '<div class="col-sm-6">' +
+                    '<select class=" form-control" id="widgetVersionAdd">' +
+                    '<option value="dashboard">{{Dashboard}}</option>' +
+                    '<option value="mobile">{{Mobile}}</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                    '<label class="col-sm-4 control-label">{{Type}}</label>' +
+                    '<div class="col-sm-6">' +
+                    '<select class="form-control" id="widgetTypeAdd">' +
+                    $('.widgetAttr[data-l1key="type"]').html() +
+                    '</select>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                    '<label class="col-sm-4 control-label">{{Sous-type}}</label>' +
+                    '<div class="col-sm-6">' +
+                    '<select class="form-control" id="widgetSubtypeAdd">' +
+                    $('.widgetAttr[data-l1key="subtype"]').html() +
+                    '</select>' +
+                    '</div>' +
+                    '</div>' +
+                    '</form>' +
+                    '</div>' +
+                    '</div>',
+            buttons: {
+                cancel: {
+                    label: "{{Annuler}}",
+                    className: "btn-default"
+                },
+                success: {
+                    label: "{{Ajouter}}",
+                    className: "btn-success",
+                    callback: function () {
+                        var result = {};
+                        result.name = $('#widgetNameAdd').value();
+                        result.version = $('#widgetVersionAdd').value();
+                        result.type = $('#widgetTypeAdd').value();
+                        result.subtype = $('#widgetSubtypeAdd').value();
+                        if (result.name !== null && result.name !== '') {
+                            addWidget(result, widgetCallback);
+                        }
+                    }
+                }
+            }
+        });
+    }
 });
 
 $('#bt_editWidget').on('click', function () {
@@ -345,7 +475,7 @@ if (getUrlVars('id') !== '') {
         $('#ul_widget .li_widget[data-path="' + getUrlVars('id') + '"]').click();
     }
 }
-$('.widgetDisplayCard').on('click', function () {
+$('body').on('click', '.widgetDisplayCard', function () {
     $('#ul_widget .li_widget[data-path="' + $(this).attr('data-path') + '"]').click();
 });
 
@@ -360,9 +490,9 @@ $('#bt_insertIcon').on('click', function () {
 });
 
 function getWidgetExemple(_path) {
-    $.ajax({// fonction permettant de faire de l'ajax
-        type: "POST", // methode de transmission des données au fichier php
-        url: "plugins/widget/core/ajax/widget.ajax.php", // url du fichier php
+    $.ajax({
+        type: "POST",
+        url: "plugins/widget/core/ajax/widget.ajax.php",
         data: {
             action: "exemple",
             path: _path
@@ -371,7 +501,7 @@ function getWidgetExemple(_path) {
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
-        success: function (data) { // si l'appel a bien fonctionné
+        success: function (data) {
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
@@ -473,29 +603,32 @@ function saveWidget(_callback) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
+            modifyContainer = true;
             if(_callback !== undefined)
                 _callback(data.result.path);
         }
     });
 }
 
-function addWidget(_name, _callback) {
+function addWidget(_data, _callback) {
     $.ajax({
         type: "POST",
         url: "plugins/widget/core/ajax/widget.ajax.php",
         data: {
             action: "add",
-            name: _name
+            data: _data
         },
         dataType: 'json',
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
         success: function (data) {
+            console.log(data);
             if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
+            modifyContainer = true;
             if(_callback !== undefined)
                 _callback(data.result.path);
         }
@@ -519,32 +652,35 @@ function removeWidget(_path, _callback) {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
+            modifyContainer = true;
             if(_callback !== undefined)
                 _callback();
         }
     });
 }
 
-function copyWidget(_path, _name, _callback) {
+function copyWidget(_path, _data, _callback) {
     $.ajax({
         type: "POST",
         url: "plugins/widget/core/ajax/widget.ajax.php",
         data: {
             action: "copy",
             path: _path,
-            name: _name
+            data: _data
         },
         dataType: 'json',
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
         success: function (data) {
+            console.log(data);
            if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
+            modifyContainer = true;
             if(_callback !== undefined)
-                _callback(data.result);
+                _callback(data.result.path);
         }
     });
 }
@@ -953,11 +1089,12 @@ function filterWidget(view) {
     var stateBinary = $('#filterBinary').prop('checked');
     var stateNumeric = $('#filterNumeric').prop('checked');
     var stateString = $('#filterString').prop('checked');
+    var stateNbUsed = $('#filterNbUsed').prop('checked');
     if( stateOther || stateSlider)
         stateAction = true;
     if( stateBinary || stateNumeric || stateString)
         stateInfo = true;
-    if(stateDesk === false && stateMob === false && stateAction === false && stateInfo === false && stateOther === false && stateSlider === false && stateBinary === false && stateNumeric === false && stateString === false) {
+    if(stateNbUsed === false &&stateDesk === false && stateMob === false && stateAction === false && stateInfo === false && stateOther === false && stateSlider === false && stateBinary === false && stateNumeric === false && stateString === false) {
         view.show();
         return;
     }
@@ -965,7 +1102,13 @@ function filterWidget(view) {
     var kids = view.filter(function () {
         var isFind = true;
         var desktop = $(this).find('.fa-desktop').length === 0 ? false : true;
-        if (stateDesk === false && stateMob === false)
+        var nbUsed = $(this).find('.badge').text();
+        console.log(nbUsed);
+        if(stateNbUsed === true && nbUsed === '0')
+            isFind = false;
+        if (stateDesk === false && stateMob === false && stateNbUsed === true)
+            return isFind;
+        if (stateDesk === false && stateMob === false && stateNbUsed === false)
             isFind = false;
         if((desktop === true && stateDesk === false) || (desktop === false && stateMob === false))
             isFind = false;
@@ -978,11 +1121,14 @@ function filterWidget(view) {
         var isFind = true;
         var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
         var subtype = $(this).find('.label').text();
+        var nbUsed = $(this).find('.badge').text();
+        if(stateNbUsed === true && nbUsed === '0')
+            isFind = false;
         if(type === 'info')
             return false;
-        if((stateAction === false && stateOther === false && stateSlider === false) && (stateInfo === true  || stateBinary === true || stateNumeric === true || stateString === true))
+        if((stateAction === false && stateOther === false && stateSlider === false && stateNbUsed === false) && (stateInfo === true  || stateBinary === true || stateNumeric === true || stateString === true))
             return false;
-        if((stateDesk === true || stateMob === true) && (stateAction === false && stateOther === false && stateSlider === false))
+        if((stateDesk === true || stateMob === true || stateNbUsed === true) && (stateAction === false && stateOther === false && stateSlider === false))
             return isFind;
         if(stateDesk === false && stateMob === false && stateAction === true && stateOther === false && stateSlider === false)
             return (type === 'action' && stateAction === true);
@@ -1001,9 +1147,9 @@ function filterWidget(view) {
         var subtype = $(this).find('.label').text();
         if(type === 'action')
             return false;
-        if((stateAction === true || stateOther === true || stateSlider === true) && (stateInfo === false  && stateBinary === false && stateNumeric === false && stateString === false))
+        if((stateAction === true || stateOther === true || stateSlider === true && stateNbUsed === false) && (stateInfo === false  && stateBinary === false && stateNumeric === false && stateString === false))
             return false;
-        if((stateDesk === true || stateMob === true) && (stateInfo === false && stateBinary === false && stateNumeric === false && stateString === false))
+        if((stateDesk === true || stateMob === true || stateNbUsed === true) && (stateInfo === false && stateBinary === false && stateNumeric === false && stateString === false))
             return isFind;
         if(stateDesk === false && stateMob === false && stateInfo === true && stateBinary === false && stateNumeric === false && stateString === false)
             return (type === 'info' && stateInfo === true);

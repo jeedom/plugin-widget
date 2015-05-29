@@ -21,101 +21,6 @@ $mobileWidget = widget::listWidget('mobile');
 $dashboardWidget = widget::listWidget('dashboard');
 $pathfile = dirname(__FILE__);
 sendVarToJS('pathFile', $pathfile);
-
-function displayWidgetName($_name) {
-    $result = '';
-    $name = explode('.', $_name);
-    if (count($name) != 3) {
-        return $name;
-    }
-    switch ($name[0]) {
-        case 'info':
-            $result .= '<i class="fa fa-eye fa-fw" title="Widget de type information"></i> ';
-            break;
-        case 'action':
-            $result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action"></i> ';
-            break;
-        default:
-            $result .= $name[0];
-            break;
-    }
-    switch ($name[1]) {
-        case 'other':
-            $result .= '<span class="label label-warning" style="text-shadow: none;">other</span> ';
-            break;
-        case 'color':
-            $result .= '<span class="label label-success" style="text-shadow: none;">color</span> ';
-            break;
-        case 'slider':
-            $result .= '<span class="label label-primary" style="text-shadow: none;">slider</span> ';
-            break;
-        case 'binary':
-            $result .= '<span class="label label-info" style="text-shadow: none;">binary</span> ';
-            break;
-        case 'numeric':
-            $result .= '<span class="label label-danger" style="text-shadow: none;">numeric</span> ';
-            break;
-        case 'string':
-            $result .= '<span class="label label-default" style="text-shadow: none;">string</span> ';
-            break;
-        default:
-            $result .= $name[1];
-            break;
-    }
-    return $result .= $name[2];
-}
-
-function displayWidgetType($_name) {
-    $result = '';
-    $name = explode('.', $_name);
-    if (count($name) != 3) {
-        return "";
-    }
-    switch ($name[0]) {
-        case 'info':
-            $result .= '<i class="fa fa-eye fa-fw" title="Widget de type information" style="position: absolute;top: 31px; left: 15px;"></i> ';
-            break;
-        case 'action':
-            $result .= '<i class="fa fa-exclamation-circle fa-fw" title="Widget de type action" style="position: absolute;top: 31px; left: 15px;"></i> ';
-            break;
-        default:
-            $result .= "";
-            break;
-    }
-    return $result;
-}
-
-function displayWidgetSubtype($_name) {
-    $result = '';
-    $name = explode('.', $_name);
-    if (count($name) != 3) {
-        return "";
-    }
-    switch ($name[1]) {
-        case 'other':
-            $result .= '<span class="label label-warning" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">other</span> ';
-            break;
-        case 'color':
-            $result .= '<span class="label label-success" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 38px 16px;">color</span> ';
-            break;
-        case 'slider':
-            $result .= '<span class="label label-primary" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">slider</span> ';
-            break;
-        case 'binary':
-            $result .= '<span class="label label-info" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 44px 16px;">binary</span> ';
-            break;
-        case 'numeric':
-            $result .= '<span class="label label-danger" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 53px 16px;">numeric</span> ';
-            break;
-        case 'string':
-            $result .= '<span class="label label-default" style="text-shadow: none;position: absolute;top: 70px; left: -21px;transform: rotate(90deg);-webkit-transform: rotate(90deg);transform-origin: 38px 16px;-webkittransform-origin: 41px 16px;">string</span> ';
-            break;
-        default:
-            $result .= "";
-            break;
-    }
-    return $result;
-}
 ?>
 <style>
     .divIconSel{
@@ -187,6 +92,9 @@ function displayWidgetSubtype($_name) {
                             </label>
                             <label class="btn btn-xs btn-default">
                                 <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterMobile"><i class="fa fa-mobile fa-fw"></i>
+                            </label>
+                            <label class="btn btn-xs btn-default">
+                                <input type="checkbox" autocomplete="off" class="filterAcionWidget" id="filterNbUsed"><span class="badge">X</span> > 0
                             </label>
                         </div>
                         <div class="btn-group  btn-group-justified" data-toggle="buttons" style="margin-top : 5px;margin-bottom: 5px;">
@@ -957,7 +865,6 @@ function displayWidgetSubtype($_name) {
                 </legend>
                 <form class="form-horizontal">
                     <fieldset>
-
                         <div class="form-group">
                             <label class="col-sm-4 control-label">{{Nom du widget}}</label>
                             <div class="col-sm-6">

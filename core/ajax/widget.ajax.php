@@ -65,9 +65,15 @@ try {
 
     if (init('action') == 'add') {
         $widget = new widget();
-        $widget->setName(init('name'));
+        $_data = init('data');
+        $widget->setName($_data['name']);
+        $widget->setVersion($_data['version']);
+        $widget->setType($_data['type']);
+        $widget->setSubtype($_data['subtype']);
         $widget->save();
-        ajax::success(utils::o2a($widget));
+        $result = utils::o2a($widget);
+        $result['path'] = $widget->generatePath();
+        ajax::success($result);
     }
 
     if (init('action') == 'remove') {
@@ -84,9 +90,12 @@ try {
         if (!is_object($widget)) {
             throw new Exception(__('Widget non trouvé : ', __FILE__) . init('path'));
         }
-        $widget->setName(init('name'));
-        utils::o2a($widget->copy(init('name',$widget->getName().'_copy')));
-        ajax::success($widget->generatePath());
+        $data = init('data');
+        $copy = $widget->copy($data);
+        $result = utils::o2a($copy);
+        $result['path'] = $copy->generatePath();
+        $result['data'] = $data;
+        ajax::success($result);
     }
 
     if (init('action') == 'sidebar') {

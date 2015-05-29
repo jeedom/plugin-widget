@@ -336,18 +336,25 @@ class widget {
         }
     }
 
-    public function copy($_name) {
+    public function copy($_data) {
+        $_data['name'] = $_data['name'] == '' ? $this->getName() . '_copy' : $_data['name'];
+        $_data['version'] = $_data['version'] != '' ? $_data['version'] : $this->getVersion();
+        $_data['type'] = $_data['type'] == 'none' ? $this->getType() : $_data['type'];
+        $_data['subtype'] = $_data['subtype'] == 'none' ? $this->getSubtype() : $_data['subtype'];
         $dep = realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $this->getName();
         if (file_exists($dep)) {
-            mkdir(realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $_name);
-            if (!rcopy($dep, realpath(dirname(__FILE__) . '/../template/' . $this->getVersion()) . '/cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $_name, false, array(), true)) {
+            mkdir(realpath(dirname(__FILE__) . '/../template/' . $_data['version']) . '/cmd.' . $_data['type'] . '.' . $_data['subtype'] . '.' . $_data['name']);
+            if (!rcopy($dep, realpath(dirname(__FILE__) . '/../template/' . $_data['version']) . '/cmd.' . $_data['type'] . '.' . $_data['subtype'] . '.' . $_data['name'], false, array(), true)) {
                 throw new Exception(__('Impossible de copier ', __FILE__) . $cibDirs[1] . ' => ' . $tmp_dir);
             }
         }
         $widget = clone $this;
-        $widget->setName($_name);
+        $widget->setName($_data['name']);
+        $widget->setVersion($_data['version']);
+        $widget->setType($_data['type']);
+        $widget->setSubtype($_data['subtype']);
         $widget->setpath(realpath($widget->generatePath()));
-        $widget->setContent(str_replace('cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $this->getName(), 'cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $_name, $widget->getContent()));
+        $widget->setContent(str_replace('cmd.' . $this->getType() . '.' . $this->getSubtype() . '.' . $this->getName(), 'cmd.' . $_data['type'] . '.' . $_data['subtype'] . '.' . $_data['name'], $widget->getContent()));
         $widget->save();
         return $widget;
     }
@@ -478,5 +485,3 @@ class widget {
     }
 
 }
-
-?>
