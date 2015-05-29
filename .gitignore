@@ -1,7 +1,7 @@
 nbproject/
 test.php
-core/config/common.config.php
 core/template/dashboard/
 core/template/mobile/
+core/config/common.config.php
 plugins
 sftp-config.json
