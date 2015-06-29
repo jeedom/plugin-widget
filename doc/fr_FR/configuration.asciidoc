@@ -1,5 +1,3 @@
-Main Header
-===========
 Optional Author Name <optional@author.email>
 Optional version, optional date
 :Author:    Skyline-ch
@@ -15,9 +13,11 @@ ainsi ont peux avoir un même widget écris en bleu sur une commande et en vert 
 
 .Therminologie
 [NOTE]
+===============================
 Widget et Tuile, a ne pas confondre.
 Le widget, c'est la partie qui vas se charger de mettre en forme et afficher une infos ou commande, un widget ne dois s'occuper que d'une seul commande ou infos.
 La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la quelle va s'afficher les divers widgets appliquer au commande et inofs du module.
+===============================
 
 == Index :
  <<chapitre-0,Installation du plugin Widget::>>
