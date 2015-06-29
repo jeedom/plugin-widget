@@ -23,7 +23,7 @@ La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la 
 == Index :
  xref:chapitre-0[Installation du plugin Widget]
  <<chapitre-1,Présentation et fonction de base du Plugin Widget>>
- <<chapitre-2,Accèder au option de personnalisation des widgets::>>
+ link:#chapitre-2[Accèder au option de personnalisation des widgets]
 
 [[chapitre-0]]
 === Installation du plugin Widget
