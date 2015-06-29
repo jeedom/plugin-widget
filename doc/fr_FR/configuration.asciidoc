@@ -1,5 +1,73 @@
-Le plugin widget est un plugin un peu particulier, car il ne permet pas de faire des équipements mais de modifier le rendu d’une commande :
+Main Header
+===========
+Optional Author Name <optional@author.email>
+Optional version, optional date
+:Author:    Skyline-ch
+:Email:     <skyline-ch@play-4-fun.net>
+:Date:      29.06.2015
+:Revision:  1.195.0
 
+== Intro
+Le plugin widget est un plugin un peu particulier, car il ne permet pas de crée des équipements mais de modifier le rendu (affichage) d’une commande, l'objectif de se Plugin c'est donc de premetre de personnaliser simplement la façon d'afficher une valeurs, infos, ou action en fonction de ses goûts et désire.
+Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le devloppeur du widget), ont peux donc avoir un widget qui s'affichera différement d'une commande à l'autre.
+
+ainsi ont peux avoir un même widget écris en bleu sur une commande et en vert sur une autre.
+
+.Therminologie
+[NOTE]
+Widget et Tuile, a ne pas confondre.
+Le widget, c'est la partie qui vas se charger de mettre en forme et afficher une infos ou commande, un widget ne dois s'occuper que d'une seul commande ou infos.
+La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la quelle va s'afficher les divers widgets appliquer au commande et inofs du module.
+
+== Index :
+ <<chapitre-0,Installation du plugin Widget::>>
+ <<chapitre-1,Présentation et fonction de base du Plugin Widget::>>
+ <<chapitre-2,Accèder au option de personnalisation des widgets::>>
+
+[[chapitre-0]]
+=== Installation du plugin Widget
+.Therminologie
+[NOTE]
+Il vous faut au préalable créer un compte sur le market Jeedom (https://market.jeedom.fr) puis entrer vos informations de conection (login et mdp) dans les paramètre de votre Jeedom
+
+Comme pour tout plugin, le plugin Widget s'installe depuis l'interface jeedom, menu "Général"=>"plugin"
+
+.Page des plugins
+image::../images/capture001.png[]
+
+Cliquer sur l'icon vert pour accèder directement au market, dans cette fenetre cliquer sur officiel et dans le champ de recherche mettre "Widget"
+
+.Page market, plugin widget
+image::../images/capture002.png[]
+
+Cliquer sur l'icon du plugin, cela ouvre la fiche du plugin dans la quelle ont trouve plusieurs informations.
+
+.Fiche du plugin widget
+image::../images/capture003.png[]
+
+Cliquer sur le bouton "Installer stable", une fois installer Jeedom vous demade si vous souhaiter aller à la page de configuration du plugin, répondre oui.
+Sur la page de configuration du plugin widget, nous n'avons pour se plugin qu'une seule option activer ou désactiver.
+Par défaut se dernier est désactiver, je vous invite donc a cliquer sur le bouton vert "activer".
+Dés à présent le plugin est actif et opérationnel.
+
+
+
+[[chapitre-1]]
+=== Présentation et fonction de base du Plugin Widget
+Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugin"=>"Programmation"=>"Widget"
+.Menu plugin
+image::../images/capture005.png[]
+
+Ont se trouve donc sur la page principale du plugin, se dernier dipose par défaut d'un éventail de widget des sont installation, il est possible d'en télécharger d'autre via le market ou de créer ses propres Widget (voir plus bas)
+.Présentation de la page principal Widget
+image::../images/capture006.png[]
+
+
+[[chapitre-2]]
+=== Accèder aux options de personnalisation des widgets
+
+
+ 
 image::../images/widget_screenshot1.JPG[]
 
 Sur la droite on ajoute un nouveau widget, sur la gauche on peut définir la version pour laquelle le widget est fait (dashboard ou mobile), le type (action ou info) et le sous-type. Tout à gauche on a le résultat et en-dessous le code à proprement parlé (html/CSS et JS).
