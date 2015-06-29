@@ -14,16 +14,9 @@ ainsi ont peux avoir un même widget écris en bleu sur une commande et en vert 
 [NOTE]
 ===============================
 Widget et Tuile, a ne pas confondre.
-
 Le widget, c'est la partie qui vas se charger de mettre en forme et afficher une infos ou commande, un widget ne dois s'occuper que d'une seul commande ou infos.
-
 La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la quelle va s'afficher les divers widgets appliquer au commande et inofs du module.
 ===============================
-
-== Index :
- xref:chapitre-0[Installation du plugin Widget]
- <<chapitre-1,Présentation et fonction de base du Plugin Widget>>
- link:#chapitre-2[Accèder au option de personnalisation des widgets]
 
 [[chapitre-0]]
 === Installation du plugin Widget
