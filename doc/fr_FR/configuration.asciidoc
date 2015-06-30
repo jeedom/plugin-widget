@@ -20,7 +20,6 @@ Le widget, c'est la partie qui vas se charger de mettre en forme et afficher une
 La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la quelle va s'afficher les divers widgets appliquer au commande et inofs du module.
 ===============================
 
-[[chapitre-0]]
 === Installation du plugin Widget
 .Avant de commancer
 [NOTE]
@@ -50,7 +49,6 @@ Dés à présent le plugin est actif et opérationnel.
 
 
 
-[[chapitre-1]]
 === Présentation et fonction de base du Plugin Widget
 Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugin"=>"Programmation"=>"Widget"
 .Menu plugin
@@ -61,7 +59,7 @@ Ont se trouve donc sur la page principale du plugin, se dernier dipose par défa
 image::../images/capture006.png[]
 
 
-[[chapitre-2]]
+
 === Accèder aux options de personnalisation des widgets
 
 
