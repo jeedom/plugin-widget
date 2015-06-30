@@ -53,14 +53,26 @@ Dés à présent le plugin est actif et opérationnel.
 === Présentation et fonction de base du Plugin Widget
 Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugin"=>"Programmation"=>"Widget".
 
-.Menu plugin
 image::../images/capture005.png[]
 
 Ont se trouve donc sur la page principale du plugin, se dernier dipose par défaut d'un éventail de widget des sont installation, il est possible d'en télécharger d'autre via le market ou de créer ses propres Widget (voir plus bas).
 
-.Présentation de la page principal Widget
 image::../images/capture006.png[]
 
+==== Appliquer le widget sur plusieurs commandes
+En cliquant sur l'un des widgets de la liste du menu de droite ou de gauche vous allez ouvrir la page de configuration du widget sur la quelle vous pouvez modifier voir un apèrçu du widget, et tout un tas d'infos de configuration comme le code source du widget
+
+image::../images/capture007.png[]
+
+WARNING: Si vous modifier un Widget qui n'ai pas une de vos créations il est préférable de le dupliquer pour éviter de perdre vos modifs si le widget original est mis à jours.
+
+Pour plus d'infos sur la configuration et création de widget voir plus bas.
+
+En cliquant sur le bonton ``Appliquer sur des commandes'' vous ouvrez une fentre qui liste toutes les commandes compatible avec le type du widget, vous pouvez donc simplement appliquer ou retirer le widget à de nombreuses commande en une seul fois.
+
+image::../images/capture008.png[]
+
+Il suffi de cocher les commandes sur les quelles  vous souhaiter appliquer le widget
 
 
 === Accèder aux options de personnalisation des widgets
