@@ -97,17 +97,34 @@ Sur cette page vous trouver tout vos éléments domotique, les Objets, les modul
 
 image::../images/capture013.png[]
 
+
+Ont peux aussi y accèder depuis la page de configuration des modules.
+
+image::../images/capture015.png[]
+
+==== Ajouter une option personnaliser
 Dans l'onglet "Affichage avancé" ont trouve 2 listes déroulentes qui permetent de changer pour la commande le widget utiliser sur un ordinateur et l'autre pour les Mobiles.
 Il y as d'autres option pour afficher ou non les noms et stat, forcé le retours à la ligne avant/aprés le widget si il y as plusieurs commande dans un module (retours a la ligne dans la tuile).
 Enfin la liste des paramètres optionnels Widget apliquer (la liste disponible se trouve sur le forum ou Wiki)
 
 image::../images/capture014.png[]
 
+.exemple de valeur pour afficher un compteur spésifique
+image::../images/capture016.png[]
+
+.exemple 2 de valeur pour afficher un autre compteur
+image::../images/capture017.png[]
+
 .Ajout d'option
 NOTE: Pour ajouter une option il vous suffi de cliquer sur le bouton "ajouter", de rensegner le nom de l'option avec les bonne minuscule et majuscule, ainsi que la valeur à attribuer à l'option.
 Pour trouver les options consulter le forum ou/et le Wiki
 
- 
+
+
+
+
+
+
 image::../images/widget_screenshot1.JPG[]
 
 Sur la droite on ajoute un nouveau widget, sur la gauche on peut définir la version pour laquelle le widget est fait (dashboard ou mobile), le type (action ou info) et le sous-type. Tout à gauche on a le résultat et en-dessous le code à proprement parlé (html/CSS et JS).
