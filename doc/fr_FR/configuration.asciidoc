@@ -68,7 +68,7 @@ WARNING: Si vous modifier un Widget qui n'ai pas une de vos créations il est pr
 
 Pour plus d'infos sur la configuration et création de widget voir plus bas.
 
-En cliquant sur le bonton ``Appliquer sur des commandes'' vous ouvrez une fentre qui liste toutes les commandes compatible avec le type du widget, vous pouvez donc simplement appliquer ou retirer le widget à de nombreuses commande en une seul fois.
+En cliquant sur le bonton ''Appliquer sur des commandes'' vous ouvrez une fentre qui liste toutes les commandes compatible avec le type du widget, vous pouvez donc simplement appliquer ou retirer le widget à de nombreuses commande en une seul fois.
 
 image::../images/capture008.png[]
 
