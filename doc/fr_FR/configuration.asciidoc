@@ -5,10 +5,12 @@
 :Revision:  1.195.0
 
 == Intro
-Le plugin widget est un plugin un peu particulier, car il ne permet pas de crée des équipements mais de modifier le rendu (affichage) d’une commande, l'objectif de se Plugin c'est donc de premetre de personnaliser simplement la façon d'afficher une valeurs, infos, ou action en fonction de ses goûts et désire.+
-Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le devloppeur du widget), ont peux donc avoir un widget qui s'affichera différement d'une commande à l'autre.+
+----
+Le plugin widget est un plugin un peu particulier, car il ne permet pas de crée des équipements mais de modifier le rendu (affichage) d’une commande, l'objectif de se Plugin c'est donc de premetre de personnaliser simplement la façon d'afficher une valeurs, infos, ou action en fonction de ses goûts et désire.
+Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le devloppeur du widget), ont peux donc avoir un widget qui s'affichera différement d'une commande à l'autre.
 
-ainsi ont peux avoir un même widget écris en bleu sur une commande et en vert sur une autre.+
+ainsi ont peux avoir un même widget écris en bleu sur une commande et en vert sur une autre.
+----
 
 .Therminologie
 [NOTE]
