@@ -51,11 +51,13 @@ Dés à présent le plugin est actif et opérationnel.
 
 
 === Présentation et fonction de base du Plugin Widget
-Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugin"=>"Programmation"=>"Widget"
+Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugin"=>"Programmation"=>"Widget".
+
 .Menu plugin
 image::../images/capture005.png[]
 
-Ont se trouve donc sur la page principale du plugin, se dernier dipose par défaut d'un éventail de widget des sont installation, il est possible d'en télécharger d'autre via le market ou de créer ses propres Widget (voir plus bas)
+Ont se trouve donc sur la page principale du plugin, se dernier dipose par défaut d'un éventail de widget des sont installation, il est possible d'en télécharger d'autre via le market ou de créer ses propres Widget (voir plus bas).
+
 .Présentation de la page principal Widget
 image::../images/capture006.png[]
 
