@@ -33,19 +33,13 @@ image::../images/capture001.png[]
 Cliquer sur l'icon vert pour accèder directement au market, dans cette fenetre cliquer sur officiel et dans le champ de recherche mettre "Widget"
 
 
-
-
-
-
-
-
-
-
 image::../images/capture002.png[]
+
 
 Cliquer sur l'icon du plugin, cela ouvre la fiche du plugin dans la quelle ont trouve plusieurs informations.
 
 image::../images/capture003.png[]
+
 
 Cliquer sur le bouton "Installer stable", une fois installer Jeedom vous demade si vous souhaiter aller à la page de configuration du plugin, répondre oui.
 Sur la page de configuration du plugin widget, nous n'avons pour se plugin qu'une seule option activer ou désactiver.
