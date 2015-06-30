@@ -85,13 +85,27 @@ image::../images/capture010.png[]
 .Widget : ConsoIMG
 image::../images/capture011.png[]
 
-=== Accèder aux options de personnalisation des widgets
+=== Options de personnalisation des widgets
 
-Il y as 
+Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le devloppeur du widget) et commune à tout les widget, ont peux donc avoir un widget qui s'affichera différement d'une commande à l'autre.
 
+Ont peux accèder à ses option de 2 façons, soite par l'arbre Domotique qui se trouve dans le menu "Général" => "Arbre Domotique"
 
+image::../images/capture012.png[]
 
+Sur cette page vous trouver tout vos éléments domotique, les Objets, les modules, les commandes.
 
+image::../images/capture013.png[]
+
+Dans l'onglet "Affichage avancé" ont trouve 2 listes déroulentes qui permetent de changer pour la commande le widget utiliser sur un ordinateur et l'autre pour les Mobiles.
+Il y as d'autres option pour afficher ou non les noms et stat, forcé le retours à la ligne avant/aprés le widget si il y as plusieurs commande dans un module (retours a la ligne dans la tuile).
+Enfin la liste des paramètres optionnels Widget apliquer (la liste disponible se trouve sur le forum ou Wiki)
+
+image::../images/capture014.png[]
+
+.Ajout d'option
+NOTE: Pour ajouter une option il vous suffi de cliquer sur le bouton "ajouter", de rensegner le nom de l'option avec les bonne minuscule et majuscule, ainsi que la valeur à attribuer à l'option.
+Pour trouver les options consulter le forum ou/et le Wiki
 
  
 image::../images/widget_screenshot1.JPG[]
