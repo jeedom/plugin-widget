@@ -5,7 +5,6 @@
 :Revision:  1.195.0
 
 == Intro
-
 Le plugin widget est un plugin un peu particulier, car il ne permet pas de crée des équipements mais de modifier le rendu (affichage) d’une commande, l'objectif de se Plugin c'est donc de premetre de personnaliser simplement la façon d'afficher une valeurs, infos, ou action en fonction de ses goûts et désire.
 
 Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le devloppeur du widget), ont peux donc avoir un widget qui s'affichera différement d'une commande à l'autre.
@@ -20,6 +19,9 @@ Widget et Tuile, a ne pas confondre.
 Le widget, c'est la partie qui vas se charger de mettre en forme et afficher une infos ou commande, un widget ne dois s'occuper que d'une seul commande ou infos.
 La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la quelle va s'afficher les divers widgets appliquer au commande et inofs du module.
 ===============================
+
+
+
 
 == Installation du plugin Widget
 .Avant de commancer
@@ -50,6 +52,7 @@ Dés à présent le plugin est actif et opérationnel.
 
 
 
+
 == Présentation et fonction de base du Plugin Widget
 Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugin"=>"Programmation"=>"Widget".
 
@@ -58,6 +61,8 @@ image::../images/capture005.png[]
 Ont se trouve donc sur la page principale du plugin, se dernier dipose par défaut d'un éventail de widget des sont installation, il est possible d'en télécharger d'autre via le market ou de créer ses propres Widget (voir plus bas).
 
 image::../images/capture006.png[]
+
+
 
 === Appliquer le widget sur plusieurs commandes
 En cliquant sur l'un des widgets de la liste du menu de droite ou de gauche vous allez ouvrir la page de configuration du widget sur la quelle vous pouvez modifier voir un apèrçu du widget, et tout un tas d'infos de configuration comme le code source du widget
@@ -75,7 +80,6 @@ image::../images/capture008.png[]
 Il suffi de cocher les commandes sur les quelles vous souhaiter appliquer le widget
 
 ==== Divers exemple pour 1 même commande
-
 .Widget : badge-transparent
 image::../images/capture009.png[]
 
@@ -85,8 +89,9 @@ image::../images/capture010.png[]
 .Widget : ConsoIMG
 image::../images/capture011.png[]
 
-== Options de personnalisation des widgets
 
+
+=== Options de personnalisation des widgets
 Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le devloppeur du widget) et commune à tout les widget, ont peux donc avoir un widget qui s'affichera différement d'une commande à l'autre.
 
 Ont peux accèder à ses option de 2 façons, soite par l'arbre Domotique qui se trouve dans le menu "Général" => "Arbre Domotique"
@@ -102,7 +107,7 @@ Ont peux aussi y accèder depuis la page de configuration des modules.
 
 image::../images/capture015.png[]
 
-=== Ajouter une option personnaliser
+==== Ajouter une option personnaliser
 Dans l'onglet "Affichage avancé" ont trouve 2 listes déroulentes qui permetent de changer pour la commande le widget utiliser sur un ordinateur et l'autre pour les Mobiles.
 Il y as d'autres option pour afficher ou non les noms et stat, forcé le retours à la ligne avant/aprés le widget si il y as plusieurs commande dans un module (retours a la ligne dans la tuile).
 Enfin la liste des paramètres optionnels Widget apliquer (la liste disponible se trouve sur le forum ou Wiki)
@@ -120,6 +125,48 @@ image::../images/capture017.png[]
 NOTE: Pour ajouter une option il vous suffi de cliquer sur le bouton "ajouter", de rensegner le nom de l'option avec les bonne minuscule et majuscule, ainsi que la valeur à attribuer à l'option.
 Pour trouver les options consulter le forum ou/et le Wiki
 
+
+=== Configuration avancé
+Dans l'onglet "Configuration avancé" vous trouvez 4 thémes d'option de configuration
+
+image::../images/capture018.png[]
+
+==== Calcul et arrondit
+Cette partie contien 2 options, la première "Formule de calcul" permet d'effectuer des corections de valeur ou convertion par le bier de calcule.
+Pour récupérer la valeur de la commande, il faut utiliser un "TAG Jeedom", ont utilise donc le Tag "#value#".
+
+La seconde, "Arrondi" permet de choisir le nombre de chiffre après la virgule souhaiter, 0 étais aucun, 1 un chiffre, ect....
+
+.Sans les options Calcul et arrondit
+image::../images/capture021.png[]
+
+.Exemple de corection
+image::../images/capture019.png[]
+
+.Résultat après correction
+image::../images/capture020.png[]
+
+==== Action sur la valeur
+Cette partie permet de réaliser des actions simple en fonction de la valeur de la commande.
+Ont peux donc dans la liste déroulente choisir entre valeur "Egale à", "Supérieur à", "Inférieur à" et "Diférent de".
+L'option "plus de (min)" permet de temporiser l'action.
+La ligne suivante, "Action à faire" donne 2 possibilité, soit le déclanchement d'une commande soite d'un sénario.
+
+image::../images/capture022.png[]
+
+==== Historique
+La partie Hisorique permet de modifier le comportement de l'historisation de la valeur de la commande, ont peux donc ici l'activer ou la désactiver.
+TIP: Plus il y as de commande historiser plus cela peur rallentire le système, il ne faut donc activer cettte option que sur les commandes pour les quelles vous avez une utililitée d'avoir un historique.
+
+Le mode de lissage, permet de définire comment Jeedom vas enregistrer les valeur et les retrenscrires, sela permet davoir des courbe plus fluide sur tout si le module envoie rarement les infos ou si il envoie souvent des valeurs très diférente.
+
+Ont peux aussi dans l'option qui suit activer une purge automatique de l'historique pour ne pas conserver plus de donnée que besoin.
+
+image::../images/capture023.png[]
+
+
+==== Autres
+A venir
 
 
 
