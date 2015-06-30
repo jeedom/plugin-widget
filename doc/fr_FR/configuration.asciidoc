@@ -21,7 +21,7 @@ Le widget, c'est la partie qui vas se charger de mettre en forme et afficher une
 La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la quelle va s'afficher les divers widgets appliquer au commande et inofs du module.
 ===============================
 
-=== Installation du plugin Widget
+== Installation du plugin Widget
 .Avant de commancer
 [NOTE]
 ===============================
@@ -50,7 +50,7 @@ Dés à présent le plugin est actif et opérationnel.
 
 
 
-=== Présentation et fonction de base du Plugin Widget
+== Présentation et fonction de base du Plugin Widget
 Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugin"=>"Programmation"=>"Widget".
 
 image::../images/capture005.png[]
@@ -59,7 +59,7 @@ Ont se trouve donc sur la page principale du plugin, se dernier dipose par défa
 
 image::../images/capture006.png[]
 
-==== Appliquer le widget sur plusieurs commandes
+=== Appliquer le widget sur plusieurs commandes
 En cliquant sur l'un des widgets de la liste du menu de droite ou de gauche vous allez ouvrir la page de configuration du widget sur la quelle vous pouvez modifier voir un apèrçu du widget, et tout un tas d'infos de configuration comme le code source du widget
 
 image::../images/capture007.png[]
@@ -74,7 +74,7 @@ image::../images/capture008.png[]
 
 Il suffi de cocher les commandes sur les quelles vous souhaiter appliquer le widget
 
-===== Divers exemple pour 1 même commande
+==== Divers exemple pour 1 même commande
 
 .Widget : badge-transparent
 image::../images/capture009.png[]
@@ -85,7 +85,7 @@ image::../images/capture010.png[]
 .Widget : ConsoIMG
 image::../images/capture011.png[]
 
-=== Options de personnalisation des widgets
+== Options de personnalisation des widgets
 
 Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le devloppeur du widget) et commune à tout les widget, ont peux donc avoir un widget qui s'affichera différement d'une commande à l'autre.
 
@@ -102,7 +102,7 @@ Ont peux aussi y accèder depuis la page de configuration des modules.
 
 image::../images/capture015.png[]
 
-==== Ajouter une option personnaliser
+=== Ajouter une option personnaliser
 Dans l'onglet "Affichage avancé" ont trouve 2 listes déroulentes qui permetent de changer pour la commande le widget utiliser sur un ordinateur et l'autre pour les Mobiles.
 Il y as d'autres option pour afficher ou non les noms et stat, forcé le retours à la ligne avant/aprés le widget si il y as plusieurs commande dans un module (retours a la ligne dans la tuile).
 Enfin la liste des paramètres optionnels Widget apliquer (la liste disponible se trouve sur le forum ou Wiki)
@@ -114,6 +114,7 @@ image::../images/capture016.png[]
 
 .exemple 2 de valeur pour afficher un autre compteur
 image::../images/capture017.png[]
+
 
 .Ajout d'option
 NOTE: Pour ajouter une option il vous suffi de cliquer sur le bouton "ajouter", de rensegner le nom de l'option avec les bonne minuscule et majuscule, ainsi que la valeur à attribuer à l'option.
