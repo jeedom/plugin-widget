@@ -72,10 +72,25 @@ En cliquant sur le bonton “Appliquer sur des commandes” vous ouvrez une fent
 
 image::../images/capture008.png[]
 
-Il suffi de cocher les commandes sur les quelles  vous souhaiter appliquer le widget
+Il suffi de cocher les commandes sur les quelles vous souhaiter appliquer le widget
 
+===== Divers exemple pour 1 même commande
+
+.Widget : badge-transparent
+image::../images/capture009.png[]
+
+.Widget : badge
+image::../images/capture010.png[]
+
+.Widget : ConsoIMG
+image::../images/capture011.png[]
 
 === Accèder aux options de personnalisation des widgets
+
+Il y as 
+
+
+
 
 
  
