@@ -15,8 +15,10 @@ ainsi ont peux avoir un même widget écris en bleu sur une commande et en vert 
 .Therminologie
 [NOTE]
 ===============================
-Widget et Tuile, a ne pas confondre.
+Widget et Tuile, à ne pas confondre.
+
 Le widget, c'est la partie qui vas se charger de mettre en forme et afficher une infos ou commande, un widget ne dois s'occuper que d'une seul commande ou infos.
+
 La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la quelle va s'afficher les divers widgets appliquer au commande et inofs du module.
 ===============================
 
@@ -27,7 +29,7 @@ La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans la 
 .Avant de commancer
 [NOTE]
 ===============================
-Il vous faut au préalable créer un compte sur le market Jeedom (https://market.jeedom.fr) puis entrer vos informations de conection (login et mdp) dans les paramètre de votre Jeedom
+Il vous faut au préalable créer un compte sur le market Jeedom (https://market.jeedom.fr) puis entrer vos informations de conection (login et mdp) dans les paramètres de votre Jeedom
 ===============================
 
 Comme pour tout plugin, le plugin Widget s'installe depuis l'interface jeedom, menu "Général"=>"plugin"
@@ -54,7 +56,7 @@ Dés à présent le plugin est actif et opérationnel.
 
 
 == Présentation et fonction de base du Plugin Widget
-Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugin"=>"Programmation"=>"Widget".
+Affin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugins"=>"Programmation"=>"Widget".
 
 image::../images/capture005.png[]
 
@@ -62,9 +64,6 @@ Ont se trouve donc sur la page principale du plugin, se dernier dipose par défa
 
 image::../images/capture006.png[]
 
-
-
-=== Appliquer le widget sur plusieurs commandes
 En cliquant sur l'un des widgets de la liste du menu de droite ou de gauche vous allez ouvrir la page de configuration du widget sur la quelle vous pouvez modifier voir un apèrçu du widget, et tout un tas d'infos de configuration comme le code source du widget
 
 image::../images/capture007.png[]
@@ -72,6 +71,8 @@ image::../images/capture007.png[]
 WARNING: Si vous modifier un Widget qui n'ai pas une de vos créations il est préférable de le dupliquer pour éviter de perdre vos modifs si le widget original est mis à jours.
 
 Pour plus d'infos sur la configuration et création de widget voir plus bas.
+
+=== Appliquer le widget sur plusieurs commandes
 
 En cliquant sur le bonton “Appliquer sur des commandes” vous ouvrez une fentre qui liste toutes les commandes compatible avec le type du widget, vous pouvez donc simplement appliquer ou retirer le widget à de nombreuses commande en une seul fois.
 
@@ -133,7 +134,7 @@ image::../images/capture018.png[]
 
 ==== Calcul et arrondit
 Cette partie contien 2 options, la première "Formule de calcul" permet d'effectuer des corections de valeur ou convertion par le bier de calcule.
-Pour récupérer la valeur de la commande, il faut utiliser un "TAG Jeedom", ont utilise donc le Tag "#value#".
+Pour récupérer la valeur de la commande, il faut utiliser un "TAG Jeedom", ont utilise donc le Tag "\#value\#".
 
 La seconde, "Arrondi" permet de choisir le nombre de chiffre après la virgule souhaiter, 0 étais aucun, 1 un chiffre, ect....
 
@@ -166,7 +167,7 @@ image::../images/capture023.png[]
 
 
 ==== Autres
-A venir
+Doc à venir
 
 
 
