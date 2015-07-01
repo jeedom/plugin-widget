@@ -72,6 +72,25 @@ WARNING: Si vous modifier un Widget qui n'ai pas une de vos créations il est pr
 
 Pour plus d'infos sur la configuration et création de widget voir plus bas.
 
+=== Appliquer le widget sur une commande
+
+Pour appliquer un widget sur une seul commande ou modifier celui appliquer, il vous faut vous rendre sur la page de configuration du module.
+Le chemin pour accèder au module divèrge en fonction du type de se dernier, voic quelques exemple :
+
+Pour les modules Z-Wave, "Plugins"=>"Protocole domotique"=>"OpenZwave", puis choisir le module qui a la commande que vous souhaitez modifier
+
+image::../images/capture024.png[]
+
+Sur la page de configuration du module se rendre sur la commande et cliquer sur les roues crantées, dans la nouvelle fenêtre se rendre dans l'onglet "Affichage avancé"
+
+image::../images/capture014.png[]
+
+Vous pouvez ici modifier le widget appliquer pour les ordinateur et mobile avec les listes déroulentes dédier.
+
+.Filtrage des listes
+NOTE: Les listes déroulentes sont auto filtrente, elle ne fournisse que les widget compatible avec le type de commande.
+
+
 === Appliquer le widget sur plusieurs commandes
 
 En cliquant sur le bonton “Appliquer sur des commandes” vous ouvrez une fentre qui liste toutes les commandes compatible avec le type du widget, vous pouvez donc simplement appliquer ou retirer le widget à de nombreuses commande en une seul fois.
