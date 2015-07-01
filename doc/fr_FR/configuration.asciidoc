@@ -83,9 +83,12 @@ image::../images/capture024.png[]
 
 Sur la page de configuration du module se rendre sur la commande et cliquer sur les roues crantées, dans la nouvelle fenêtre se rendre dans l'onglet "Affichage avancé"
 
-image::../images/capture014.png[]
+image::../images/capture025.png[]
 
 Vous pouvez ici modifier le widget appliquer pour les ordinateur et mobile avec les listes déroulentes dédier.
+
+image::../images/capture014.png[]
+
 
 .Filtrage des listes
 NOTE: Les listes déroulentes sont auto filtrente, elle ne fournisse que les widget compatible avec le type de commande.
