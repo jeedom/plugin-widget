@@ -248,14 +248,14 @@ Ont peux modifier le nom, type et sous-type par la suite, toute fois cela peux a
 
 ====== Le type Info
 Le type "info" est utiliser pour des commandes qui retourne une valeur, par exemple, un état de module, une valeur numérique (température, luminausité, humidité ....ect), un texte ou tout autre information.
-Il existe 3 sous-type pour le type info.
+.Il existe 3 sous-type pour le type info.
 * Numéric : pour les nombres
 * Binaire : pour les état on/off (0/1)
 * Autre : pour tout les autres type d'infos comme les texte
 
 ====== Le type action
 Le type "action" est utiliser pour des commandes qui vont avoir une action dans Jeedom ou sur un equipement externe.
-Il existe 4 sous-type pour le type action.
+.Il existe 4 sous-type pour le type action.
 * Defaut : utiliser pour créer des boutons d'action
 * Curceur : utiliser pour créer des curceurs permettent de modifier des valeur numérique
 * Message : Utiliser pour créer une zone de saisie de texte avc bouton d'envoie
