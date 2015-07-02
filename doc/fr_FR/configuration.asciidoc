@@ -210,12 +210,9 @@ sur la partie de gauche, en premier un bouton pour importer des packs ou image, 
 image::../images/capture027.png[]
 
 .Les 3 types de widget en mode facile
-* Widget On/Off::
-	Déstiner au commades bouton pour les on/off 
-* Widget Simple Etat:: 
-	Déstiner pour les commandes qui ont un retours d'état
-* Widget Numérique:: 
-	Déstiner pour les commandes qui envoie une valeur numérique (exemple : Température, luminosité ... ect)
+* Widget On/Off => Déstiner au commades bouton pour les on/off 
+* Widget Simple Etat => Déstiner pour les commandes qui ont un retours d'état
+* Widget Numérique => Déstiner pour les commandes qui envoie une valeur numérique (exemple : Température, luminosité ... ect)
 
 ===== Exemple avec la création d'un widget d'état
 NOTE: Cette exemple reste applicable pour les 2 autres types de création
@@ -231,7 +228,41 @@ WARNING: Ne pas modifier ses informations si vous ne savez pas se que vous fetes
 Il ne reste plus qu'à valider pour finaliser la création du widget, vous serez auromatiquement rediriger sur la page de configuration avanvcé qui vous permet d'appliquer le widget à plusieurs commande (voir le chapitre <<ancre-1,Appliquer le widget sur plusieurs commandes>>)
 
 ==== Création / modification en mode avancé
-En mode avancer, il faut avoir des connaissance en langage de programmation HTML, CSS et Javascript.
+En mode avancé, il faut avoir des connaissances en langage de programmation "HTML", "CSS" et "JavaScript" pour pouvoir modifier correctement un widget.
+
+NOTE: Il existe plusieurs site en FR sur le web pour apprendre ses langages, je vous conseille OpenClassRoom qui explique tout depuis le début.
+
+Pour accèder au mode avancé, il vous suffi de vous rendre dans le plugin widget, de choisir le widget a modifier ou de cliquer sur le bouton "Ajouter un widget"
+
+===== Crétion d'un widget
+Depuis la page principale du plugin, cliquer sur "Ajouter un Widget", Jeedom vous demande quelques infos sur le future widget.
+
+image::../images/capture029.png[]
+
+- Le nom dois être un nom unique, verifier donc que se nom n'existe pas déjà
+- Version, correspond au type d'appareil pour le quelle il est destiner (PC ou Mobile)
+- Type, correspond au type de commende qui utilisera le widget, Aucun, info ou action
+- Sous-type, donne une précision au type choisi précérement.
+
+Ont peux modifier le nom, type et sous-type par la suite, toute fois cela peux avoir des incidances si le widget est déjà appliquer à une ou plusieurs commande, il vaut donc mieux l'éviter.
+
+====== Le type Info
+Le type "info" est utiliser pour des commandes qui retourne une valeur, par exemple, un état de module, une valeur numérique (température, luminausité, humidité ....ect), un texte ou tout autre information.
+Il existe 3 sous-type pour le type info.
+* Numéric : pour les nombres
+* Binaire : pour les état on/off (0/1)
+* Autre : pour tout les autres type d'infos comme les texte
+
+====== Le type action
+Le type "action" est utiliser pour des commandes qui vont avoir une action dans Jeedom ou sur un equipement externe.
+Il existe 4 sous-type pour le type action.
+* Defaut : utiliser pour créer des boutons d'action
+* Curceur : utiliser pour créer des curceurs permettent de modifier des valeur numérique
+* Message : Utiliser pour créer une zone de saisie de texte avc bouton d'envoie
+* Couleur : utiliser pour créer un bouton de choix de couleur
+
+
+
 
 
 
