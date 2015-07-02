@@ -234,7 +234,7 @@ En mode avancer, il faut avoir des connaissance en langage de programmation HTML
 
 
 
-//
+////
 image::../images/widget_screenshot1.JPG[]
 
 Sur la droite on ajoute un nouveau widget, sur la gauche on peut définir la version pour laquelle le widget est fait (dashboard ou mobile), le type (action ou info) et le sous-type. Tout à gauche on a le résultat et en-dessous le code à proprement parlé (html/CSS et JS).
@@ -280,4 +280,4 @@ Ensuite pour affecter un widget à une commande, on peut passer par la page Gén
      jeedom.cmd.execute({id :'#id#', { color: '#000000'}})
 
 Voilà ce plugin permet de modifier facilement le rendu des commandes pour pouvoir configurer son tableau de bord exactement comme on le souhaite.
-//
+////
