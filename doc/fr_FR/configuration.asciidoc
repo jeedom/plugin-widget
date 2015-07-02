@@ -93,7 +93,7 @@ image::../images/capture014.png[]
 .Filtrage des listes
 NOTE: Les listes déroulentes sont auto filtrente, elle ne fournisse que les widget compatible avec le type de commande.
 
-
+[[ancre-1]]
 === Appliquer le widget sur plusieurs commandes
 
 En cliquant sur le bonton “Appliquer sur des commandes” vous ouvrez une fentre qui liste toutes les commandes compatible avec le type du widget, vous pouvez donc simplement appliquer ou retirer le widget à de nombreuses commande en une seul fois.
@@ -189,8 +189,45 @@ image::../images/capture023.png[]
 
 
 ==== Autres
-Doc à venir
+#Doc à venir#
 
+
+=== Création / Modification de widget
+Le plugin offre 2 possibilité pour la création de Widget, le mode facile qui permet de faire des widget basic facilement avec un assistent de création, et le mode avancer qui lui permet aussi la modification par la suite de tout les widgets.
+
+.Editeur de widget en mode avancé
+NOTE: Le mose avancé apporte une souplesse sans limite toute fois il vous faut avoir quelques connaissence en langage de programmation basique telle que HTML et CSS pour la base et JavaScript pour pouvoir réaliser des chose un peux plus complexe.
+
+==== Mode création facile
+Pour réaliser un widget avec l'assistant, il vous suffi de vous rendre dans le plugin : menu "Plugins"=>"Programation"=>"Widget".
+A partire de cette page, cliquer sur le bouton "Mode création facile" en haut à gauche
+
+image::../images/capture026.png[]
+
+Sur la nouvelle page, vous pouvez dans la partie de droite, visualiser les icons de base Jeedom, les images que vous avez importer et les packs importer.
+sur la partie de gauche, en premier un bouton pour importer des packs ou image, puis 3 boutons pour la création de widget.
+
+image::../images/capture027.png[]
+
+.Les 3 types de widget en mode facile
+* Widget On/Off:: Déstiner au commades bouton pour les on/off 
+* Widget Simple Etat:: Déstiner pour les commandes qui ont un retours d'état
+* Widget Numérique:: Déstiner pour les commandes qui envoie une valeur numérique (exemple : Température, luminosité ... ect)
+
+===== Exemple avec la création d'un widget d'état
+NOTE: Cette exemple reste aplicable pour les 2 autres types de création
+
+Cliquer sur le bouton "Widget Simple Etat", ont arrive sur la page de configuration assistée, il faut donné un nom au widget (nom unique), le type d'interfaces, si le widget est destiner au PC (dashboard) ou mobie, puis la bibliotèque à utiliser (Jeedom, Image perso ou packs).
+
+image::../images/capture028.png[]
+
+Puis il vous faut choisir l'icon pour l'Etat 0 et 1, ainsi que la taille de l'icon (valeur en "EM" = % de la taille d'origine de la police du navigateur, 1 = 100%), une fois choisie, en dessous de la zone de configuration, le code source apparêt
+
+WARNING: Ne pas modifier ses informations si vous ne savez pas se que vous fetes.
+
+Il ne reste plus qu'à valider pour finaliser la création du widget, vous serez auromatiquement rediriger sur la page de configuration avanvcé qui vous permet d'appliquer le widget à plusieurs commande (voir le chapitre <<ancre-1,Appliquer le widget sur plusieurs commandes>>)
+
+==== Création / modification en mode avancé
 
 
 
