@@ -211,9 +211,11 @@ image::../images/capture027.png[]
 
 .Les 3 types de widget en mode facile
 * Widget On/Off::
- Déstiner au commades bouton pour les on/off 
-* Widget Simple Etat:: Déstiner pour les commandes qui ont un retours d'état
-* Widget Numérique:: Déstiner pour les commandes qui envoie une valeur numérique (exemple : Température, luminosité ... ect)
+	Déstiner au commades bouton pour les on/off 
+* Widget Simple Etat:: 
+	Déstiner pour les commandes qui ont un retours d'état
+* Widget Numérique:: 
+	Déstiner pour les commandes qui envoie une valeur numérique (exemple : Température, luminosité ... ect)
 
 ===== Exemple avec la création d'un widget d'état
 NOTE: Cette exemple reste applicable pour les 2 autres types de création
