@@ -234,7 +234,7 @@ NOTE: Il existe plusieurs site en FR sur le web pour apprendre ses langages, je 
 
 Pour accèder au mode avancé, il vous suffi de vous rendre dans le plugin widget, de choisir le widget a modifier ou de cliquer sur le bouton "Ajouter un widget"
 
-===== Crétion d'un widget
+===== Création d'un widget
 Depuis la page principale du plugin, cliquer sur "Ajouter un Widget", Jeedom vous demande quelques infos sur le future widget.
 
 image::../images/capture029.png[]
@@ -252,7 +252,7 @@ Le type "info" est utiliser pour des commandes qui retourne une valeur, par exem
 .Il existe 3 sous-type pour le type info.
 * Numéric : pour les nombres
 * Binaire : pour les état on/off (0/1)
-* Autre : pour tout les autres type d'infos comme les texte
+* Autre : pour tout les autres type d'infos comme les textes
 
 ====== Le type action
 Le type "action" est utiliser pour des commandes qui vont avoir une action dans Jeedom ou sur un equipement externe.
@@ -263,11 +263,84 @@ Le type "action" est utiliser pour des commandes qui vont avoir une action dans 
 * Message : Utiliser pour créer une zone de saisie de texte avc bouton d'envoie
 * Couleur : utiliser pour créer un bouton de choix de couleur
 
+Une fois paramètrer cliquer sur "Ajouter", Jeedom vous redirige sur la page principale de la configuration/modification du Widget, à partir de la le widget est créer dans Jeedom mais ne contien pour le moment pas de code pour l'affichage de la commande.
+
+image::../images/capture030.png[]
+
+
+===== Modification d'un widget
+Une fois sur la page principal de config d'un widget, c'est la partie Code source que les modification de l'apparance s'applique.
+
+WARNING: Pour modifier ses infos il faut avoir quelques base en programation HTML, CSS et JavaScript, les modification peuvent avoir un impacte importent sur l'affichage du widget et sur l'affichage d'autre widget voir bloquer l'affichage de 1 voir tout les widgets.
+
+La base (squelette) d'un widget se fais en HTML, cela permet de structurer l'affichage et retrouver plus simplement les informations.
+Dans Jeedom pour les widgets, le premier bout de code à créer c'est une "div" qui fera office de conteneur principal pour tout le code de notre Widget.
+Dans cette "div", ont peux y trouver jusqu'à 3 sous partie disticte :
+* La partie HTML qui vas afficher les informations
+* La partie CSS qui vas rendre plus jolis en mettent en forme la parte HTML (Partie Facultative)
+* La partie JavaScript qui permet de travailler sur divers action, calcule et animation
+
+====== Code HTML
+Plus tot que de long discourt, voici un exemple de code de base pour un widget
+
+.Structure HTML de base
+[source,html]
+----
+<div>
+	<center>
+         <span></span>
+	</center>
+	<style>
+	
+	</style>
+	<script>
+   
+	</script>
+</div>
+----
+La structure de base qui schématise les différents emplacement dans notre widget est maintenant créer mais pour autent ont as rien qui ne s'affiche, c'est normal.
+.explication du code
+* div = conteneur multi fonction relativement polyvalent avec retour à la ligne après lui
+* center = balise que centre sont contenu
+* span = conteneur multi fonction relativement polyvalent sans retour à la ligne après lui
+* style = Conteneur pour le code CSS qui sera appliquer de façon général (attention sont contenu peux affecter tout les elements de la page)
+* script = balise qui vas contenir du JavaScript
+
+En l'etat, il est difficile de faire quoi que se soie avec se bout de code, c'est pourquoi ont vas ajouter quelques options (appeler Attribut en langage HTML) dans nos balises.
+
+.Ajoout des Attribut de base
+[source,html]
+----
+<div id="Doc-#id#" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmdid="#id#" >
+	<center>
+         <span></span>
+	</center>
+	<style>
+	
+	</style>
+	<script>
+   
+	</script>
+</div>
+----
+Dans notre "div" principal ont à ajouter plusieurs Attribut :
+.explication du code
+id:: L'atribut "id" permet de rendre un element unique sur la page affin de le retrouver et cibler plus facilement, il est impératif que ça valeur soie unique sur la page, pour cela je vous conseil d'utiliser un mot qui represente notre element, dans notre exemple la div représente l'enssemble de notre widget donc ont peux utiliser le nom de notre widget ou un abrévation (ici j'ai choisi Doc-), puis affin de garentire que l'id soie unique, ont vas y mettre un tag "\#id\#" (pour plus d'info sur les tag jeedom voir plus bas).
+
+class:: Les class contrairement au id ne sont pas unique, elle servent a appliquer un style défini dans la partie style (la balise) ont peux inssi reproduire simplement et facilement une même mise en forme que l'ont crée une fois et réutilise par mot clé (class), ici ont ajoute plusieurs class définie et disponible de base dans Jeedom (voir plus bas les class Jeedom).
+
+data-type:: cette attribu permet de stock le type de commande sur la quelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre type en dessus de la zone de code.
+
+data-subtype:: cette attribu permet de stock le sous-type de commande sur la quelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre sous-type en dessus de la zone de code.
 
 
 
 
+==== Les Tag Jeedom
+#Doc à venir#
 
+==== Les class CSS Jeedom 
+#Doc à venir#
 
 ////
 image::../images/widget_screenshot1.JPG[]
