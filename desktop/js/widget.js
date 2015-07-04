@@ -15,19 +15,19 @@
  */
 
 
-/* global jeedom, CodeMirror, Infinity, jwerty, bootbox, Snap, editor */
+ /* global jeedom, CodeMirror, Infinity, jwerty, bootbox, Snap, editor */
 
-editor = null;
-var imagesWidgets = [];
-var specialWidgets = [];
-updateListImages();
-updateListSvgs();
-updateListFonts($('#bsFontsView'));
-getSideBarList();
+ editor = null;
+ var imagesWidgets = [];
+ var specialWidgets = [];
+ updateListImages();
+ updateListSvgs();
+ updateListFonts($('#bsFontsView'));
+ getSideBarList();
 
-var modifyContainer = true;
+ var modifyContainer = true;
 
-function getSideBarList(_path) {
+ function getSideBarList(_path) {
     $.ajax({
         type: "POST",
         url: "plugins/widget/core/ajax/widget.ajax.php",
@@ -124,23 +124,23 @@ function getContainer() {
                                     el.trigger("sporty");
                                 }
                             });
-                        },
-                        load: function () {
-                            el.lazyload({
-                                event: "sporty"
-                            });
-                            el.trigger("sporty");
-                        }
-                    });
-                } else {
-                    el.lazyload({
-                        event: "sporty"
-                    });
-                    el.trigger("sporty");
-                }
-            });
-        }
+},
+load: function () {
+    el.lazyload({
+        event: "sporty"
     });
+    el.trigger("sporty");
+}
+});
+} else {
+    el.lazyload({
+        event: "sporty"
+    });
+    el.trigger("sporty");
+}
+});
+}
+});
 }
 
 $('.bt_displayWidgetList').on('click', function () {
@@ -154,6 +154,11 @@ $('.bt_displayWidgetList').on('click', function () {
         getContainer();
         modifyContainer = false;
     }
+});
+
+$('.widgetAttr[data-l1key=type]').on('change',function(){
+    $('.widgetAttr[data-l1key=subtype] option').hide();
+    $('.widgetAttr[data-l1key=subtype] option[data-type='+$(this).value()+']').show();
 });
 
 $("#ul_widget").on('click', ".li_widget", function (event) {
@@ -195,64 +200,64 @@ $('.widgetAction[data-action=remove]').on('click', function () {
 });
 
 $('.widgetAction[data-action=copy]').on('click', function () {
-   bootbox.dialog({
-        title: "{{Choisissez vos paramètres}}",
-        message: '<div class="row">' +
-                '<div class="col-md-12"> ' +
-                '<form class="form-horizontal">' +
-                        '<div class="form-group">' +
-                        '<label class="col-sm-4 control-label">{{Nom du widget}}</label>' +
-                        '<div class="col-sm-6">' +
-                        '<input type="text" class="form-control" id="widgetNameCopy" placeholder="{{Nom du widget}}"/>' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label class="col-sm-4 control-label">{{Version}}</label>' +
-                        '<div class="col-sm-6">' +
-                        '<select class=" form-control" id="widgetVersionCopy" value="' + $('.widgetAttr[data-l1key="version"]').val() + '">' +
-                        '<option value="dashboard">{{Dashboard}}</option>' +
-                        '<option value="mobile">{{Mobile}}</option>' +
-                        '</select>' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label class="col-sm-4 control-label">{{Type}}</label>' +
-                        '<div class="col-sm-6">' +
-                        '<select class="form-control" id="widgetTypeCopy" value="' + $('.widgetAttr[data-l1key="type"]').val() + '">' +
-                        $('.widgetAttr[data-l1key="type"]').html() +
-                        '</select>' +
-                        '</div>' +
-                        '</div>' +
-                        '<div class="form-group">' +
-                        '<label class="col-sm-4 control-label">{{Sous-type}}</label>' +
-                        '<div class="col-sm-6">' +
-                        '<select class="form-control" id="widgetSubtypeCopy" value="' + $('.widgetAttr[data-l1key="subtype"]').val() + '">' +
-                        $('.widgetAttr[data-l1key="subtype"]').html() +
-                        '</select>' +
-                        '</div>' +
-                        '</div>' +
-                        '</form>' +
-                        '</div>' +
-                        '</div>',
-        buttons: {
-            cancel: {
-                label: "{{Annuler}}",
-                className: "btn-default"
-            },
-            success: {
-                label: "{{Ajouter}}",
-                className: "btn-success",
-                callback: function () {
-                    var result = {};
-                    result.name = $('#widgetNameCopy').value();
-                    result.version = $('#widgetVersionCopy').value();
-                    result.type = $('#widgetTypeCopy').value();
-                    result.subtype = $('#widgetSubtypeCopy').value();
-                    copyWidget($('.widgetAttr[data-l1key=path]').value(), result, widgetCallback);
-                }
+ bootbox.dialog({
+    title: "{{Choisissez vos paramètres}}",
+    message: '<div class="row">' +
+    '<div class="col-md-12"> ' +
+    '<form class="form-horizontal">' +
+    '<div class="form-group">' +
+    '<label class="col-sm-4 control-label">{{Nom du widget}}</label>' +
+    '<div class="col-sm-6">' +
+    '<input type="text" class="form-control" id="widgetNameCopy" placeholder="{{Nom du widget}}"/>' +
+    '</div>' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label class="col-sm-4 control-label">{{Version}}</label>' +
+    '<div class="col-sm-6">' +
+    '<select class=" form-control" id="widgetVersionCopy" value="' + $('.widgetAttr[data-l1key="version"]').val() + '">' +
+    '<option value="dashboard">{{Dashboard}}</option>' +
+    '<option value="mobile">{{Mobile}}</option>' +
+    '</select>' +
+    '</div>' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label class="col-sm-4 control-label">{{Type}}</label>' +
+    '<div class="col-sm-6">' +
+    '<select class="form-control" id="widgetTypeCopy" value="' + $('.widgetAttr[data-l1key="type"]').val() + '">' +
+    $('.widgetAttr[data-l1key="type"]').html() +
+    '</select>' +
+    '</div>' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label class="col-sm-4 control-label">{{Sous-type}}</label>' +
+    '<div class="col-sm-6">' +
+    '<select class="form-control" id="widgetSubtypeCopy" value="' + $('.widgetAttr[data-l1key="subtype"]').val() + '">' +
+    $('.widgetAttr[data-l1key="subtype"]').html() +
+    '</select>' +
+    '</div>' +
+    '</div>' +
+    '</form>' +
+    '</div>' +
+    '</div>',
+    buttons: {
+        cancel: {
+            label: "{{Annuler}}",
+            className: "btn-default"
+        },
+        success: {
+            label: "{{Ajouter}}",
+            className: "btn-success",
+            callback: function () {
+                var result = {};
+                result.name = $('#widgetNameCopy').value();
+                result.version = $('#widgetVersionCopy').value();
+                result.type = $('#widgetTypeCopy').value();
+                result.subtype = $('#widgetSubtypeCopy').value();
+                copyWidget($('.widgetAttr[data-l1key=path]').value(), result, widgetCallback);
             }
         }
-    });
+    }
+});
 });
 
 $('.widgetAction[data-action=create]').on('click', function () {
@@ -285,42 +290,42 @@ $('.widgetAction[data-action=add]').on('click', function () {
         bootbox.dialog({
             title: "{{Choisissez vos paramètres}}",
             message: '<div class="row">' +
-                    '<div class="col-md-12"> ' +
-                    '<form class="form-horizontal">' +
-                    '<div class="form-group">' +
-                    '<label class="col-sm-4 control-label">{{Nom du widget}}</label>' +
-                    '<div class="col-sm-6">' +
-                    '<input type="text" class="form-control" id="widgetNameAdd" placeholder="{{Nom du widget}}"/>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="form-group">' +
-                    '<label class="col-sm-4 control-label">{{Version}}</label>' +
-                    '<div class="col-sm-6">' +
-                    '<select class=" form-control" id="widgetVersionAdd">' +
-                    '<option value="dashboard">{{Dashboard}}</option>' +
-                    '<option value="mobile">{{Mobile}}</option>' +
-                    '</select>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="form-group">' +
-                    '<label class="col-sm-4 control-label">{{Type}}</label>' +
-                    '<div class="col-sm-6">' +
-                    '<select class="form-control" id="widgetTypeAdd">' +
-                    $('.widgetAttr[data-l1key="type"]').html() +
-                    '</select>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="form-group">' +
-                    '<label class="col-sm-4 control-label">{{Sous-type}}</label>' +
-                    '<div class="col-sm-6">' +
-                    '<select class="form-control" id="widgetSubtypeAdd">' +
-                    $('.widgetAttr[data-l1key="subtype"]').html() +
-                    '</select>' +
-                    '</div>' +
-                    '</div>' +
-                    '</form>' +
-                    '</div>' +
-                    '</div>',
+            '<div class="col-md-12"> ' +
+            '<form class="form-horizontal">' +
+            '<div class="form-group">' +
+            '<label class="col-sm-4 control-label">{{Nom du widget}}</label>' +
+            '<div class="col-sm-6">' +
+            '<input type="text" class="form-control" id="widgetNameAdd" placeholder="{{Nom du widget}}"/>' +
+            '</div>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label class="col-sm-4 control-label">{{Version}}</label>' +
+            '<div class="col-sm-6">' +
+            '<select class=" form-control" id="widgetVersionAdd">' +
+            '<option value="dashboard">{{Dashboard}}</option>' +
+            '<option value="mobile">{{Mobile}}</option>' +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label class="col-sm-4 control-label">{{Type}}</label>' +
+            '<div class="col-sm-6">' +
+            '<select class="form-control" id="widgetTypeAdd">' +
+            $('.widgetAttr[data-l1key="type"]').html() +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label class="col-sm-4 control-label">{{Sous-type}}</label>' +
+            '<div class="col-sm-6">' +
+            '<select class="form-control" id="widgetSubtypeAdd">' +
+            $('.widgetAttr[data-l1key="subtype"]').html() +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '</form>' +
+            '</div>' +
+            '</div>',
             buttons: {
                 cancel: {
                     label: "{{Annuler}}",
@@ -342,7 +347,7 @@ $('.widgetAction[data-action=add]').on('click', function () {
                 }
             }
         });
-    }
+}
 });
 
 $('#bt_editWidget').on('click', function () {
@@ -364,90 +369,90 @@ $('#bt_editWidget').on('click', function () {
     $('.widgetImageView').show();
     switch (widget.type + '.' + widget.subtype) {
         case "action.other":
-            if (editorOther === null) {
-                editorOther = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
-                    lineNumbers: true,
-                    mode: "text/html",
-                    matchBrackets: true,
-                    viewportMargin: Infinity
-                });
-            }
-            $('#bsInfoBinaryCategory').hide();
-            $('#bsInfoNumericCategory').hide();
-            $('#bsPanelWidgetImages').hide();
-            $('#bsOtherActionCategory').show();
-            $('#bsOtherSvgSpecColor').val('#000');
-            $('#bsOtherSvgSpecSize').val('64');
-            setSelectImage($('#bsOtherImage1'));
-            setSelectImage($('#bsOtherImage2'));
-            setSelectPack($('#bsOtherSpecialCat1'));
-            setSelectPack($('#bsOtherSpecialCat2'));
-            $('#bsOtherActionCategory').setValues(widgetDetails, '.actionOtherAttr');
-            bsOtherActionType();
-            break;
+        if (editorOther === null) {
+            editorOther = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
+                lineNumbers: true,
+                mode: "text/html",
+                matchBrackets: true,
+                viewportMargin: Infinity
+            });
+        }
+        $('#bsInfoBinaryCategory').hide();
+        $('#bsInfoNumericCategory').hide();
+        $('#bsPanelWidgetImages').hide();
+        $('#bsOtherActionCategory').show();
+        $('#bsOtherSvgSpecColor').val('#000');
+        $('#bsOtherSvgSpecSize').val('64');
+        setSelectImage($('#bsOtherImage1'));
+        setSelectImage($('#bsOtherImage2'));
+        setSelectPack($('#bsOtherSpecialCat1'));
+        setSelectPack($('#bsOtherSpecialCat2'));
+        $('#bsOtherActionCategory').setValues(widgetDetails, '.actionOtherAttr');
+        bsOtherActionType();
+        break;
         case "info.binary":
-            if (editorBinary === null) {
-                editorBinary = CodeMirror.fromTextArea(document.getElementById("bsViewInfoBinary"), {
-                    lineNumbers: true,
-                    mode: "text/html",
-                    matchBrackets: true,
-                    viewportMargin: Infinity
-                });
-            }
-            $('#bsInfoNumericCategory').hide();
-            $('#bsOtherActionCategory').hide();
-            $('#bsInfoBinaryCategory').show();
-            $('#bsInfoBinarySvgSpecColor').val('#000');
-            $('#bsInfoBinarySvgSpecSize').val('64');
-            setSelectImage($('#bsInfoBinaryImage1'));
-            setSelectImage($('#bsInfoBinaryImage2'));
-            setSelectPack($('#bsInfoBinarySpecialCat1'));
-            setSelectPack($('#bsInfoBinarySpecialCat2'));
-            $('#bsInfoBinaryCategory').setValues(widgetDetails, '.infoBinaryAttr');
-            bsInfoBinaryType();
-            $('#bsPanelWidgetImages').hide();
-            break;
+        if (editorBinary === null) {
+            editorBinary = CodeMirror.fromTextArea(document.getElementById("bsViewInfoBinary"), {
+                lineNumbers: true,
+                mode: "text/html",
+                matchBrackets: true,
+                viewportMargin: Infinity
+            });
+        }
+        $('#bsInfoNumericCategory').hide();
+        $('#bsOtherActionCategory').hide();
+        $('#bsInfoBinaryCategory').show();
+        $('#bsInfoBinarySvgSpecColor').val('#000');
+        $('#bsInfoBinarySvgSpecSize').val('64');
+        setSelectImage($('#bsInfoBinaryImage1'));
+        setSelectImage($('#bsInfoBinaryImage2'));
+        setSelectPack($('#bsInfoBinarySpecialCat1'));
+        setSelectPack($('#bsInfoBinarySpecialCat2'));
+        $('#bsInfoBinaryCategory').setValues(widgetDetails, '.infoBinaryAttr');
+        bsInfoBinaryType();
+        $('#bsPanelWidgetImages').hide();
+        break;
         case "info.numeric":
-            if (editorNumeric === null) {
-                editorNumeric = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
-                    lineNumbers: true,
-                    mode: "text/html",
-                    matchBrackets: true,
-                    viewportMargin: Infinity
-                });
+        if (editorNumeric === null) {
+            editorNumeric = CodeMirror.fromTextArea(document.getElementById("bsViewOther"), {
+                lineNumbers: true,
+                mode: "text/html",
+                matchBrackets: true,
+                viewportMargin: Infinity
+            });
+        }
+        $('#bsInfoBinaryCategory').hide();
+        $('#bsOtherActionCategory').hide();
+        $('#bsInfoNumericCategory').show();
+        $('#bsInfoNumericSvgSpecColor').val('#000');
+        $('#bsInfoNumericSvgSpecSize').val('64');
+        var all = widgetDetails.min.length;
+        setSelectImage($('#bsInfoNumericImage0'));
+        setSelectPack($('#bsInfoNumericSpecialCat0'));
+        for (var index = 0; index < all; index++) {
+            if(index > 0)
+                $('#bsInfoNumericAddEntry').click();
+            $('#bsInfoNumericEcartMin' + index).val(widgetDetails.min[index]);
+            $('#bsInfoNumericEcartMax' + index).val(widgetDetails.max[index]);
+            switch (widgetDetails.type) {
+                case "0":
+                $('#bsInfoNumericIconCmd' + index).html(widgetDetails.icons[index]);
+                break;
+                case "1":
+                $('#bsInfoNumericImage' + index).val(widgetDetails.images[index]);
+                break;
+                case "2":
+                $('#bsInfoNumericSpecialCat' + index).val(widgetDetails.specials[index].list);
+                $('#bsInfoNumericSpecialIcon' + index).val(widgetDetails.specials[index].icon);
+                break;
             }
-            $('#bsInfoBinaryCategory').hide();
-            $('#bsOtherActionCategory').hide();
-            $('#bsInfoNumericCategory').show();
-            $('#bsInfoNumericSvgSpecColor').val('#000');
-            $('#bsInfoNumericSvgSpecSize').val('64');
-            var all = widgetDetails.min.length;
-            setSelectImage($('#bsInfoNumericImage0'));
-            setSelectPack($('#bsInfoNumericSpecialCat0'));
-            for (var index = 0; index < all; index++) {
-                if(index > 0)
-                    $('#bsInfoNumericAddEntry').click();
-                $('#bsInfoNumericEcartMin' + index).val(widgetDetails.min[index]);
-                $('#bsInfoNumericEcartMax' + index).val(widgetDetails.max[index]);
-                switch (widgetDetails.type) {
-                    case "0":
-                        $('#bsInfoNumericIconCmd' + index).html(widgetDetails.icons[index]);
-                        break;
-                    case "1":
-                        $('#bsInfoNumericImage' + index).val(widgetDetails.images[index]);
-                        break;
-                    case "2":
-                        $('#bsInfoNumericSpecialCat' + index).val(widgetDetails.specials[index].list);
-                        $('#bsInfoNumericSpecialIcon' + index).val(widgetDetails.specials[index].icon);
-                        break;
-                }
-            }
-            $('#bsInfoNumericCategory').setValues(widgetDetails, '.infoNumericAttr');
-            bsInfoNumericType();
-            $('#bsPanelWidgetImages').hide();
-            break;
+        }
+        $('#bsInfoNumericCategory').setValues(widgetDetails, '.infoNumericAttr');
+        bsInfoNumericType();
+        $('#bsPanelWidgetImages').hide();
+        break;
     }
- });
+});
 
 $('#bt_shareOnMarket').on('click', function () {
     $('#md_modal').dialog({title: "Partager sur le market"});
@@ -577,7 +582,7 @@ function printWidget(_path, _callback) {
 
 function widgetCallback(_path) {
     getSideBarList(_path);
- }
+}
 
 function saveWidget(_callback) {
     $.hideAlert();
@@ -673,7 +678,7 @@ function copyWidget(_path, _data, _callback) {
         },
         success: function (data) {
             console.log(data);
-           if (data.state !== 'ok') {
+            if (data.state !== 'ok') {
                 $('#div_alert').showAlert({message: data.result, level: 'danger'});
                 return;
             }
@@ -750,10 +755,10 @@ function updateListSvgs() {
                     for (var nbIcons in specialWidgets[index].files) {
                         specialWidgets[index].svg[nbIcons].snap = specialWidgets[index].svg[nbIcons].snap.replace(/<?[^>]*>/, "").replace(/<!DOCTYPE[^>]*>/, "").replace(/<!--[^>]*>/, "");
                     }
+                }
+                setTimeout('createSpecialHtml()', 1000);
             }
-            setTimeout('createSpecialHtml()', 1000);
-        }
-    });
+        });
 }
 
 function createSpecialHtml() {
@@ -804,59 +809,59 @@ function createSpecialHtml() {
                 mySvg.selectAll('path').attr({fill: getRandomColor()});
                 mySvg.select('svg').attr({height: height});
             }
-    }
-}
-
-function getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-$('#bsImagesFileload').fileupload({
-    dataType: 'json',
-    url: "plugins/widget/core/ajax/widget.ajax.php?action=imageUpload",
-    dropZone: "#bsImagesPanel",
-    done: function (e, data) {
-        if (data.result.state !== 'ok') {
-            $('#div_alert').showAlert({message: data.result.result, level: 'danger'});
-            return;
         }
-        updateListImages();
-        $('#collapseTwo').collapse('show');
-        notify("{{Ajout d'une Image}}", '{{Image ajoutée avec succès}}', 'success');
     }
-});
 
-$('#bsImagesView').on('click', '.bsDelImage', function () {
-    var image = $(this).data('image');
-    bootbox.confirm("{{Etes-vous sur de vouloir effacer cette image}}", function (result) {
-        if (result) {
-            $.ajax({
-                type: "POST",
-                url: "plugins/widget/core/ajax/widget.ajax.php",
-                data: {
-                    action: "removeImage",
-                    image: image
-                },
-                dataType: 'json',
-                error: function (request, status, error) {
-                    handleAjaxError(request, status, error);
-                },
-                success: function (data) {
-                    if (data.state !== 'ok') {
-                        $('#div_alert').showAlert({message: data.result, level: 'danger'});
-                        return;
-                    }
-                    updateListImages();
-                    notify("Suppression d'une Image", '{{Image supprimée avec succès}}', 'success');
-                }
-            });
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    $('#bsImagesFileload').fileupload({
+        dataType: 'json',
+        url: "plugins/widget/core/ajax/widget.ajax.php?action=imageUpload",
+        dropZone: "#bsImagesPanel",
+        done: function (e, data) {
+            if (data.result.state !== 'ok') {
+                $('#div_alert').showAlert({message: data.result.result, level: 'danger'});
+                return;
+            }
+            updateListImages();
+            $('#collapseTwo').collapse('show');
+            notify("{{Ajout d'une Image}}", '{{Image ajoutée avec succès}}', 'success');
         }
     });
+
+    $('#bsImagesView').on('click', '.bsDelImage', function () {
+        var image = $(this).data('image');
+        bootbox.confirm("{{Etes-vous sur de vouloir effacer cette image}}", function (result) {
+            if (result) {
+                $.ajax({
+                    type: "POST",
+                    url: "plugins/widget/core/ajax/widget.ajax.php",
+                    data: {
+                        action: "removeImage",
+                        image: image
+                    },
+                    dataType: 'json',
+                    error: function (request, status, error) {
+                        handleAjaxError(request, status, error);
+                    },
+                    success: function (data) {
+                        if (data.state !== 'ok') {
+                            $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                            return;
+                        }
+                        updateListImages();
+                        notify("Suppression d'une Image", '{{Image supprimée avec succès}}', 'success');
+                    }
+                });
+            }
+        });
 });
 
 function updateListImages() {
@@ -926,19 +931,19 @@ function setSelectImage(select) {
 
 function setSelectPack(select) {
     var options = '<option value="">{{Aucune}}</option>';
-        for (var index in specialWidgets) {
-            options += '<option value="' + specialWidgets[index].name + '">' + specialWidgets[index].name + '</option>';
-        }
+    for (var index in specialWidgets) {
+        options += '<option value="' + specialWidgets[index].name + '">' + specialWidgets[index].name + '</option>';
+    }
     select.html(options);
 }
 
 function setSelectPackIcones(select, value) {
     var options = '<option value="">{{Aucune}}</option>';
     var list = value.find(':selected').index() - 1;
-        for(var index in specialWidgets[list].files) {
-                var filename = specialWidgets[list].files[index].split('.');
-                options += '<option value="' + specialWidgets[list].files + '">' + filename[0] + '</option>';
-         }
+    for(var index in specialWidgets[list].files) {
+        var filename = specialWidgets[list].files[index].split('.');
+        options += '<option value="' + specialWidgets[list].files + '">' + filename[0] + '</option>';
+    }
     select.html(options);
 }
 
@@ -1030,7 +1035,7 @@ $('#bt_InfoBinaryAdd').on('click', function () {
     $('#bsInfoBinarySpecialCat2').val(imageSpec2);
     bsInfoBinaryType();
     $('#bsPanelWidgetImages').hide('fade');
- });
+});
 
 var editorNumeric = null;
 
@@ -1139,33 +1144,33 @@ function filterWidget(view) {
             isFind = false;
         return isFind;
     });
-    
-    var kidsInfo = kids.filter(function () {
-        var isFind = true;
-        var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
-        var subtype = $(this).find('.label').text();
-        if(type === 'action')
-            return false;
-        if((stateAction === true || stateOther === true || stateSlider === true && stateNbUsed === false) && (stateInfo === false  && stateBinary === false && stateNumeric === false && stateString === false))
-            return false;
-        if((stateDesk === true || stateMob === true || stateNbUsed === true) && (stateInfo === false && stateBinary === false && stateNumeric === false && stateString === false))
-            return isFind;
-        if(stateDesk === false && stateMob === false && stateInfo === true && stateBinary === false && stateNumeric === false && stateString === false)
-            return (type === 'info' && stateInfo === true);
-        if(type === 'info' && stateInfo === false)
-            isFind = false;
-        if(stateInfo === true  && stateBinary === false && stateNumeric === false && stateString === false)
-            return isFind;
-        if((subtype === 'binary' && stateBinary === false) || (subtype === 'numeric' && stateNumeric === false) || (subtype === 'string' && stateString === false))
-            isFind = false;
-        return isFind;
-    });
 
-    view.hide();
-    kidsAtion.each(function () {
-        $(this).show();
-    });
-    kidsInfo.each(function () {
-        $(this).show();
-    });
- }
+var kidsInfo = kids.filter(function () {
+    var isFind = true;
+    var type = $(this).find('.fa-exclamation-circle').length === 0 ? "info" : "action";
+    var subtype = $(this).find('.label').text();
+    if(type === 'action')
+        return false;
+    if((stateAction === true || stateOther === true || stateSlider === true && stateNbUsed === false) && (stateInfo === false  && stateBinary === false && stateNumeric === false && stateString === false))
+        return false;
+    if((stateDesk === true || stateMob === true || stateNbUsed === true) && (stateInfo === false && stateBinary === false && stateNumeric === false && stateString === false))
+        return isFind;
+    if(stateDesk === false && stateMob === false && stateInfo === true && stateBinary === false && stateNumeric === false && stateString === false)
+        return (type === 'info' && stateInfo === true);
+    if(type === 'info' && stateInfo === false)
+        isFind = false;
+    if(stateInfo === true  && stateBinary === false && stateNumeric === false && stateString === false)
+        return isFind;
+    if((subtype === 'binary' && stateBinary === false) || (subtype === 'numeric' && stateNumeric === false) || (subtype === 'string' && stateString === false))
+        isFind = false;
+    return isFind;
+});
+
+view.hide();
+kidsAtion.each(function () {
+    $(this).show();
+});
+kidsInfo.each(function () {
+    $(this).show();
+});
+}
