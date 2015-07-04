@@ -300,11 +300,11 @@ Plus tot que de long discourt, voici un exemple de code de base pour un widget
 ----
 La structure de base qui schématise les différents emplacement dans notre widget est maintenant créer mais pour autent ont as rien qui ne s'affiche, c'est normal.
 .explication du code
-* div = conteneur multi fonction relativement polyvalent avec retour à la ligne après lui
-* center = balise que centre sont contenu
-* span = conteneur multi fonction relativement polyvalent sans retour à la ligne après lui
-* style = Conteneur pour le code CSS qui sera appliquer de façon général (attention sont contenu peux affecter tout les elements de la page)
-* script = balise qui vas contenir du JavaScript
+div:: conteneur multi fonction relativement polyvalent avec retour à la ligne après lui
+center:: balise que centre sont contenu
+span:: conteneur multi fonction relativement polyvalent sans retour à la ligne après lui
+style:: Conteneur pour le code CSS qui sera appliquer de façon général (attention sont contenu peux affecter tout les elements de la page)
+script:: balise qui vas contenir du JavaScript
 
 En l'etat, il est difficile de faire quoi que se soie avec se bout de code, c'est pourquoi ont vas ajouter quelques options (appeler Attribut en langage HTML) dans nos balises.
 
@@ -313,13 +313,11 @@ En l'etat, il est difficile de faire quoi que se soie avec se bout de code, c'es
 ----
 <div id="Doc-#id#" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmdid="#id#" >
 	<center>
-         <span></span>
+		<span></span>
 	</center>
-	<style>
-	
+	<style>	
 	</style>
-	<script>
-   
+	<script> 
 	</script>
 </div>
 ----
