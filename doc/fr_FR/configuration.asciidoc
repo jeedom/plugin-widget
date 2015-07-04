@@ -312,11 +312,14 @@ En l'etat, il est difficile de faire quoi que se soie avec se bout de code, c'es
 [source,html]
 ----
 <div id="Doc-#id#" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmdid="#id#" >
+	
 	<center>
 		<span></span>
 	</center>
+	
 	<style>	
 	</style>
+	
 	<script> 
 	</script>
 </div>
