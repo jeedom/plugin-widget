@@ -288,11 +288,13 @@ Plus tot que de long discourt, voici un exemple de code de base pour un widget
 ----
 <div>
 	<center>
-         <span></span>
+		<span></span>
 	</center>
+	
 	<style>
 	
 	</style>
+	
 	<script>
    
 	</script>
@@ -311,16 +313,18 @@ En l'etat, il est difficile de faire quoi que se soie avec se bout de code, c'es
 .Ajoout des Attribut de base
 [source,html]
 ----
-<div id="Doc-#id#" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmdid="#id#" >
+<div id="Doc-#id#" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
 	
 	<center>
 		<span></span>
 	</center>
 	
 	<style>	
+	
 	</style>
 	
 	<script> 
+	
 	</script>
 </div>
 ----
@@ -333,6 +337,45 @@ class:: Les class contrairement au id ne sont pas unique, elle servent a appliqu
 data-type:: cette attribu permet de stock le type de commande sur la quelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre type en dessus de la zone de code.
 
 data-subtype:: cette attribu permet de stock le sous-type de commande sur la quelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre sous-type en dessus de la zone de code.
+
+data-cmd id:: Cette Atribut prend comme valeur le Tag \#id\#, il est utiliser par Jeedom pour la mise à jours du la Dashboard.
+
+A partir de la ont as une base qui corespond au stadard Jeedom, c'est le code minimaliste qu'il faut pour avoir un widget qui respecte la charte/règle Jeedom
+
+IMPORTANT: Ne pas oublier de modifier l'attribut data-type et data-subtype si vous modifier ses valeur dans la config du widget.
+
+====== Code CSS
+Cette partie qui vien s'ajouter entre les 2 balises "style", permet de déclarer des règles de mise en forme.
+cette partie est facultative car ont peux ajouter les mise en forme directement dans l'atribut style d'une balise ou a l'aide de JavaScript.
+L'uilisation de cette partie ai donc une question de préférance pou bien séparer le HTML et le CSS
+
+WARNING: Tout code déclarer dans des balsise style, s'applique à toute la page, il faut donc bien faire attention au selecteur CSS que vous chosisser d'utiliser pour ne pas altérer les autres widget.
+
+Affin de ne pas impacter d'autre widget involontairement par le code CSS que vous aller y mettre je vous conseille d'utiliser le selecteur id qui cible votre widget affin de ne pas impacter les autres widget.
+
+Exemple, si le texte que je mettrais dans la balise "Span" je veux le mettre en rouge, ont aurais tendance a écrire :
+
+.Code mis dans la balise Style
+[source,CSS]
+----
+span{
+	color: red;
+}
+----
+
+Mais cela aurais pour effet de changer la couleur du texte de tout les span de la page.
+Donc pour éviter cela ajouter un selecteur id qui vise votre widget pour déléimité sont action
+
+.Code mis dans la balise Style et délimité
+[source,CSS]
+----
+#Doc-#id# span{
+	color: red;
+}
+----
+En ajoutent \#Doc-\#id\# devent le selecteur span, ont délimite la modification à l'interieur de notre widget.
+
+====== Code JavaScript
 
 
 
