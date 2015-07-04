@@ -313,7 +313,7 @@ En l'etat, il est difficile de faire quoi que se soie avec se bout de code, c'es
 .Ajoout des Attribut de base
 [source,html]
 ----
-<div id="Doc-#id#" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
+<div id="Doc-#id#" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmd id="#id#" >
 	
 	<center>
 		<span></span>
@@ -330,7 +330,7 @@ En l'etat, il est difficile de faire quoi que se soie avec se bout de code, c'es
 ----
 Dans notre "div" principal ont à ajouter plusieurs Attribut :
 .explication du code
-id:: L'atribut "id" permet de rendre un element unique sur la page affin de le retrouver et cibler plus facilement, il est impératif que ça valeur soie unique sur la page, pour cela je vous conseil d'utiliser un mot qui represente notre element, dans notre exemple la div représente l'enssemble de notre widget donc ont peux utiliser le nom de notre widget ou un abrévation (ici j'ai choisi Doc-), puis affin de garentire que l'id soie unique, ont vas y mettre un tag "\#id\#" (pour plus d'info sur les tag jeedom voir plus bas).
+id:: L'atribut "id" permet de rendre un element unique sur la page affin de le retrouver et cibler plus facilement, il est impératif que ça valeur soie unique sur la page, pour cela je vous conseil d'utiliser un mot qui represente notre element, dans notre exemple la div représente l'enssemble de notre widget donc ont peux utiliser le nom de notre widget ou un abrévation (ici j'ai choisi Doc-), puis affin de garentire que l'id soie unique, ont vas y mettre un tag "\#id#" (pour plus d'info sur les tag jeedom voir plus bas).
 
 class:: Les class contrairement au id ne sont pas unique, elle servent a appliquer un style défini dans la partie style (la balise) ont peux inssi reproduire simplement et facilement une même mise en forme que l'ont crée une fois et réutilise par mot clé (class), ici ont ajoute plusieurs class définie et disponible de base dans Jeedom (voir plus bas les class Jeedom).
 
@@ -338,7 +338,7 @@ data-type:: cette attribu permet de stock le type de commande sur la quelle le w
 
 data-subtype:: cette attribu permet de stock le sous-type de commande sur la quelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre sous-type en dessus de la zone de code.
 
-data-cmd id:: Cette Atribut prend comme valeur le Tag \#id\#, il est utiliser par Jeedom pour la mise à jours du la Dashboard.
+data-cmd id:: Cette Atribut prend comme valeur le Tag \#id#, il est utiliser par Jeedom pour la mise à jours du la Dashboard.
 
 A partir de la ont as une base qui corespond au stadard Jeedom, c'est le code minimaliste qu'il faut pour avoir un widget qui respecte la charte/règle Jeedom
 
@@ -373,7 +373,7 @@ Donc pour éviter cela ajouter un selecteur id qui vise votre widget pour délé
 	color: red;
 }
 ----
-En ajoutent \#Doc-\#id\# devent le selecteur span, ont délimite la modification à l'interieur de notre widget.
+En ajoutent \#Doc-#id# devent le selecteur span, ont délimite la modification à l'interieur de notre widget.
 
 ====== Code JavaScript
 
