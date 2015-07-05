@@ -7,14 +7,8 @@
         $('.iconCmd#id#').empty();
         if ('#state#' == '1') {
             $('.iconCmd#id#').append('<i class="fa fa-check"></i>');
-            if ($('.cmd[data-cmd_id=#id#]').closest('.eqLogic').attr('data-bgColor') != undefined) {
-                $('.cmd[data-cmd_id=#id#]').closest('.eqLogic').css('background-color', $('.cmd[data-cmd_id=#id#]').closest('.eqLogic').attr('data-bgColor'));
-            }
-        }
-        else {
+        }else {
             $('.iconCmd#id#').append('<i class="icon jeedom-alerte2"></i>');
-            $('.cmd[data-cmd_id=#id#]').closest('.eqLogic').attr('data-bgColor', $('.cmd[data-cmd_id=#id#]').closest('.eqLogic').css('background-color'));
-            $('.cmd[data-cmd_id=#id#]').closest('.eqLogic').css('background-color', '#e74c3c');
         }
     </script>
 </div>
