@@ -376,7 +376,14 @@ Donc pour éviter cela ajouter un selecteur id qui vise votre widget pour délé
 En ajoutent \#Doc-#id# devent le selecteur span, ont délimite la modification à l'interieur de notre widget.
 
 ====== Code JavaScript
+Le javaScript se met entre les balises "Script", ont utilise le JavaScript pour faire des calcules, convertire des données, animer le widget, mettre en forme le widget, réaliser des actions sur le widget en fonction d'événement.
+En plus du javaScript de base, Jeedom intégre par défaut plusieurs Freamwork qui permette de simplifier le code JavaScript ont peux donc utiliser sans les initialisers :
 
+* Jquery
+* Jquery UI
+* Bootstrap
+
+WARNING: En cas d'erreur dans le code JS, cela peux bloquer touts les codes JS qui pourrais suivre que se soie dans le widget ou d'autre widget, il font donc être prudent l'aure des modifications.
 
 
 
