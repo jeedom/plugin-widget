@@ -428,10 +428,11 @@ A utiliser dans l'attribut "class" d'une balise "i"
 ----
 
 * \#history# => Permet si l'historique de la valeur est activé de retourner les class : 'history cursor' (Voir les class CSS Jeedom), si non il sera remplacer par un vide. Le tag permet donc d'afficher ou non le graphique d'hisorique sur la dashboard.
++
 ----
 A utiliser dans l'attribut "class" de la div principale 
 ----
-
++
 ==== Les class CSS Jeedom 
 
 cmd:: doit impérativement être ajouter à l'attribut "class" de la div principale, cette class permet la mise à jours du widget, sans cette class le widget ne se met a jours que par actualisation de la page.
