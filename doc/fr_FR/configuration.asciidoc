@@ -421,11 +421,16 @@ Tous les tags ne sont pas disponibles avec tous les types de commande, voici don
 ** A utiliser comme du texte ou en JS
 * \#maxHistoryValue# => Maximum sur les x dernières heures de la commande
 ** A utiliser comme du texte ou en JS
-* \#tendance# => Permet si l'historique de la valeur est activé de retourner les class : 'fa fa-minus', 'fa fa-arrow-up' ou 'fa fa-arrow-down' (icone trait, flèche bas, flèche haut), lier à la tendance de la valeur
-** A utiliser dans l'attribut "class" d'une balise "i"
-\#history# :: Permet si l'historique de la valeur est activé de retourner les class : 'history cursor' (Voir les class CSS Jeedom), si non il sera remplacer par un vide. Le tag permet donc d'afficher ou non le graphique d'hisorique sur la dashboard.
- A utiliser dans l'attribut "class" de la div principale 
 
+* \#tendance# => Permet si l'historique de la valeur est activé de retourner les class : 'fa fa-minus', 'fa fa-arrow-up' ou 'fa fa-arrow-down' (icone trait, flèche bas, flèche haut), lier à la tendance de la valeur
+----
+A utiliser dans l'attribut "class" d'une balise "i"
+----
+
+* \#history# => Permet si l'historique de la valeur est activé de retourner les class : 'history cursor' (Voir les class CSS Jeedom), si non il sera remplacer par un vide. Le tag permet donc d'afficher ou non le graphique d'hisorique sur la dashboard.
+----
+A utiliser dans l'attribut "class" de la div principale 
+----
 
 ==== Les class CSS Jeedom 
 
