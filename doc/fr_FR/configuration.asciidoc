@@ -313,7 +313,7 @@ En l'état, il est difficile de faire quoi que ce soit avec ce bout de code, c'e
 .Ajout des Attribut de base
 [source,html]
 ----
-<div id="Doc-#id#" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
+<div id="Doc-#id#" class="cmd tooltips cmd-widget #history#" title="" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
 	
 	<center>
 		<span></span>
@@ -406,19 +406,40 @@ Tous les tags ne sont pas disponibles avec tous les types de commande, voici don
 
 .Tag pour le type info
 * \#name_display# => Nom de la commande avec retour à la ligne et vide si le nom de la commande ne doit pas être affiché
+** A utiliser comme du texte ou en JS
 * \#unite# => Unité de la commande
-* \#collectDate# => Date exacte ou de la valeur de la commande
+** A utiliser comme du texte ou en JS
+* \#collectDate# => Retourne la date et heure de la dernière mise à jours du widget au format "yyyy-mm-dd hh:mn:ss"
+** A utiliser comme du texte, en JS, ou dans l'attribut titre
 * \#state# => Valeur de la commande 
-* \#displayHistory# => Si la commande est historisée alors la valeur est de '' sinon 'display : none;'
+** A utiliser comme du texte ou en JS
+* \#displayHistory# => Permet de prendre en compte l'option "Afficher les statistiques sur les widgets" dans le menu "Général"=>"Administration"=>"Configuration" onglet "Configuration des commandes", si l'option est sur oui, le tag retournera un vide sinon 'display : none;'
+** A utiliser dans l'attribut "style" d'une balise html à afficher si l'historisation est activer dans la config Jeedom  
 * \#averageHistoryValue# => Valeur moyenne sur les x dernières heures de la commande
+** A utiliser comme du texte ou en JS
 * \#minHistoryValue# => Minimum sur les x dernières heures de la commande
+** A utiliser comme du texte ou en JS
 * \#maxHistoryValue# => Maximum sur les x dernières heures de la commande
-* \#tendance# => Tendance soit 'fa fa-minus', 'fa fa-arrow-up' ou 'fa fa-arrow-down'
-* \#history# => si la commande est historisée le tag  vaudra : 'history cursor' et le widget 'jeedom.cmd.info.history.default' sera ajouté (pour permettre d'afficher l'historique)
+** A utiliser comme du texte ou en JS
+* \#tendance# => Permet si l'historique de la valeur est activé de retourner les class : 'fa fa-minus', 'fa fa-arrow-up' ou 'fa fa-arrow-down' (icone trait, flèche bas, flèche haut), lier à la tendance de la valeur
+** A utiliser dans l'attribut "class" d'une balise "i"
+* \#history# => Permet si l'historique de la valeur est activé de retourner les class : 'history cursor' (Voir les class CSS Jeedom), si non il sera remplacer par un vide. Le tag permet donc d'afficher ou non le graphique d'hisorique sur la dashboard.
+** A utiliser dans l'attribut "class" de la div principale 
 
 
 ==== Les class CSS Jeedom 
-#Doc à venir#
+
+cmd:: doit impérativement être ajouter à l'attribut "class" de la div principale, cette class permet la mise à jours du widget, sans cette class le widget ne se met a jours que par actualisation de la page.
+
+cmd-widget:: cette class est recommandé car elle permet ajouter quelques paramètre CSS par defaut au widget pour un bon comportement.
+
+cursor:: Permet de modifier le pointeur en main.
+
+history:: Cette class permet de modifier le pointeur en main et au clique d'afficher l'historique de la valeur du widget.
+
+tooltips:: ??
+
+
 
 ////
 
