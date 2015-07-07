@@ -394,66 +394,87 @@ Les Tags sont des sortes de Variable (boite) dans les quelles sont stocker des v
 Tous les tags ne sont pas disponibles avec tous les types de commande, voici donc la liste et leur détail :
 
 .Tag Commun au type action et info
-* \#id# => ID de la commande créé par Jeedom à la création de la commande (valeur numérique unique).
-* \#logicalId# => ID logique de la commande (peut être vide).
-* \#name# => Nom de la commande.
-* \#minValue# => Valeur minimum que peut prendre la commande.
-* \#maxValue# => Valeur maximum que peut prendre la commande.
+\#id#::
+ID de la commande créé par Jeedom à la création de la commande (valeur numérique unique).
+
+\#logicalId#::
+ID logique de la commande (peut être vide).
+
+\#name#::
+Nom de la commande.
+
+\#minValue#::
+Valeur minimum que peut prendre la commande.
+
+\#maxValue#::
+Valeur maximum que peut prendre la commande.
 
 .Tag pour le type action
-* \#valueName# => Nom de la commande info liée, si la commande action est liée à une commande info.
-* \#lastValue# => Dernière valeur de la commande (peut être vide).
+\#valueName#::
+Nom de la commande info liée, si la commande action est liée à une commande info.
+
+\#lastValue#::
+Dernière valeur de la commande (peut être vide).
 
 .Tag pour le type info
-* \#name_display# => Nom de la commande avec retour à la ligne et vide si le nom de la commande ne doit pas être affiché
+\#name_display#::
+Nom de la commande avec retour à la ligne et vide si le nom de la commande ne doit pas être affiché
 +
 ----
 A utiliser comme du texte ou en JS
 ----
 
-* \#unite# => Unité de la commande
+\#unite#::
+Unité de la commande
 +
 ----
 A utiliser comme du texte ou en JS
 ----
 
-* \#collectDate# => Retourne la date et heure de la dernière mise à jours du widget au format "yyyy-mm-dd hh:mn:ss"
+\#collectDate#::
+Retourne la date et heure de la dernière mise à jours du widget au format "yyyy-mm-dd hh:mn:ss"
 +
 ----
 A utiliser comme du texte, en JS, ou dans l'attribut titre
 ----
 
-* \#state# => Valeur de la commande 
+\#state#::
+Valeur de la commande 
 +
 ----
 A utiliser comme du texte ou en JS
 ----
 
-* \#displayHistory# => Permet de prendre en compte l'option "Afficher les statistiques sur les widgets" dans le menu "Général"=>"Administration"=>"Configuration" onglet "Configuration des commandes", si l'option est sur oui, le tag retournera un vide sinon 'display : none;'
+\#displayHistory#::
+Permet de prendre en compte l'option "Afficher les statistiques sur les widgets" dans le menu "Général"=>"Administration"=>"Configuration" onglet "Configuration des commandes", si l'option est sur oui, le tag retournera un vide sinon 'display : none;'
 +
 ----
 A utiliser dans l'attribut "style" d'une balise html à afficher si l'historisation est activer dans la config Jeedom  
 ----
 
-* \#averageHistoryValue# => Valeur moyenne sur les x dernières heures de la commande
+\#averageHistoryValue#::
+Valeur moyenne sur les x dernières heures de la commande
 +
 ----
 A utiliser comme du texte ou en JS
 ----
 
-* \#minHistoryValue# => Minimum sur les x dernières heures de la commande
+\#minHistoryValue#::
+Minimum sur les x dernières heures de la commande
 +
 ----
 A utiliser comme du texte ou en JS
 ----
 
-* \#maxHistoryValue# => Maximum sur les x dernières heures de la commande
+\#maxHistoryValue#::
+Maximum sur les x dernières heures de la commande
 +
 ----
 A utiliser comme du texte ou en JS
 ----
 
-* \#tendance# => Permet si l'historique de la valeur est activé de retourner les class : 'fa fa-minus', 'fa fa-arrow-up' ou 'fa fa-arrow-down' (icone trait, flèche bas, flèche haut), lier à la tendance de la valeur
+\#tendance#::
+Permet si l'historique de la valeur est activé de retourner les class : 'fa fa-minus', 'fa fa-arrow-up' ou 'fa fa-arrow-down' (icone trait, flèche bas, flèche haut), lier à la tendance de la valeur
 +
 ----
 A utiliser dans l'attribut "class" d'une balise "i"
