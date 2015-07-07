@@ -406,23 +406,55 @@ Tous les tags ne sont pas disponibles avec tous les types de commande, voici don
 
 .Tag pour le type info
 * \#name_display# => Nom de la commande avec retour à la ligne et vide si le nom de la commande ne doit pas être affiché
-** A utiliser comme du texte ou en JS
++
+----
+A utiliser comme du texte ou en JS
+----
+
 * \#unite# => Unité de la commande
-** A utiliser comme du texte ou en JS
++
+----
+A utiliser comme du texte ou en JS
+----
+
 * \#collectDate# => Retourne la date et heure de la dernière mise à jours du widget au format "yyyy-mm-dd hh:mn:ss"
-** A utiliser comme du texte, en JS, ou dans l'attribut titre
++
+----
+A utiliser comme du texte, en JS, ou dans l'attribut titre
+----
+
 * \#state# => Valeur de la commande 
-** A utiliser comme du texte ou en JS
++
+----
+A utiliser comme du texte ou en JS
+----
+
 * \#displayHistory# => Permet de prendre en compte l'option "Afficher les statistiques sur les widgets" dans le menu "Général"=>"Administration"=>"Configuration" onglet "Configuration des commandes", si l'option est sur oui, le tag retournera un vide sinon 'display : none;'
-** A utiliser dans l'attribut "style" d'une balise html à afficher si l'historisation est activer dans la config Jeedom  
++
+----
+A utiliser dans l'attribut "style" d'une balise html à afficher si l'historisation est activer dans la config Jeedom  
+----
+
 * \#averageHistoryValue# => Valeur moyenne sur les x dernières heures de la commande
-** A utiliser comme du texte ou en JS
++
+----
+A utiliser comme du texte ou en JS
+----
+
 * \#minHistoryValue# => Minimum sur les x dernières heures de la commande
-** A utiliser comme du texte ou en JS
++
+----
+A utiliser comme du texte ou en JS
+----
+
 * \#maxHistoryValue# => Maximum sur les x dernières heures de la commande
-** A utiliser comme du texte ou en JS
++
+----
+A utiliser comme du texte ou en JS
+----
 
 * \#tendance# => Permet si l'historique de la valeur est activé de retourner les class : 'fa fa-minus', 'fa fa-arrow-up' ou 'fa fa-arrow-down' (icone trait, flèche bas, flèche haut), lier à la tendance de la valeur
++
 ----
 A utiliser dans l'attribut "class" d'une balise "i"
 ----
@@ -432,7 +464,7 @@ A utiliser dans l'attribut "class" d'une balise "i"
 ----
 A utiliser dans l'attribut "class" de la div principale 
 ----
-+
+
 ==== Les class CSS Jeedom 
 
 cmd:: doit impérativement être ajouter à l'attribut "class" de la div principale, cette class permet la mise à jours du widget, sans cette class le widget ne se met a jours que par actualisation de la page.
