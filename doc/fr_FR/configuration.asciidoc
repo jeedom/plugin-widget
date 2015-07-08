@@ -29,14 +29,14 @@ La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans laq
 .Avant de commencer
 [NOTE]
 ===============================
-Il vous faut au préalable créer un compte sur le market Jeedom (https://market.jeedom.fr) puis entrer vos informations de connexion (login et mdp) dans les paramètres de votre Jeedom
+Il vous faut au préalable créer un compte sur le market Jeedom (https://market.jeedom.fr) puis entrer vos informations de connexion (login et mdp) dans les paramètres de votre Jeedom ("Général"=>"Administration"=>"Configuration"=>"Market et mise à jours")
 ===============================
 
 Comme pour tout plugin, le plugin Widget s'installe depuis l'interface Jeedom, menu "Général"=>"plugin"
 
 image::../images/capture001.png[]
 
-Cliquer sur l'icône vert pour accéder directement au market, dans cette fenêtre cliquer sur officiel et dans le champ de recherche mettre "Widget"
+Cliquer sur l'icône vert pour accéder directement au market, dans cette fenêtre cliquer sur "Officiel" et dans le champ de recherche mettre "Widget"
 
 
 image::../images/capture002.png[]
@@ -49,9 +49,10 @@ image::../images/capture003.png[]
 
 Cliquer sur le bouton "Installer stable", une fois installer Jeedom vous demande si vous souhaiter aller à la page de configuration du plugin, répondre oui.
 Sur la page de configuration du plugin widget, nous n'avons pour se plugin qu'une seule option activer ou désactiver.
-Par défaut ce dernier est désactiver, je vous invite donc à cliquer sur le bouton vert "activer".
-Dès à présent le plugin est actif et opérationnel.
 
+Par défaut ce dernier est désactiver, je vous invite donc à cliquer sur le bouton vert "activer".
+
+Dès à présent le plugin est actif et opérationnel.
 
 
 
@@ -64,7 +65,7 @@ On se trouve donc sur la page principale du plugin, ce dernier dispose par défa
 
 image::../images/capture006.png[]
 
-En cliquant sur l'un des widgets de la liste du menu de droite ou de gauche vous allez ouvrir la page de configuration du widget sur laquelle vous pouvez modifier,  voir un aperçu du widget, et tout un tas d'infos de configuration comme le code source du widget
+En cliquant sur l'un des widgets de la liste du menu de droite ou de gauche vous allez ouvrir la page de configuration du widget sur laquelle vous pouvez modifier,  voir un aperçu du widget (si Jeedom trouve une commande compatible), et tout un tas d'infos de configuration comme le code source du widget
 
 image::../images/capture007.png[]
 
@@ -77,7 +78,7 @@ Pour plus d'infos sur la configuration et création de widget voir plus bas.
 Pour appliquer un widget sur une seul commande ou modifier celui appliquer, il vous faut vous rendre sur la page de configuration du module.
 Le chemin pour accéder au module diverge en fonction du type de se dernier, voici quelques exemples :
 
-Pour les modules Z-Wave, "Plugins"=>"Protocole domotique"=>"OpenZwave", puis choisir le module qui à la commande que vous souhaitez modifier
+Pour les modules Z-Wave, "Plugins"=>"Protocole domotique"=>"Z-wave", puis choisir le module qui à la commande que vous souhaitez modifier
 
 image::../images/capture024.png[]
 
@@ -91,7 +92,7 @@ image::../images/capture014.png[]
 
 
 .Filtrage des listes
-NOTE: Les listes déroulantes sont auto filtrante, elle ne fournisse que les widget compatible avec le type de commande.
+NOTE: Les listes déroulantes sont auto filtrante, elles ne fournissent que les widgets compatible avec le type de commande.
 
 [[ancre-1]]
 === Appliquer le widget sur plusieurs commandes
@@ -117,11 +118,12 @@ image::../images/capture011.png[]
 === Options de personnalisation des widgets
 Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le développeur du widget) et commune à tous les widgets, ont peux donc avoir un widget qui s'affichera différemment d'une commande à l'autre.
 
-Ont peux accéder à ses options de 2 façons, site par l'arbre Domotique qui se trouve dans le menu "Général" => "Arbre Domotique"
+Ont peux accéder à ses options de 2 façons, site par l'arbre Domotique qui se trouve dans le menu "Général" => "Résumé Domotique"
 
 image::../images/capture012.png[]
 
 Sur cette page vous trouver tous vos éléments domotique, les Objets, les modules, les commandes.
+Cliquer sur les petite roue crantée pour accèder à la page de configuration.
 
 image::../images/capture013.png[]
 
@@ -189,11 +191,11 @@ image::../images/capture023.png[]
 
 
 ==== Autres
-#Doc à venir#
+#Doc à venir# (à completer par Loïc)
 
 
 === Création / Modification de widget
-Le plugin offre 2 possibilité pour la création de Widget, le mode facile qui permet de faire des widget basic facilement avec un assistent de création, et le mode avancer qui lui permet aussi la modification par la suite de tous les widgets.
+Le plugin offre 2 possibilités pour la création de Widget, le mode facile qui permet de faire des widget basic facilement avec un assistent de création, et le mode avancer qui lui permet aussi la modification par la suite de tous les widgets.
 
 .Editeur de widget en mode avancé
 NOTE: Le mode avancé apporte une souplesse sans limite, toute fois il vous faut avoir quelques connaissance en langage de programmation basique telle que HTML et CSS pour la base et JavaScript pour pouvoir réaliser des choses un peu plus complexe.
@@ -274,7 +276,9 @@ Une fois sur la page principal de config d'un widget, c'est la partie Code sourc
 WARNING: Pour modifier ses infos il faut avoir quelques base en programmation HTML, CSS et JavaScript, les modifications peuvent avoir un impact importent sur l'affichage du widget et sur l'affichage d'autre widget voir bloquer l'affichage de 1 voir tous les widgets.
 
 La base (squelette) d'un widget se fait en HTML, cela permet de structurer l'affichage et retrouver plus simplement les informations.
+
 Dans Jeedom pour les widgets, le premier bout de code à créer c'est une "div" qui fera office de conteneur principal pour tout le code de notre Widget.
+
 Dans cette "div", ont peux y trouver jusqu'à 3 sous parties distinctes :
 * La partie HTML qui va afficher les informations
 * La partie CSS qui vas rendre plus jolis en mettent en forme la parte HTML (Partie Facultative)
@@ -301,12 +305,18 @@ Plus tôt que de long discourt, voici un exemple de code de base pour un widget
 </div>
 ----
 La structure de base qui schématise les différents emplacements dans notre widget est maintenant créer mais pour autant ont as rien qui ne s'affiche, c'est normal.
+
 .explication du code
-div:: conteneur multi fonction relativement polyvalent avec retour à la ligne après lui
-center:: balise que centre sont contenu
-span:: conteneur multi fonction relativement polyvalent sans retour à la ligne après lui
-style:: Conteneur pour le code CSS qui sera appliquer de façon général (attention sont contenu peux affecter tous les éléments de la page)
-script:: balise qui vas contenir du JavaScript
+div:: 
+	conteneur multi fonction relativement polyvalent avec retour à la ligne après lui
+center:: 
+	balise que centre sont contenu
+span:: 
+	conteneur multi fonction relativement polyvalent sans retour à la ligne après lui
+style:: 
+	Conteneur pour le code CSS qui sera appliquer de façon général (attention sont contenu peux affecter tous les éléments de la page)
+script:: 
+	balise qui vas contenir du JavaScript
 
 En l'état, il est difficile de faire quoi que ce soit avec ce bout de code, c'est pourquoi ont vas ajouter quelques options (appeler Attribut en langage HTML) dans nos balises.
 
@@ -329,16 +339,22 @@ En l'état, il est difficile de faire quoi que ce soit avec ce bout de code, c'e
 </div>
 ----
 Dans notre "div" principal ont à ajouter plusieurs Attribut :
+
 .explication du code
-id:: L'attribut "id" permet de rendre un élément unique sur la page afin de le retrouver et cibler plus facilement, il est impératif que ça valeur soie unique sur la page, pour cela je vous conseille d'utiliser un mot qui représente notre élément, dans notre exemple la div représente l'ensemble de notre widget donc ont peux utiliser le nom de notre widget ou une abréviation (ici j'ai choisi Doc-), puis afin de garantir que l'id soie unique, ont vas y mettre un tag "\#id#" (pour plus d'info sur les tag Jeedom voir plus bas).
+id:: 
+	L'attribut "id" permet de rendre un élément unique sur la page afin de le retrouver et cibler plus facilement, il est impératif que ça valeur soie unique sur la page, pour cela je vous conseille d'utiliser un mot qui représente notre élément, dans notre exemple la div représente l'ensemble de notre widget donc ont peux utiliser le nom de notre widget ou une abréviation (ici j'ai choisi Doc-), puis afin de garantir que l'id soie unique, ont vas y mettre un tag "\#id#" (pour plus d'info sur les tag Jeedom voir plus bas).
 
-class:: Les class contrairement au id ne sont pas unique, elle servent à appliquer un style défini dans la partie style (la balise) ont peux ainsi reproduire simplement et facilement une même mise en forme que l'on crée une fois et réutilise par mot clé (class), ici on ajoute plusieurs class définie et disponible de base dans Jeedom (voir plus bas les class Jeedom).
+class:: 
+	Les class contrairement au id ne sont pas unique, elle servent à appliquer un style défini dans la partie style (la balise) ont peux ainsi reproduire simplement et facilement une même mise en forme que l'on crée une fois et réutilise par mot clé (class), ici on ajoute plusieurs class définie et disponible de base dans Jeedom (voir plus bas les class Jeedom).
 
-data-type:: cette attribut permet de stock le type de commande sur laquelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre type en dessus de la zone de code.
+data-type:: 
+	cette attribut permet de stock le type de commande sur laquelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre type en dessus de la zone de code.
 
-data-subtype:: cette attribut permet de stock le sous-type de commande sur laquelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre sous-type en dessus de la zone de code.
+data-subtype::
+	cette attribut permet de stock le sous-type de commande sur laquelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre sous-type en dessus de la zone de code.
 
-data-cmd_id:: Cette Attribut prend comme valeur le Tag \#id#, il est utilisé par Jeedom pour la mise à jours du la Dashboard.
+data-cmd_id:: 
+	Cette Attribut prend comme valeur le Tag \#id#, il est utilisé par Jeedom pour la mise à jours du la Dashboard.
 
 A partir de là ont as une base qui correspond au standard Jeedom, c'est le code minimaliste qu'il faut pour avoir un widget qui respecte la charte/règle Jeedom
 
