@@ -396,25 +396,53 @@ Tous les tags ne sont pas disponibles avec tous les types de commande, voici don
 .Tag Commun au type action et info
 \#id#::
 ID de la commande créé par Jeedom à la création de la commande (valeur numérique unique).
++
+----
+A utiliser comme du texte, en JS ou dans les attributs HTML
+----
 
 \#logicalId#::
 ID logique de la commande (peut être vide).
++
+----
+A utiliser comme du texte ou en JS
+----
 
 \#name#::
 Nom de la commande.
++
+----
+A utiliser comme du texte ou en JS
+----
 
 \#minValue#::
 Valeur minimum que peut prendre la commande.
++
+----
+A utiliser comme du texte, en JS ou dans les attributs HTML
+----
 
 \#maxValue#::
 Valeur maximum que peut prendre la commande.
++
+----
+A utiliser comme du texte, en JS ou dans les attributs HTML
+----
 
 .Tag pour le type action
 \#valueName#::
 Nom de la commande info liée, si la commande action est liée à une commande info.
++
+----
+A utiliser comme du texte ou en JS
+----
 
 \#lastValue#::
 Dernière valeur de la commande (peut être vide).
++
+----
+A utiliser comme du texte ou en JS
+----
 
 .Tag pour le type info
 \#name_display#::
