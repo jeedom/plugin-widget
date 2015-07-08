@@ -1,11 +1,11 @@
 
 :Author:    Skyline-ch
 :Email:     <skyline-ch@play-4-fun.net>
-:Date:      29.06.2015
-:Revision:  1.195.0
+:Date:      08.07.2015
+:Revision:  1.198.0
 
 == Intro
-Le plugin widget est un plugin un peu particulier, car il ne permet pas de crée des équipements mais de modifier le rendu (affichage) d’une commande, l'objectif de se Plugin c'est donc de permettre de personnaliser simplement la façon d'afficher une valeurs, infos, ou action en fonction de ses goûts et désires.
+Le plugin widget est un plugin un peu particulier, car il ne permet pas de crée des équipements mais de modifier le rendu (affichage) d’une commande, l'objectif de se Plugin c'est donc de permettre de personnaliser simplement la façon d'afficher une valeur, infos, ou action en fonction de ses goûts et désires.
 
 Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifique (créer par le développeur du widget), ont peux donc avoir un widget qui s'affichera différemment d'une commande à l'autre.
 
@@ -60,7 +60,7 @@ Afin de se rendre dans le plugin Widget, il faut aller dans le menu "Plugins"=>"
 
 image::../images/capture005.png[]
 
-On se trouve donc sur la page principale du plugin, se dernier dispose par défaut d'un éventail de widget dès son installation, il est possible d'en télécharger d'autre via le market ou de créer ses propres Widget (voir plus bas).
+On se trouve donc sur la page principale du plugin, ce dernier dispose par défaut d'un éventail de widget dès son installation, il est possible d'en télécharger d'autre via le market ou de créer ses propres Widget (voir plus bas).
 
 image::../images/capture006.png[]
 
@@ -163,7 +163,7 @@ La seconde, "Arrondi" permet de choisir le nombre de chiffre après la virgule s
 .Sans les options Calcul et arrondit
 image::../images/capture021.png[]
 
-.Exemple de corection
+.Exemple de correction
 image::../images/capture019.png[]
 
 .Résultat après correction
@@ -179,7 +179,7 @@ image::../images/capture022.png[]
 
 ==== Historique
 La partie Historique permet de modifier le comportement de l'historisation de la valeur de la commande, ont peux donc ici l'activer ou la désactiver.
-TIP: Plus il y a de commande historiser plus cela peur ralentir le système, il ne faut donc activer cette option que sur les commandes pour lesquelles vous avez une utilité d'avoir un historique.
+TIP: Plus il y a de commande historiser plus cela peut ralentir le système, il ne faut donc activer cette option que sur les commandes pour lesquelles vous avez une utilité d'avoir un historique.
 
 Le mode de lissage, permet de définir comment Jeedom vas enregistrer les valeurs et les retranscrire, cela permet d’avoir des courbe plus fluide sur tout si le module envoie rarement les infos ou si il envoie souvent des valeurs très différente.
 
@@ -196,7 +196,7 @@ image::../images/capture023.png[]
 Le plugin offre 2 possibilité pour la création de Widget, le mode facile qui permet de faire des widget basic facilement avec un assistent de création, et le mode avancer qui lui permet aussi la modification par la suite de tous les widgets.
 
 .Editeur de widget en mode avancé
-NOTE: Le mode avancé apporte une souplesse sans limite, toute fois il vous faut avoir quelques connaissance en langage de programmation basique telle que HTML et CSS pour la base et JavaScript pour pouvoir réaliser des choses un peux plus complexe.
+NOTE: Le mode avancé apporte une souplesse sans limite, toute fois il vous faut avoir quelques connaissance en langage de programmation basique telle que HTML et CSS pour la base et JavaScript pour pouvoir réaliser des choses un peu plus complexe.
 
 ==== Mode création facile
 Pour réaliser un widget avec l'assistant, il vous suffit de vous rendre dans le plugin : menu "Plugins"=>"Programmation"=>"Widget".
@@ -385,6 +385,9 @@ En plus du JavaScript de base, Jeedom intègre par défaut plusieurs Framework q
 
 WARNING: En cas d'erreur dans le code JS, cela peut bloquer tous les codes JS qui pourrait suivre que ce soit dans le widget ou d'autre widget, il faut donc être prudent lors des modifications.
 
+TIP: Si après avoir enregistrer une modification de widget la roue crantée contenue à tourner indéfiniment, il se peut que vous avez fait une erreur JS qui fais planter la suite de l'exécution JS sur la page.
+Pour pouvoir corriger il vous suffit de passer la div id=jqueryLoadingDiv en display none  à l'aide de la console du navigateur, corriger le code et enregistrer, il faut aussi faire F5 pour actualiser la page
+
 
 
 ==== Les Tag Jeedom
@@ -509,12 +512,14 @@ A utiliser dans l'attribut "class" d'une balise "i"
 ----
 
 \#history#::
-Permet si l'historique de la valeur est activé de retourner les class : 'history cursor' (Voir les class CSS Jeedom), si non il sera remplacer par un vide. Le tag permet donc d'afficher ou non le graphique d'hisorique sur la dashboard.
+Permet si l'historique de la valeur est activé de retourner les class : 'history cursor' (Voir les class CSS Jeedom), sinon il sera remplacé par un vide. Le tag permet donc d'afficher ou non le graphique d'historique sur la dashboard.
 +
 ----
 A utiliser dans l'attribut "class" de la div principale 
 ----
 
+.Exemple de retrous de valeur
+image::../images/capture031.png[]
 ==== Les class CSS Jeedom 
 
 cmd:: doit impérativement être ajouter à l'attribut "class" de la div principale, cette class permet la mise à jours du widget, sans cette class le widget ne se met a jours que par actualisation de la page.
