@@ -124,7 +124,7 @@ sendVarToJS('pathFile', $pathfile);
                         </div>
                     </div>
                 </div>
-                <li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
+                <li style="margin-bottom: 5px;"><input class="form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%" id="in_filter"/></li>
             </ul>
             <ul id="ul_widget" class="nav nav-pills nav-stacked"></ul>
         </div>

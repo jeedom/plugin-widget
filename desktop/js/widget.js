@@ -57,6 +57,16 @@
     });
 }
 
+$("#in_filter").on('keydown',function(){
+    $('.li_widget').show();
+    var search = $(this).value();
+    $('.li_widget a').each(function(){
+        if($(this).text().toLowerCase().indexOf(search) < 0){
+            $(this).closest('.li_widget').hide();
+        }
+    });
+});
+
 function getContainer() {
     $.ajax({
         type: "POST",
