@@ -315,7 +315,7 @@ data-type::
 data-subtype::
 	cette attribut permet de stock le sous-type de commande sur laquelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre sous-type en dessus de la zone de code.
 
-data-cmd_id:: 
+data-cmd__id:: 
 	Cette Attribut prend comme valeur le Tag \#id#, il est utilisé par Jeedom pour la mise à jours du la Dashboard.
 
 A partir de là ont as une base qui correspond au standard Jeedom, c'est le code minimaliste qu'il faut pour avoir un widget qui respecte la charte/règle Jeedom
