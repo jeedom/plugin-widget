@@ -302,11 +302,11 @@ Dans notre "div" principal ont à ajouter plusieurs Attribut :
 id:: 
 	L'attribut "id"est déconseillé sur Jeedom 
 	
-IMPORTANT: Pour être sur d'éviter un conflit au niveau des IDs (qui peut planter toute la page web), sous Jeedom nous utilisons des class et des attribut "data-" cela permet d'etre sur qu'en cas de collision toute la page web ne soit pas plantée.
-	permet 
+IMPORTANT: Pour être sur d'éviter un conflit au niveau des IDs (qui peut planter toute la page web), sous Jeedom nous utilisons des class-id et des attribut "data-" cela permet d'être sur qu'en cas de collision toute la page web ne soit pas plantée. 
 
 class:: 
 	Les class contrairement au id ne sont pas unique, elle servent à appliquer un style défini dans la partie style (la balise) ont peux ainsi reproduire simplement et facilement une même mise en forme que l'on crée une fois et réutilise par mot clé (class), ici on ajoute plusieurs class définie et disponible de base dans Jeedom (voir plus bas les class Jeedom).
+	
 	Jeedom utilise à la place de l'attribut id, une class comme id, cela permet de rendre un élément unique sur la page afin de le retrouver et cibler plus facilement, il est impératif que ça valeur soie unique sur la page, pour cela je vous conseille d'utiliser un mot qui représente notre élément, dans notre exemple la div représente l'ensemble de notre widget donc ont peux utiliser le nom de notre widget ou une abréviation (ici j'ai choisi Doc-), puis afin de garantir que la class-id soie unique, ont vas y mettre un tag "\#id#" (pour plus d'info sur les tag Jeedom voir plus bas), se qui donne "Doc-\#id#".
 
 data-type:: 
@@ -315,7 +315,7 @@ data-type::
 data-subtype::
 	cette attribut permet de stock le sous-type de commande sur laquelle le widget vas être appliquer, il faut donc que ça valeur correspond au paramètre sous-type en dessus de la zone de code.
 
-data-cmd__id:: 
+data-cmd_id:: 
 	Cette Attribut prend comme valeur le Tag \#id#, il est utilisé par Jeedom pour la mise à jours du la Dashboard.
 
 A partir de là ont as une base qui correspond au standard Jeedom, c'est le code minimaliste qu'il faut pour avoir un widget qui respecte la charte/règle Jeedom
