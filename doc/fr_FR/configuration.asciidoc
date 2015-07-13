@@ -347,11 +347,11 @@ Donc pour éviter cela ajouter un sélecteur id qui vise votre widget pour déli
 .Code mis dans la balise Style et délimité
 [source,CSS]
 ----
-\.Doc-#id# span{
+.Doc-#id# span{
 	color: red;
 }
 ----
-En ajoutent \.Doc-#id# devant le sélecteur span, ont délimite la modification à l'intérieur de notre widget.
+En ajoutent .Doc-\#id# devant le sélecteur span, ont délimite la modification à l'intérieur de notre widget.
 
 ====== Code JavaScript
 Le JavaScript se met entre les balises "Script", on utilise le JavaScript pour faire des calculs, convertir des données, animer le widget, mettre en forme le widget, réaliser des actions sur le widget en fonction d'événement.
