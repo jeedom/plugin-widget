@@ -26,11 +26,6 @@ La Tuile, c'est un regroupement de widget pour un module, c'est la zone dans laq
 
 
 == Installation du plugin Widget
-.Avant de commencer
-[NOTE]
-===============================
-Il vous faut au préalable créer un compte sur le market Jeedom (https://market.jeedom.fr) puis entrer vos informations de connexion (login et mdp) dans les paramètres de votre Jeedom ("Général"=>"Administration"=>"Configuration"=>"Market et mise à jours")
-===============================
 
 Comme pour tout plugin, le plugin Widget s'installe depuis l'interface Jeedom, menu "Général"=>"plugin"
 
@@ -152,46 +147,8 @@ Pour trouver les options consulter le forum ou/et le Wiki
 
 
 === Configuration avancé
-Dans l'onglet "Configuration avancé" vous trouvez 4 thèmes d'option de configuration
 
-image::../images/capture018.png[]
-
-==== Calcul et arrondit
-Cette partie contiens 2 options, la première "Formule de calcul" permet d'effectuer des corrections de valeur ou convention par le biais de calcule.
-Pour récupérer la valeur de la commande, il faut utiliser un "TAG Jeedom", on utilise donc le Tag "\#value#".
-
-La seconde, "Arrondi" permet de choisir le nombre de chiffre après la virgule souhaiter, 0 étais aucun, 1 un chiffre, ect....
-
-.Sans les options Calcul et arrondit
-image::../images/capture021.png[]
-
-.Exemple de correction
-image::../images/capture019.png[]
-
-.Résultat après correction
-image::../images/capture020.png[]
-
-==== Action sur la valeur
-Cette partie permet de réaliser des actions simples en fonction de la valeur de la commande.
-Ont peux donc dans la liste déroulante choisir entre valeur "Egale à", "Supérieur à", "Inférieur à" et "Différent de".
-L'option "plus de (min)" permet de temporiser l'action.
-La ligne suivante, "Action à faire" donne 2 possibilités, soit le déclanchement d'une commande soit d'un scénario.
-
-image::../images/capture022.png[]
-
-==== Historique
-La partie Historique permet de modifier le comportement de l'historisation de la valeur de la commande, ont peux donc ici l'activer ou la désactiver.
-TIP: Plus il y a de commande historiser plus cela peut ralentir le système, il ne faut donc activer cette option que sur les commandes pour lesquelles vous avez une utilité d'avoir un historique.
-
-Le mode de lissage, permet de définir comment Jeedom vas enregistrer les valeurs et les retranscrire, cela permet d’avoir des courbe plus fluide sur tout si le module envoie rarement les infos ou si il envoie souvent des valeurs très différente.
-
-Ont peux aussi dans l'option qui suit activer une purge automatique de l'historique pour ne pas conserver plus de donnée que besoin.
-
-image::../images/capture023.png[]
-
-
-==== Autres
-#Doc à venir# (à completer par Loïc)
+#Lien vers la doc# (à completer par Loïc, j'ai pas trouver cette page dans la doc)
 
 
 === Création / Modification de widget
@@ -280,6 +237,7 @@ La base (squelette) d'un widget se fait en HTML, cela permet de structurer l'aff
 Dans Jeedom pour les widgets, le premier bout de code à créer c'est une "div" qui fera office de conteneur principal pour tout le code de notre Widget.
 
 Dans cette "div", ont peux y trouver jusqu'à 3 sous parties distinctes :
+
 * La partie HTML qui va afficher les informations
 * La partie CSS qui vas rendre plus jolis en mettent en forme la parte HTML (Partie Facultative)
 * La partie JavaScript qui permet de travailler sur divers action, calcule et animation
@@ -546,7 +504,7 @@ cursor:: Permet de modifier le pointeur en main.
 
 history:: Cette class permet de modifier le pointeur en main et au clique d'afficher l'historique de la valeur du widget.
 
-tooltips:: ??
+tooltips:: C'est pour le title d'un élément au lieu d'etre jaune il devient noir translucide avec le texte en blanc
 
 
 
