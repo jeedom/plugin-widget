@@ -51,6 +51,7 @@ class widget {
 	}
 
 	public static function listSvgWidget() {
+		$return = array();
 		$uploaddir = dirname(__FILE__) . '/../special';
 		$data['files'] = ls($uploaddir, "*", false, array('files'));
 		$data['folders'] = ls($uploaddir, "*", false, array('folders'));
