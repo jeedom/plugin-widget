@@ -505,27 +505,27 @@ function getHtmlOtherJeedom(dashboard) {
     html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
-        html += '\t\tif ("#displayName#" == "1") {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
+        html += '\t\tif (\'#displayName#\' == \'1\') {\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#] .cmdName\').show();\n';
         html += '\t\t} else {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#] .cmdName\').hide();\n';
         html += '\t\t}\n';
     }
-    html += '\t\t\$(".iconCmd#id#").empty();\n';
-    html += '\t\tif ("#state#" == "1") {\n';
-    html += '\t\t\t$(".iconCmd#id#").append("' + $('#bsOtherActionIconCmd2').html().replace(/\"/g, "'") + '");\n';
-    html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "on") {\n';
-    html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+    html += '\t\t\$(\'.iconCmd#id#\').empty();\n';
+    html += '\t\tif (\'#state#\' == \'1\') {\n';
+    html += '\t\t\t$(\'.iconCmd#id#\').append("' + $('#bsOtherActionIconCmd2').html().replace(/\"/g, "'") + '");\n';
+    html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'on\') {\n';
+    html += '\t\t\t\t$(\'.cmd[data-cmd_id=#id#]\').hide();\n';
     html += '\t\t\t}\n';
     html += '\t\t} else {\n';
-    html += '\t\t\t$(".iconCmd#id#").append("' + $('#bsOtherActionIconCmd1').html().replace(/\"/g, "'") + '");\n';
-    html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "off") {\n';
-    html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+    html += '\t\t\t$(\'.iconCmd#id#\').append("' + $('#bsOtherActionIconCmd1').html().replace(/\"/g, "'") + '");\n';
+    html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'off\') {\n';
+    html += '\t\t\t\t$(\'.cmd[data-cmd_id=#id#]\').hide();\n';
     html += '\t\t\t}\n';
     html += '\t\t}\n';
-    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").off();\n';
-    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").on("click", function() {\n';
-    html += '\t\t\tjeedom.cmd.execute({id: "#id#"});\n';
+    html += '\t\t$(\'.cmd[data-cmd_id=#id#] .action\').off();\n';
+    html += '\t\t$(\'.cmd[data-cmd_id=#id#] .action\').on(\'click\', function() {\n';
+    html += '\t\t\tjeedom.cmd.execute({id: \'#id#\'});\n';
     html += '\t\t});\n';
     html += "\t<\/script>\n";
     html += '</div>\n';
@@ -564,29 +564,29 @@ function getHtmlOtherImage(dashboard) {
     html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
-        html += '\t\tif ("#displayName#" == "1") {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 20) + 'px");\n';
+        html += '\t\tif (\'#displayName#\' == \'1\') {\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#] .cmdName\').show();\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#]\').css(\'min-height\', \'' + (height + 20) + 'px\');\n';
         html += '\t\t} else {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + height + 'px");\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#] .cmdName\').hide();\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#]\').css(\'min-height\', \'' + height + 'px\');\n';
         html += '\t\t}\n';
     }
-    html += '\t\t\$(".iconCmd#id#").empty();\n';
-    html += '\t\tif ("#state#" == "1") {\n';
-    html += '\t\t\t$(".iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + image2 + '\'>");\n';
-    html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "on") {\n';
-    html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+    html += '\t\t\$(\'.iconCmd#id#\').empty();\n';
+    html += '\t\tif (\'#state#\' == \'1\') {\n';
+    html += '\t\t\t$(\'.iconCmd#id#\').append(\'<img src=\'plugins/widget/core/images/' + image2 + '\'>\');\n';
+    html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'on\') {\n';
+    html += '\t\t\t\t$(\'.cmd[data-cmd_id=#id#]\').hide();\n';
     html += '\t\t\t}\n';
     html += '\t\t} else {\n';
-    html += '\t\t\t$(".iconCmd#id#").append("<img src=\'plugins/widget/core/images/' + image1 + '\'>");\n';
-    html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "off") {\n';
-    html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+    html += '\t\t\t$(\'.iconCmd#id#\').append(\'<img src=\'plugins/widget/core/images/' + image1 + '\'>\');\n';
+    html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'off\') {\n';
+    html += '\t\t\t\t$(\'.cmd[data-cmd_id=#id#]\').hide();\n';
     html += '\t\t\t}\n';
     html += '\t\t}\n';
-    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").off();\n';
-    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").on("click", function() {\n';
-    html += '\t\t\tjeedom.cmd.execute({id: "#id#"});\n';
+    html += '\t\t$(\'.cmd[data-cmd_id=#id#] .action\').off();\n';
+    html += '\t\t$(\'.cmd[data-cmd_id=#id#] .action\').on(\'click\', function() {\n';
+    html += '\t\t\tjeedom.cmd.execute({id: \'#id#\'});\n';
     html += '\t\t});\n';
     html += "\t<\/script>\n";
     html += '</div>\n';
@@ -645,42 +645,42 @@ function getHtmlOtherSpecial(dashboard) {
     html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
-        html += '\t\tif ("#displayName#" == "1") {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 20) + 'px");\n';
+        html += '\t\tif (\'#displayName#\' == \'1\') {\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#] .cmdName\').show();\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#]\').css(\'min-height\', \'' + (height + 20) + 'px\');\n';
         html += '\t\t} else {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + height + 'px");\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#] .cmdName\').hide();\n';
+        html += '\t\t\t$(\'.cmd[data-cmd_id=#id#]\').css(\'min-height\', \'' + height + 'px\');\n';
         html += '\t\t}\n';
     }
     if (specialWidgets[list1].extension !== 'svg')
-        html += '\t\t\$(".iconCmd#id#").empty();\n';
-    html += '\t\tif ("#state#" == "1") {\n';
+        html += '\t\t\$(\'.iconCmd#id#\').empty();\n';
+    html += '\t\tif (\'#state#\' == \'1\') {\n';
     if (specialWidgets[list1].extension !== 'svg') {
-        html += '\t\t\t$(".iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + specialWidgets[list2].folder + specialWidgets[list1].files[svg2] + '\'>");\n';
-        html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "on") {\n';
-        html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+        html += '\t\t\t$(\'.iconCmd#id#\').append(\'<img src=\'plugins/widget/core/special/' + specialWidgets[list2].folder + specialWidgets[list1].files[svg2] + '\'>\');\n';
+        html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'on\') {\n';
+        html += '\t\t\t\t$(\'.cmd[data-cmd_id=#id#]\').hide();\n';
         html += '\t\t\t}\n';
     }
     else {
-        html += '\t\t\t$(".cmdSvg1#id#").hide();\n';
-        html += '\t\t\t$(".cmdSvg2#id#").show();\n';
+        html += '\t\t\t$(\'.cmdSvg1#id#\').hide();\n';
+        html += '\t\t\t$(\'.cmdSvg2#id#\').show();\n';
     }
     html += '\t\t} else {\n';
     if (specialWidgets[list2].extension !== 'svg') {
-        html += '\t\t\t$(".iconCmd#id#").append("<img src=\'plugins/widget/core/special/' + specialWidgets[list1].folder + specialWidgets[list2].files[svg1] + '\'>");\n';
-        html += '\t\t\tif (jeedom.cmd.normalizeName("#name#") == "off") {\n';
-        html += '\t\t\t\t$(".cmd[data-cmd_id=#id#]").hide();\n';
+        html += '\t\t\t$(\'.iconCmd#id#\').append(\'<img src=\'plugins/widget/core/special/' + specialWidgets[list1].folder + specialWidgets[list2].files[svg1] + '\'>\');\n';
+        html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'off\') {\n';
+        html += '\t\t\t\t$(\'.cmd[data-cmd_id=#id#]\').hide();\n';
         html += '\t\t\t}\n';
     }
     else {
-        html += '\t\t\t$(".cmdSvg2#id#").hide();\n';
-        html += '\t\t\t$(".cmdSvg1#id#").show();\n';
+        html += '\t\t\t$(\'.cmdSvg2#id#\').hide();\n';
+        html += '\t\t\t$(\'.cmdSvg1#id#\').show();\n';
     }
     html += '\t\t}\n';
-    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").off();\n';
-    html += '\t\t$(".cmd[data-cmd_id=#id#] .action").on("click", function() {\n';
-    html += '\t\t\tjeedom.cmd.execute({id: "#id#"});\n';
+    html += '\t\t$(\'.cmd[data-cmd_id=#id#] .action\').off();\n';
+    html += '\t\t$(\'.cmd[data-cmd_id=#id#] .action\').on(\'click\', function() {\n';
+    html += '\t\t\tjeedom.cmd.execute({id: \'#id#\'});\n';
     html += '\t\t});\n';
     html += "\t<\/script>\n";
     html += '</div>\n';
