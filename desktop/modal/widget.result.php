@@ -38,11 +38,15 @@ include_file('3rdparty', 'highstock/highcharts-more', 'js');
 
 if ($widget->getVersion() == 'mobile') {
 	include_file('3rdparty', 'jquery.mobile/jquery.mobile.min', 'css');
-	include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid', 'css');
-	include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid.dark', 'css');
-	include_file('3rdparty', 'jquery.mobile/css/jquery.mobile.nativedroid.color.green', 'css');
+	include_file('3rdparty', 'jquery.mobile/css/nativedroid2', 'css');
+	include_file('3rdparty', 'jquery.mobile/css/nativedroid2.color.blue-grey', 'css');
+	include_file('3rdparty', 'jquery.mobile/css/flexboxgrid.min', 'css');
+	include_file('3rdparty', 'waves/waves.min', 'css');
+	include_file('3rdparty', 'jquery.mobile/css/fonts', 'css');
+	include_file('3rdparty', 'roboto/roboto', 'css');
 	include_file('mobile', 'commun', 'css');
 	include_file('3rdparty', 'jquery.mobile/jquery.mobile.min', 'js');
+	include_file('3rdparty', 'jquery.mobile/nativedroid2', 'js');
 } else {
 	include_file('desktop', 'commun', 'css');
 	include_file('3rdparty', 'bootstrap/css/bootstrap.min', 'css');
