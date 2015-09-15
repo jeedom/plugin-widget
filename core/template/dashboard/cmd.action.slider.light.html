@@ -13,7 +13,7 @@
             $('.iconCmd#id#').attr('data-state', 'off');
         }
 
-        $('.iconCmd#id#').on('click', function() {
+        $('.iconCmd#id#').off().on('click', function() {
             if ($(this).attr('data-state') == 'on') {
                 jeedom.cmd.execute({id: '#id#', value: {slider: 0}});
             } else {
@@ -21,7 +21,7 @@
             }
         });
 
-        $(".cmd[data-cmd_id=#id#] .slider").bootstrapSlider({
+        $(".cmd[data-cmd_id=#id#]:last .slider").bootstrapSlider({
             min: ('#minValue#' == '') ? 0 : parseInt('#minValue#'),
             max: ('#maxValue#' == '') ? 100 : parseInt('#maxValue#'),
             value: ('#state#' == '') ? 0 : parseInt('#state#')
