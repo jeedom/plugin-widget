@@ -1,6 +1,6 @@
-<span class="cmd" data-type="info" data-subtype="numeric" data-cmd_id="#id#" style="width:140px;height: 140px;" >
+<span class="cmd" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" style="width:140px;height: 140px;" >
     <div style="width:140px;display: inline-block;" class="#history#" cmd_id="#id#" >
-        <div id="cmd#id#"></div>
+        <div id="cmd#uid#"></div>
         <span class="collectDate" style="width:140px;font-size: 0.85em; #displayHistory#">
             <i class="#collectInProgress#"></i>
             <span>#minHistoryValue#</span>|<span>#averageHistoryValue#</span>|<span>#maxHistoryValue#</span> <i class="#tendance#"></i>
@@ -12,7 +12,7 @@
 
     <script>
         $.include(['plugins/widget/3rdparty/jquery.mobile.tolito/tolito.js', 'plugins/widget/3rdparty/jquery.mobile.tolito/tolito.css'], function() {
-            TolitoProgressBar('cmd#id#')
+            TolitoProgressBar('cmd#uid#')
                     .setOuterTheme('b')
                     .setInnerTheme('e')
                     .setMax(#maxValue#)

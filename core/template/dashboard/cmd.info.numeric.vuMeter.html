@@ -1,11 +1,11 @@
-<div class="cmd #history# container-fluid tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="Valeur du #valueDate#, collectée le #collectDate#" style="min-width:90px;min-height:105px;padding:0px !important;">
+<div class="cmd #history# container-fluid tooltips cmd-widget" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="Valeur du #valueDate#, collectée le #collectDate#" style="min-width:90px;min-height:105px;padding:0px !important;">
     <div class="vuMeter"></div>
     <div style="#displayHistory# font-size: 0.8em;" class="col-xs-12 center-block">
         <span title='Min' class='tooltips'>#minHistoryValue#</span>|<span title='Moyenne' class='tooltips'>#averageHistoryValue#</span>|<span title='Max' class='tooltips'>#maxHistoryValue#</span> <i class="#tendance#"></i>
     </div>
     <script>
         if (is_numeric('#state#')) {
-            $('.cmd[data-cmd_id=#id#] .vuMeter').highcharts({
+            $('.cmd[data-cmd_uid=#uid#] .vuMeter').highcharts({
                 chart: {
                     events: {
                         click: function (event) {
@@ -100,7 +100,7 @@
 
             });
 } else {
-    $('.cmd[data-cmd_id=#id#] .vuMeter').append('<center><span class="label label-danger" style="margin-top : 5px;">#state#</span></center>');
+    $('.cmd[data-cmd_uid=#uid#] .vuMeter').append('<center><span class="label label-danger" style="margin-top : 5px;">#state#</span></center>');
 }
 </script>
 

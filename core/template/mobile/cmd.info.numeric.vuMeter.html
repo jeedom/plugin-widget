@@ -1,19 +1,19 @@
-<span class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#" style="width:120px;display: inline-block;">
+<span class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#" style="width:120px;display: inline-block;">
     <div class="vuMeter"></div>
     <span style="vertical-align: top; display : inline;white-space: nowrap;" >
-        <a href="#tooltipsCmd#id#" data-rel="popup" data-transition="pop" class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-info ui-btn-inline" style="margin-right: 0em;"></a>
+        <a href="#tooltipsCmd#uid#" data-rel="popup" data-transition="pop" class="ui-btn ui-btn-icon-notext ui-corner-all ui-icon-info ui-btn-inline" style="margin-right: 0em;"></a>
         <span class="collectDate" style="font-size: 0.75em; #displayHistory#">
             <span>#minHistoryValue#</span>|<span>#averageHistoryValue#</span>|<span>#maxHistoryValue#</span> <i class="#tendance#"></i>
         </span>
     </span>
-    <div data-role="popup" id="tooltipsCmd#id#" class="ui-content" data-theme="a" style="max-width:350px;">
+    <div data-role="popup" id="tooltipsCmd#uid#" class="ui-content" data-theme="a" style="max-width:350px;">
         #collectDate#
     </div>
 
     <script>
         setTimeout(function(){
             if (is_numeric('#state#')) {
-                $('.cmd[data-cmd_id=#id#] .vuMeter').highcharts({
+                $('.cmd[data-cmd_uid=#uid#] .vuMeter').highcharts({
                     chart: {
                         events: {
                             click: function (event) {
@@ -108,7 +108,7 @@
 
                 });
 } else {
-    $('.cmd[data-cmd_id=#id#] .vuMeter').append('<center><span class="label label-danger" style="margin-top : 5px;">#state#</span></center>');
+    $('.cmd[data-cmd_uid=#uid#] .vuMeter').append('<center><span class="label label-danger" style="margin-top : 5px;">#state#</span></center>');
 }
 }, 100);
 </script>

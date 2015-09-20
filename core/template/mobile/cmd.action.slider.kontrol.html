@@ -1,4 +1,4 @@
-<div class="cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" style="width : 100px;height : 100px;display : block;">
+<div class="cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#" style="width : 100px;height : 100px;display : block;">
     <div style="margin-top : 5px;">
         <input type="text" class="dial" data-role="none" value="#state#" data-min="#minValue#" data-max="#maxValue#" data-width="100" data-height="100" />
     </div>
@@ -7,7 +7,7 @@
     </div>
     <script>
         $.include(['plugins/widget/core/template/mobile/cmd.action.slider.kontrol/jquery.kontrol.js'], function() {
-            $(".cmd[data-cmd_id=#id#] .dial").dial({
+            $(".cmd[data-cmd_uid=#uid#] .dial").dial({
                 fgColor: "#FFFFFF",
                 bgColor: '#cmdColor#',
                 noScroll: true,

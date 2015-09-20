@@ -513,36 +513,36 @@ function getHtmlInfoNumericJeedom(dashboard) {
     width = $('#bsInfoNumericIconSize0').val() * 20 + 15;
     height = $('#bsInfoNumericIconSize0').val() * 20 + 20;
     if (dashboard) {
-        html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#">\n';
+        html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">\n';
         html += '\t<center>\n';
         html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
-        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
     }
     else {
-        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
     }
     html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").show();\n';
         html += '\t\t} else {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").hide();\n';
         html += '\t\t}\n';
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
-    html += '\t\t\$(".iconCmd#id#").empty();\n';
+    html += '\t\t\$(".iconCmd#uid#").empty();\n';
     for (var index = 0; index < all; index++) {
         if (index === (all - 1))
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
-        html += "\t\t\t$('.iconCmd#id#').append('" + $('#bsInfoNumericIconCmd' + index).html() + "');\n";
-        html += "\t\t\t$('.iconCmd#id#').parent().append('<span style=\"font-size: 12px;\" ><br>'+temp+'%</span>');\n";
+        html += "\t\t\t$('.iconCmd#uid#').append('" + $('#bsInfoNumericIconCmd' + index).html() + "');\n";
+        html += "\t\t\t$('.iconCmd#uid#').parent().append('<span style=\"font-size: 12px;\" ><br>'+temp+'%</span>');\n";
         html += '\t\t}\n';
     }
     html += '\t</script>\n';
@@ -573,38 +573,38 @@ function getHtmlInfoNumericImage(dashboard) {
     width = $('#bsInfoNumericPreview0').width() + 15;
     height = $('#bsInfoNumericPreview0').height() + 15;
     if (dashboard) {
-        html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<div class="row">\n';
         html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
-        html += '\t\t<div class="center-block col-xs-12 iconCmd#id#"></div>\n';
+        html += '\t\t<div class="center-block col-xs-12 iconCmd#uid#"></div>\n';
         html += '\t</div>\n';
     }
     else {
-        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
     }
     html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 30) + 'px");\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").show();\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#]").css("min-height", "' + (height + 30) + 'px");\n';
         html += '\t\t} else {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 10) + 'px");\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").hide();\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#]").css("min-height", "' + (height + 10) + 'px");\n';
         html += '\t\t}\n';
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
-    html += '\t\t\$(".iconCmd#id#").empty();\n';
+    html += '\t\t\$(".iconCmd#uid#").empty();\n';
     for (var index = 0; index < all; index++) {
         var image = $('#bsInfoNumericImage' + index).val();
         if (index === (all - 1))
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
-        html += "\t\t\t$('.iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/images/" + image + "\"><span>'+temp+'%</span>');\n";
+        html += "\t\t\t$('.iconCmd#uid#').append('<img style=\"display: block;\" src=\"plugins/widget/core/images/" + image + "\"><span>'+temp+'%</span>');\n";
         html += '\t\t}\n';
     }
     html += '\t</script>\n';
@@ -643,37 +643,37 @@ function getHtmlInfoNumericSpecial(dashboard) {
         height = parseInt(myInfoNumericSvgPreview[0].select('svg').attr('height')) + 15;
     }
     if (dashboard) {
-        html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<div class="row">\n';
         html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
         html += '\t\t<div class="center-block col-xs-12 iconCmd#id#">\n';
         if (specialWidgets[list].extension === 'svg') {
             for (var index = 0; index < all; index++) {
                 image = myInfoNumericSvgPreview[index].select('svg').toString();
-                html += '\t\t\t<div name="cmdSvg#id#' + index + '">\n\t\t\t\t' + image.replace(/\"/g, "'").replace(/(\r\n|\n|\r)/gm, "").replace(/>/g, ">\n\t\t\t\t") + '\n';
+                html += '\t\t\t<div name="cmdSvg#uid#' + index + '">\n\t\t\t\t' + image.replace(/\"/g, "'").replace(/(\r\n|\n|\r)/gm, "").replace(/>/g, ">\n\t\t\t\t") + '\n';
                 html += '\t\t\t</div>\n';
             }
         }
         html += '\t\t</div>\n';
         if (specialWidgets[list].extension === 'svg')
-            html += '\t<span class="cmdTextSvg#id#"></span>\n';
+            html += '\t<span class="cmdTextSvg#uid#"></span>\n';
         html += '\t</div>\n';
     }
     else {
-        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" title="#collectDate#">\n';
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
     }
     html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
         html += '\t\tif ("#displayName#" == "1") {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").show();\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 30) + 'px");\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").show();\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#]").css("min-height", "' + (height + 30) + 'px");\n';
         html += '\t\t} else {\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#] .cmdName").hide();\n';
-        html += '\t\t\t$(".cmd[data-cmd_id=#id#]").css("min-height", "' + (height + 10) + 'px");\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").hide();\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#]").css("min-height", "' + (height + 10) + 'px");\n';
         html += '\t\t}\n';
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
@@ -687,11 +687,11 @@ function getHtmlInfoNumericSpecial(dashboard) {
         else
             html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         if (specialWidgets[list].extension !== 'svg')
-            html += "\t\t\t$('.iconCmd#id#').append('<img style=\"display: block;\" src=\"plugins/widget/core/special/" + specialWidgets[listItem].folder + specialWidgets[listItem].files[svg] + "\"><span>'+temp+'%</span>');\n";
+            html += "\t\t\t$('.iconCmd#uid#').append('<img style=\"display: block;\" src=\"plugins/widget/core/special/" + specialWidgets[listItem].folder + specialWidgets[listItem].files[svg] + "\"><span>'+temp+'%</span>');\n";
         else {
-            html += "\t\t\t$('div[name*=\"cmdSvg#id#\"]').hide();\n";
-            html += "\t\t\t$('div[name=\"cmdSvg#id#" + index + "\"]').show();\n";
-            html += "\t\t\t$('.cmdTextSvg#id#').text(temp + \"%\");\n";
+            html += "\t\t\t$('div[name*=\"cmdSvg#uid#\"]').hide();\n";
+            html += "\t\t\t$('div[name=\"cmdSvg#uid#" + index + "\"]').show();\n";
+            html += "\t\t\t$('.cmdTextSvg#uid#').text(temp + \"%\");\n";
         }
 
         html += '\t\t}\n';

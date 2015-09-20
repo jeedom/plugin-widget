@@ -1,22 +1,22 @@
-<div style="width:90px;min-height:80px;" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmd_id="#id#">
+<div style="width:90px;min-height:80px;" class="cmd tooltips cmd-widget cursor" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">
     <center>
         <span style="font-size: 3em;font-weight: bold;margin-top: 5px;" class="action iconCmd#id#"></span>
     </center>
     <script>
-        $('.iconCmd#id#').empty();
+        $('.iconCmd#uid#').empty();
         if ('#state#' == '1' || '#state#' == '99' || '#state#' == 'on') {
             $('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/on.png" />');
             if (jeedom.cmd.normalizeName('#name#') == 'on') {
-                $('.cmd[data-cmd_id=#id#]').hide();
+                $('.cmd[data-cmd_id=#uid#]').hide();
             }
         } else {
-            $('.iconCmd#id#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/off.png" />');
+            $('.iconCmd#uid#').append('<img src="plugins/widget/core/template/dashboard/cmd.action.other.lightIMG/off.png" />');
             if (jeedom.cmd.normalizeName('#name#') == 'off') {
-                $('.cmd[data-cmd_id=#id#]').hide();
+                $('.cmd[data-cmd_uid=#uid#]').hide();
             }
         }
-        $('.cmd[data-cmd_id=#id#] .action').off();
-        $('.cmd[data-cmd_id=#id#] .action').on('click', function () {
+        $('.cmd[data-cmd_uid=#uid#] .action').off();
+        $('.cmd[data-cmd_uid=#uid#] .action').on('click', function () {
             jeedom.cmd.execute({id: '#id#'});
         });
     </script>
