@@ -9,9 +9,9 @@
     </div>
     <script>
         var value = (is_numeric('#state#')) ? parseInt('#state#') : 0;
-        $('.cmd[data-cmd=#uid#]').find('.progress-bar').attr('aria-valuenow', value);
+        $('.cmd[data-cmd_uid=#uid#]').find('.progress-bar').attr('aria-valuenow', value);
         var pourcentage = (value / ('#maxValue#' - '#minValue#')) * 100;
-        $('.cmd[data-cmd=#uid#]').find('.progress-bar').css('width', pourcentage + '%');
+        $('.cmd[data-cmd_uid=#uid#]').find('.progress-bar').css('width', pourcentage + '%');
         var progressBarClass = '';
         if (pourcentage < 100) {
             progressBarClass = 'progress-bar-danger';
@@ -25,6 +25,6 @@
         if (pourcentage < 25) {
             progressBarClass = 'progress-bar-success';
         }
-        $('.cmd[data-cmd=#uid#]').find('.progress-bar').addClass(progressBarClass);
+        $('.cmd[data-cmd_uid=#uid#]').find('.progress-bar').addClass(progressBarClass);
     </script>
 </div>

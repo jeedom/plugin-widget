@@ -16,8 +16,8 @@
                 $('.cmd[data-cmd_uid=#uid#]').hide();
             }
         }
-        $('.cmd[data-cmd_id=#uid#] .action').off();
-        $('.cmd[data-cmd_id=#uid#] .action').on('click', function () {
+        $('.cmd[data-cmd_uid=#uid#] .action').off();
+        $('.cmd[data-cmd_uid=#uid#] .action').on('click', function () {
             jeedom.cmd.execute({id: '#id#'});
         });
     </script>
