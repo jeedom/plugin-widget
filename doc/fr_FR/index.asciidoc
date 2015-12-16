@@ -1,13 +1,6 @@
-:icons:
-== Widget
-
-=== Description
+= Widget
 Plugin permettant de récupérer et/ou de créer de nouveaux widgets.
 
 '''
-=== Configuration
+== Configuration
 include::configuration.asciidoc[]
-
-'''
-=== FAQ
-include::faq.asciidoc[]
