@@ -493,9 +493,8 @@ function getHtmlInfoBinaryJeedom(dashboard) {
         html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
         html += '\t\t<span style="font-size: ' + $('#bsInfoBinaryIconSize1').val() + 'em;" class="iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
-    }
-    else {
-        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="#collectDate#">\n';
+    }else {
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
         html += '\t\t<span style="font-size: ' + $('#bsInfoBinaryIconSize1').val() + 'em;" class="iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
@@ -542,9 +541,8 @@ function getHtmlInfoBinaryImage(dashboard) {
         html += '\t\t<div class="center-block col-xs-12 h5 cmdName" id="cmdName#id#" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
         html += '\t\t<div class="center-block col-xs-12 iconCmd#id#"></div>\n';
         html += '\t</div>\n';
-    }
-    else {
-        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="binary" data-cmd_id="#id#" title="#collectDate#">\n';
+    }else {
+        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
         html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
@@ -612,8 +610,7 @@ function getHtmlInfoBinarySpecial(dashboard) {
         }
         html += '\t\t</div>\n';
         html += '\t</div>\n';
-    }
-    else {
+    }else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
         html += '\t\t<span style="font-size: 1.1em;" class="iconCmd#uid#"></span>\n';
