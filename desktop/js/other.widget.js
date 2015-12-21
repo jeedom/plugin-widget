@@ -495,8 +495,7 @@ function getHtmlOtherJeedom(dashboard) {
         html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
         html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
-    }
-    else {
+    } else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="action" data-subtype="other" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
         html += '\t\t<span style="font-size: ' + $('#bsOtherActionIconSize1').val() + 'em;" class="action" id="iconCmd#uid#"></span>\n';
@@ -554,8 +553,7 @@ function getHtmlOtherImage(dashboard) {
         html += '\t\t<center><span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span></center>\n';
         html += '\t\t<h5 class="action center-block iconCmd#id#" style="vertical-align:middle;"></h5>\n';
         html += '\t</div>\n';
-    }
-    else {
+    } else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="action" data-subtype="other" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
         html += '\t\t<span style="font-size: 1.1em;" class="action iconCmd#uid#"></span>\n';
@@ -639,7 +637,7 @@ function getHtmlOtherSpecial(dashboard) {
     else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="action" data-subtype="other" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span style="font-size: 1.1em;" class="action iconCmd#id#"></span>\n';
+        html += '\t\t<span style="font-size: 1.1em;" class="action iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
     }
     html += cdata;
@@ -654,32 +652,32 @@ function getHtmlOtherSpecial(dashboard) {
         html += '\t\t}\n';
     }
     if (specialWidgets[list1].extension !== 'svg')
-        html += '\t\t\$(\'.iconCmd#id#\').empty();\n';
+        html += '\t\t\$(\'.iconCmd#uid#\').empty();\n';
     html += '\t\tif (\'#state#\' == \'1\') {\n';
     if (specialWidgets[list1].extension !== 'svg') {
-        html += '\t\t\t$(\'.iconCmd#id#\').append(\'<img src=\'plugins/widget/core/special/' + specialWidgets[list2].folder + specialWidgets[list1].files[svg2] + '\'>\');\n';
+        html += '\t\t\t$(\'.iconCmd#uid#\').append(\'<img src=\'plugins/widget/core/special/' + specialWidgets[list2].folder + specialWidgets[list1].files[svg2] + '\'>\');\n';
         html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'on\') {\n';
         html += '\t\t\t\t$(\'.cmd[data-cmd_uid=#uid#]\').hide();\n';
         html += '\t\t\t}\n';
     }
     else {
-        html += '\t\t\t$(\'.cmdSvg1#id#\').hide();\n';
-        html += '\t\t\t$(\'.cmdSvg2#id#\').show();\n';
+        html += '\t\t\t$(\'.cmdSvg1#uid#\').hide();\n';
+        html += '\t\t\t$(\'.cmdSvg2#uid#\').show();\n';
     }
     html += '\t\t} else {\n';
     if (specialWidgets[list2].extension !== 'svg') {
-        html += '\t\t\t$(\'.iconCmd#id#\').append(\'<img src=\'plugins/widget/core/special/' + specialWidgets[list1].folder + specialWidgets[list2].files[svg1] + '\'>\');\n';
+        html += '\t\t\t$(\'.iconCmd#uid#\').append(\'<img src=\'plugins/widget/core/special/' + specialWidgets[list1].folder + specialWidgets[list2].files[svg1] + '\'>\');\n';
         html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'off\') {\n';
         html += '\t\t\t\t$(\'.cmd[data-cmd_uid=#uid#]\').hide();\n';
         html += '\t\t\t}\n';
     }
     else {
-        html += '\t\t\t$(\'.cmdSvg2#id#\').hide();\n';
-        html += '\t\t\t$(\'.cmdSvg1#id#\').show();\n';
+        html += '\t\t\t$(\'.cmdSvg2#uid#\').hide();\n';
+        html += '\t\t\t$(\'.cmdSvg1#uid#\').show();\n';
     }
     html += '\t\t}\n';
-    html += '\t\t$(\'.cmd[data-cmd_id=#id#] .action\').off();\n';
-    html += '\t\t$(\'.cmd[data-cmd_id=#id#] .action\').on(\'click\', function() {\n';
+    html += '\t\t$(\'.cmd[data-cmd_uid=#uid#] .action\').off();\n';
+    html += '\t\t$(\'.cmd[data-cmd_uid=#uid#] .action\').on(\'click\', function() {\n';
     html += '\t\t\tjeedom.cmd.execute({id: \'#id#\'});\n';
     html += '\t\t});\n';
     html += "\t<\/script>\n";
