@@ -397,11 +397,18 @@ Nom de la commande.
 A utiliser comme du texte ou en JS
 ----
 
-\#minValue#::
-Valeur minimum que peut prendre la commande.
+\#name_display#::
+Nom de la commande et vide si le nom de la commande ne doit pas être affiché.
 +
 ----
-A utiliser comme du texte, en JS ou dans les attributs HTML
+A utiliser comme du texte ou en JS
+----
+
+\#hideCmdName#::
+Vide si le nom de la commande doit être affiché. Et "display:none;" si le nom de la commande ne doit pas être affiché.
++
+----
+A utiliser dans les attributs HTML style
 ----
 
 \#maxValue#::
@@ -413,7 +420,7 @@ A utiliser comme du texte, en JS ou dans les attributs HTML
 
 .Tag pour le type action
 \#valueName#::
-Nom de la commande info liée, si la commande action est liée à une commande info.
+Nom de la commande info liée, si la commande action est liée à une commande info, nom de la commande action sinon. Vide si le nom de la commande ne doit pas être affiché.
 +
 ----
 A utiliser comme du texte ou en JS
@@ -427,12 +434,6 @@ A utiliser comme du texte ou en JS
 ----
 
 .Tag pour le type info
-\#name_display#::
-Nom de la commande avec retour à la ligne et vide si le nom de la commande ne doit pas être affiché.
-+
-----
-A utiliser comme du texte ou en JS
-----
 
 \#unite#::
 Unité de la commande
@@ -522,7 +523,7 @@ Le principe pour le code du widget est relativement simple ça marche par rempla
 * \#id# => ID de la commande
 * \#logicalId# => ID logique de la commande (peut être vide)
 * \#name# => Nom de la commande
-* \#name_display# => Nom de la commande avec retour à la ligne et vide si le nom de la commande ne doit pas être affiché
+* \#name_display# => Nom de la commande et vide si le nom de la commande ne doit pas être affiché
 * \#unite# => Unité de la commande
 * \#collectDate# => Date exacte ou de la valeur de la commande
 * \#state# => Valeur de la commande 
@@ -535,15 +536,19 @@ Le principe pour le code du widget est relativement simple ça marche par rempla
 * \#minValue# => Valeur minimum que peut prendre la commande
 * \#maxValue# => Valeur maximum que peut prendre la commande
 * \#history# => si la commande est historisée historize vaudra : 'history cursor' et le widget 'jeedom.cmd.info.history.default' sera ajouté (pour permettre d'afficher l'historique)
+* \#hideCmdName# => Vide si le nom de la commande doit être affiché. Et "display:none;" si le nom de la commande ne doit pas être affiché.
 
 - Action
 * \#id# => ID de la commande
 * \#logicalId# => ID logique de la commande (peut être vide)
 * \#name# => Nom de la commande
-* \#valueName# => Nom de la commande info, si la commande action est liée à une commande info
+* \#name_display# => Nom de la commande et vide si le nom de la commande ne doit pas être affiché
+* \#valueName# => Nom de la commande info, si la commande action est liée à une commande info, nom de la commande action sinon. Vide si le nom de la commande ne doit pas être affiché
 * \#lastValue# => Dernière valeur de la commande (peut être vide)
 * \#minValue# => Valeur minimum que peut prendre la commande
 * \#maxValue# => Valeur maximum que peut prendre la commande
+* \#hideCmdName# => Vide si le nom de la commande doit être affiché. Et "display:none;" si le nom de la commande ne doit pas être affiché.
+
 * Pour que l'action soit exécutée il faut appeler la fonction : jeedom.cmd.execute(ID,options) avec
 ** ID => ID de la commande
 ** options => objet contenant les options de la commande
