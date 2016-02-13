@@ -34,7 +34,7 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
 <div style="display: none;" id="md_applyWidgetAlert"></div>
 <div style="position: fixed;height: 50px;background-color: white;margin-top:-6px;padding-top: 6px;" id="div_boutons">
     <a class="btn btn-default" id="bt_applyWidgetToogle" data-state="0"><i class="fa fa-check-circle-o"></i> {{Basculer}}</a>
-    <a class="btn btn-success pull-right bt_applyWidgetToCmd" data-path="<?php echo $widget->getPath()?>" style="color : white;" data-version=""><i class="fa fa-check"></i> {{Valider}}</a>
+    <a class="btn btn-success pull-right bt_applyWidgetToCmd" data-path="<?php echo $widget->getPath() ?>" style="color : white;" data-version=""><i class="fa fa-check"></i> {{Valider}}</a>
 </div>
 <br/><br/>
 
