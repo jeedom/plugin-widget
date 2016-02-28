@@ -850,7 +850,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
 <div class="col-lg-9 col-md-8 col-sm-8 widgetListDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
     <legend>{{Widgets installés sur votre Jeedom}}
         <span style="font-size: 0.7em;color:#c5c5c5">
-            Vous devez être connecté à internet pour voir les prévisualisation
+            {{Vous devez être connecté à internet pour voir les prévisualisation}}
         </span>
     </legend>
     <div class="pluginContainer"></div>

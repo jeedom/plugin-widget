@@ -512,6 +512,7 @@ function getWidgetExemple(_path) {
             path: _path
         },
         dataType: 'json',
+        global : false,
         error: function (request, status, error) {
             handleAjaxError(request, status, error);
         },
