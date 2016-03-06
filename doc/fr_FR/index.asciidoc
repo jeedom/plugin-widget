@@ -4,3 +4,5 @@ Plugin permettant de récupérer et/ou de créer de nouveaux widgets.
 '''
 == Configuration
 include::configuration.asciidoc[]
+
+include::faq.asciidoc[]
