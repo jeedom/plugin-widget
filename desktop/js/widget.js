@@ -466,7 +466,7 @@ $('#bt_editWidget').on('click', function () {
 
 $('#bt_shareOnMarket').on('click', function () {
     $('#md_modal').dialog({title: "Partager sur le market"});
-    $('#md_modal').load('index.php?v=d&modal=market.send&type=widget&logicalId=' + encodeURI($('.widgetAttr[data-l1key=logicalId]').value()) + '&name=' + encodeURI($('.widgetAttr[data-l1key=logicalId]').value())).dialog('open');
+    $('#md_modal').load('index.php?v=d&modal=update.send&type=widget&logicalId=' + encodeURI($('.widgetAttr[data-l1key=logicalId]').value()) + '&name=' + encodeURI($('.widgetAttr[data-l1key=logicalId]').value())).dialog('open');
 });
 
 $('#bt_applyWidget').on('click', function () {
@@ -481,7 +481,7 @@ $('#bt_manageFiles').on('click', function () {
 
 $('#bt_getFromMarket').on('click', function () {
     $('#md_modal').dialog({title: "Partager sur le market"});
-    $('#md_modal').load('index.php?v=d&modal=market.list&type=widget').dialog('open');
+    $('#md_modal').load('index.php?v=d&modal=update.list&type=widget').dialog('open');
 });
 
 if (getUrlVars('id') !== '') {
