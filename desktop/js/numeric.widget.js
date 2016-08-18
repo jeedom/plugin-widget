@@ -646,7 +646,7 @@ function getHtmlInfoNumericSpecial(dashboard) {
         html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<div class="row">\n';
         html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
-        html += '\t\t<div class="center-block col-xs-12 iconCmd#id#">\n';
+        html += '\t\t<div class="center-block col-xs-12 iconCmd#uid#">\n';
         if (specialWidgets[list].extension === 'svg') {
             for (var index = 0; index < all; index++) {
                 image = myInfoNumericSvgPreview[index].select('svg').toString();
@@ -678,7 +678,7 @@ function getHtmlInfoNumericSpecial(dashboard) {
     }
     html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
     if (specialWidgets[list].extension !== 'svg')
-        html += '\t\t\$(".iconCmd#id#").empty();\n';
+        html += '\t\t\$(".iconCmd#uid#").empty();\n';
     for (var index = 0; index < all; index++) {
         var listItem = $('#bsInfoNumericSpecialCat' + index).find(':selected').index() - 1;
         var svg = $('#bsInfoNumericSpecialIcon' + index).find(':selected').index() - 1;
