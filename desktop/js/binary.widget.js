@@ -539,7 +539,7 @@ function getHtmlInfoBinaryImage(dashboard) {
         html += '<div style="padding:0;width:' + width + 'px;min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<div class="row">\n';
         html += '\t\t<div class="center-block col-xs-12 h5 cmdName" id="cmdName#id#" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
-        html += '\t\t<div class="center-block col-xs-12 iconCmd#id#"></div>\n';
+        html += '\t\t<div class="center-block col-xs-12 iconCmd#uid#"></div>\n';
         html += '\t</div>\n';
     }else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
