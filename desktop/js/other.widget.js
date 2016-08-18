@@ -510,14 +510,14 @@ function getHtmlOtherJeedom(dashboard) {
         html += '\t\t\t$(\'.cmd[data-cmd_uid=#uid#] .cmdName\').hide();\n';
         html += '\t\t}\n';
     }
-    html += '\t\t\$(\'.iconCmd#id#\').empty();\n';
+    html += '\t\t\$(\'.iconCmd#uid#\').empty();\n';
     html += '\t\tif (\'#state#\' == \'1\') {\n';
-    html += '\t\t\t$(\'.iconCmd#id#\').append("' + $('#bsOtherActionIconCmd2').html().replace(/\"/g, "'") + '");\n';
+    html += '\t\t\t$(\'.iconCmd#uid#\').append("' + $('#bsOtherActionIconCmd2').html().replace(/\"/g, "'") + '");\n';
     html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'on\') {\n';
     html += '\t\t\t\t$(\'.cmd[data-cmd_uid=#uid#]\').hide();\n';
     html += '\t\t\t}\n';
     html += '\t\t} else {\n';
-    html += '\t\t\t$(\'.iconCmd#id#\').append("' + $('#bsOtherActionIconCmd1').html().replace(/\"/g, "'") + '");\n';
+    html += '\t\t\t$(\'.iconCmd#uid#\').append("' + $('#bsOtherActionIconCmd1').html().replace(/\"/g, "'") + '");\n';
     html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'off\') {\n';
     html += '\t\t\t\t$(\'.cmd[data-cmd_uid=#uid#]\').hide();\n';
     html += '\t\t\t}\n';
@@ -551,7 +551,7 @@ function getHtmlOtherImage(dashboard) {
         html += '<div style="width:' + width + 'px; height:' + height + 'px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="action" data-subtype="other" data-cmd_id="#id#" data-cmd_uid="#uid#">\n';
         html += '\t<div class="row">\n';
         html += '\t\t<center><span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span></center>\n';
-        html += '\t\t<h5 class="action center-block iconCmd#id#" style="vertical-align:middle;"></h5>\n';
+        html += '\t\t<h5 class="action center-block iconCmd#uid#" style="vertical-align:middle;"></h5>\n';
         html += '\t</div>\n';
     } else {
         html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="action" data-subtype="other" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
@@ -570,14 +570,14 @@ function getHtmlOtherImage(dashboard) {
         html += '\t\t\t$(\'.cmd[data-cmd_uid=#uid#]\').css(\'min-height\', \'' + height + 'px\');\n';
         html += '\t\t}\n';
     }
-    html += '\t\t\$(\'.iconCmd#id#\').empty();\n';
+    html += '\t\t\$(\'.iconCmd#uid#\').empty();\n';
     html += '\t\tif (\'#state#\' == \'1\') {\n';
-    html += '\t\t\t$(\'.iconCmd#id#\').append("<img src=\'plugins/widget/core/images/' + image2 + '\'>");\n';
+    html += '\t\t\t$(\'.iconCmd#uid#\').append("<img src=\'plugins/widget/core/images/' + image2 + '\'>");\n';
     html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'on\') {\n';
     html += '\t\t\t\t$(\'.cmd[data-cmd_uid=#uid#]\').hide();\n';
     html += '\t\t\t}\n';
     html += '\t\t} else {\n';
-    html += '\t\t\t$(\'.iconCmd#id#\').append("<img src=\'plugins/widget/core/images/' + image1 + '\'>");\n';
+    html += '\t\t\t$(\'.iconCmd#uid#\').append("<img src=\'plugins/widget/core/images/' + image1 + '\'>");\n';
     html += '\t\t\tif (jeedom.cmd.normalizeName(\'#name#\') == \'off\') {\n';
     html += '\t\t\t\t$(\'.cmd[data-cmd_uid=#uid#]\').hide();\n';
     html += '\t\t\t}\n';
