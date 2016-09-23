@@ -3,12 +3,9 @@
     <id>widget</id>
     <name>Widget</name>
     <description>Plugin pour appliquer/modifier widget</description>
-    <icon>fa fa-square</icon>
     <licence>AGPL</licence>
-    <author>Loïc Gevrey</author>
-    <installation>Aucune</installation>
+    <author>Loïc</author>
     <require>1.20</require>
-    <version>1.0</version>
     <category>programming</category>
 </info>
 
