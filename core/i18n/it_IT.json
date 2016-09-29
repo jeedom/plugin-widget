@@ -1,0 +1,52 @@
+{
+    "plugins/widget/desktop/php/widget.php": {
+        "Récuperer du market": "Recupera dal market",
+        "Market": "Market",
+        "Ajouter un widget": "Aggiungi widget",
+        "Rechercher": "Cerca",
+        "Widgets installés sur votre Jeedom": "Widget installati nel tuo sistema Jeedom",
+        "Général": "Principale",
+        "Fichiers": "File",
+        "Dupliquer": "Duplica",
+        "Nom du widget": "nome del widget",
+        "Version": "Versione",
+        "Dashboard": "Dashboard",
+        "Mobile": "Mobile",
+        "Type": "Tipo",
+        "Aucun": "Nessuno",
+        "Sous-type": "Sotto-tipo",
+        "Utilisé par ": "Usato da",
+        "Apercu": "Anteprima",
+        "Appliquer sur des commandes": "Applica su comandi",
+        "Partager": "Condividi",
+        "Supprimer": "Elimina",
+        "Sauvegarder": "Salva"
+    },
+    "plugins/widget/desktop/js/widget.js": {
+        "Sauvegarde effectué avec succès": "Backup completato con successo",
+        "Suppression effectué avec succès": "Eliminazione avvenuta con successo",
+        "Etes-vous sûr de vouloir supprimer le widget": "Sei sicuro di voler cancellare questo widget",
+        "Nom la copie du widget ?": "Nome della copia del widget ?"
+    },
+    "plugins/widget/desktop/modal/widget.3rdparty.php": {
+        "Nom du fichier": "nome del file",
+        "Chemin": "Percorso",
+        "Action": "Azione",
+        "Fichier(s) ajouté(s) avec succes": "File aggiunto(i) con successo",
+        "Etes-vous sûr de vouloir supprimer le fichier": "Sei sicuro di voler cancellare il file",
+        "Fichier supprimé avec succes": "File eliminato con successo"
+    },
+    "plugins/widget/desktop/modal/widget.apply.php": {
+        "Basculer": "Attiva/Disattiva",
+        "Valider": "Convalida",
+        "Object": "Oggetto",
+        "Equipement": "Dispositivo",
+        "Commande": "Comando",
+        "Unité": "Unità",
+        "Widget appliqué avec succès": "Widget applicato con successo"
+    },
+    "plugins/widget/plugin_info/info.xml": {
+        "Plugin pour appliquer/modifier widget": "Plugin per applicare/cambiare i widget",
+        "Aucune": "Nessuno"
+    }
+}

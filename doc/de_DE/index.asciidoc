@@ -1,0 +1,8 @@
+= Widget
+Plugin das es ermöglicht Widgets herunterzuladen und/oder neue zu erschaffen.
+
+'''
+== Konfiguration
+include::configuration.asciidoc[]
+
+include::faq.asciidoc[]

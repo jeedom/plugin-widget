@@ -1,0 +1,52 @@
+{
+    "plugins/widget/desktop/php/widget.php": {
+        "Récuperer du market": "Récuperer du market",
+        "Market": "Market",
+        "Ajouter un widget": "Ajouter un widget",
+        "Rechercher": "Mencari",
+        "Widgets installés sur votre Jeedom": "Widgets installés sur votre Jeedom",
+        "Général": "Umum",
+        "Fichiers": "Fichiers",
+        "Dupliquer": "Duplikat",
+        "Nom du widget": "Nom du widget",
+        "Version": "Versi",
+        "Dashboard": "Dashboard",
+        "Mobile": "Mobile",
+        "Type": "Jenis",
+        "Aucun": "Tak ada",
+        "Sous-type": "Subtipe",
+        "Utilisé par ": "Utilisé par",
+        "Apercu": "Apercu",
+        "Appliquer sur des commandes": "Appliquer sur des commandes",
+        "Partager": "Berbagi",
+        "Supprimer": "Menghapus",
+        "Sauvegarder": "Menyimpan"
+    },
+    "plugins/widget/desktop/js/widget.js": {
+        "Sauvegarde effectué avec succès": "Sauvegarde effectué avec succès",
+        "Suppression effectué avec succès": "Suppression effectué avec succès",
+        "Etes-vous sûr de vouloir supprimer le widget": "Etes-vous sûr de vouloir supprimer le widget",
+        "Nom la copie du widget ?": "Nom la copie du widget ?"
+    },
+    "plugins/widget/desktop/modal/widget.3rdparty.php": {
+        "Nom du fichier": "Nom du fichier",
+        "Chemin": "Chemin",
+        "Action": "Tindakan",
+        "Fichier(s) ajouté(s) avec succes": "Fichier(s) ajouté(s) avec succes",
+        "Etes-vous sûr de vouloir supprimer le fichier": "Etes-vous sûr de vouloir supprimer le fichier",
+        "Fichier supprimé avec succes": "Fichier supprimé avec succes"
+    },
+    "plugins/widget/desktop/modal/widget.apply.php": {
+        "Basculer": "Basculer",
+        "Valider": "Mengesahkan",
+        "Object": "Object",
+        "Equipement": "Peralatan",
+        "Commande": "Pesanan",
+        "Unité": "Satuan",
+        "Widget appliqué avec succès": "Widget appliqué avec succès"
+    },
+    "plugins/widget/plugin_info/info.xml": {
+        "Plugin pour appliquer/modifier widget": "Plugin pour appliquer/modifier widget",
+        "Aucune": "Tak ada"
+    }
+}

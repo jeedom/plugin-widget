@@ -1,0 +1,52 @@
+{
+    "plugins/widget/desktop/php/widget.php": {
+        "Récuperer du market": "Восстановить Маркет",
+        "Market": "Маркет",
+        "Ajouter un widget": "Добавить виджет",
+        "Rechercher": "Искать",
+        "Widgets installés sur votre Jeedom": "Виджеты, установленные на вашем Jeedom",
+        "Général": "Главная",
+        "Fichiers": "Файлы",
+        "Dupliquer": "Дублировать",
+        "Nom du widget": "Имя виджета",
+        "Version": "Версия",
+        "Dashboard": "Приборная панель",
+        "Mobile": "Мобильный",
+        "Type": "Тип",
+        "Aucun": "Нет",
+        "Sous-type": "Под-Тип",
+        "Utilisé par ": "Используется",
+        "Apercu": "Обзор",
+        "Appliquer sur des commandes": "Применить команды",
+        "Partager": "Распределение",
+        "Supprimer": "Удалить",
+        "Sauvegarder": "Сохранить"
+    },
+    "plugins/widget/desktop/js/widget.js": {
+        "Sauvegarde effectué avec succès": "Резервное копирование завершено успешно",
+        "Suppression effectué avec succès": "Удаление успешно завершено",
+        "Etes-vous sûr de vouloir supprimer le widget": "Вы уверены, что хотите удалить виджет",
+        "Nom la copie du widget ?": "Назовите копию виджета?"
+    },
+    "plugins/widget/desktop/modal/widget.3rdparty.php": {
+        "Nom du fichier": "Имя файла",
+        "Chemin": "Путь",
+        "Action": "Действие",
+        "Fichier(s) ajouté(s) avec succes": "Файл (ы) добавлен (ы) успешно",
+        "Etes-vous sûr de vouloir supprimer le fichier": "Вы уверены, что хотите удалить файл",
+        "Fichier supprimé avec succes": "Файл успешно удален"
+    },
+    "plugins/widget/desktop/modal/widget.apply.php": {
+        "Basculer": "Переключатель",
+        "Valider": "Применить",
+        "Object": "Объект",
+        "Equipement": "Оборудование",
+        "Commande": "Команда",
+        "Unité": "Устройство",
+        "Widget appliqué avec succès": "Виджет успешно применен"
+    },
+    "plugins/widget/plugin_info/info.xml": {
+        "Plugin pour appliquer/modifier widget": "Плагин для применения / изменения виджетов",
+        "Aucune": "Нет"
+    }
+}

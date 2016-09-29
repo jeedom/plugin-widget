@@ -1,0 +1,52 @@
+{
+    "plugins/widget/desktop/php/widget.php": {
+        "Récuperer du market": "Retrieve from Market",
+        "Market": "Market",
+        "Ajouter un widget": "Add widget",
+        "Rechercher": "Search",
+        "Widgets installés sur votre Jeedom": "Widgets installed onto your Jeedom system",
+        "Général": "Main",
+        "Fichiers": "Files",
+        "Dupliquer": "Duplicate",
+        "Nom du widget": "Widget name",
+        "Version": "Version",
+        "Dashboard": "Dashboard",
+        "Mobile": "Mobile",
+        "Type": "Type",
+        "Aucun": "None",
+        "Sous-type": "Sub-type",
+        "Utilisé par ": "Used by",
+        "Apercu": "Preview",
+        "Appliquer sur des commandes": "Apply on commands",
+        "Partager": "Share",
+        "Supprimer": "Delete",
+        "Sauvegarder": "Save"
+    },
+    "plugins/widget/desktop/js/widget.js": {
+        "Sauvegarde effectué avec succès": "Backup successfully completed",
+        "Suppression effectué avec succès": "Deletion completed successfully",
+        "Etes-vous sûr de vouloir supprimer le widget": "Do you really want to delete the widget ",
+        "Nom la copie du widget ?": "Name of the widget copy?"
+    },
+    "plugins/widget/desktop/modal/widget.3rdparty.php": {
+        "Nom du fichier": "Filename",
+        "Chemin": "Path",
+        "Action": "Action",
+        "Fichier(s) ajouté(s) avec succes": "File(s) added successfully",
+        "Etes-vous sûr de vouloir supprimer le fichier": "Do you really want to delete the file ",
+        "Fichier supprimé avec succes": "File deleted successfully"
+    },
+    "plugins/widget/desktop/modal/widget.apply.php": {
+        "Basculer": "Switch",
+        "Valider": "Validate",
+        "Object": "Object",
+        "Equipement": "Device",
+        "Commande": "Command",
+        "Unité": "Unit",
+        "Widget appliqué avec succès": "Widget applied successfully"
+    },
+    "plugins/widget/plugin_info/info.xml": {
+        "Plugin pour appliquer/modifier widget": "Plugin to apply/change widgets",
+        "Aucune": "None"
+    }
+}
