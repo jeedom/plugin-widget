@@ -8,13 +8,13 @@
 
 //initInfoNumeric();
 
-$('#bsInfoNumeric').bootstrapSlider({
+$('#bsInfoNumeric').slider({
     formatter: function (value) {
         return 'Valeur: ' + value;
     }
 });
 
-$('#bsInfoNumeric').on('slideStop', function () {
+$('#bsInfoNumeric').on('slidestop', function () {
     bsInfoNumericType();
 });
 
@@ -307,12 +307,12 @@ $('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericSpecialIcon']", fu
         if (myInfoNumericSvgPreview[index] !== null)
             if (myInfoNumericSvgPreview[index].select('svg') !== null)
                 myInfoNumericSvgPreview[index].select('svg').remove();
-        img.onload = function () {
+        img.on('load', function() {
             var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
             $('#bsInfoNumericLabelSpec' + index).empty();
             $('#bsInfoNumericLabelSpec' + index).append(temp);
             checkNumericSpecial();
-        };
+        });
     }
     else {
         $('.svgSpecView').prop('disabled', false);
@@ -444,12 +444,12 @@ $('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericImage']", function
     var img = new Image();
     img.src = "plugins/widget/core/images/" + image + "";
     $('#bsInfoNumericPreview' + index).attr('src', img.src);
-    img.onload = function () {
+    img.on('load', function() {
         var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsInfoNumericLabel' + index).empty();
         $('#bsInfoNumericLabel' + index).append(temp);      
         checkNumericWidgetImage();
-    };
+    });
 });
 
 $('#bsInfoNumericAddEntry').on('click', function () {

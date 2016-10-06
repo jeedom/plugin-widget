@@ -111,13 +111,7 @@ function getContainer() {
                                                 });
                                                 el.trigger("sporty");
                                             },
-                                            load: function () {
-                                                el.attr("data-original", el.attr('data-original3'));
-                                                el.lazyload({
-                                                    event: "sporty"
-                                                });
-                                                el.trigger("sporty");
-                                            }
+                                            
                                         });
                                     } else {
                                         el.lazyload({
@@ -126,21 +120,10 @@ function getContainer() {
                                         el.trigger("sporty");
                                     }
                                 },
-                                load: function () {
-                                    el.attr("data-original", el.attr('data-original2'));
-                                    el.lazyload({
-                                        event: "sporty"
-                                    });
-                                    el.trigger("sporty");
-                                }
+                               
                             });
 },
-load: function () {
-    el.lazyload({
-        event: "sporty"
-    });
-    el.trigger("sporty");
-}
+
 });
 } else {
     el.lazyload({
@@ -927,9 +910,9 @@ function addImage(image, index) {
         }
     };
     xhr.send(null);
-    img.onload = function () {
+   img.on('load', function() {
         $('#bsImagesView').find('#bsViewImageWH' + index).append('<strong style="font-size:12px" class="text-nowrap">H: ' + this.width + ' - L:' + this.height + '</strong>');
-    };
+    });
 };
 
 function setSelectImage(select) {

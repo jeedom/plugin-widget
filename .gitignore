@@ -5,3 +5,4 @@ core/template/mobile/
 core/config/common.config.php
 plugins
 sftp-config.json
+.project
