@@ -910,9 +910,9 @@ function addImage(image, index) {
         }
     };
     xhr.send(null);
-   img.on('load', function() {
+  /* img.on('load', function() {
         $('#bsImagesView').find('#bsViewImageWH' + index).append('<strong style="font-size:12px" class="text-nowrap">H: ' + this.width + ' - L:' + this.height + '</strong>');
-    });
+    });*/
 };
 
 function setSelectImage(select) {
