@@ -37,7 +37,7 @@ Cliquer sur l'icône verte pour accéder directement au market. Dans cette fenê
 image::../images/capture002.png[]
 
 
-Cliquer sur l'icône du plugin. Cela ouvre la fiche du plugin dans laquelle se trouvent plusieurs informations.
+Klicken Sie auf das Plugin-Symbol, es öffnet sich die Karteikarte des Plugins, in dem man mehrere Informationen findet.
 
 image::../images/capture003.png[]
 
@@ -119,7 +119,7 @@ Soit par l'arbre Domotique qui se trouve dans le menu "Général" => "Résumé D
 image::../images/capture012.png[]
 
 Sur cette page vous trouvez tous vos éléments domotiques, les objets, les modules, les commandes.
-Cliquez sur la petite roue crantée pour accèder à la page de configuration.
+Klicken Sie auf das kleine Zahnrad um auf die Konfigurationsseite zuzugreifen.
 
 image::../images/capture013.png[]
 
@@ -147,7 +147,7 @@ WICHTIG: Um eine Option hinzuzufügen, klicken Sie einfach auf den Button "Hinzu
 Pour trouver les options, consulter le forum ou/et le Wiki
 
 
-=== Configuration avancée
+=== Erweiterte Konfiguration
 
 Voir la doc sur le Résumé domotique => link:/doc/documentation/core/fr_FR/doc-core-display.html[ICI]
 
