@@ -9,7 +9,7 @@ Le plugin widget est un plugin un peu particulier, car il ne permet pas de crée
 
 Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifiques (créées par le développeur du widget). On peut donc avoir un widget qui s'affichera différemment d'une commande à l'autre.
 
-Ainsi, on peut avoir un même widget écris en bleu sur une commande et en vert sur une autre.
+Ainsi, on peut avoir un même widget écrit en bleu sur une commande et en vert sur une autre.
 
 
 .Begriffe
@@ -27,11 +27,11 @@ La Tuile, c'est un regroupement de widgets pour un module. C'est la zone dans la
 
 == Installation des Widget Plugins
 
-Wie bei jedem Plugin wird das Widget-Plugin aus der Jeedom Schnittstelle installiert, Menü "Plugins" => "Plugin Verwaltung"
+Comme pour tout plugin, le plugin Widget s'installe depuis l'interface Jeedom, menu "Général"=>"Plugins"
 
 image::../images/capture001.png[]
 
-Cliquer sur l'icône verte pour accéder directement au market. Dans cette fenêtre cliquer sur "Officiel" et dans le champ de recherche mettre "Widget".
+Cliquer sur l'icône verte pour accéder directement au Market. Dans cette fenêtre cliquer sur "Officiel" et dans le champ de recherche mettre "Widget".
 
 
 image::../images/capture002.png[]
@@ -124,18 +124,18 @@ Klicken Sie auf das kleine Zahnrad um auf die Konfigurationsseite zuzugreifen.
 image::../images/capture013.png[]
 
 
-On peut aussi y accéder depuis la page de configuration des modules.
+Soit depuis la page de configuration des modules.
 
 image::../images/capture015.png[]
 
 ==== Ajouter une option personnalisée
 Dans l'onglet "Affichage avancé" on trouve 2 listes déroulantes qui permettent de changer pour la commande le widget utilisé sur un ordinateur et l'autre pour les mobiles.
-Il y a aussi d'autres options, pour afficher ou non les noms et stats, forcer le retour à la ligne avant/après le widget si il y a plusieurs commandes dans un module (retours à la ligne dans la tuile).
+Il y a aussi d'autres options, pour afficher ou non les noms et stats, forcer le retour à la ligne avant/après le widget s'il y a plusieurs commandes dans un module (retours à la ligne dans la tuile).
 Enfin la liste des paramètres optionnels Widget appliqués (la liste disponible se trouve sur le forum ou Wiki, un système de doc est à l’étude)
 
 image::../images/capture014.png[]
 
-.Beispiel, um einen bestimmten Zähler Wert anzuzeigen
+.exemple 1 de valeur pour afficher un compteur spécifique
 image::../images/capture016.png[]
 
 .Beispiel 2,  um einen anderen Zähler Wert anzuzeigen
@@ -143,7 +143,7 @@ image::../images/capture017.png[]
 
 
 .Option hinzufügen
-WICHTIG: Um eine Option hinzuzufügen, klicken Sie einfach auf den Button "Hinzufügen", geben Sie der Option einen Namen mit der korrekten Groß- und Kleinschreibung und weisen sie einen Wert der Option zu.
+NOTE: Pour ajouter une option il vous suffit de cliquer sur le bouton "Ajouter", de renseigner le nom de l'option avec les bonnes minuscules et majuscules, ainsi que la valeur à attribuer à l'option.
 Pour trouver les options, consulter le forum ou/et le Wiki
 
 
@@ -153,9 +153,9 @@ Voir la doc sur le Résumé domotique => link:/doc/documentation/core/fr_FR/doc-
 
 
 === Erstellung / Änderung von Widget 
-Le plugin offre 2 possibilités pour la création de Widget, le mode facile qui permet de faire des widgets basiques facilement avec un assistant de création, et le mode avancé qui permet aussi la modification par la suite de tous les widgets.
+Le plugin offre 2 possibilités pour la création de Widgets, le mode facile qui permet de faire des widgets basiques facilement avec un assistant de création, et le mode avancé qui permet aussi la modification par la suite de tous les widgets.
 
-.Widget-Editor im erweiterten Modus
+.Editeur de widgets en mode avancé
 NOTE: Le mode avancé apporte une souplesse sans limite. Toutefois, il vous faut avoir quelques connaissances en langage de programmation basique telle que HTML et CSS pour la base et JavaScript pour pouvoir réaliser des choses un peu plus complexes.
 
 ==== Einfacher Erstellungs Modus
@@ -169,7 +169,7 @@ Sur la partie de gauche, en premier un bouton pour importer des packs ou images,
 
 image::../images/capture027.png[]
 
-.Die 3 Widget-Typen im einfachen Modus
+.Les 3 types d'un widget en mode facile
 * Widget On/Off => Destiné aux commandes bouton pour les on/off 
 * Widget Simple Etat => Destiné aux commandes qui ont un retour d'état
 * Widget Numérique => Destiné aux commandes qui envoient une valeur numérique (exemple : Température, luminosité ... etc)
@@ -181,7 +181,7 @@ Cliquer sur le bouton "Widget Simple Etat". On arrive sur la page de configurati
 
 image::../images/capture028.png[]
 
-Puis il vous faut choisir l'icône pour l'Etat 0 et 1, ainsi que la taille de l'icône (valeur en "EM" = % de la taille d'origine de la police du navigateur, 1 = 100%). Ceci fait, le code source apparait en dessous de la zone de configuration.
+Puis il vous faut choisir l'icône pour l'Etat 0 et 1, ainsi que la taille de l'icône (valeur en "EM" = % de la taille d'origine de la police du navigateur, 1 = 100%). Ceci fait, le code source apparaît en dessous de la zone de configuration.
 
 WARNING: Ne pas modifier ces informations si vous ne savez pas ce que vous faites.
 
@@ -240,8 +240,8 @@ Dans Jeedom pour les widgets, le premier bout de code à créer c'est une "div" 
 Dans cette "div", on peut y trouver jusqu'à 3 sous-parties distinctes :
 
 * La partie HTML qui va afficher les informations
-* La partie CSS qui vas rendre plus joli en mettant en forme la parte HTML (Partie Facultative)
-* La partie JavaScript qui permet de travailler sur divers actiona, calculs et animations
+* La partie CSS qui va rendre plus joli en mettant en forme la parte HTML (Partie Facultative)
+* La partie JavaScript qui permet de travailler sur diverses actions, calculs et animations
 
 ====== HTML Code
 Plutôt que de longs discours, voici un exemple de code de base pour un widget
@@ -267,11 +267,11 @@ La structure de base qui schématise les différents emplacements dans notre wid
 
 .Erklärung des Codes
 div:: 
-	relativ vielseitiger Multifunktions-Container nach ihm einen Zeilenumbruch 
+	conteneur multifonction relativement polyvalent avec retour à la ligne après lui
 center:: 
 	balise qui centre son contenu
 span:: 
-	relativ vielseitigen Multi-Funktions-Container ohne einen Zeilenumbruch nach ihm
+	conteneur multifonction relativement polyvalent sans retour à la ligne après lui
 style:: 
 	Conteneur pour le code CSS qui sera appliqué de façon générale (attention son contenu peut affecter tous les éléments de la page)
 script:: 
@@ -297,7 +297,7 @@ En l'état, il est difficile de faire quoi que ce soit avec ce bout de code. C'e
 	</script>
 </div>
 ----
-Dans notre "div" principal on à ajouté plusieurs attributs :
+Dans notre "div" principal on a ajouté plusieurs attributs :
 
 .Erklärung des Codes
 id:: 
@@ -306,9 +306,9 @@ id::
 IMPORTANT: Pour être sûr d'éviter un conflit au niveau des IDs (ce qui peut planter toute la page web), sous Jeedom nous utilisons des class-id et des attribut "data-". Cela permet d'être sûr qu'en cas de collision, toute la page web ne soit pas plantée. 
 
 class:: 
-	Les class contrairement au id ne sont pas uniques. Elle servent à appliquer un style défini dans la partie style (la balise). On peut ainsi reproduire simplement une même mise en forme que l'on crée une fois et que l'on réutilise par mot clé (class). Ici on ajoute plusieurs class définies et disponibles de base dans Jeedom (voir plus bas les class Jeedom).
+	Les class contrairement aux ids ne sont pas uniques. Elle servent à appliquer un style défini dans la partie style (la balise). On peut ainsi reproduire simplement une même mise en forme que l'on crée une fois et que l'on réutilise par mot clé (class). Ici on ajoute plusieurs class définies et disponibles de base dans Jeedom (voir plus bas les class Jeedom).
 	
-	Jeedom utilise à la place de l'attribut id, une class comme id, cela permet de rendre un élément unique sur la page afin de le retrouver et le cibler plus facilement. Il est impératif que sa valeur soit unique sur la page. Pour cela je vous conseille d'utiliser un mot qui représente notre élément. Dans notre exemple la div représente l'ensemble de notre widget, donc on peut utiliser le nom de notre widget ou une abréviation (ici j'ai choisi Doc-). Ensuite, afin de garantir que la class-id soit unique, on va y mettre un tag "#id#" (pour plus d'info sur les tag Jeedom voir plus bas), ce qui donne "Doc-#id#".
+	Jeedom utilise à la place de l'attribut id, une class comme id, cela permet de rendre un élément unique sur la page afin de le retrouver et le cibler plus facilement. Il est impératif que sa valeur soit unique sur la page. Pour cela je vous conseille d'utiliser un mot qui représente notre élément. Dans notre exemple la div représente l'ensemble de notre widget, donc on peut utiliser le nom de notre widget ou une abréviation (ici j'ai choisi Doc-). Ensuite, afin de garantir que la class-id soit unique, on va y mettre un tag "#id#" (pour plus d'info sur les tags Jeedom voir plus bas), ce qui donne "Doc-#id#".
 
 data-type:: 
 	cette attribut permet de stocker le type de la commande sur laquelle le widget vas être appliqué. Il faut donc que sa valeur corresponde au paramètre type au dessus de la zone de code.
@@ -317,7 +317,7 @@ data-subtype::
 	cette attribut permet de stocker le sous-type de la commande sur laquelle le widget vas être appliqué. Il faut donc que sa valeur corresponde au paramètre sous-type au dessus de la zone de code.
 
 data-cmd_id:: 
-	Cette attribut prend comme valeur le Tag \#id#. Il est utilisé par Jeedom pour la mise à jour du Dashboard.
+	Cet attribut prend comme valeur le Tag \#id#. Il est utilisé par Jeedom pour la mise à jour du Dashboard.
 
 A partir de là, on a une base qui correspond au standard Jeedom. C'est le code minimaliste qu'il faut pour avoir un widget qui respecte la charte/règle Jeedom
 
@@ -328,7 +328,7 @@ Cette partie qui vient s'ajouter entre les 2 balises "style", permet de déclare
 Cette partie est facultative car on peut ajouter les mises en forme directement dans l'attribut style d'une balise ou à l'aide de JavaScript.
 L'utilisation de cette partie est donc une question de préférence pour bien séparer le HTML et le CSS
 
-WARNING: Tout code déclaré dans des balises style, s'applique à toute la page. Il faut donc bien faire attention au sélecteur CSS que vous choisissez d'utiliser pour ne pas altérer les autres widget.
+WARNING: Tout code déclaré dans des balises style, s'applique à toute la page. Il faut donc bien faire attention au sélecteur CSS que vous choisissez d'utiliser pour ne pas altérer les autres widgets.
 
 Afin de ne pas impacter d'autres widgets involontairement par le code CSS que vous allez y mettre, je vous conseille d'utiliser le sélecteur id qui cible votre widget.
 
@@ -356,7 +356,7 @@ En ajoutant .Doc-\#id# devant le sélecteur span, on délimite la modification �
 
 ====== JavaScript Code
 Le JavaScript se met entre les balises "Script". On utilise le JavaScript pour faire des calculs, convertir des données, animer le widget, mettre en forme le widget, réaliser des actions sur le widget en fonction d'événements.
-En plus du JavaScript de base, Jeedom intègre par défaut plusieurs Framework qui permettent de simplifier le code JavaScript. On peux donc utiliser sans les initialiser :
+En plus du JavaScript de base, Jeedom intègre par défaut plusieurs Frameworks qui permettent de simplifier le code JavaScript. On peut donc utiliser sans les initialiser :
 
 * Jquery
 * Jquery UI
@@ -371,7 +371,7 @@ Pour pouvoir corriger il vous suffit de passer la div id=jqueryLoadingDiv en dis
 
 ==== Les tags Jeedom
 Dans Jeedom vous rencontrerez souvent les tags qui sont des noms entourer de "#". Le principe de fonctionnement de ces tags est simple : Jeedom vas les remplacer par la valeur qui correspond au tag.
-Les Tags sont des sortes de variables (boites) dans lesquelles sont stockées des valeurs que l'on ne connait pas au moment où l'on écrit le code. C'est un peu comme si l'on faisait un texte avec des blancs pour y mettre plus tard des mots qui donneraient un sens variable au texte.
+Les Tags sont des sortes de variables (boîtes) dans lesquelles sont stockées des valeurs que l'on ne connait pas au moment où l'on écrit le code. C'est un peu comme si l'on faisait un texte avec des blancs pour y mettre plus tard des mots qui donneraient un sens variable au texte.
 
 Tous les tags ne sont pas disponibles avec tous les types de commande, voici donc la liste et leur détail :
 
@@ -412,7 +412,7 @@ A utiliser dans les attributs HTML style (CSS)
 ----
 
 \#maxValue#::
-Maximalwert, den der Befehl annehmen kann.
+Valeur maximale que peut prendre la commande.
 +
 ----
 Verwenden als Text, JS oder in den HTML-Attributen
@@ -443,7 +443,7 @@ A utiliser comme du texte ou en JS
 ----
 
 \#collectDate#::
-Retourne la date et heure de la dernière mise à jours du widget au format "yyyy-mm-dd hh:mn:ss"
+Retourne la date et heure de la dernière mise à jour du widget au format "yyyy-mm-dd hh:mn:ss"
 +
 ----
 Verwenden als Text, Js, oder im Titel  Attribut 
@@ -504,7 +504,7 @@ image::../images/capture031.png[]
 
 cmd:: Muss unbedingt zum Attribut "class" des Hauptdiv hinzugefügt werden, diese Klasse ermöglicht die Aktualisierung des Widgets. Ohne diese Klasse aktualisiert sich das Widget nur durch Aktualisieren der Seite.
 
-cmd-widget:: Diese Klasse wird empfohlen, da es Ihnen erlaubt, einige Standard-CSS-Einstellungen des Widgets für ein gutes Verhalten hinzuzufügen.
+cmd-widget:: cette class est recommandée car elle permet d'ajouter quelques paramètres CSS par défaut au widget pour un bon comportement.
 
 cursor:: Ermöglicht den Mauszeiger zu ändern
 
@@ -545,8 +545,8 @@ Das Prinzip des Widget-Code ist relativ einfach, es funktioniert durch ersetzen 
 * \#name_display# => Befehlsname und leer, wenn der Name des Befehls nicht angezeigt werden soll
 * \#valueName# => Nom de la commande info, si la commande action est liée à une commande info, nom de la commande action sinon. Vide si le nom de la commande ne doit pas être affiché
 * \#lastValue# => Letzter Wert der Befehls (kann leer sein)  
-* \#minValue# => Minimalwert, den der Befehl annehmen kann
-* \#maxValue# => Maximalwert, den der Befehl annehmen kann
+* \#minValue# => Valeur minimale que peut prendre la commande
+* \#maxValue# => Valeur maximale que peut prendre la commande
 * \#hideCmdName# => Vide si le nom de la commande doit être affiché. Et "display:none;" si le nom de la commande ne doit pas être affiché.
 
 * Pour que l'action soit exécutée il faut appeler la fonction : jeedom.cmd.execute(ID,options) avec
