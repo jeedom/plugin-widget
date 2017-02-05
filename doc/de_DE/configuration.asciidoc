@@ -27,7 +27,7 @@ La Tuile, c'est un regroupement de widgets pour un module. C'est la zone dans la
 
 == Installation des Widget Plugins
 
-Comme pour tout plugin, le plugin Widget s'installe depuis l'interface Jeedom, menu "Général"=>"Plugins"
+Wie jedes Plugin wird das Widget-Plugin von der Jeedom-Schnittstelle aus installiert, Menü "Allgemein"=>"Plugins"
 
 image::../images/capture001.png[]
 
@@ -387,21 +387,21 @@ Verwenden als Text, JS oder in den HTML-Attributen
 Logische ID des Befehls (kann leer sein). 
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#name#::
 Befehlsname
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#name_display#::
 Nom de la commande. A utiliser pour l'affichage du nom de la commande au niveau du widget.
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#hideCmdName#::
@@ -423,14 +423,14 @@ Verwenden als Text, JS oder in den HTML-Attributen
 Nom de la commande info liée, si la commande action est liée à une commande info, nom de la commande action sinon. 
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#lastValue#::
 Letzter Wert des Befehls (kann leer sein).
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 .Tag, für den Typ Info
@@ -439,7 +439,7 @@ A utiliser comme du texte ou en JS
 Unité de la commande
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#collectDate#::
@@ -453,7 +453,7 @@ Verwenden als Text, Js, oder im Titel  Attribut
 Valeur de la commande 
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#displayHistory#::
@@ -467,21 +467,21 @@ A utiliser dans l'attribut "style" d'une balise html à afficher si l'historisat
 Valeur moyenne sur les x dernières heures de la commande
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#minHistoryValue#::
 Minimum sur les x dernières heures de la commande
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#maxHistoryValue#::
 Maximum sur les x dernières heures de la commande
 +
 ----
-A utiliser comme du texte ou en JS
+Zur Verwendung als Text oder in JS
 ----
 
 \#tendance#::
@@ -545,8 +545,8 @@ Das Prinzip des Widget-Code ist relativ einfach, es funktioniert durch ersetzen 
 * \#name_display# => Befehlsname und leer, wenn der Name des Befehls nicht angezeigt werden soll
 * \#valueName# => Nom de la commande info, si la commande action est liée à une commande info, nom de la commande action sinon. Vide si le nom de la commande ne doit pas être affiché
 * \#lastValue# => Letzter Wert der Befehls (kann leer sein)  
-* \#minValue# => Valeur minimale que peut prendre la commande
-* \#maxValue# => Valeur maximale que peut prendre la commande
+* \#minValue# => Minimaler Wert den der Befehl annehmen kann
+* \#maxValue# => Maximaler Wert den der Befehl annehmen kann
 * \#hideCmdName# => Vide si le nom de la commande doit être affiché. Et "display:none;" si le nom de la commande ne doit pas être affiché.
 
 * Pour que l'action soit exécutée il faut appeler la fonction : jeedom.cmd.execute(ID,options) avec
