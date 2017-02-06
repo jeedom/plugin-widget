@@ -98,7 +98,7 @@ image::../images/capture008.png[]
 
 Es reicht aus die Befehle anzukreuzen, auf denen sie das Widget anwenden möchten
 
-==== Divers exemples pour une même commande
+==== Verschiedene Beispiele für den gleichen Befehl
 .Widget : badge-transparent
 image::../images/capture009.png[]
 
@@ -113,12 +113,12 @@ image::../images/capture011.png[]
 === Anpassungsmöglichkeiten der Widget
 Depuis la version 1.112 de Jeedom, il est possible de personnaliser les widgets avec des options spécifiques (créées par le développeur du widget) et communes à tous les widgets. On peut donc avoir un widget qui s'affichera différemment d'une commande à l'autre.
 
-On peut accéder à ces options de 2 façons. 
+Man hat zu diesen Optionen 2 Wege des zugriffs. 
 Soit par l'arbre Domotique qui se trouve dans le menu "Général" => "Résumé Domotique"
 
 image::../images/capture012.png[]
 
-Sur cette page vous trouvez tous vos éléments domotiques, les objets, les modules, les commandes.
+Auf dieser Seite finden Sie all Ihre Haus-Automatisierungs-Geräte, Objekte, Module und Befehle.
 Klicken Sie auf das kleine Zahnrad um auf die Konfigurationsseite zuzugreifen.
 
 image::../images/capture013.png[]
@@ -128,14 +128,14 @@ Soit depuis la page de configuration des modules.
 
 image::../images/capture015.png[]
 
-==== Ajouter une option personnalisée
+==== Benutzerdefinierte Option hinzufügen
 Dans l'onglet "Affichage avancé" on trouve 2 listes déroulantes qui permettent de changer pour la commande le widget utilisé sur un ordinateur et l'autre pour les mobiles.
 Il y a aussi d'autres options, pour afficher ou non les noms et stats, forcer le retour à la ligne avant/après le widget s'il y a plusieurs commandes dans un module (retours à la ligne dans la tuile).
 Enfin la liste des paramètres optionnels Widget appliqués (la liste disponible se trouve sur le forum ou Wiki, un système de doc est à l’étude)
 
 image::../images/capture014.png[]
 
-.exemple 1 de valeur pour afficher un compteur spécifique
+.Beispiel 1, der Wert, um einen bestimmten Zähler anzuzeigen
 image::../images/capture016.png[]
 
 .Beispiel 2,  um einen anderen Zähler Wert anzuzeigen
@@ -144,7 +144,7 @@ image::../images/capture017.png[]
 
 .Option hinzufügen
 NOTE: Pour ajouter une option il vous suffit de cliquer sur le bouton "Ajouter", de renseigner le nom de l'option avec les bonnes minuscules et majuscules, ainsi que la valeur à attribuer à l'option.
-Pour trouver les options, consulter le forum ou/et le Wiki
+Um die Optionen zu finden, konsultieren sie das Forum und/oder das Wiki.
 
 
 === Erweiterte Konfiguration
