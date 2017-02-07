@@ -149,7 +149,7 @@ Um die Optionen zu finden, konsultieren sie das Forum und/oder das Wiki.
 
 === Erweiterte Konfiguration
 
-Voir la doc sur le Résumé domotique => link:/doc/documentation/core/fr_FR/doc-core-display.html[ICI]
+Siehe im Dokument "Übersicht Haus-Automatisierung" => https://jeedom.github.io/documentation/core/de_DE/display.html[hier]
 
 
 === Erstellung / Änderung von Widget 
