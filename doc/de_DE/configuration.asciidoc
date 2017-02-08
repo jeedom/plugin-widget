@@ -244,9 +244,9 @@ Dans cette "div", on peut y trouver jusqu'à 3 sous-parties distinctes :
 * La partie JavaScript qui permet de travailler sur diverses actions, calculs et animations
 
 ====== HTML Code
-Plutôt que de longs discours, voici un exemple de code de base pour un widget
+Statt langer Rede, hier ist ein Basis-Code Beispiel für ein Widget
 
-.Structure HTML de base
+.HTML Grundstruktur
 [source,html]
 ----
 <div>
@@ -267,19 +267,19 @@ La structure de base qui schématise les différents emplacements dans notre wid
 
 .Erklärung des Codes
 div:: 
-	conteneur multifonction relativement polyvalent avec retour à la ligne après lui
+	relativ vielseitiger Multifunktions-Container nach ihm kommt ein Zeilenumbruch 
 center:: 
-	balise qui centre son contenu
+	Markierungszeichen, der Inhalt wird zentriert 
 span:: 
-	conteneur multifonction relativement polyvalent sans retour à la ligne après lui
+	relativ vielseitigen Multi-Funktions-Container ohne einen Zeilenumbruch nach ihm
 style:: 
-	Conteneur pour le code CSS qui sera appliqué de façon générale (attention son contenu peut affecter tous les éléments de la page)
+	Container für den CSS-Code, der im Großen und Ganzen angewendet werden soll (Achtung der Inhalt kann aller Elemente auf der Seite beeinflussen)
 script:: 
 	Markierungszeichen, das JavaScript enthalten wird
 
-En l'état, il est difficile de faire quoi que ce soit avec ce bout de code. C'est pourquoi on va ajouter quelques options (appelées Attribut en langage HTML) dans nos balises.
+In diesem Zustand ist es schwierig, etwas mit diesem Codestück zu machen. Deshalb wird man einige Optionen (bezeichnet als Attribute in der HTML-Sprache) zwischen unseren Markierungszeichen hinzufügen.
 
-.Ajout des attributs de base
+.Hinzufügen von grundlegenden Attribute
 [source,html]
 ----
 <div class="Doc-#id# cmd tooltips cmd-widget #history#" title="" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
@@ -297,13 +297,13 @@ En l'état, il est difficile de faire quoi que ce soit avec ce bout de code. C'e
 	</script>
 </div>
 ----
-Dans notre "div" principal on a ajouté plusieurs attributs :
+In unserem "div" wurden mehrere wichtige Attribute hinzugefügt :
 
 .Erklärung des Codes
 id:: 
-	L'attribut "id" est déconseillé sur Jeedom 
+	Das "id" Attribut wird auf Jeedom nicht empfohlen 
 	
-IMPORTANT: Pour être sûr d'éviter un conflit au niveau des IDs (ce qui peut planter toute la page web), sous Jeedom nous utilisons des class-id et des attribut "data-". Cela permet d'être sûr qu'en cas de collision, toute la page web ne soit pas plantée. 
+IMPORTANT: Um sicher zu sein, einen Konflikt mit IDs unter Jeedom zu vermeiden, verwenden wir die class-id und das Attribut "data-". Das ermöglicht im Falle einer Kollision, das die Web-Seite nicht erstart. 
 
 class:: 
 	Les class contrairement aux ids ne sont pas uniques. Elle servent à appliquer un style défini dans la partie style (la balise). On peut ainsi reproduire simplement une même mise en forme que l'on crée une fois et que l'on réutilise par mot clé (class). Ici on ajoute plusieurs class définies et disponibles de base dans Jeedom (voir plus bas les class Jeedom).
