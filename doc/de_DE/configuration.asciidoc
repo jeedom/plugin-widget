@@ -342,7 +342,7 @@ span{
 }
 ----
 
-Mais cela aurait pour effet de changer la couleur du texte de tous les span de la page.
+Aber dies würde die Textfarbe, alles was im Span-Tag steht, der Seite ändern.
 Donc pour éviter cela, ajouter un sélecteur id qui vise votre widget pour délimiter son action :
 
 .Code mis dans la balise Style et délimité
@@ -352,10 +352,10 @@ Donc pour éviter cela, ajouter un sélecteur id qui vise votre widget pour dél
 	color: red;
 }
 ----
-En ajoutant .Doc-\#id# devant le sélecteur span, on délimite la modification à l'intérieur de notre widget.
+Indem zusätzlich .Doc-\#id# zum span Selektor hinzugefügt wird, werden die Veränderung auf unser Widget begrenzt.
 
 ====== JavaScript Code
-Le JavaScript se met entre les balises "Script". On utilise le JavaScript pour faire des calculs, convertir des données, animer le widget, mettre en forme le widget, réaliser des actions sur le widget en fonction d'événements.
+Das JavaScript beginnt zwischen den "Script'" Tags. JavaScript wird verwendet, um Berechnungen zu machen, Daten zu konvertieren, das Widget zu animieren, das Widget zu formatieren, auf dem Widget je nach Ereignissen Aktionen zu realisieren. 
 En plus du JavaScript de base, Jeedom intègre par défaut plusieurs Frameworks qui permettent de simplifier le code JavaScript. On peut donc utiliser sans les initialiser :
 
 * Jquery
