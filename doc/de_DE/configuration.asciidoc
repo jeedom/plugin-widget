@@ -412,7 +412,7 @@ A utiliser dans les attributs HTML style (CSS)
 ----
 
 \#maxValue#::
-Valeur maximale que peut prendre la commande.
+Maximalwert, den der Befehl annehmen kann.
 +
 ----
 Verwenden als Text, JS oder in den HTML-Attributen
@@ -436,21 +436,21 @@ Zur Verwendung als Text oder in JS
 .Tag, für den Typ Info
 
 \#unite#::
-Unité de la commande
+Einheit des Befehls
 +
 ----
 Zur Verwendung als Text oder in JS
 ----
 
 \#collectDate#::
-Retourne la date et heure de la dernière mise à jour du widget au format "yyyy-mm-dd hh:mn:ss"
+Gibt das Datum und die Uhrzeit der letzten Aktualisierung des Widget im Format "yyyy-mm-dd hh:mn:ss" aus
 +
 ----
-Verwenden als Text, Js, oder im Titel  Attribut 
+Verwenden als Text, JS, oder im Titel  Attribut 
 ----
 
 \#state#::
-Valeur de la commande 
+Wert des Befehls 
 +
 ----
 Zur Verwendung als Text oder in JS
@@ -464,21 +464,21 @@ A utiliser dans l'attribut "style" d'une balise html à afficher si l'historisat
 ----
 
 \#averageHistoryValue#::
-Valeur moyenne sur les x dernières heures de la commande
+Durchschnittlicher Wert in den x letzten Stunden des Befehls
 +
 ----
 Zur Verwendung als Text oder in JS
 ----
 
 \#minHistoryValue#::
-Minimum sur les x dernières heures de la commande
+Minimaler Wert in den x letzten Stunden des Befehls
 +
 ----
 Zur Verwendung als Text oder in JS
 ----
 
 \#maxHistoryValue#::
-Maximum sur les x dernières heures de la commande
+Maximaler Wert in den x letzten Stunden des Befehls
 +
 ----
 Zur Verwendung als Text oder in JS
@@ -504,7 +504,7 @@ image::../images/capture031.png[]
 
 cmd:: Muss unbedingt zum Attribut "class" des Hauptdiv hinzugefügt werden, diese Klasse ermöglicht die Aktualisierung des Widgets. Ohne diese Klasse aktualisiert sich das Widget nur durch Aktualisieren der Seite.
 
-cmd-widget:: cette class est recommandée car elle permet d'ajouter quelques paramètres CSS par défaut au widget pour un bon comportement.
+cmd-widget:: Diese Klasse wird empfohlen, da es Ihnen erlaubt, einige Standard-CSS-Einstellungen des Widgets für ein gutes Verhalten hinzuzufügen.
 
 cursor:: Ermöglicht den Mauszeiger zu ändern
 
