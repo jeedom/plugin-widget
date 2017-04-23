@@ -41,6 +41,35 @@ function infoBinarySave(_callback) {
                 _callback(data.result.path);
         }
     });
+    
+    if($('#bsInfoBinaryType').val() === "1"){
+        var nomWidget = $('#bsInfoBinaryName').val();
+        $.ajax({
+            type: "POST",
+            url: "plugins/widget/core/ajax/widget.ajax.php",
+            data: {
+                action: "imageCopie",
+                pathDestFils: pathFile.replace('desktop/php','core/class') + "/../template/" + ($('#bsInfoBinaryDash').val() === "1" ? 'dashboard' : 'mobile') + "/cmd.info.binary." + nomWidget,
+                name1 : $('#bsInfoBinaryImage1').val(), 
+                name2 : $('#bsInfoBinaryImage2').val()
+            },
+            dataType: 'json',
+            error: function (request, status, error) {
+                handleAjaxError(request, status, error);
+                return;
+            },
+            success: function (data) { 
+                if (data.state !== 'ok') {
+                    $('#div_alert').showAlert({message: data.result, level: 'danger'});
+                    return;
+                }
+
+                notify("Copie d'images", 'Copie des images réussie pour le widget : ' + nomWidget, 'success');
+                if(_callback !== undefined)
+                    _callback(data.result.path);
+            }
+        });
+    }
 }
 $('#modalInfoBinarySave').on('click', function () {
     infoBinarySave(widgetCallback);
@@ -229,10 +258,14 @@ function checkInfoBinaryWidgetImage() {
         editorBinary.setValue(text);
         if ($('#bsInfoBinaryName').val() !== '')
             $('#modalInfoBinarySave').prop('disabled', false);
-        $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#", $('#bsInfoBinaryName').val()));
-        $('#bsInfoBinaryWidgetOff').parent().parent().show();
-        $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#", $('#bsInfoBinaryName').val()));
-        $('#bsInfoBinaryWidgetOn').parent().parent().show();
+            $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace(/#uid#/g, "Uid3").replace(/#displayName#/, "1").replace(/#state#/g, "0").replace(/#valueName#/, $('#bsInfoBinaryName').val()));           
+            $('.iconCmdUid3 img').attr('src', 'plugins/widget/core/images/'+$('#bsInfoBinaryImage1').val());
+            $('#bsInfoBinaryWidgetOff').parent().parent().show();
+
+
+            $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace(/#uid#/g, "Uid4").replace(/#displayName#/, "1").replace(/#state#/g, "1").replace(/#valueName#/, $('#bsInfoBinaryName').val()));
+            $('.iconCmdUid4 img').attr('src', 'plugins/widget/core/images/'+$('#bsInfoBinaryImage2').val());
+            $('#bsInfoBinaryWidgetOn').parent().parent().show();
         return true;
     }
     else {
@@ -438,8 +471,8 @@ $('#bsInfoBinaryImage1').on('change', function () {
     var img = new Image();
     img.src = "plugins/widget/core/images/" + image + "";
     $('#bsInfoBinaryPreview1').attr('src', img.src);
-    img.on('load', function() {
-        var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+    $(img).on('load', function() {
+        var temp = '<span class="text-center">L:' + this.width + 'px - H:' + this.height + 'px</span>';
         $('#bsInfoBinaryLabel1').empty();
         $('#bsInfoBinaryLabel1').append(temp);      
         if(!checkInfoBinaryWidgetImage() && $('#bsInfoBinaryLabel2').text() !== '')
@@ -463,8 +496,8 @@ $('#bsInfoBinaryImage2').on('change', function () {
     var img = new Image();
     img.src = "plugins/widget/core/images/" + image + "";
     $('#bsInfoBinaryPreview2').attr('src', img.src);
-    img.on('load', function() {
-        var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
+    $(img).on('load', function() {
+        var temp = '<span class="text-center">L:' + this.width + 'px - H:' + this.height + 'px</span>';
         $('#bsInfoBinaryLabel2').empty();
         $('#bsInfoBinaryLabel2').append(temp);
         if(!checkInfoBinaryWidgetImage() && $('#bsInfoBinaryLabel1').text() !== '')
@@ -488,9 +521,9 @@ function getHtmlInfoBinaryJeedom(dashboard) {
     width = $('#bsInfoBinaryActionIconSize1').val() * 20 + 15;
     height = $('#bsInfoBinaryActionIconSize1').val() * 20 + 20;
     if (dashboard) {
-        html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#">\n';
+        html += '<div style="width:90px; min-height:80px;" class="cmd #history# tooltips cmd-widget" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" title="#collectDate#">\n';
         html += '\t<center>\n';
-        html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
+        html += '\t\t<div class="cmdName" style="font-weight: bold;font-size : 12px; #hideCmdName#">#name_display#</div>\n';
         html += '\t\t<span style="font-size: ' + $('#bsInfoBinaryIconSize1').val() + 'em;" class="iconCmd#uid#"></span>\n';
         html += '\t</center>\n';
     }else {
@@ -501,19 +534,25 @@ function getHtmlInfoBinaryJeedom(dashboard) {
     }
     html += cdata;
     html += '\t<script>\n';
+    html += '\t\tjeedom.cmd.update[\'#id#\'] = function(_options){\n';                                                             
     if (dashboard) {
-        html += '\t\tif ("#displayName#" == "1") {\n';
-        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").show();\n';
-        html += '\t\t} else {\n';
-        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").hide();\n';
-        html += '\t\t}\n';
+      /*
+        html += '\t\t\tif ("#displayName#" == "1") {\n';
+        html += '\t\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").show();\n';
+        html += '\t\t\t} else {\n';
+        html += '\t\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").hide();\n';
+        html += '\t\t\t}\n';
+	*/
     }
-    html += '\t\t\$(".iconCmd#uid#").empty();\n';
-    html += '\t\tif ("#state#" == "1") {\n';
-    html += '\t\t\t$(".iconCmd#uid#").append("' + $('#bsInfoBinaryIconCmd2').html().replace(/\"/g, "'") + '");\n';
-    html += '\t\t} else {\n';
-    html += '\t\t\t$(".iconCmd#uid#").append("' + $('#bsInfoBinaryIconCmd1').html().replace(/\"/g, "'") + '");\n';
+    html += '\t\t\t\$(".iconCmd#uid#").empty();\n';
+    html += '\t\t\tif (parseInt(_options.display_value) == 1) {\n';
+    html += '\t\t\t\t$(".iconCmd#uid#").append("' + $('#bsInfoBinaryIconCmd2').html().replace(/\"/g, "'") + '");\n';
+    html += '\t\t\t} else {\n';
+    html += '\t\t\t\t$(".iconCmd#uid#").append("' + $('#bsInfoBinaryIconCmd1').html().replace(/\"/g, "'") + '");\n';
+    html += '\t\t\t}\n';
+    html += "\t\t\t$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);\n";                                                                                          
     html += '\t\t}\n';
+    html += '\t\tjeedom.cmd.update[\'#id#\']({display_value:\'#state#\',valueDate:\'#valueDate#\',collectDate:\'#collectDate#\',alertLevel:\'#alertLevel#\'});\n';
     html += '\t</script>\n';
     html += '</div>\n';
     return html;
@@ -538,7 +577,7 @@ function getHtmlInfoBinaryImage(dashboard) {
     if (dashboard) {
         html += '<div style="padding:0;width:' + width + 'px;min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="binary" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<div class="row">\n';
-        html += '\t\t<div class="center-block col-xs-12 h5 cmdName" id="cmdName#id#" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
+        html += '\t\t<div class="center-block col-xs-12 h5 cmdName" id="cmdName#id#" style="margin-top:0; #hideCmdName#;">#name_display#</div>\n';
         html += '\t\t<div class="center-block col-xs-12 iconCmd#uid#"></div>\n';
         html += '\t</div>\n';
     }else {
@@ -549,21 +588,27 @@ function getHtmlInfoBinaryImage(dashboard) {
     }
     html += cdata;
     html += '\t<script>\n';
+  	html += '\t\tjeedom.cmd.update[\'#id#\'] = function(_options){\n';
     if (dashboard) {
-        html += '\t\tif ("#displayName#" == "1") {\n';
+     /* 
+     	html += '\t\tif ("#displayName#" == "1") {\n';
         html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").show();\n';
         html += '\t\t\t$(".cmd[data-cmd_uid=#uid#]").css("min-height", "' + (height + 20) + 'px");\n';
         html += '\t\t} else {\n';
         html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").hide();\n';
         html += '\t\t\t$(".cmd[data-cmd_uid=#uid#]").css("min-height", "' + height + 'px");\n';
         html += '\t\t}\n';
+      */
     }
-    html += '\t\t\$(".iconCmd#uid#").empty();\n';
-    html += '\t\tif ("#state#" == "1") {\n';
-    html += '\t\t\t$(".iconCmd#uid#").append("<img src=\'plugins/widget/core/images/' + image2 + '\'>");\n';
-    html += '\t\t} else {\n';
-    html += '\t\t\t$(".iconCmd#uid#").append("<img src=\'plugins/widget/core/images/' + image1 + '\'>");\n';
+   	html += '\t\t\t\$(".iconCmd#uid#").empty();\n';
+    html += '\t\t\tif (parseInt(_options.display_value) == 1) {\n';
+    html += '\t\t\t\t$(".iconCmd#uid#").append("<img src=\'plugins/widget/core/template/dashboard/cmd.info.binary.' + $('#bsInfoBinaryName').val() +'/'+ image2 + '\'>");\n';
+    html += '\t\t\t} else {\n';
+    html += '\t\t\t\t$(".iconCmd#uid#").append("<img src=\'plugins/widget/core/template/dashboard/cmd.info.binary.' + $('#bsInfoBinaryName').val() +'/'+ image1 + '\'>");\n';
+    html += '\t\t\t}\n';
+    html += "\t\t\t$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);\n";                                                                                          
     html += '\t\t}\n';
+    html += '\t\tjeedom.cmd.update[\'#id#\']({display_value:\'#state#\',valueDate:\'#valueDate#\',collectDate:\'#collectDate#\',alertLevel:\'#alertLevel#\'});\n';
     html += '\t</script>\n';
     html += '</div>\n';
     return html;
