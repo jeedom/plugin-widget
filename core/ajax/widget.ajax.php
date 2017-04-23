@@ -271,6 +271,25 @@ try {
         }
         ajax::success();
     }
+  	
+    if (init('action') == 'imageCopie') {
+        $uploaddir = dirname(__FILE__) . '/../images';
+      	$imgPath = init('pathDestFils');
+        $img1 = init('name1');
+        $img2 = init('name2');
+        
+        if (!file_exists($imgPath)) {
+            mkdir($imgPath);
+        }
+        if (!copy($uploaddir.'/'.$img1, $imgPath.'/'.$img1)) {
+            log::add('Widget','Error','Erreur de copie du fichier-> '.$uploaddir.'/'.$img1.' / Destination->'.$imgPath.'/'.$img1);
+        }
+        if (!copy($uploaddir.'/'.$img2, $imgPath.'/'.$img2)) {
+            log::add('Widget','Error','Erreur de copie du fichier-> '.$uploaddir.'/'.$img2.' / Destination->'.$imgPath.'/'.$img2);
+        }
+
+        ajax::success();
+    }
 
     if (init('action') == 'loadSvg') {
         $folder = init('folder');
