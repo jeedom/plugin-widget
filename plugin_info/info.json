@@ -1,0 +1,9 @@
+{
+	"id" : "widget",
+	"name" : "Widget",
+	"description" : "Plugin pour appliquer/modifier widget",
+	"licence" : "AGPL",
+	"author" : "Loïc",
+	"require" : "3.0",
+	"category" : "programming"
+}
