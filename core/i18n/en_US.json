@@ -29,7 +29,7 @@
         "Nom la copie du widget ?": "Name of the widget copy?"
     },
     "plugins/widget/desktop/modal/widget.3rdparty.php": {
-        "Nom du fichier": "Filename",
+        "Nom du fichier": "File name",
         "Chemin": "Path",
         "Action": "Action",
         "Fichier(s) ajouté(s) avec succes": "File(s) added successfully",
