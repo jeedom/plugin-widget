@@ -188,9 +188,29 @@ function checkNumericJeedomIcon() {
         editorNumeric.setValue(text);
         if($('#bsInfoNumericName').val() !== '')
             $('#modalInfoNumericSave').prop('disabled', false);
-        text = text.replace(/#id#/g, "5").replace("#displayName#", "1").replace("#state#", $('#bsInfoNumeric').bootstrapSlider('getValue'));
-        text = text.replace("#valueName#", $('#bsInfoNumericName').val()).replace("#minValue#", "0").replace("#maxValue#", "100");
-        $('#bsInfoNumericWidgetOff').html(text);
+        var minVal = parseInt($('#bsInfoNumericEcartMin0').val());
+		var maxVal = parseInt($('#bodyInfoNumeric input[name*="bsInfoNumericEcartMax"]:last').val());
+	
+		var handle = $( "#custom-handle" );
+		$( "#slider" ).slider({
+		  min: minVal,
+		  max: maxVal,
+		  value: minVal,
+		 slide: function( event, ui ) {
+			handle.text( ui.value );
+	
+			
+		},change: function( event, ui ) {
+			if($('#bsInfoNumericWidgetOff .cmd .state').length > 0){
+				jeedom.cmd.update[$('#bsInfoNumericWidgetOff div.cmd').data('cmd_id')]({display_value:$('#slider').slider('value')});
+			}
+		}
+		});
+		handle.text( $( "#slider" ).slider( "value" ) );
+		text = text.replace(/#id#/g, "5").replace("#name_display#", "Prévisualisation").replace(/#uid#/g, "Uid5").replace(/#unite#/g, "°C").replace(/#state#/g, $('#slider').slider('value')).replace(/#displayHistory#/g, 'display:none;');
+        
+		text = text.replace("#valueName#", $('#bsInfoNumericName').val()).replace("#minValue#", minVal).replace("#maxValue#", maxVal);		
+		$('#bsInfoNumericWidgetOff').html(text);	
         $('#bsInfoNumericWidgetOff').parent().parent().show();
     }
     else {
@@ -217,13 +237,51 @@ function checkNumericWidgetImage() {
     }
     if (check) {
         var dashboard = $('#bsInfoNumericDash').val() === "1" ? true : false;
+		var mobDash = $('#bsInfoNumericDash').val() == 0 ? 'mobile' : 'dashboard';
         var text = getHtmlInfoNumericImage(dashboard);
         editorNumeric.setValue(text);
         if($('#bsInfoNumericName').val() !== '')
             $('#modalInfoNumericSave').prop('disabled', false);
-        text = text.replace(/#id#/g, "5").replace("#displayName#", "1").replace("#state#", $('#bsInfoNumeric').bootstrapSlider('getValue'));
-        text = text.replace("#valueName#", $('#bsInfoNumericName').val()).replace("#minValue#", "0").replace("#maxValue#", "100");
-        $('#bsInfoNumericWidgetOff').html(text);
+        var minVal = parseInt($('#bsInfoNumericEcartMin0').val());
+		var maxVal = parseInt($('#bodyInfoNumeric input[name*="bsInfoNumericEcartMax"]:last').val());
+	
+		var handle = $( "#custom-handle" );
+		$( "#slider" ).slider({
+		  min: minVal,
+		  max: maxVal,
+		  value: minVal,
+		 slide: function( event, ui ) {
+			handle.text( ui.value );
+	
+			
+		},change: function( event, ui ) {
+			if($('#bsInfoNumericWidgetOff .cmd .state').length > 0){
+				jeedom.cmd.update[$('#bsInfoNumericWidgetOff div.cmd').data('cmd_id')]({display_value:$('#slider').slider('value')});
+				$('.cmd[data-cmd_uid=Uid5] img').css({
+					'max-width': '50px'
+				});
+			}
+		}
+		});
+		handle.text( $( "#slider" ).slider( "value" ) );
+		text = text.replace(/#id#/g, "5").replace(/#name_display#/g, "Prévisualisation").replace(/#uid#/g, "Uid5").replace(/#unite#/g, "°C").replace(/#state#/g, $('#slider').slider('value')).replace(/#displayHistory#/g, 'display:none;');
+        
+		
+		text = text.replace("#valueName#", $('#bsInfoNumericName').val()).replace("#minValue#", minVal).replace("#maxValue#", maxVal).replace("var srcImg = 'plugins/widget/core/template/"+mobDash+"/cmd.info.numeric."+$('#bsInfoNumericName').val(), "var srcImg = 'plugins/widget/core/images/");
+        
+		
+		$('#bsInfoNumericWidgetOff').html(text);
+		
+		$('.cmd[data-cmd_uid=Uid5] img').css({
+			'max-width': '50px'
+		});
+		
+		$('.cmd[data-cmd_uid=Uid5]').css({
+			'width':'100%',
+			'height':'auto',
+			'min-height':''
+		});
+		
         $('#bsInfoNumericWidgetOff').parent().parent().show();
     }
     else {
@@ -262,7 +320,7 @@ function checkNumericSpecial() {
         editorNumeric.setValue(text);
         if($('#bsInfoNumericName').val() !== '')
             $('#modalInfoNumericSave').prop('disabled', false);
-        text = text.replace(/#id#/g, "5").replace("#displayName#", "1").replace("#state#", $('#bsInfoNumeric').bootstrapSlider('getValue'));
+        text = text.replace(/#id#/g, "5").replace("#displayName#", "1");//.replace("#state#", $('#bsInfoNumeric').bootstrapSlider('getValue'));
         text = text.replace("#valueName#", $('#bsInfoNumericName').val()).replace("#minValue#", "0").replace("#maxValue#", "100");
         $('#bsInfoNumericWidgetOff').html(text);
         $('#bsInfoNumericWidgetOff').parent().parent().show();
@@ -395,19 +453,26 @@ $('#bodyInfoNumeric').on('click',"button[name*='bsInfoNumericDel']", function ()
     bsInfoNumericType();
 });
 
-$('#bodyInfoNumeric').on('change',"input[name*='bsInfoNumericEcartMin']", function () {
-    var index = parseInt($(this).data('index'));
-    if(index !== 0)
-        $('#bodyInfoNumeric').find("#bsInfoNumericEcartMax" + (index - 1)).val($(this).val());
-    bsInfoNumericType();
-});
+function verifPlageAll(){
+	$('#bodyInfoNumeric tr').each(function(i){
+		var index = parseInt($("input[name*='bsInfoNumericEcartMin']",this).data('index'));
+		var valMin = parseInt($("#bsInfoNumericEcartMin" + index).val());
+	
+		if( valMin >= parseInt($("#bsInfoNumericEcartMax" + index).val())){
+			$('#bsInfoNumericEcartMax' + index).val(valMin+1);    
+		}
+		if(parseInt($("#bsInfoNumericEcartMin" + (index+1)).val())-1 != parseInt($("#bsInfoNumericEcartMax" + index).val()) ){
+			$("#bsInfoNumericEcartMin" + (index+1)).val(parseInt($("#bsInfoNumericEcartMax" + index).val())+1);
+		}
+	});
+	
+}
 
 $('#bodyInfoNumeric').on('change',"input[name*='bsInfoNumericEcartMax']", function () {
-    var index = parseInt($(this).data('index'));
-    var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length - 1;
-    if(index !== all)
-        $('#bodyInfoNumeric').find("#bsInfoNumericEcartMin" + (index + 1)).val($(this).val());   
-    bsInfoNumericType();
+	verifPlageAll();
+});
+$('#bodyInfoNumeric').on('change',"input[name*='bsInfoNumericEcartMin']", function () {
+	verifPlageAll();
 });
 
 $('#bodyInfoNumeric').on('click', "a[name*='bsInfoNumericInsertIcon']", function () {
@@ -444,7 +509,7 @@ $('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericImage']", function
     var img = new Image();
     img.src = "plugins/widget/core/images/" + image + "";
     $('#bsInfoNumericPreview' + index).attr('src', img.src);
-    img.on('load', function() {
+    $(img).on('load', function() {
         var temp = '<span class="text-center">H:' + this.width + 'px - L:' + this.height + 'px</span>';
         $('#bsInfoNumericLabel' + index).empty();
         $('#bsInfoNumericLabel' + index).append(temp);      
@@ -454,7 +519,7 @@ $('#bodyInfoNumeric').on('change',"select[name*='bsInfoNumericImage']", function
 
 $('#bsInfoNumericAddEntry').on('click', function () {
     var index = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
-    var min = $('#bodyInfoNumeric').find("#bsInfoNumericEcartMax" + (index - 1)).val();
+    var min = parseInt($('#bodyInfoNumeric').find("#bsInfoNumericEcartMax" + (index - 1)).val()) +1;
     var html = '<tr>';
     html += '<td style="text-align: center; vertical-align: middle;">';
     html += '<a class="btn btn-default btn-xs JeedomView" data-index="' + index + '" name="bsInfoNumericInsertIcon' + index + '" id="bsInfoNumericInsertIcon' + index + '" style=display:none"><i class="fa fa-flag"></i> Rechercher une icone</a>';
@@ -468,10 +533,10 @@ $('#bsInfoNumericAddEntry').on('click', function () {
     html += '<label class="col-sm-12 control-label specialView" id="bsInfoNumericLabelSpec' + index + '"></label>';
     html += '</td>';
     html += '<td style="text-align: center; vertical-align: middle;">';
-    html += '<input type="number" value="' + min + '" max="100" data-index="' + index + '" class="form-control" name="bsInfoNumericEcartMin' + index + '" id="bsInfoNumericEcartMin' + index + '"/>';
+    html += '<input type="number" value="' + min + '" max="" data-index="' + index + '" class="form-control" name="bsInfoNumericEcartMin' + index + '" id="bsInfoNumericEcartMin' + index + '"/>';
     html += '</td>';
     html += '<td style="text-align: center; vertical-align: middle;">';
-    html += '<input type="number" class="form-control" value="100" max="100" data-index="' + index + '" name="bsInfoNumericEcartMax' + index + '" id="bsInfoNumericEcartMax' + index + '"/>';
+    html += '<input type="number" class="form-control" value="'+ (min+1) +'" max="" data-index="' + index + '" name="bsInfoNumericEcartMax' + index + '" id="bsInfoNumericEcartMax' + index + '"/>';
     html += '</td>';
     html += '<td style="text-align: center; vertical-align: middle;" id="bsInfoNumericSvgPreview' + index + '">';
     html += '<span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView" data-index="' + index + '" name="bsInfoNumericIconCmd' + index + '" id="bsInfoNumericIconCmd' + index + '"></span>';
@@ -513,38 +578,54 @@ function getHtmlInfoNumericJeedom(dashboard) {
     width = $('#bsInfoNumericIconSize0').val() * 20 + 15;
     height = $('#bsInfoNumericIconSize0').val() * 20 + 20;
     if (dashboard) {
-        html += '<div style="width:90px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">\n';
-        html += '\t<center>\n';
-        html += '\t\t<span class="cmdName" style="font-weight: bold;font-size : 12px;display: none;">#valueName#</span><br>\n';
-        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="iconCmd#uid#"></span>\n';
-        html += '\t</center>\n';
-    }
-    else {
-        html += '<div style="width:' + width + 'px;height:100%;" class="cmd #history# tooltips" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
-        html += '\t<center>\n';
-        html += '\t\t<span style="font-size: ' + $('#bsInfoNumericIconSize0').val() + 'em;" class="iconCmd#uid#"></span>\n';
-        html += '\t</center>\n';
+        html += '<div style="min-width:120px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">\n'+
+				'	<center>\n'+
+				'		<div style="font-weight: bold;font-size : 12px;#hideCmdName#">#name_display#</div>\n'+
+				'		<span style="font-size: '+$("#bsInfoNumericIconSize0").val()+'em;" class="iconCmd"></span>\n'+
+				'		<div style="display:inline-block;">\n'+
+				'			<span style="font-weight: bold;" class="pull-right">#unite#</span>\n'+
+				'			<span style="font-size: 2em;font-weight: bold;" class="pull-right state"></span>\n'+
+				'		</div>\n'+
+				'		<div style="#displayHistory# font-size: 0.8em;" class="col-xs-12 center-block">\n'+
+				'			<span title="Min" class="tooltips">#minHistoryValue#</span>|<span title="Moyenne" class="tooltips" >#averageHistoryValue#</span> | <span title="Max" class="tooltips">#maxHistoryValue#</span> <i class="#tendance#"></i>\n'+
+				'		</div>\n'+
+				'	</center>\n';
+    }else {
+        html += '<div class="cmd" data-type="info" data-version="#version#" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">\n'+
+				'	<center>\n'+
+				'		<div style="font-size : 12px;#hideCmdName#">#name_display#</div>\n'+
+				'		<span style="font-size: '+$("#bsInfoNumericIconSize0").val()+'em;" class="iconCmd"></span>\n'+
+				'		<span style="font-size: 2em;" class="state">#state#</span>#unite#\n'+
+				'	</center>\n';
+
     }
     html += cdata;
     html += '\t<script>\n';
     if (dashboard) {
-        html += '\t\tif ("#displayName#" == "1") {\n';
+ /*       html += '\t\tif ("#displayName#" == "1") {\n';
         html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").show();\n';
         html += '\t\t} else {\n';
         html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").hide();\n';
         html += '\t\t}\n';
-    }
-    html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
-    html += '\t\t\$(".iconCmd#uid#").empty();\n';
-    for (var index = 0; index < all; index++) {
-        if (index === (all - 1))
-            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
-        else
-            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
-        html += "\t\t\t$('.iconCmd#uid#').append('" + $('#bsInfoNumericIconCmd' + index).html() + "');\n";
-        html += "\t\t\t$('.iconCmd#uid#').parent().append('<span style=\"font-size: 12px;\" ><br>'+temp+'%</span>');\n";
-        html += '\t\t}\n';
-    }
+*/    
+	}
+	
+	html +=	"	var iconUpdate = function (state){\n"+
+			"		$('.cmd[data-cmd_uid=#uid#] .iconCmd').empty();\n";
+			
+	for(var index = 0; index < all; index++) {
+		html +=	"		if (state >= "+$('#bsInfoNumericEcartMin' + index).val()+" && state <= "+$('#bsInfoNumericEcartMax' + index).val()+") {\n"+
+				"			$('.cmd[data-cmd_uid=#uid#] .iconCmd').append('"+$('#bsInfoNumericIconCmd' + index).html()+"');\n"+
+				"		}\n";
+	}
+	 
+	html +=	"		$('.cmd[data-cmd_uid=#uid#] .state').text(state);\n"+
+			"	};\n"+
+			"	jeedom.cmd.update['#id#'] = function(_options){\n"+
+			"		$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)\n"+
+			"		iconUpdate(_options.display_value);\n"+
+			"	}\n"+
+			"	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});\n";
     html += '\t</script>\n';
     html += '</div>\n';
     return html;
@@ -553,7 +634,8 @@ function getHtmlInfoNumericJeedom(dashboard) {
 function getHtmlInfoNumericImage(dashboard) {
     var html = "", ecartMin = [], ecartMax = [], icons = [];
     var all = $('#bodyInfoNumeric').find("select[name*='bsInfoNumericImage']").length;
-    for (var index = 0; index < all; index++) {
+    var mobDash = $('#bsInfoNumericDash').val() == 0 ? 'mobile' : 'dashboard';
+	for (var index = 0; index < all; index++) {
         ecartMin.push($('#bsInfoNumericEcartMin' + index).val());
         ecartMax.push($('#bsInfoNumericEcartMax' + index).val());
         icons.push($('#bsInfoNumericImage' + index).val());
@@ -572,7 +654,69 @@ function getHtmlInfoNumericImage(dashboard) {
     var width, height;
     width = $('#bsInfoNumericPreview0').width() + 15;
     height = $('#bsInfoNumericPreview0').height() + 15;
+    
+	if (dashboard) {
+        html += '<div style="min-width:120px; min-height:80px;" class="cmd tooltips cmd-widget cursor container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">\n'+
+				'	<center>\n'+
+				'		<div style="font-weight: bold;font-size : 12px;#hideCmdName#">#name_display#</div>\n'+
+				'		<span style="font-size: '+$("#bsInfoNumericIconSize0").val()+'em;" class="iconCmd"></span>\n'+
+				'		<div style="display:inline-block;">\n'+
+				'			<span style="font-weight: bold;" class="pull-right">#unite#</span>\n'+
+				'			<span style="font-size: 2em;font-weight: bold;" class="pull-right state"></span>\n'+
+				'		</div>\n'+
+				'		<div style="#displayHistory# font-size: 0.8em;" class="col-xs-12 center-block">\n'+
+				'			<span title="Min" class="tooltips">#minHistoryValue#</span>|<span title="Moyenne" class="tooltips" >#averageHistoryValue#</span> | <span title="Max" class="tooltips">#maxHistoryValue#</span> <i class="#tendance#"></i>\n'+
+				'		</div>\n'+
+				'	</center>\n';
+    }else {
+        html += '<div class="cmd" data-type="info" data-version="#version#" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#">\n'+
+				'	<center>\n'+
+				'		<div style="font-size : 12px;#hideCmdName#">#name_display#</div>\n'+
+				'		<span style="font-size: '+$("#bsInfoNumericIconSize0").val()+'em;" class="iconCmd"></span>\n'+
+				'		<span style="font-size: 2em;" class="state">#state#</span>#unite#\n'+
+				'	</center>\n';
+
+    }
+    html += cdata;
+    html += '\t<script>\n';
     if (dashboard) {
+ /*       html += '\t\tif ("#displayName#" == "1") {\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").show();\n';
+        html += '\t\t} else {\n';
+        html += '\t\t\t$(".cmd[data-cmd_uid=#uid#] .cmdName").hide();\n';
+        html += '\t\t}\n';
+*/   
+	}
+	
+	html +=	"   var srcImg = 'plugins/widget/core/template/"+mobDash+"/cmd.info.numeric."+$('#bsInfoNumericName').val()+"/';\n"+
+			"	var iconUpdate = function (state){\n"+
+			"		$('.cmd[data-cmd_uid=#uid#] .iconCmd').empty();\n";
+			
+	for(var index = 0; index < all; index++) {
+		html +=	"		if (state >= "+$('#bsInfoNumericEcartMin' + index).val()+" && state <= "+$('#bsInfoNumericEcartMax' + index).val()+") {\n"+
+				"			$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img style=\"display: inline-block;\" src=\"'+srcImg+'"+ $('#bsInfoNumericImage' + index).val() + "\">');\n"+
+				"		}\n";
+	}
+	 
+	html +=	"		$('.cmd[data-cmd_uid=#uid#] .state').text(state);\n"+
+			"	};\n"+
+			"	jeedom.cmd.update['#id#'] = function(_options){\n"+
+			"		$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)\n"+
+			"		iconUpdate(_options.display_value);\n"+
+			"	}\n"+
+			"	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});\n";
+    html += '\t</script>\n';
+    html += '</div>\n';
+    return html;
+	
+	
+	
+	
+	
+	
+	
+/*	
+	if (dashboard) {
         html += '<div style="padding:0;width:' + width + 'px; min-height:' + height + 'px;" class="cmd #history# tooltips cmd-widget container-fluid" data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" title="#collectDate#">\n';
         html += '\t<div class="row">\n';
         html += '\t\t<div class="center-block col-xs-12 h5 cmdName" style="margin-top:0;"><strong>#valueName#</strong></div>\n';
@@ -596,20 +740,21 @@ function getHtmlInfoNumericImage(dashboard) {
         html += '\t\t\t$(".cmd[data-cmd_uid=#uid#]").css("min-height", "' + (height + 10) + 'px");\n';
         html += '\t\t}\n';
     }
-    html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
+    html += '\t\tvar val = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
     html += '\t\t\$(".iconCmd#uid#").empty();\n';
     for (var index = 0; index < all; index++) {
         var image = $('#bsInfoNumericImage' + index).val();
         if (index === (all - 1))
-            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
+            html += '\t\tif (val >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && val <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else
-            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
-        html += "\t\t\t$('.iconCmd#uid#').append('<img style=\"display: block;\" src=\"plugins/widget/core/images/" + image + "\"><span>'+temp+'%</span>');\n";
+            html += '\t\tif (val >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && val < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
+        html += "\t\t\t$('.iconCmd#uid#').append('<img style=\"display: block;\" src=\"plugins/widget/core/images/" + image + "\"><span>'+val+'%</span>');\n";
         html += '\t\t}\n';
     }
     html += '\t</script>\n';
     html += '</div>\n';
     return html;
+*/
 }
 
 function getHtmlInfoNumericSpecial(dashboard) {
@@ -676,22 +821,22 @@ function getHtmlInfoNumericSpecial(dashboard) {
         html += '\t\t\t$(".cmd[data-cmd_uid=#uid#]").css("min-height", "' + (height + 10) + 'px");\n';
         html += '\t\t}\n';
     }
-    html += '\t\tvar temp = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
+    html += '\t\tvar val = Math.round((#maxValue# - #minValue#) * #state# / 100)\n';
     if (specialWidgets[list].extension !== 'svg')
         html += '\t\t\$(".iconCmd#uid#").empty();\n';
     for (var index = 0; index < all; index++) {
         var listItem = $('#bsInfoNumericSpecialCat' + index).find(':selected').index() - 1;
         var svg = $('#bsInfoNumericSpecialIcon' + index).find(':selected').index() - 1;
         if (index === (all - 1))
-            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
+            html += '\t\tif (val >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && val <= ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         else
-            html += '\t\tif (temp >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && temp < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
+            html += '\t\tif (val >= ' + $('#bsInfoNumericEcartMin' + index).val() + ' && val < ' + $('#bsInfoNumericEcartMax' + index).val() + ') {\n';
         if (specialWidgets[list].extension !== 'svg')
-            html += "\t\t\t$('.iconCmd#uid#').append('<img style=\"display: block;\" src=\"plugins/widget/core/special/" + specialWidgets[listItem].folder + specialWidgets[listItem].files[svg] + "\"><span>'+temp+'%</span>');\n";
+            html += "\t\t\t$('.iconCmd#uid#').append('<img style=\"display: block;\" src=\"plugins/widget/core/special/" + specialWidgets[listItem].folder + specialWidgets[listItem].files[svg] + "\"><span>'+val+'%</span>');\n";
         else {
             html += "\t\t\t$('div[name*=\"cmdSvg#uid#\"]').hide();\n";
             html += "\t\t\t$('div[name=\"cmdSvg#uid#" + index + "\"]').show();\n";
-            html += "\t\t\t$('.cmdTextSvg#uid#').text(temp + \"%\");\n";
+            html += "\t\t\t$('.cmdTextSvg#uid#').text(val + \"%\");\n";
         }
 
         html += '\t\t}\n';
