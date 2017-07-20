@@ -481,9 +481,8 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                         <label class="col-sm-2 control-label" for="bsOtherActionDash">{{Biblithèques}}</label>
                                         <div class="col-sm-2">
                                             <select class="form-control actionOtherAttr" data-l1key="type" id="bsOtherActionType">
-                                                <option value="0">Jeedom</option>
-                                                <option value="1">Widgets</option>
-                                                <option value="2">Spécial</option>
+                                                <option value="0">Icons</option>
+                                                <option value="1">Images</option>
                                             </select>
                                         </div>
                                     </div>
@@ -599,9 +598,8 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                         <label class="col-sm-2 control-label" for="bsInfoBinaryDash">{{Biblithèques}}</label>
                                         <div class="col-sm-2">
                                             <select class="form-control infoBinaryAttr" data-l1key="type" id="bsInfoBinaryType">
-                                                <option value="0">Jeedom</option>
-                                                <option value="1">Widgets</option>
-                                                <option value="2">Spécial</option>
+                                                <option value="0">Icons</option>
+                                                <option value="1">Images</option>
                                             </select>
                                         </div>
                                     </div>
@@ -717,9 +715,8 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                         <label class="col-sm-2 control-label" for="bsInfoNumericDash">{{Biblithèques}}</label>
                                         <div class="col-sm-2">
                                             <select class="form-control infoNumericAttr" data-l1key="type" id="bsInfoNumericType">
-                                                <option value="0">Jeedom</option>
-                                                <option value="1">Widgets</option>
-                                                <option value="2">Spécial</option>
+                                                <option value="0">Icons</option>
+                                                <option value="1">Images</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
@@ -752,15 +749,15 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                 <select class="form-control specialView" value="" data-index="0" name="bsInfoNumericSpecialIcon0" id="bsInfoNumericSpecialIcon0" ><option value="">{{Aucune}}</option></select>
                                             </td>
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <input type="number" class="form-control JeedomView infoNumericAttr" data-l1key="size" data-index="0" style=display:none" value="2.5" min="1" max="5" step="0.2" name="bsInfoNumericIconSize0" id="bsInfoNumericIconSize0"/>
+                                                <input type="number" class="form-control JeedomView infoNumericAttr" data-l1key="size" data-index="0" style=display:none" value="2.5" min="0.1" max="5" step="0.2" name="bsInfoNumericIconSize0" id="bsInfoNumericIconSize0"/>
                                                 <label class="col-sm-12 control-label widgetsView" id="bsInfoNumericLabel0"></label>
                                                 <label class="col-sm-12 control-label specialView" id="bsInfoNumericLabelSpec0"></label>
                                             </td>
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <input type="number" class="form-control" value="0" max="100" data-index="0" name="" id="bsInfoNumericEcartMin0" disabled/>
+                                                <input type="number" class="form-control" value="0" max="" data-index="0" name="bsInfoNumericEcartMin0" id="bsInfoNumericEcartMin0" />
                                             </td>
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <input type="number" class="form-control" value="100" max="100" data-index="0" name="bsInfoNumericEcartMax0" id="bsInfoNumericEcartMax0"/>
+                                                <input type="number" class="form-control" value="100" max="" data-index="0" name="bsInfoNumericEcartMax0" id="bsInfoNumericEcartMax0"/>
                                             </td>
                                             <td style="text-align: center; vertical-align: middle;" id="bsInfoNumericSvgPreview0">
                                                 <span style="font-size: 2.5em;font-weight: bold;margin-top: 5px;" class=" JeedomView" data-index="0" name="bsInfoNumericIconCmd0" id="bsInfoNumericIconCmd0"></span>
@@ -776,8 +773,10 @@ foreach (ls('core/css/icon', '*') as $dir) {
                             <div class="col-sm-3 noPaddingLeft noPaddingRight" style="min-width:190px">
                                 <div class="well col-sm-12">
                                     <div class="col-sm-2"></div>
-                                    <div class="col-sm-10 noPaddingLeft noPaddingRight" style="min-width: 150px;margin: 0px auto;text-align: center; vertical-align: middle;">
-                                        <input id="bsInfoNumeric" style="width:150px;" data-slider-id='bsInfoNumericSlider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0"/>
+                                    <div class="col-sm-10 noPaddingLeft noPaddingRight" style="min-width: 150px;margin: 10px auto;text-align: center; vertical-align: middle;">
+										<div id="slider">
+											<div id="custom-handle" class="ui-slider-handle"></div>
+										</div>
                                     </div>
                                     <div class="col-sm-12 noPaddingLeft noPaddingRight" style="text-align: center; vertical-align: middle;">
                                         <div class="eqLogic eqLogic-widget" style="display: none;">
