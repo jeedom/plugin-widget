@@ -91,14 +91,14 @@ class widget {
 		}
 		$path_parts = pathinfo($_pathfile);
 		$informations = explode('.', $path_parts['basename']);
-		$widget = new self();
-		$widget->setType($informations[1]);
-		$widget->setSubtype($informations[2]);
-		$widget->setName($informations[3]);
+		$widget = (new self())
+			->setType($informations[1])
+			->setSubtype($informations[2])
+			->setName($informations[3]);
 		$folder = explode('/', $path_parts['dirname']);
-		$widget->setVersion($folder[count($folder) - 1]);
-		$widget->setContent(file_get_contents($_pathfile));
-		$widget->setPath($_pathfile);
+		$widget->setVersion($folder[count($folder) - 1])
+			->setContent(file_get_contents($_pathfile))
+			->setPath($_pathfile);
 		return $widget;
 	}
 
@@ -148,7 +148,7 @@ class widget {
 			throw new Exception(__('Impossible d\'installer le widget le repertoire n\éxiste pas : ', __FILE__) . $cibDir);
 		}
 		$zip = new ZipArchive;
-		if ($zip->open($_path) === TRUE) {
+		if ($zip->open($_path) === true) {
 			$zip->extractTo($cibDir . '/');
 			$zip->close();
 		} else {
@@ -440,6 +440,7 @@ class widget {
 
 	public function setType($type) {
 		$this->type = $type;
+		return $this;
 	}
 
 	public function getSubtype() {
@@ -448,6 +449,7 @@ class widget {
 
 	public function setSubtype($subtype) {
 		$this->subtype = $subtype;
+		return $this;
 	}
 
 	public function getName() {
@@ -456,6 +458,7 @@ class widget {
 
 	public function setName($name) {
 		$this->name = str_replace('.', '_', $name);
+		return $this;
 	}
 
 	public function getPath() {
@@ -464,6 +467,7 @@ class widget {
 
 	public function setPath($path) {
 		$this->path = $path;
+		return $this;
 	}
 
 	public function getContent() {
@@ -472,6 +476,7 @@ class widget {
 
 	public function setContent($content) {
 		$this->content = $content;
+		return $this;
 	}
 
 	public function getVersion() {
@@ -480,6 +485,7 @@ class widget {
 
 	public function setVersion($version) {
 		$this->version = $version;
+		return $this;
 	}
 
 }
