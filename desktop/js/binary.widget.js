@@ -232,10 +232,13 @@ function checkInfoBinaryJeedomIcon() {
         editorBinary.setValue(text);
         if ($('#bsInfoBinaryName').val() !== '')
             $('#modalInfoBinarySave').prop('disabled', false);
-        $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#", $('#bsInfoBinaryName').val()));
+        $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace("#displayName#", "1").replace(/#state#/g, "0").replace("#valueName#", $('#bsInfoBinaryName').val()).replace(/#name_display#/g, "Prévisualisation"));
         $('#bsInfoBinaryWidgetOff').parent().parent().show();
-        $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#", $('#bsInfoBinaryName').val()));
+        $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace("#displayName#", "1").replace(/#state#/g, "1").replace("#valueName#", $('#bsInfoBinaryName').val()).replace(/#name_display#/g, "Prévisualisation"));
         $('#bsInfoBinaryWidgetOn').parent().parent().show();
+		
+		$('#bsInfoBinaryWidgetOff span').html($('#bsInfoBinaryIconCmd1').html());
+		$('#bsInfoBinaryWidgetOn span').html($('#bsInfoBinaryIconCmd2').html());
         return true;
     }
     else {
@@ -258,13 +261,33 @@ function checkInfoBinaryWidgetImage() {
         editorBinary.setValue(text);
         if ($('#bsInfoBinaryName').val() !== '')
             $('#modalInfoBinarySave').prop('disabled', false);
-            $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace(/#uid#/g, "Uid3").replace(/#displayName#/, "1").replace(/#state#/g, "0").replace(/#valueName#/, $('#bsInfoBinaryName').val()));           
-            $('.iconCmdUid3 img').attr('src', 'plugins/widget/core/images/'+$('#bsInfoBinaryImage1').val());
+            $('#bsInfoBinaryWidgetOff').html(text.replace(/#id#/g, "3").replace(/#uid#/g, "Uid3").replace(/#displayName#/, "1").replace(/#state#/g, "0").replace(/#valueName#/, $('#bsInfoBinaryName').val()).replace(/#name_display#/g, "Prévisualisation"));           
+			$('.cmd[data-cmd_uid=Uid3] img').attr({
+				'src': 'plugins/widget/core/images/'+$('#bsInfoBinaryImage1').val()
+			}).css({
+				'width':'100%',
+				'height':'auto'
+			});
+			$('.cmd[data-cmd_uid=Uid3]').css({
+				'width':'100%',
+				'height':'auto',
+				'min-height':''
+			});
             $('#bsInfoBinaryWidgetOff').parent().parent().show();
 
 
-            $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace(/#uid#/g, "Uid4").replace(/#displayName#/, "1").replace(/#state#/g, "1").replace(/#valueName#/, $('#bsInfoBinaryName').val()));
-            $('.iconCmdUid4 img').attr('src', 'plugins/widget/core/images/'+$('#bsInfoBinaryImage2').val());
+            $('#bsInfoBinaryWidgetOn').html(text.replace(/#id#/g, "4").replace(/#uid#/g, "Uid4").replace(/#displayName#/, "1").replace(/#state#/g, "1").replace(/#valueName#/, $('#bsInfoBinaryName').val()).replace(/#name_display#/g, "Prévisualisation"));
+			$('.cmd[data-cmd_uid=Uid4] img').attr({
+				'src': 'plugins/widget/core/images/'+$('#bsInfoBinaryImage2').val()
+			}).css({
+				'width':'100%',
+				'height':'auto'
+			});
+			$('.cmd[data-cmd_uid=Uid4]').css({
+				'width':'100%',
+				'height':'auto',
+				'min-height':''
+			});
             $('#bsInfoBinaryWidgetOn').parent().parent().show();
         return true;
     }
@@ -560,6 +583,7 @@ function getHtmlInfoBinaryJeedom(dashboard) {
 
 function getHtmlInfoBinaryImage(dashboard) {
     var html = "";
+	var mobDash = $('#bsInfoBinaryDash').val() == 0 ? 'mobile' : 'dashboard';
     var cdata = '<!-- Ne Pas Supprimer -->\n' +
             '\t<script class="createWidgetInfo" type="text/javascript">//<![CDATA[' +
             JSON.stringify({
@@ -602,9 +626,9 @@ function getHtmlInfoBinaryImage(dashboard) {
     }
    	html += '\t\t\t\$(".iconCmd#uid#").empty();\n';
     html += '\t\t\tif (parseInt(_options.display_value) == 1) {\n';
-    html += '\t\t\t\t$(".iconCmd#uid#").append("<img src=\'plugins/widget/core/template/dashboard/cmd.info.binary.' + $('#bsInfoBinaryName').val() +'/'+ image2 + '\'>");\n';
+    html += '\t\t\t\t$(".iconCmd#uid#").append("<img src=\'plugins/widget/core/template/'+mobDash+'/cmd.info.binary.' + $('#bsInfoBinaryName').val() +'/'+ image2 + '\'>");\n';
     html += '\t\t\t} else {\n';
-    html += '\t\t\t\t$(".iconCmd#uid#").append("<img src=\'plugins/widget/core/template/dashboard/cmd.info.binary.' + $('#bsInfoBinaryName').val() +'/'+ image1 + '\'>");\n';
+    html += '\t\t\t\t$(".iconCmd#uid#").append("<img src=\'plugins/widget/core/template/'+mobDash+'/cmd.info.binary.' + $('#bsInfoBinaryName').val() +'/'+ image1 + '\'>");\n';
     html += '\t\t\t}\n';
     html += "\t\t\t$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);\n";                                                                                          
     html += '\t\t}\n';
