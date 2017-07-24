@@ -956,22 +956,29 @@ $('#bt_OtherActionAdd').on('click', function () {
     $('#bsInfoNumericCategory').hide();
     $('#bsOtherActionCategory').show('fade');
     var image1,image2,imageSpec1,imageSpec2;
-    if($('#bsOtherImage1').val() !== undefined && $('#bsOtherImage1').val() !== null && $('#bsOtherImage1').val() !== '0')
+    
+	if($('#bsOtherImage1').val() !== undefined && $('#bsOtherImage1').val() !== null && $('#bsOtherImage1').val() !== '0'){
         image1 = $('#bsOtherImage1').val();
-    else
+    }else{
         image1 = '0';
-    if($('#bsOtherImage2').val() !== undefined && $('#bsOtherImage2').val() !== null && $('#bsOtherImage2').val() !== '0')
+	}
+	
+    if($('#bsOtherImage2').val() !== undefined && $('#bsOtherImage2').val() !== null && $('#bsOtherImage2').val() !== '0'){
         image2 = $('#bsOtherImage2').val();
-    else
+    }else{
         image2 = '0';
-    if($('#bsOtherSpecialCat1').val() !== undefined && $('#bsOtherSpecialCat1').val() !== null && $('#bsOtherSpecialCat1').val() !== '0')
+	}
+	
+    if($('#bsOtherSpecialCat1').val() !== undefined && $('#bsOtherSpecialCat1').val() !== null && $('#bsOtherSpecialCat1').val() !== '0'){
         imageSpec1 = $('#bsOtherSpecialCat1').val();
-    else
+    }else{
         imageSpec1 = '';
-    if($('#bsOtherSpecialCat2').val() !== undefined && $('#bsOtherSpecialCat2').val() !== null && $('#bsOtherSpecialCat2').val() !== '0')
+	}
+    if($('#bsOtherSpecialCat2').val() !== undefined && $('#bsOtherSpecialCat2').val() !== null && $('#bsOtherSpecialCat2').val() !== '0'){
         imageSpec2 = $('#bsOtherSpecialCat2').val();
-    else
+    }else{
         imageSpec2 = '';
+	}
     $('#bsOtherSvgSpecColor').val('#000');
     $('#bsOtherSvgSpecSize').val('64');
     setSelectImage($('#bsOtherImage1'));
@@ -984,6 +991,7 @@ $('#bt_OtherActionAdd').on('click', function () {
     $('#bsOtherSpecialCat2').val(imageSpec2);
     bsOtherActionType();
     $('#bsPanelWidgetImages').hide('fade');
+	
 });
 
 var editorBinary = null;
@@ -1066,6 +1074,24 @@ $('#bt_InfoNumericAdd').on('click', function () {
     $('#modalInfoNumericSave').prop('disabled',true);
     bsInfoNumericType();
     $('#bsPanelWidgetImages').hide('fade');
+	
+	var handle = $( "#custom-handle" );
+    $( "#slider" ).slider({
+      create: function() {
+        handle.text( $( this ).slider( "value" ) );
+      },
+      slide: function( event, ui ) {
+        handle.text( ui.value );
+      }
+    });
+	
+/*	$('#bodyInfoNumeric').on('change',"#bsInfoNumericEcartMin0", function () {
+		var index = parseInt($(this).data('index'));
+		if(index == 0 && parseInt($("#bsInfoNumericEcartMax0").val()) <= parseInt($(this).val())){
+		   $("#bsInfoNumericEcartMax0").val(parseInt($(this).val())+1);
+		}
+		bsInfoNumericType();
+	});*/
 });
 
 
