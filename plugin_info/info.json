@@ -1,10 +1,10 @@
 {
 	"id" : "widget",
 	"name" : "Widget",
-	"description" : "Plugin pour appliquer/modifier widget",
+	"description" : "Plugin pour appliquer/modifier/créer des widgets",
 	"licence" : "AGPL",
-	"author" : "Loïc",
-	"require" : "3.0",
+	"author" : "Loïc - Skyline-ch",
+	"require" : "3.1.7",
 	"category" : "programming",
 	"changelog" : "https://github.com/jeedom/plugin-widget/blob/stable/doc/#language#/changelog.asciidoc",
 	"documentation" : "https://github.com/jeedom/plugin-widget/blob/stable/doc/#language#/index.asciidoc"
