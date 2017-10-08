@@ -66,7 +66,10 @@ try {
     if (init('action') == 'add') {
         $widget = new widget();
         $_data = init('data');
-        $widget->setName($_data);
+        $widget->setName($_data['name']);
+        $widget->setVersion($_data['version']);
+        $widget->setType($_data['type']);
+        $widget->setSubtype($_data['subtype']);
         $widget->save();
         $result = utils::o2a($widget);
         $result['path'] = $widget->generatePath();
