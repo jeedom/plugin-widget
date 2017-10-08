@@ -271,16 +271,7 @@ $('.widgetAction[data-action=fonts]').on('click', function () {
 
 $('.widgetAction[data-action=add]').on('click', function () {
     $.hideAlert();
-    if ($('#bt_expertMode').attr('state') !== '1') {
-        bootbox.prompt("Nom du widget ?", function (result) {
-            if (result !== null) {
-                result.name = result;
-                addWidget(result, widgetCallback);
-            }
-        });
-    }
-    else {
-        bootbox.dialog({
+    	bootbox.dialog({
             title: "{{Choisissez vos paramètres}}",
             message: '<div class="row">' +
             '<div class="col-md-12"> ' +
@@ -340,7 +331,6 @@ $('.widgetAction[data-action=add]').on('click', function () {
                 }
             }
         });
-}
 });
 
 $('#bt_editWidget').on('click', function () {
