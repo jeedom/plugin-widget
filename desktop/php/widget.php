@@ -478,7 +478,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                 <option value="0">Mobile</option>
                                             </select>
                                         </div>
-                                        <label class="col-sm-2 control-label" for="bsOtherActionDash">{{Biblithèques}}</label>
+                                        <label class="col-sm-2 control-label" for="bsOtherActionDash">{{Bibliothèques}}</label>
                                         <div class="col-sm-2">
                                             <select class="form-control actionOtherAttr" data-l1key="type" id="bsOtherActionType">
                                                 <option value="0">Icons</option>
@@ -595,7 +595,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                 <option value="0">Mobile</option>
                                             </select>
                                         </div>
-                                        <label class="col-sm-2 control-label" for="bsInfoBinaryDash">{{Biblithèques}}</label>
+                                        <label class="col-sm-2 control-label" for="bsInfoBinaryDash">{{Bibliothèques}}</label>
                                         <div class="col-sm-2">
                                             <select class="form-control infoBinaryAttr" data-l1key="type" id="bsInfoBinaryType">
                                                 <option value="0">Icons</option>
@@ -712,7 +712,7 @@ foreach (ls('core/css/icon', '*') as $dir) {
                                                 <option value="0">Mobile</option>
                                             </select>
                                         </div>
-                                        <label class="col-sm-2 control-label" for="bsInfoNumericDash">{{Biblithèques}}</label>
+                                        <label class="col-sm-2 control-label" for="bsInfoNumericDash">{{Bibliothèques}}</label>
                                         <div class="col-sm-2">
                                             <select class="form-control infoNumericAttr" data-l1key="type" id="bsInfoNumericType">
                                                 <option value="0">Icons</option>
