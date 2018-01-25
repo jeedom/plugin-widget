@@ -13,7 +13,7 @@ Ainsi, on peut avoir un même widget écrit en bleu sur une commande et en vert 
 
 
 .Terminologie
-[NOTE]
+[NOTA]
 ===============================
 Widget et Tuile, à ne pas confondre.
 
