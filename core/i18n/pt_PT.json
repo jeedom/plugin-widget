@@ -1,0 +1,52 @@
+{
+    "plugins/widget/desktop/php/widget.php": {
+        "Récuperer du market": "Recuperar o mercado",
+        "Market": "Market",
+        "Ajouter un widget": "Adicionar Widget",
+        "Rechercher": "Pesquisar",
+        "Widgets installés sur votre Jeedom": "Widgets instalado no seu Jeedom",
+        "Général": "Geral",
+        "Fichiers": "arquivos",
+        "Dupliquer": "duplicar",
+        "Nom du widget": "nome do widget",
+        "Version": "versão",
+        "Dashboard": "painel de instrumentos",
+        "Mobile": "móvel",
+        "Type": "tipo",
+        "Aucun": "Nemhum",
+        "Sous-type": "subtipo",
+        "Utilisé par ": "usado por",
+        "Apercu": "visão global",
+        "Appliquer sur des commandes": "aplicar controles",
+        "Partager": "ação",
+        "Supprimer": "remover",
+        "Sauvegarder": "Salvar"
+    },
+    "plugins/widget/desktop/js/widget.js": {
+        "Sauvegarde effectué avec succès": "Backup concluído com êxito",
+        "Suppression effectué avec succès": "Remoção concluída com êxito",
+        "Etes-vous sûr de vouloir supprimer le widget": "Tem certeza de que deseja remover o widget",
+        "Nom la copie du widget ?": "Nomeie a cópia do widget?"
+    },
+    "plugins/widget/desktop/modal/widget.3rdparty.php": {
+        "Nom du fichier": "nome do arquivo",
+        "Chemin": "caminho",
+        "Action": "ação",
+        "Fichier(s) ajouté(s) avec succes": "Arquivo (s) adicionado (s) com sucesso",
+        "Etes-vous sûr de vouloir supprimer le fichier": "Tem certeza de que deseja excluir o arquivo",
+        "Fichier supprimé avec succes": "Arquivo excluído com sucesso"
+    },
+    "plugins/widget/desktop/modal/widget.apply.php": {
+        "Basculer": "alternar",
+        "Valider": "validar",
+        "Object": "objeto",
+        "Equipement": "Equipamento",
+        "Commande": "ordem",
+        "Unité": "unidade",
+        "Widget appliqué avec succès": "Widget aplicado com sucesso"
+    },
+    "plugins/widget/plugin_info/info.xml": {
+        "Plugin pour appliquer/modifier widget": "Plugin para aplicar widget / editar",
+        "Aucune": "Nenhum"
+    }
+}

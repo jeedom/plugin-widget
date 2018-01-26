@@ -1,0 +1,52 @@
+{
+    "plugins/widget/desktop/php/widget.php": {
+        "Récuperer du market": "市場を回復",
+        "Market": "市場",
+        "Ajouter un widget": "ウィジェットを追加",
+        "Rechercher": "検索する",
+        "Widgets installés sur votre Jeedom": "あなたのJeedomにインストールされているウィジェット",
+        "Général": "コモン",
+        "Fichiers": "ファイル",
+        "Dupliquer": "複写",
+        "Nom du widget": "ウィジェットの名前",
+        "Version": "バージョン",
+        "Dashboard": "計器盤",
+        "Mobile": "モバイル",
+        "Type": "タイプ",
+        "Aucun": "何でもありません",
+        "Sous-type": "サブタイプ",
+        "Utilisé par ": "で使用されます",
+        "Apercu": "概要",
+        "Appliquer sur des commandes": "コントロールを適用します",
+        "Partager": "シェア",
+        "Supprimer": "取り除きます",
+        "Sauvegarder": "セーブ"
+    },
+    "plugins/widget/desktop/js/widget.js": {
+        "Sauvegarde effectué avec succès": "バックアップが正常に完了",
+        "Suppression effectué avec succès": "取り外しが正常に完了",
+        "Etes-vous sûr de vouloir supprimer le widget": "あなたがウィジェットを削除してよろしいです",
+        "Nom la copie du widget ?": "ウィジェットのコピーに名前を付けますか？"
+    },
+    "plugins/widget/desktop/modal/widget.3rdparty.php": {
+        "Nom du fichier": "ファイル名",
+        "Chemin": "パス",
+        "Action": "アクション",
+        "Fichier(s) ajouté(s) avec succes": "ファイル（複数可）に成功（S）を追加しました",
+        "Etes-vous sûr de vouloir supprimer le fichier": "あなたは、ファイルを削除してもよろしいです",
+        "Fichier supprimé avec succes": "ファイルが正常に削除します"
+    },
+    "plugins/widget/desktop/modal/widget.apply.php": {
+        "Basculer": "トグル",
+        "Valider": "検証",
+        "Object": "オブジェクト",
+        "Equipement": "設備",
+        "Commande": "オーダー",
+        "Unité": "団結",
+        "Widget appliqué avec succès": "ウィジェットが正常に適用します"
+    },
+    "plugins/widget/plugin_info/info.xml": {
+        "Plugin pour appliquer/modifier widget": "/編集ウィジェットを適用するためのプラグイン",
+        "Aucune": "何でもありません"
+    }
+}
