@@ -5,7 +5,7 @@
 	"licence" : "AGPL",
 	"author" : "Loïc - Skyline-ch",
 	"require" : "3.1.7",
-        "category" : "programming",
+        "category" : "programming",
         "changelog" : "https://jeedom.github.io/plugin-widget/#language#/changelog",
         "documentation" : "https://jeedom.github.io/plugin-widget/#language#/"
 }
