@@ -1,6 +1,0 @@
-== FAQ
-
-Wie lernt man, ein Widget zu machen ?::
-Das Widget System stützt sich auf die Sprachen HTML und Javascript, es ist also ratsam sich die (sehr zahlreiche) Kurse über diese Sprachen anzusehen. Es ist desweiteren interessant, auch Jquery Kurse (und mobilem Jquery für die mobile Version der Widgets)  zu lesen. 
-
-Eine andere Art und Weise besteht darin, ein Widget im „einfacher Erstellung Modus“ zu machen, da wird das Plugin automatisch den Code Ihrer Widgets erzeugen.
