@@ -207,7 +207,7 @@ class widget {
 			$urlPath2 = config::byKey('market::address') . '/filestore/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.png';
 			$urlPath3 = config::byKey('market::address') . '/filestore/market/widget/images/' . $widget->getVersion() . '.' . $widget->getHumanName() . '_icon.jpg';
 			$return .= "<center>";
-			$return .= '<img class="lazy" style="margin-left: 40px;border: 1px solid #C5C5C5;border-radius:5px; padding: 3px" src="plugins/widget/doc/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
+			$return .= '<img class="lazy" style="margin-left: 40px;border: 1px solid #C5C5C5;border-radius:5px; padding: 3px" src="plugins/widget/docs/images/widget_icon.png" data-original3="' . $urlPath3 . '" data-original2="' . $urlPath2 . '" data-original="' . $urlPath . '" height="105" width="95" />';
 			$return .= "</center>";
 			if ($widget->getVersion() == 'mobile') {
 				$return .= '<strong class="well col-sm-12 text-center" style="font-size : 0.85em;position:relative;padding: 5px; top : 15px;"><div style="width: auto; overflow: hidden;  -o-text-overflow: ellipsis; text-overflow: ellipsis; white-space: nowrap;" title="' . $widget->getName() . '">' . '<span class="badge pull-left">' . count($widget->getUsedBy()) . '</span> ' . $widget->getName() . '</div></strong>';
