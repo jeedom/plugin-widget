@@ -104,7 +104,7 @@ class widget {
 
 	public static function shareOnMarket(&$market) {
 		$informations = explode('.', $market->getLogicalId());
-		$tmp_dir = realpath(dirname(__FILE__) . '/../../../../tmp/') . '/' . $market->getLogicalId();
+		$tmp_dir = jeedom::getTmpFolder('market') . '/' . $market->getLogicalId();
 		if (file_exists($tmp_dir)) {
 			if (!rrmdir($tmp_dir)) {
 				throw new Exception(__('Impossible de supprimer : ', __FILE__) . $tmp_dir . __('. Vérifiez les droits', __FILE__));
@@ -129,7 +129,7 @@ class widget {
 				throw new Exception(__('Impossible de copier ', __FILE__) . $cibDirs[1] . ' => ' . $tmp_dir);
 			}
 		}
-		$tmp = dirname(__FILE__) . '/../../../../tmp/' . $market->getLogicalId() . '.zip';
+		$tmp = jeedom::getTmpFolder('market')  . $market->getLogicalId() . '.zip';
 		if (file_exists($tmp)) {
 			if (!unlink($tmp)) {
 				throw new Exception(__('Impossible de supprimer : ', __FILE__) . $tmp . __('. Vérifiez les droits', __FILE__));
