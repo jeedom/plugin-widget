@@ -1,7 +1,7 @@
 # 05/07/2018
 
-- Correction d'un bug sur les images
+- Ein Fehler in den Bildern wurde behoben
 
 # 25/04/2018
 
-- Correction d'un soucis d'envoi de widget sur le market
+- Es wurde ein Problem beim Senden eines Widgets auf dem Markt behoben
