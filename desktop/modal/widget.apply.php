@@ -45,9 +45,6 @@ include_file('3rdparty', 'jquery.tablesorter/jquery.tablesorter.widgets.min', 'j
         <?php
 foreach (cmd::byTypeSubType($widget->getType(), $widget->getSubType()) as $cmd) {
 	$eqLogic = $cmd->getEqLogic();
-	if ($eqLogic->getIsEnable() == 0 || $eqLogic->getIsVisible() == 0 || $cmd->getIsVisible() == 0) {
-		continue;
-	}
 	if (is_object($eqLogic)) {
 		$object = $eqLogic->getObject();
 	} else {
