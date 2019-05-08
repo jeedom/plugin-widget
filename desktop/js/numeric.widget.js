@@ -610,7 +610,7 @@ function getHtmlInfoNumericJeedom(dashboard) {
 */    
 	}
 	
-	html +=	"	var iconUpdate = function (state){\n"+
+	html +=	"	var iconUpdate#uid# = function (state){\n"+
 			"		$('.cmd[data-cmd_uid=#uid#] .iconCmd').empty();\n";
 			
 	for(var index = 0; index < all; index++) {
@@ -623,7 +623,7 @@ function getHtmlInfoNumericJeedom(dashboard) {
 			"	};\n"+
 			"	jeedom.cmd.update['#id#'] = function(_options){\n"+
 			"		$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)\n"+
-			"		iconUpdate(_options.display_value);\n"+
+			"		iconUpdate#uid#(_options.display_value);\n"+
 			"	}\n"+
 			"	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});\n";
     html += '\t</script>\n';
@@ -689,7 +689,7 @@ function getHtmlInfoNumericImage(dashboard) {
 	}
 	
 	html +=	"   var srcImg = 'plugins/widget/core/template/"+mobDash+"/cmd.info.numeric."+$('#bsInfoNumericName').val()+"/';\n"+
-			"	var iconUpdate = function (state){\n"+
+			"	var iconUpdate#uid# = function (state){\n"+
 			"		$('.cmd[data-cmd_uid=#uid#] .iconCmd').empty();\n";
 			
 	for(var index = 0; index < all; index++) {
@@ -702,7 +702,7 @@ function getHtmlInfoNumericImage(dashboard) {
 			"	};\n"+
 			"	jeedom.cmd.update['#id#'] = function(_options){\n"+
 			"		$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)\n"+
-			"		iconUpdate(_options.display_value);\n"+
+			"		iconUpdate#uid#(_options.display_value);\n"+
 			"	}\n"+
 			"	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});\n";
     html += '\t</script>\n';
