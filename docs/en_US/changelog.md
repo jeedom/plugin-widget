@@ -1,7 +1,11 @@
+# 16/10/2018
+
+- Fixed bug on "Apply on" option when commands are invisible
+
 # 05/07/2018
 
-- Correction d'un bug sur les images
+- Fixed a bug on images
 
 # 25/04/2018
 
-- Correction d'un soucis d'envoi de widget sur le market
+- Fixed a problem of sending widget to the market

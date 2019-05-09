@@ -4,7 +4,7 @@
         "Market": "Market",
         "Ajouter un widget": "Add widget",
         "Rechercher": "Search",
-        "Widgets installés sur votre Jeedom": "Widgets installed onto your Jeedom system",
+        "Widgets installés sur votre Jeedom": "Widgets installed on your Jeedom",
         "Général": "Main",
         "Fichiers": "Files",
         "Dupliquer": "Duplicate",
@@ -23,8 +23,8 @@
         "Sauvegarder": "Save"
     },
     "plugins/widget/desktop/js/widget.js": {
-        "Sauvegarde effectué avec succès": "Backup successfully completed",
-        "Suppression effectué avec succès": "Deletion completed successfully",
+        "Sauvegarde effectué avec succès": "Saved successfully",
+        "Suppression effectué avec succès": "Deleted successfully",
         "Etes-vous sûr de vouloir supprimer le widget": "Do you really want to delete the widget ",
         "Nom la copie du widget ?": "Name of the widget copy?"
     },

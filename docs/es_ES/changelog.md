@@ -1,3 +1,7 @@
+# 16/10/2018
+
+- Correction d'un bug sur l'option "Appliquer sur" lorsque les commandes sont invisibles
+
 # 05/07/2018
 
 - Correction d'un bug sur les images
