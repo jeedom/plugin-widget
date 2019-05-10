@@ -1,3 +1,7 @@
+# 09/05/2019
+
+- Correction de de bug (merci @Salvialf)
+
 # 16/10/2018
 
 - Fixed bug on "Apply on" option when commands are invisible
