@@ -194,7 +194,7 @@ Configuration avancée
 ---------------------
 
 Voir la doc sur le Résumé domotique ⇒
-[ICI](/doc/documentation/core/fr_FR/doc-core-display.html)
+[ICI](https://jeedom.github.io/core/fr_FR/display)
 
 Création / Modification de widget 
 ---------------------------------
