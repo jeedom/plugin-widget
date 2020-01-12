@@ -1,7 +1,7 @@
 Konfiguration
 =============
 
-Intro 
+Einleitung
 =====
 
 Le plugin widget est un plugin un peu particulier, car il ne permet pas
@@ -30,8 +30,8 @@ vert sur une autre.
 > zone dans laquelle vont s’afficher les différents widgets appliqués
 > aux commandes et infos du module.
 
-Installation du plugin Widget 
-=============================
+Installation des Widget-Plugins 
+==============================
 
 Comme pour tout plugin, le plugin Widget s’installe depuis l’interface
 Jeedom, menu "Général"⇒"Plugins"
@@ -59,7 +59,7 @@ bouton vert "activer".
 
 Von nun an ist das Plugin aktiv und einsatzfähig.
 
-Présentation et fonction de base du Plugin Widget 
+Darstellung und Grundfunktion des Widget Plugins
 =================================================
 
 Afin de se rendre dans le plugin Widget, il faut aller dans le menu
@@ -141,7 +141,7 @@ appliquer le widget
 
 ![Widget : ConsoIMG](../images/capture011.png)
 
-Options de personnalisation des widgets 
+Anpassungsoptionen für das Widget
 ---------------------------------------
 
 Depuis la version 1.112 de Jeedom, il est possible de personnaliser les
