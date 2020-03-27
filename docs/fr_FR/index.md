@@ -697,29 +697,24 @@ voici donc la liste et leur détail :
 
 ### Les class CSS Jeedom 
 
-cmd
-
-:   doit impérativement être ajouté à l’attribut "class" de la div
+cmd:   
+    - Doit impérativement être ajouté à l’attribut "class" de la div
     principale, cette class permet la mise à jour du widget. Sans cette
     class le widget ne se met à jour que par actualisation de la page.
 
-cmd-widget
-
-:   cette class est recommandée car elle permet d’ajouter quelques
+cmd-widget:   
+    - Cette class est recommandée car elle permet d’ajouter quelques
     paramètres CSS par défaut au widget pour un bon comportement.
 
-cursor
+cursor:   
+    - Permet de modifier le pointeur en main.
 
-:   Permet de modifier le pointeur en main.
-
-history
-
-:   Cette class permet de modifier le pointeur en main, et lors du clic
+history:
+    - Cette class permet de modifier le pointeur en main, et lors du clic
     d’afficher l’historique de la valeur du widget.
 
-tooltips
-
-:   C’est pour le title d’un élément au lieu d’être jaune il devient
+tooltips:   
+    - C’est pour le title d’un élément au lieu d’être jaune il devient
     noir translucide avec le texte en blanc
 
 FAQ 
