@@ -453,8 +453,9 @@ $('#bt_manageFiles').on('click', function () {
 });
 
 $('#bt_getFromMarket').on('click', function () {
-    $('#md_modal').dialog({title: "Partager sur le market"});
-    $('#md_modal').load('index.php?v=d&modal=update.list&type=widget&repo=market').dialog('open');
+    //$('#md_modal').dialog({title: "Partager sur le market"});
+    //$('#md_modal').load('index.php?v=d&modal=update.list&type=widget&repo=market').dialog('open');
+    window.open('https://images.jeedom.com/archives/widget/', '_blank');
 });
 
 if (getUrlVars('id') !== '') {

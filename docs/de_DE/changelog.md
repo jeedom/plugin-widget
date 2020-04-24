@@ -1,11 +1,15 @@
-# 16/10/2018
+# 05/09/2019
 
-- Correction d'un bug sur l'option "Appliquer sur" lorsque les commandes sont invisibles
+- Fehlerkorrektur (danke @Salvialf)
 
-# 05/07/2018
+# 16.10.2008
 
-- Ein Fehler in den Bildern wurde behoben
+- Behebung eines Fehlers bei der Option "Anwenden auf", wenn die Befehle unsichtbar sind
 
-# 25/04/2018
+# 07/05/2018
 
-- Es wurde ein Problem beim Senden eines Widgets auf dem Markt behoben
+- Korrektur eines Fehlers auf den Bildern
+
+# 25.04.2008
+
+- Es wurde ein Problem beim Senden eines Widgets an den Markt behoben
