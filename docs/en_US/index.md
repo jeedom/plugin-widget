@@ -4,7 +4,7 @@ Setup
 Intro 
 =====
 
-The Widget plugin is a bit special because it does not allow
+The widget plugin is a bit special because it does not allow
 to create equipment but to modify the rendering (display) of a
 ordered. The objective of this plugin is therefore to allow personalization
 simply how to display a value, info, or action based
@@ -12,18 +12,18 @@ of his tastes and desires.
 
 Since version 1.112 from Jeedom, it is possible to customize
 widgets with specific options (created by the developer of the
-widget). So we can have a Widget that will display differently from a
+widget). So we can have a widget that will display differently from a
 order to the other.
 
-Thus, we can have the same Widget written in blue on an order and in
+Thus, we can have the same widget written in blue on an order and in
 green on another.
 
-> **Note**
+> **NOTE**
 >
 > Widget and Tile, not to be confused.
 >
-> The Widget is the part that will take care of formatting and
-> display an info or order. A Widget should only handle one
+> The widget is the part that will take care of formatting and
+> display an info or order. A widget should only handle one
 > single order or info.
 >
 > La Tuile is a grouping of widgets for a module. It's here
@@ -51,7 +51,7 @@ which contains several pieces of information.
 
 Click on the "Install stable" button". Once installed, Jeedom will
 ask if you want to go to the plugin configuration page.
-Answer yes. On the configuration page of the Widget plugin, we
+Answer yes. On the configuration page of the widget plugin, we
 we only have one option for this plugin : activate or deactivate.
 
 By default the plugin is disabled. I invite you to click on the
@@ -75,26 +75,26 @@ download others via the market or create your own widgets
 ![capture006](../images/capture006.png)
 
 By clicking on one of the widgets in the list on the right menu or
-left you will open the Widget configuration page, in
-which you can modify, see a preview of the Widget (if Jeedom
+left you will open the widget configuration page, in
+which you can modify, see a preview of the widget (if Jeedom
 find a compatible command) and lots of configuration info
-like Widget source code
+like widget source code
 
 ![capture007](../images/capture007.png)
 
 > **Warning**
 >
-> If you modify a Widget that is not one of your creations, it is
-> better to duplicate it to avoId losing your changes if the
-> original Widget is updated.
+> If you modify a widget that is not one of your creations, it is
+> better to duplicate it to avoid losing your changes if the
+> original widget is updated.
 
-For more info on configuration and Widget creation see more
+For more info on configuration and widget creation see more
 bas.
 
-Apply the Widget on an order 
+Apply the widget on an order 
 ------------------------------------
 
-To apply a Widget on a single command or modify the one
+To apply a widget on a single command or modify the one
 applied, you must go to the module configuration page. The
 path to access the module differs according to the type of the latter.
 Here are some examples :
@@ -110,22 +110,22 @@ click on the notched wheels. In the new window, go to
 
 ![capture025](../images/capture025.png)
 
-Here you can change the Widget applied for computers and
+Here you can change the widget applied for computers and
 mobiles with dedicated drop-down lists.
 
 ![capture014](../images/capture014.png)
 
-> **Note**
+> **NOTE**
 >
 > The drop-down lists are self-filtering. They only provide
 > widgets compatible with the type of command.
 
-Apply the Widget on several commands {# anchor-1}
+Apply the widget on several commands {# anchor-1}
 -------------------------------------------
 
 En cliquant sur le bouton “Appliquer sur des commandes” vous ouvrez une
 window which lists all the commands compatible with the type of
-widget. So you can simply apply or remove the Widget from
+widget. So you can simply apply or remove the widget from
 many orders at one time.
 
 ![capture008](../images/capture008.png)
@@ -146,7 +146,7 @@ Widget customization options
 
 Since version 1.112 from Jeedom, it is possible to customize
 widgets with specific options (created by the developer of the
-widget) and common to all widgets. So we can have a Widget that
+widget) and common to all widgets. So we can have a widget that
 will display differently from one command to another.
 
 There are 2 ways to access these options. Either by the home automation tree
@@ -167,10 +167,10 @@ Either from the module configuration page.
 ### Add a custom option 
 
 In the "Advanced display" tab, there are 2 drop-down lists which
-allow to change for the command the Widget used on a
+allow to change for the command the widget used on a
 computer and the other for mobile. There are also other options,
 to display or not names and stats, force a line break
-before / after the Widget if there are several commands in a module
+before / after the widget if there are several commands in a module
 (line breaks in the tile). Finally the list of parameters
 optional Widget applied (the list available is on the forum
 or Wiki, a doc system is under study)
@@ -183,7 +183,7 @@ specific](../ images / capture016.png)
 ![exemple 2 de valeur pour afficher un autre
 counter](../ images / capture017.png)
 
-> **Note**
+> **NOTE**
 >
 > To add an option just click on the button
 > "Add ", enter the name of the option with the correct lower case
@@ -194,7 +194,7 @@ Advanced configuration
 ---------------------
 
 See the doc on the Home automation summary ⇒
-[Here](https://jeedom.github.io/core/fr_FR/display)
+[Here](https://jeedom.github.io/core/en_US/display)
 
 Widget creation / modification 
 ---------------------------------
@@ -204,7 +204,7 @@ easy which allows to make basic widgets easily with a
 creation assistant, and the advanced mode which also allows
 subsequent modification of all widgets.
 
-> **Note**
+> **NOTE**
 >
 > Advanced mode provides limitless flexibility. However, you
 > must have some knowledge of basic programming language
@@ -213,7 +213,7 @@ subsequent modification of all widgets.
 
 ### Easy creation mode 
 
-To make a Widget with the wizard, you just have to go
+To make a widget with the wizard, you just have to go
 in the plugin : "Plugins" menu ⇒ "Programming" ⇒ "Widget". From
 this page, click on the "Easy creation mode" button at the top
 gauche.
@@ -223,7 +223,7 @@ gauche.
 On the new page, you can in the right part, view
 Jeedom basic icons, images you imported, and
 imported packs. On the left side, first a button for
-import packs or images, then 3 buttons for Widget creation.
+import packs or images, then 3 buttons for widget creation.
 
 ![capture027](../images/capture027.png)
 
@@ -234,15 +234,15 @@ import packs or images, then 3 buttons for Widget creation.
 -   Digital Widget ⇒ Intended for commands that send a value
     digital (example : Temperature, brightness… etc)
 
-#### Example with the creation of a status Widget 
+#### Example with the creation of a status widget 
 
-> **Note**
+> **NOTE**
 >
 > This example remains applicable for the 2 other types of creation
 
 Click on the button "Simple State Widget". We arrive on the page of
-assisted configuration. You have to give a name to the Widget (unique name), the
-interface type, if the Widget is for the PC (Dashboard) or mobile,
+assisted configuration. You have to give a name to the widget (unique name), the
+interface type, if the widget is for the PC (Dashboard) or mobile,
 then the library to use (Jeedom, Personal image or packs).
 
 ![capture028](../images/capture028.png)
@@ -257,31 +257,31 @@ below the configuration area.
 > Do not modify this information if you do not know what you
 > do.
 
-It only remains to validate to finalize the creation of the Widget. You
+It only remains to validate to finalize the creation of the widget. You
 will be automatically redirected to the advanced configuration page which
-allows you to apply the Widget to multiple commands (see the
-chapter [Apply the Widget on several commands](#ancre-1))
+allows you to apply the widget to multiple commands (see the
+chapter [Apply the widget on several commands](#ancre-1))
 
 ### Creation / modification in advanced mode 
 
 In advanced mode, you must have knowledge of the language of
 "HTML", "CSS" and "JavaScript" programming to be able to modify
-correctly a Widget.
+correctly a widget.
 
-> **Note**
+> **NOTE**
 >
 > There are several sites in FR on the web to learn these
 > languages, I recommend OpenClassRoom which explains everything from the
 > Start.
 
 To access the advanced mode, simply go to the
-Widget plugin, choose the Widget to modify or click on the
+widget plugin, choose the widget to modify or click on the
 "Add widget" button"
 
-#### Creating a Widget 
+#### Creating a widget 
 
 From the main plugin page, click on "Add a Widget".
-Jeedom asks you some info on the future Widget.
+Jeedom asks you some info on the future widget.
 
 ![capture029](../images/capture029.png)
 
@@ -297,8 +297,8 @@ Jeedom asks you some info on the future Widget.
 -   Sub-type, gives precision to the type chosen previously.
 
 You can change the name, type and subtype later. However, this
-may have implications if the Widget is already applied to one or
-multiple orders. It is therefore better to avoId it.
+may have implications if the widget is already applied to one or
+multiple orders. It is therefore better to avoid it.
 
 ##### Type Info 
 
@@ -329,12 +329,12 @@ action in Jeedom or on external equipment.
 
 Once configured, click on "Add". Jeedom redirects you to the
 main page of Widget configuration / modification. From
-there, the Widget is created in Jeedom but does not currently contain
+there, the widget is created in Jeedom but does not currently contain
 code for displaying the command.
 
 ![capture030](../images/capture030.png)
 
-#### Editing a Widget 
+#### Editing a widget 
 
 Once on the main config page of a widget, it is in the
 "source code" part that changes in appearance apply.
@@ -343,10 +343,10 @@ Once on the main config page of a widget, it is in the
 >
 > To modify this info you need to have some programming bases
 > HTML, CSS and JavaScript. Changes can have an impact
-> important on the display of the Widget and on the display of other
+> important on the display of the widget and on the display of other
 > widgets, or even block the display of all widgets.
 
-The base (skeleton) of a Widget is in HTML. This allows to
+The base (skeleton) of a widget is in HTML. This allows to
 structure the display and find information more simply.
 
 In Jeedom for widgets, the first piece of code to create is a
@@ -387,7 +387,7 @@ widget
 `` ''
 
 The basic structure which schematizes the different locations in
-our Widget is now created. However, we have nothing that
+our widget is now created. However, we have nothing that
 is displayed, it's normal.
 
 div
@@ -420,7 +420,7 @@ in HTML) in our tags.
 **Addition of basic attributes.**
 
 `` `{.html}
-<div class="Doc-#id# cmd tooltips cmd-Widget #history#" title="" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
+<div class="Doc-#id# cmd tooltips cmd-widget #history#" title="" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
 
     <center>
         <span></span>
@@ -444,7 +444,7 @@ id
 
 > **Important**
 >
-> To be sure to avoId a conflict in IDs (which can
+> To be sure to avoid a conflict in IDs (which can
 > plant the whole web page), under Jeedom we use class-ids and
 > "data" attributes-". This makes it possible to be sure that in the event of a collision,
 > the whole web page is not crashed.
@@ -458,33 +458,33 @@ class
     several basic defined and available classes in Jeedom (see
     lower Jeedom class).
 
-        Jeedom uses instead of the Id attribute, a class like id, this makes it possible to make an element unique on the page in order to find it and target it more easily. It is imperative that its value is unique on the page. For this I advise you to use a word that represents our element. In our example the div represents the whole of our widget, so we can use the name of our Widget or an abbreviation (here I chose Doc-). Then, to ensure that the class-Id is unique, we will put a tag "# Id #" (for more info on Jeedom tags see below), which gives "Doc- # id#".
+        Jeedom uses instead of the id attribute, a class like id, this makes it possible to make an element unique on the page in order to find it and target it more easily. It is imperative that its value is unique on the page. For this I advise you to use a word that represents our element. In our example the div represents the whole of our widget, so we can use the name of our widget or an abbreviation (here I chose Doc-). Then, in order to guarantee that the class-id is unique, we will put a tag "#id#" (for more info on Jeedom tags see below), which gives "Doc-#id#".
 
 data-type
 
 :   this attribute allows to store the type of the command on which
-    the Widget will be applied. Its value must therefore correspond
+    the widget will be applied. Its value must therefore correspond
     to the type parameter above the code area.
 
 data-subtype
 
 :   this attribute allows to store the subtype of the command on
-    which Widget will be applied. So its value
+    which widget will be applied. So its value
     matches the subtype parameter above the code area.
 
 data-cmd\_id
 
-:   This attribute takes as value the Tag \#Id \#. It is used by
+:   This attribute takes as value the Tag \#id\#. It is used by
     Jeedom for the Dashboard update.
 
 From there, we have a base which corresponds to the Jeedom standard. It is
-the minimalist code it takes to have a Widget that respects the
+the minimalist code it takes to have a widget that respects the
 Jeedom charter / rule
 
 > **Important**
 >
 > Don't forget to modify the data-type and data-subtype attribute if
-> you change these values in the Widget config.
+> you change these values in the widget config.
 
 ##### CSS code 
 
@@ -502,7 +502,7 @@ is therefore a matter of preference to properly separate HTML and CSS
 
 In order not to unintentionally impact other widgets by code
 CSS that you are going to put there, I advise you to use the selector
-Id that targets your Widget.
+id that targets your widget.
 
 Example, if I want to put in red the text located in the tag
 "Span ", we would tend to write :
@@ -516,25 +516,25 @@ span{
 `` ''
 
 But it would change the color of the text of all
-page span. So to avoId this, add an Id selector which aims
-your Widget to define its action :
+page span. So to avoid this, add an id selector which aims
+your widget to define its action :
 
 **Code put in the Style tag and delimited.**
 
 `` `{.CSS}
-.Doc- # Id # span{
+.Doc-#id# span{
     color: red;
 }
 `` ''
 
-By adding .Doc - \# Id \# in front of the span selector, we delimit the
-modification inside our Widget.
+By adding .Doc- \#id\# in front of the span selector, we delimit the
+modification inside our widget.
 
 ##### JavaScript code 
 
 JavaScript is put between the tags "Script". We use the
 JavaScript to do calculations, convert data, animate the
-widget, format the widget, perform actions on the Widget by
+widget, format the widget, perform actions on the widget by
 event function. In addition to the basic JavaScript, Jeedom integrates by
 default several Frameworks which allow to simplify the code
 JavaScript. We can therefore use without initializing them :
@@ -548,16 +548,16 @@ JavaScript. We can therefore use without initializing them :
 > **Warning**
 >
 > In case of error in JS code, it can block all JS codes
-> that could follow, whether in the Widget or other widgets.
+> that could follow, whether in the widget or other widgets.
 > So be careful when making changes.
 
 > **Tip**
 >
-> If after saving a Widget modification, the toothed wheel
+> If after saving a widget modification, the toothed wheel
 > contained to rotate indefinitely, you may have made a
 > JS error causing the continuation of the JS execution to crash on the page.
 > To be able to correct it, you just need to pass the div
-> Id = jqueryLoadingDiv in display none using the console
+> id = jqueryLoadingDiv in display none using the console
 > browser, correct code and save. You also have to do F5
 > to refresh the page.
 
@@ -593,10 +593,10 @@ so here is the list and their detail :
 
         Use as text or in JS
 
-\#name\_display \#
+\#name\_display\#
 
 :   Name of the order. To be used for displaying the name of the
-    Widget level command.
+    widget level command.
 
         Use as text or in JS
 
@@ -638,7 +638,7 @@ so here is the list and their detail :
 
 \#collectDate\#
 
-:   Returns the date and time of the last Widget update on
+:   Returns the date and time of the last widget update on
     format "yyyy-mm-dd hh:mn:ss"
 
         Use as text, in JS, or in the title attribute
@@ -699,19 +699,19 @@ so here is the list and their detail :
 
 cmd:   
     - Must be added to the "class" attribute of the div
-    main, this class allows the update of the Widget. Without this
-    class Widget only updates by refreshing the page.
+    main, this class allows the update of the widget. Without this
+    class widget only updates by refreshing the page.
 
 cmd-widget:   
     - This class is recommended because it allows to add some
-    default CSS settings for the Widget for good behavior.
+    default CSS settings for the widget for good behavior.
 
 cursor:   
     - Allows you to change the pointer in hand.
 
 history:
     - This class allows you to change the pointer in hand, and when clicking
-    display the Widget value history.
+    display the widget value history.
 
 tooltips:   
     - It is for the title of an element instead of being yellow it becomes
@@ -720,9 +720,9 @@ tooltips:
 Faq 
 ===
 
-How to learn to make a Widget ?
+How to learn to make a widget ?
 
-:   The Widget system is based on the HTML and Javascript languages,
+:   The widget system is based on the HTML and Javascript languages,
     it is therefore advisable to watch the courses (very numerous) on
     these languages. In addition, it is also interesting to read courses on
     Jquery (and Jquery mobile for the mobile version of widgets).

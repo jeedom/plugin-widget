@@ -4,7 +4,7 @@ Configuración
 Introducción 
 =====
 
-El complemento del Reproductor es un poco especial porque no permite
+El complemento del widget es un poco especial porque no permite
 para crear equipos pero para modificar la representación (visualización) de un
 comando El objetivo de este complemento es, por lo tanto, permitir la personalización
 simplemente cómo mostrar un valor, información o acción basada
@@ -12,28 +12,28 @@ de sus gustos y deseos.
 
 Desde la versión 1.112 de Jeedom, es posible personalizar
 widgets con opciones específicas (creadas por el desarrollador del
-widget). Entonces podemos tener un Reproductor que se mostrará de manera diferente a un
+widget). Entonces podemos tener un widget que se mostrará de manera diferente a un
 orden al otro.
 
-Por lo tanto, podemos tener el mismo Reproductor escrito en azul en un pedido y en
+Por lo tanto, podemos tener el mismo widget escrito en azul en un pedido y en
 verde en otro.
 
-> **Note**
+> **Nota**
 >
-> Reproductor y Tile, para no confundir.
+> Widget y Tile, para no confundir.
 >
-> El Reproductor es la parte que se encargará de formatear y
-> mostrar una información o pedido. Un Reproductor solo debe manejar uno
+> El widget es la parte que se encargará de formatear y
+> mostrar una información o pedido. Un widget solo debe manejar uno
 > orden individual o información.
 >
 > La Tuile es una agrupación de widgets para un módulo. Esta aquí
 > área en la que se mostrarán los diferentes widgets aplicados
 > comandos e información del módulo.
 
-Instalar el complemento Reproductor 
+Instalar el complemento Widget 
 =============================
 
-Al igual que con cualquier complemento, el complemento Reproductor se instala desde la interfaz
+Al igual que con cualquier complemento, el complemento Widget se instala desde la interfaz
 Jeedom, menú "General" ⇒ "Complementos"
 
 ![capture001](../images/capture001.png)
@@ -57,9 +57,9 @@ solo tenemos una opción para este complemento : activar o desactivar.
 Por defecto, el complemento está deshabilitado. Los invito a hacer clic en el
 botón verde "activar".
 
-Desde ahora, el complemento está activo y operativo.
+A partir de ahora, el complemento está activo y operativo.
 
-Presentación y función básica del complemento Reproductor 
+Presentación y función básica del complemento Widget 
 =================================================
 
 Para ir al complemento Widget, vaya al menú
@@ -76,25 +76,25 @@ descargue otros a través del mercado o cree sus propios widgets
 
 Al hacer clic en uno de los widgets de la lista en el menú de la derecha o
 a la izquierda abrirá la página de configuración del widget, en
-que puede modificar, vea una vista previa del Reproductor (si Jeedom
+que puede modificar, vea una vista previa del widget (si Jeedom
 encontrar un comando compatible) y mucha información de configuración
 como el código fuente del widget
 
 ![capture007](../images/capture007.png)
 
-> **Warning**
+> **Advertencia**
 >
-> Si modifica un Reproductor que no es una de sus creaciones, es
+> Si modifica un widget que no es una de sus creaciones, es
 > mejor duplicarlo para evitar perder los cambios si el
-> el Reproductor original se actualiza.
+> el widget original se actualiza.
 
 Para obtener más información sobre la configuración y la creación de widgets, vea más
 bas.
 
-Aplicar el Reproductor en un pedido 
+Aplicar el widget en un pedido 
 ------------------------------------
 
-Para aplicar un Reproductor en un solo comando o modificar el
+Para aplicar un widget en un solo comando o modificar el
 aplicado, debe ir a la página de configuración del módulo. El
 la ruta para acceder al módulo difiere según el tipo de este último.
 He aquí algunos ejemplos :
@@ -110,22 +110,22 @@ Pestaña "Vista avanzada""
 
 ![capture025](../images/capture025.png)
 
-Aquí puede cambiar el Reproductor aplicado para computadoras y
+Aquí puede cambiar el widget aplicado para computadoras y
 móviles con listas desplegables dedicadas.
 
 ![capture014](../images/capture014.png)
 
-> **Note**
+> **Nota**
 >
 > Las listas desplegables se autofiltran. Solo proporcionan
 > widgets compatibles con el tipo de comando.
 
-Aplique el Reproductor en varios comandos {# anchor-1}
+Aplique el widget en varios comandos {# anchor-1}
 -------------------------------------------
 
 En cliquant sur le bouton “Appliquer sur des commandes” vous ouvrez une
 ventana que enumera todos los comandos compatibles con el tipo de
-Reproductor Por lo tanto, simplemente puede aplicar o eliminar el Reproductor de
+widget Por lo tanto, simplemente puede aplicar o eliminar el widget de
 muchos pedidos a la vez.
 
 ![capture008](../images/capture008.png)
@@ -133,7 +133,7 @@ muchos pedidos a la vez.
 Solo verifique los pedidos en los que desea
 aplicar widget
 
-### Varios ejemplos para el mismo orden. 
+### Varios ejemplos para el mismo orden 
 
 ![Reproductor : badge-transparent](../images/capture009.png)
 
@@ -146,10 +146,10 @@ Opciones de personalización de widgets
 
 Desde la versión 1.112 de Jeedom, es posible personalizar
 widgets con opciones específicas (creadas por el desarrollador del
-widget) y común a todos los widgets. Entonces podemos tener un Reproductor que
+widget) y común a todos los widgets. Entonces podemos tener un widget que
 se mostrará de manera diferente de un comando a otro.
 
-Hay 2 formas de acceder a estas opciones.. Ya sea por el árbol de domótica
+Hay 2 formas de acceder a estas opciones. Ya sea por el árbol de domótica
 que se puede encontrar en el menú "General" ⇒ "Resumen de automatización del hogar"
 
 ![capture012](../images/capture012.png)
@@ -167,12 +167,12 @@ Ya sea desde la página de configuración del módulo.
 ### Agregar una opción personalizada 
 
 En la pestaña "Pantalla avanzada", hay 2 listas desplegables que
-permitir cambiar para el comando el Reproductor utilizado en un
-computadora y el otro para móviles. También hay otras opciones.,
+permitir cambiar para el comando el widget utilizado en un
+computadora y el otro para móviles. También hay otras opciones,
 para mostrar o no nombres y estadísticas, forzar un salto de línea
-antes / después del Reproductor si hay varios comandos en un módulo
+antes / después del widget si hay varios comandos en un módulo
 (saltos de línea en el mosaico). Finalmente la lista de parámetros
-Reproductor opcional aplicado (la lista disponible está en el foro
+Widget opcional aplicado (la lista disponible está en el foro
 o Wiki, se está estudiando un sistema de documentación)
 
 ![capture014](../images/capture014.png)
@@ -183,7 +183,7 @@ específico](../ images / capture016.png)
 ![exemple 2 de valeur pour afficher un autre
 contador](../ images / capture017.png)
 
-> **Note**
+> **Nota**
 >
 > Para agregar una opción simplemente haga clic en el botón
 > "Agregar ", ingrese el nombre de la opción con la minúscula correcta
@@ -194,7 +194,7 @@ Configuración avanzada
 ---------------------
 
 Ver el documento en el resumen de domótica ⇒
-[Aquí](https://jeedom.github.io/core/fr_FR/display)
+[Aquí](https://jeedom.github.io/core/es_ES/display)
 
 Creación / modificación de widgets 
 ---------------------------------
@@ -204,7 +204,7 @@ fácil que permite hacer widgets básicos fácilmente con un
 asistente de creación, y el modo avanzado que también permite
 posterior modificación de todos los widgets.
 
-> **Note**
+> **Nota**
 >
 > El modo avanzado proporciona flexibilidad ilimitada. Sin embargo, usted
 > debe tener algún conocimiento del lenguaje de programación básico
@@ -213,7 +213,7 @@ posterior modificación de todos los widgets.
 
 ### Modo de creación fácil 
 
-Para hacer un Reproductor con el asistente, solo tienes que ir
+Para hacer un widget con el asistente, solo tienes que ir
 en el complemento : Menú "Complementos" ⇒ "Programación" ⇒ "Widget". Desde
 esta página, haga clic en el botón "Modo de creación fácil" en la parte superior
 gauche.
@@ -227,22 +227,22 @@ importar paquetes o imágenes, luego 3 botones para la creación de widgets.
 
 ![capture027](../images/capture027.png)
 
--   Activar / Desactivar Reproductor ⇒ Destinado a comandos de botón para activar / desactivar
+-   Activar / Desactivar widget ⇒ Destinado a comandos de botón para activar / desactivar
 
--   Reproductor de estado simple ⇒ Destinado a comandos que tienen una retroalimentación de estado
+-   Widget de estado simple ⇒ Destinado a comandos que tienen una retroalimentación de estado
 
--   Reproductor digital ⇒ Destinado a comandos que envían un valor
+-   Widget digital ⇒ Destinado a comandos que envían un valor
     digital (ejemplo : Temperatura, brillo ... etc.)
 
-#### Ejemplo con la creación de un Reproductor de estado 
+#### Ejemplo con la creación de un widget de estado 
 
-> **Note**
+> **Nota**
 >
-> Este ejemplo sigue siendo aplicable para los otros 2 tipos de creación.
+> Este ejemplo sigue siendo aplicable para los otros 2 tipos de creación
 
-Haga clic en el botón "Reproductor de estado simple". Llegamos a la página de
-configuración asistida. Tienes que dar un nombre al Reproductor (nombre único), el
-tipo de interfaz, si el Reproductor es para PC (Tablero) o móvil,
+Haga clic en el botón "Widget de estado simple". Llegamos a la página de
+configuración asistida. Tienes que dar un nombre al widget (nombre único), el
+tipo de interfaz, si el widget es para PC (Tablero) o móvil,
 luego la biblioteca a usar (Jeedom, imagen personal o paquetes).
 
 ![capture028](../images/capture028.png)
@@ -252,36 +252,36 @@ tamaño del icono (valor en "EM" =% del tamaño original de la
 fuente del navegador, 1 = 100%). Hecho esto, el código fuente aparece en
 debajo del área de configuración.
 
-> **Warning**
+> **Advertencia**
 >
 > No modifique esta información si no sabe lo que
 > hacer.
 
-Solo queda validar para finalizar la creación del Reproductor. Vosotras
+Solo queda validar para finalizar la creación del widget. Vosotras
 será redirigido automáticamente a la página de configuración avanzada que
-le permite aplicar el Reproductor a múltiples comandos (consulte el
-capítulo [Aplicar el Reproductor en varios comandos](#ancre-1))
+le permite aplicar el widget a múltiples comandos (consulte el
+capítulo [Aplicar el widget en varios comandos](#ancre-1))
 
 ### Creación / modificación en modo avanzado 
 
 En modo avanzado, debe tener conocimiento del idioma de
 Programación "HTML", "CSS" y "JavaScript" para poder modificar
-correctamente un Reproductor.
+correctamente un widget.
 
-> **Note**
+> **Nota**
 >
 > Hay varios sitios en FR en la web para aprender estos
 > idiomas, recomiendo OpenClassRoom que explica todo desde el
 > Inicio.
 
 Para acceder al modo avanzado, simplemente vaya a
-complemento de widget, elija el Reproductor para modificar o haga clic en el
+complemento de widget, elija el widget para modificar o haga clic en el
 Botón "Agregar widget""
 
-#### Crear un Reproductor 
+#### Crear un widget 
 
 Desde la página principal del complemento, haga clic en "Agregar un widget".
-Jeedom te pide información sobre el Reproductor futuro.
+Jeedom te pide información sobre el widget futuro.
 
 ![capture029](../images/capture029.png)
 
@@ -297,7 +297,7 @@ Jeedom te pide información sobre el Reproductor futuro.
 -   Subtipo, da precisión al tipo elegido previamente.
 
 Puede cambiar el nombre, tipo y subtipo más tarde. Sin embargo, esto
-puede tener implicaciones si el Reproductor ya está aplicado a uno o
+puede tener implicaciones si el widget ya está aplicado a uno o
 pedidos múltiples. Por lo tanto, es mejor evitarlo.
 
 ##### Información de tipo 
@@ -329,24 +329,24 @@ acción en Jeedom o en equipos externos.
 
 Una vez configurado, haga clic en "Agregar". Jeedom te redirige a
 página principal de configuración / modificación de widgets. Desde
-allí, el Reproductor se crea en Jeedom pero actualmente no contiene
+allí, el widget se crea en Jeedom pero actualmente no contiene
 código para mostrar el comando.
 
 ![capture030](../images/capture030.png)
 
-#### Editar un Reproductor 
+#### Editar un widget 
 
 Una vez en la página de configuración principal de un widget, está en el
 parte del "código fuente" que aplica cambios en la apariencia.
 
-> **Warning**
+> **Advertencia**
 >
 > Para modificar esta información necesitas tener algunas bases de programación
 > HTML, CSS y JavaScript. Los cambios pueden tener un impacto
-> importante en la visualización del Reproductor y en la visualización de otros
+> importante en la visualización del widget y en la visualización de otros
 > widgets, o incluso bloquear la visualización de todos los widgets.
 
-La base (esqueleto) de un Reproductor está en HTML. Esto permite
+La base (esqueleto) de un widget está en HTML. Esto permite
 estructura la pantalla y encuentra información de manera más simple.
 
 En Jeedom para widgets, el primer código para crear es un
@@ -387,7 +387,7 @@ widget
 `` ''
 
 La estructura básica que esquematiza las diferentes ubicaciones en
-nuestro Reproductor ahora está creado. Sin embargo, no tenemos nada que
+nuestro widget ahora está creado. Sin embargo, no tenemos nada que
 se muestra, es normal.
 
 div
@@ -417,10 +417,10 @@ Tal como está, es difícil hacer algo con este poco de
 código Es por eso que agregaremos algunas opciones (llamadas Atributo
 en HTML) en nuestras etiquetas.
 
-**Adición de atributos básicos..**
+**Adición de atributos básicos.**
 
 `` `{.html}
-<div class="Doc-#id# cmd información sobre herramientas cmd-Reproductor #history#" title="" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
+<div class="Doc-#id# cmd información sobre herramientas cmd-widget #history#" title="" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
 
     <center>
         <span></span>
@@ -442,7 +442,7 @@ id
 
 :   El atributo "id" no se recomienda en Jeedom
 
-> **Important**
+> **Importante**
 >
 > Para asegurarse de evitar un conflicto en las ID (que puede
 > plantar toda la página web), en Jeedom utilizamos identificadores de clase y
@@ -458,33 +458,33 @@ class
     varias clases básicas definidas y disponibles en Jeedom (ver
     clase inferior de Jeedom).
 
-        Jeedom usa en lugar del atributo id, una clase como id, esto hace posible que un elemento sea único en la página para encontrarlo y apuntarlo más fácilmente. Es imperativo que su valor sea único en la página.. Para esto te aconsejo que uses una palabra que represente nuestro elemento. En nuestro ejemplo, el div representa la totalidad de nuestro widget, por lo que podemos usar el nombre de nuestro Reproductor o una abreviatura (aquí elegí Doc-). Luego, para asegurarnos de que la clase-Identificación es única, colocaremos una etiqueta "# Identificación #" (para obtener más información sobre las etiquetas Jeedom, ver más abajo), que proporciona "Doc- # id#".
+        Jeedom usa en lugar del atributo id, una clase como id, esto hace posible que un elemento sea único en la página para encontrarlo y apuntarlo más fácilmente. Es imperativo que su valor sea único en la página. Para esto te aconsejo que uses una palabra que represente nuestro elemento. En nuestro ejemplo, el div representa la totalidad de nuestro widget, por lo que podemos usar el nombre de nuestro widget o una abreviatura (aquí elegí Doc-). Luego, para garantizar que el id de clase sea único, colocaremos una etiqueta "#id#" (para obtener más información sobre las etiquetas Jeedom, consulte a continuación), que proporciona "Doc-#id#".
 
 data-type
 
 :   Este atributo permite almacenar el tipo de comando en el que
-    se aplicará el Reproductor. Por lo tanto, su valor debe corresponder
+    se aplicará el widget. Por lo tanto, su valor debe corresponder
     al parámetro tipo encima del área de código.
 
 data-subtype
 
 :   Este atributo permite almacenar el subtipo del comando en
-    qué Reproductor se aplicará. Entonces su valor
+    qué widget se aplicará. Entonces su valor
     coincide con el parámetro de subtipo sobre el área de código.
 
 data-cmd\_id
 
-:   Este atributo toma como valor la etiqueta \#Identificación \#. Es utilizado por
+:   Este atributo toma como valor la etiqueta \#id\#. Es utilizado por
     Jeedom para la actualización del tablero.
 
-Desde ahí, tenemos una base que corresponde al estándar Jeedom. Es
-el código minimalista que se necesita para tener un Reproductor que respete el
+A partir de ahí, tenemos una base que corresponde al estándar Jeedom. Es
+el código minimalista que se necesita para tener un widget que respete el
 Carta de libertad / regla
 
-> **Important**
+> **Importante**
 >
 > No olvide modificar el atributo de tipo de datos y subtipo de datos si
-> cambia estos valores en la configuración del Reproductor.
+> cambia estos valores en la configuración del widget.
 
 ##### Código CSS 
 
@@ -494,15 +494,15 @@ puedes agregar el formato directamente en el atributo de estilo
 una etiqueta o usando JavaScript. El uso de esta parte
 Por lo tanto, es una cuestión de preferencia separar correctamente HTML y CSS
 
-> **Warning**
+> **Advertencia**
 >
-> Cualquier código declarado en etiquetas de estilo se aplica a toda la página..
+> Cualquier código declarado en etiquetas de estilo se aplica a toda la página.
 > Así que ten cuidado con el selector CSS que elijas
 > usar para no alterar los otros widgets.
 
 Para no impactar involuntariamente otros widgets por código
 CSS que vas a poner allí, te aconsejo que uses el selector
-ID que se dirige a tu Reproductor.
+ID que se dirige a tu widget.
 
 Ejemplo, si quiero poner en rojo el texto ubicado en la etiqueta
 "Span ", tendemos a escribir :
@@ -516,25 +516,25 @@ span{
 `` ''
 
 Pero cambiaría el color del texto de todos
-lapso de página. Para evitar esto, agregue un selector de Identificación que apunta
-su Reproductor para definir su acción :
+lapso de página. Para evitar esto, agregue un selector de id que apunta
+su widget para definir su acción :
 
 **Código puesto en la etiqueta Estilo y delimitado.**
 
 `` `{.CSS}
-.Doc- # Identificación # span{
+.Doc-#id# span{
     color: red;
 }
 `` ''
 
-Agregando .Doc - \# Identificación \# delante del selector de span, delimitamos el
-modificación dentro de nuestro Reproductor.
+Al agregar .Doc- \#id\# delante del selector de span, delimitamos el
+modificación dentro de nuestro widget.
 
 ##### Código JavaScript 
 
 JavaScript se coloca entre las etiquetas "Script". Utilizamos el
 JavaScript para hacer cálculos, convertir datos, animar
-widget, formatear el widget, realizar acciones en el Reproductor por
+widget, formatear el widget, realizar acciones en el widget por
 función de evento. Además del JavaScript básico, Jeedom se integra por
 varios marcos predeterminados que permiten simplificar el código
 JavaScript Por lo tanto, podemos usar sin inicializarlos :
@@ -545,33 +545,33 @@ JavaScript Por lo tanto, podemos usar sin inicializarlos :
 
 -   Bootstrap
 
-> **Warning**
+> **Advertencia**
 >
 > En caso de error en el código JS, puede bloquear todos los códigos JS
-> eso podría seguir, ya sea en el Reproductor u otros widgets.
+> eso podría seguir, ya sea en el widget u otros widgets.
 > Así que ten cuidado al hacer cambios.
 
-> **Tip**
+> **Punta**
 >
 > Si después de guardar una modificación del widget, la rueda dentada
 > contenido para rotar indefinidamente, puede haber hecho un
 > Error de JS que hace que la continuación de la ejecución de JS se bloquee en la página.
 > Para poder corregirlo, solo necesita pasar el div
-> Identificación = jqueryLoadingDiv en display none usando la consola
+> id = jqueryLoadingDiv en display none usando la consola
 > navegador, corregir código y guardar. También tienes que hacer F5
 > para actualizar la página.
 
 ### Etiquetas de libertad 
 
 En Jeedom a menudo encontrarás etiquetas que son nombres
-rodear con "\#". El principio de funcionamiento de estas etiquetas es simple. :
+rodear con "\#". El principio de funcionamiento de estas etiquetas es simple :
 Jeedom los reemplazará con el valor que corresponde a la etiqueta. Etiquetas
 son tipos de variables (cajas) en las que se almacenan
 valores que no conocemos al momento de escribir el código. Es
 un poco como si estuviéramos haciendo un texto con espacios en blanco para poner más
 palabras tardías que darían un significado variable al texto.
 
-No todas las etiquetas están disponibles con todos los tipos de pedidos.,
+No todas las etiquetas están disponibles con todos los tipos de pedidos,
 así que aquí está la lista y sus detalles :
 
 \#id\#
@@ -593,10 +593,10 @@ así que aquí está la lista y sus detalles :
 
         Usar como texto o en JS
 
-\#name\_display \#
+\#name\_display\#
 
 :   Nombre de la orden. Para ser utilizado para mostrar el nombre de la
-    comando de nivel de Reproductor.
+    comando de nivel de widget.
 
         Usar como texto o en JS
 
@@ -609,7 +609,7 @@ así que aquí está la lista y sus detalles :
 
 \#maxValue\#
 
-:   Valor máximo que puede tomar el pedido..
+:   Valor máximo que puede tomar el pedido.
 
         Usar como texto, en JS o en atributos HTML
 
@@ -638,7 +638,7 @@ así que aquí está la lista y sus detalles :
 
 \#collectDate\#
 
-:   Devuelve la fecha y hora de la última actualización del Reproductor en
+:   Devuelve la fecha y hora de la última actualización del widget en
     formato "aaaa-mm-dd hh:mn:ss"
 
         Usar como texto, en JS o en el atributo de título
@@ -699,19 +699,19 @@ así que aquí está la lista y sus detalles :
 
 cmd:   
     - Debe agregarse al atributo "clase" del div
-    principal, esta clase permite la actualización del Reproductor. Sin esto
-    el Reproductor de clase solo se actualiza al actualizar la página.
+    principal, esta clase permite la actualización del widget. Sin esto
+    el widget de clase solo se actualiza al actualizar la página.
 
 cmd-widget:   
     - Esta clase se recomienda porque permite agregar algunos
-    configuración CSS predeterminada para el Reproductor para un buen comportamiento.
+    configuración CSS predeterminada para el widget para un buen comportamiento.
 
 cursor:   
     - Le permite cambiar el puntero en la mano.
 
 history:
     - Esta clase le permite cambiar el puntero en la mano, y al hacer clic
-    mostrar el historial del valor del Reproductor.
+    mostrar el historial del valor del widget.
 
 tooltips:   
     - Es por el título de un elemento en lugar de ser amarillo, se convierte en
@@ -720,12 +720,12 @@ tooltips:
 Preguntas frecuentes 
 ===
 
-Cómo aprender a hacer un Reproductor ?
+Cómo aprender a hacer un widget ?
 
-:   El sistema de widgets se basa en los lenguajes HTML y Javascript.,
+:   El sistema de widgets se basa en los lenguajes HTML y Javascript,
     Por lo tanto, es aconsejable ver los cursos (muy numerosos) en
     estos idiomas. Además, también es interesante leer cursos sobre
     Jquery (y Jquery mobile para la versión móvil de widgets).
 
-Otra forma es hacer un Reproductor de "creación fácil", de modo que el
+Otra forma es hacer un widget de "creación fácil", de modo que el
 el complemento generará automáticamente su código de widgets.

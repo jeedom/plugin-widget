@@ -18,7 +18,7 @@ zum anderen bestellen.
 Somit können wir dasselbe Widget in einer Bestellung und in blau schreiben lassen
 grün auf einem anderen.
 
-> **Note**
+> **Notiz**
 >
 > Widget und Kachel, nicht zu verwechseln.
 >
@@ -82,7 +82,7 @@ wie Widget-Quellcode
 
 ![capture007](../images/capture007.png)
 
-> **Warning**
+> **Warnung**
 >
 > Wenn Sie ein Widget ändern, das nicht zu Ihren Kreationen gehört, ist dies der Fall
 > Es ist besser, es zu duplizieren, um zu vermeiden, dass Ihre Änderungen verloren gehen, wenn die
@@ -115,7 +115,7 @@ Handys mit speziellen Dropdown-Listen.
 
 ![capture014](../images/capture014.png)
 
-> **Note**
+> **Notiz**
 >
 > Die Dropdown-Listen filtern sich selbst. Sie bieten nur
 > Widgets, die mit dem Befehlstyp kompatibel sind.
@@ -183,7 +183,7 @@ spezifisch](../ images / capture016.png)
 ![exemple 2 de valeur pour afficher un autre
 Zähler](../ images / capture017.png)
 
-> **Note**
+> **Notiz**
 >
 > Um eine Option hinzuzufügen, klicken Sie einfach auf die Schaltfläche
 > "Hinzufügen ", geben Sie den Namen der Option mit dem richtigen Kleinbuchstaben ein
@@ -194,7 +194,7 @@ Erweiterte Konfiguration
 ---------------------
 
 Siehe das Dokument in der Zusammenfassung der Hausautomation ⇒
-[Hier](https://jeedom.github.io/core/fr_FR/display)
+[Hier](https://jeedom.github.io/core/de_DE/display)
 
 Erstellung / Änderung von Widgets 
 ---------------------------------
@@ -204,7 +204,7 @@ easy, mit dem sich einfache Widgets einfach mit einem erstellen lassen
 Erstellungsassistent und der erweiterte Modus, der auch erlaubt
 nachfolgende Änderung aller Widgets.
 
-> **Note**
+> **Notiz**
 >
 > Der erweiterte Modus bietet grenzenlose Flexibilität. Sie jedoch
 > muss einige Kenntnisse der grundlegenden Programmiersprache haben
@@ -236,7 +236,7 @@ Importieren Sie Pakete oder Bilder und dann 3 Schaltflächen für die Erstellung
 
 #### Beispiel mit der Erstellung eines Status-Widgets 
 
-> **Note**
+> **Notiz**
 >
 > Dieses Beispiel gilt weiterhin für die beiden anderen Erstellungstypen
 
@@ -252,7 +252,7 @@ Symbolgröße (Wert in "EM" =% der Originalgröße des
 Browser-Schriftart, 1 = 100%). Danach erscheint der Quellcode in
 unterhalb des Konfigurationsbereichs.
 
-> **Warning**
+> **Warnung**
 >
 > Ändern Sie diese Informationen nicht, wenn Sie nicht wissen, was Sie sind
 > tun.
@@ -268,7 +268,7 @@ Im erweiterten Modus müssen Sie Kenntnisse in der Sprache von haben
 "HTML" -, "CSS" - und "JavaScript" -Programmierung, um Änderungen vornehmen zu können
 richtig ein Widget.
 
-> **Note**
+> **Notiz**
 >
 > Es gibt mehrere Websites in FR im Web, um diese zu lernen
 > Sprachen empfehle ich OpenClassRoom, das alles aus dem erklärt
@@ -339,7 +339,7 @@ Code zur Anzeige des Befehls.
 Sobald Sie sich auf der Hauptkonfigurationsseite eines Widgets befinden, befindet es sich in der
 "Quellcode" -Teil, dessen Erscheinungsbild sich ändert.
 
-> **Warning**
+> **Warnung**
 >
 > Um diese Informationen zu ändern, benötigen Sie einige Programmiergrundlagen
 > HTML, CSS und JavaScript. Änderungen können Auswirkungen haben
@@ -442,7 +442,7 @@ id
 
 :   Das Attribut "id" wird in Jeedom nicht empfohlen
 
-> **Important**
+> **Wichtig**
 >
 > Um einen Konflikt in IDs zu vermeiden (was möglich ist)
 > pflanze die ganze Webseite), unter Jeedom verwenden wir Klassen-IDs und
@@ -452,13 +452,13 @@ id
 class
 
 :   Klassen im Gegensatz zu IDs sind nicht eindeutig. Sie sind es gewohnt
-    Wenden Sie einen Stil an, der im Stilteil (dem Tag) definiert ist.. Wir können
+    Wenden Sie einen Stil an, der im Stilteil (dem Tag) definiert ist. Wir können
     reproduzieren Sie also einfach die gleiche Formatierung, die wir erstellen
     mal und dass wir durch Schlüsselwort (Klasse) wiederverwenden. Hier fügen wir hinzu
     mehrere grundlegende definierte und verfügbare Klassen in Jeedom (siehe
     untere Jeedom-Klasse).
 
-        Jeedom verwendet anstelle des id-Attributs eine Klasse wie Identifikation. Dies ermöglicht es, ein Element auf der Seite eindeutig zu machen, um es leichter zu finden und zu zielen. Es ist unbedingt erforderlich, dass der Wert auf der Seite eindeutig ist. Dazu rate ich Ihnen, ein Wort zu verwenden, das unser Element darstellt. In unserem Beispiel repräsentiert das div das gesamte Widget, sodass wir den Namen unseres Widgets oder eine Abkürzung verwenden können (hier habe ich Doc- gewählt).. Um sicherzustellen, dass die Klassen-ID eindeutig ist, setzen wir ein Tag "# Identifikation #" (weitere Informationen zu Jeedom-Tags siehe unten), das "Doc- # id" enthält#".
+        Jeedom verwendet anstelle des id-Attributs eine Klasse wie id. Dies ermöglicht es, ein Element auf der Seite eindeutig zu machen, um es leichter zu finden und zu zielen. Es ist unbedingt erforderlich, dass der Wert auf der Seite eindeutig ist. Dazu rate ich Ihnen, ein Wort zu verwenden, das unser Element darstellt. In unserem Beispiel repräsentiert das div das gesamte Widget, sodass wir den Namen unseres Widgets oder eine Abkürzung verwenden können (hier habe ich Doc- gewählt). Um sicherzustellen, dass die Klassen-ID eindeutig ist, setzen wir ein Tag "#id#" (Weitere Informationen zu Jeedom-Tags finden Sie unten), in dem "Doc-#id#".
 
 data-type
 
@@ -474,14 +474,14 @@ data-subtype
 
 data-cmd\_id
 
-:   Dieses Attribut nimmt als Wert das Tag \#Identifikation \ an#. Es wird von verwendet
+:   Dieses Attribut nimmt als Wert das Tag \ an#id\.#. Es wird von verwendet
     Jeedom für das Dashboard-Update.
 
 Von dort haben wir eine Basis, die dem Jeedom-Standard entspricht. Es ist
 Der minimalistische Code, der benötigt wird, um ein Widget zu haben, das das respektiert
 Jeedom Charter / Regel
 
-> **Important**
+> **Wichtig**
 >
 > Vergessen Sie nicht, das Attribut Datentyp und Datensubtyp zu ändern, wenn
 > Sie ändern diese Werte in der Widget-Konfiguration.
@@ -494,7 +494,7 @@ Sie können die Formatierung direkt im Stilattribut hinzufügen
 ein Tag oder mit JavaScript. Die Verwendung dieses Teils
 Es ist daher eine Frage der Präferenz, HTML und CSS richtig zu trennen
 
-> **Warning**
+> **Warnung**
 >
 > Jeder in Stil-Tags deklarierte Code gilt für die gesamte Seite.
 > Seien Sie also vorsichtig mit dem CSS-Selektor, den Sie auswählen
@@ -522,12 +522,12 @@ Ihr Widget, um seine Aktion zu definieren :
 **Code in das Style-Tag eingefügt und abgegrenzt.**
 
 `` `{.CSS}
-.Doc- # Identifikation # span{
+.Doc-#id# span{
     color: red;
 }
 `` ''
 
-Hinzufügen .Doc - \# Identifikation \# vor dem Span Selector begrenzen wir das
+Durch Hinzufügen von .Doc- \#id\.# vor dem span selector begrenzen wir das
 Änderung in unserem Widget.
 
 ##### JavaScript-Code 
@@ -545,19 +545,19 @@ JavaScript. Wir können daher verwenden, ohne sie zu initialisieren :
 
 -   Bootstrap
 
-> **Warning**
+> **Warnung**
 >
 > Im Falle eines Fehlers im JS-Code können alle JS-Codes blockiert werden
 > das könnte folgen, ob im Widget oder in anderen Widgets.
 > Seien Sie also vorsichtig, wenn Sie Änderungen vornehmen.
 
-> **Tip**
+> **Spitze**
 >
 > Wenn nach dem Speichern einer Widget-Änderung das Zahnrad
 > enthalten, um auf unbestimmte Zeit zu drehen, haben Sie möglicherweise eine gemacht
 > JS-Fehler, der dazu führt, dass die Fortsetzung der JS-Ausführung auf der Seite abstürzt.
 > Um es korrigieren zu können, müssen Sie nur das div übergeben
-> Identifikation = jqueryLoadingDiv in Anzeige keine über die Konsole
+> id = jqueryLoadingDiv in Anzeige keine über die Konsole
 > Browser, Code korrigieren und speichern. Sie müssen auch F5 machen
 > um die Seite zu aktualisieren.
 
@@ -574,40 +574,40 @@ späte Wörter, die dem Text eine variable Bedeutung verleihen würden.
 Nicht alle Tags sind für alle Arten von Bestellungen verfügbar,
 Also hier ist die Liste und ihre Details :
 
-\#id\#
+\.#id\.#
 
 :   Bestellnummer, die von Jeedom erstellt wurde, als die Bestellung erstellt wurde
     (eindeutiger numerischer Wert).
 
         Verwendung als Text, in JS oder in HTML-Attributen
 
-\#logicalId\#
+\.#logicalId\.#
 
 :   Logische Bestellnummer (möglicherweise leer).
 
         Verwendung als Text oder in JS
 
-\#name\#
+\.#name\.#
 
 :   Name der Bestellung.
 
         Verwendung als Text oder in JS
 
-\#name\_display \#
+\.#name\._display\.#
 
 :   Name der Bestellung. Zur Anzeige des Namens des
     Befehl auf Widget-Ebene.
 
         Verwendung als Text oder in JS
 
-\#hideCmdName\#
+\.#hideCmdName\.#
 
 :   Leer, wenn der Name des Befehls angezeigt werden muss. Und "Anzeige:none;"
     wenn der Name des Befehls nicht angezeigt werden soll.
 
         Verwendung in CSS-Attributen (HTML Style)
 
-\#maxValue\#
+\.#maxValue\.#
 
 :   Maximaler Wert, der die Bestellung annehmen kann.
 
@@ -615,14 +615,14 @@ Also hier ist die Liste und ihre Details :
 
 <!-- -->
 
-\#valueName\#
+\.#valueName\.#
 
 :   Name des verknüpften Infobefehls, wenn der Aktionsbefehl mit a verknüpft ist
     Info-Befehl, sonst Name des Aktionsbefehls.
 
         Verwendung als Text oder in JS
 
-\#lastValue\#
+\.#lastValue\.#
 
 :   Letzter Wert der Bestellung (kann leer sein).
 
@@ -630,26 +630,26 @@ Also hier ist die Liste und ihre Details :
 
 <!-- -->
 
-\#unite\#
+\.#unite\.#
 
 :   Steuereinheit
 
         Verwendung als Text oder in JS
 
-\#collectDate\#
+\.#collectDate\.#
 
 :   Gibt das Datum und die Uhrzeit des letzten Widget-Updates am zurück
     Format "JJJJ-MM-TT HH:mn:ss"
 
         Verwendung als Text, in JS oder im title-Attribut
 
-\#state\#
+\.#state\.#
 
 :   Bestellwert
 
         Verwendung als Text oder in JS
 
-\#displayHistory\#
+\.#displayHistory\.#
 
 :   Ermöglicht die Berücksichtigung der Option "Statistiken anzeigen am
     Widgets "im Menü" Allgemein "⇒" Administration "⇒" Konfiguration"
@@ -658,25 +658,25 @@ Also hier ist die Liste und ihre Details :
 
         Wird im Attribut "style" eines HTML-Tags verwendet, um anzuzeigen, ob die Protokollierung in der Jeedom-Konfiguration aktiviert ist
 
-\#averageHistoryValue\#
+\.#averageHistoryValue\.#
 
 :   Durchschnittswert in den letzten x Stunden der Bestellung
 
         Verwendung als Text oder in JS
 
-\#minHistoryValue\#
+\.#minHistoryValue\.#
 
 :   Minimum in den letzten x Stunden der Bestellung
 
         Verwendung als Text oder in JS
 
-\#maxHistoryValue\#
+\.#maxHistoryValue\.#
 
 :   Maximal in den letzten x Stunden der Bestellung
 
         Verwendung als Text oder in JS
 
-\#tendance\#
+\.#tendance\.#
 
 :   Ermöglicht, wenn der Werteverlauf aktiviert ist, um das zurückzugeben
     Klasse : 'fa fa-minus ',' fa fa-Pfeil nach oben 'oder' fa fa-Pfeil nach unten '(Symbol
@@ -684,10 +684,10 @@ Also hier ist die Liste und ihre Details :
 
         Wird im Attribut "class" eines "i-Tags" verwendet"
 
-\#history\#
+\.#history\.#
 
 :   Ermöglicht, wenn der Werteverlauf aktiviert ist, um das zurückzugeben
-    Klasse : 'VerlaufsCursor '(Siehe Jeedom CSS-Klasse), sonst wird es
+    Klasse : 'Verlaufscursor '(Siehe Jeedom CSS-Klasse), sonst wird es
     durch ein Vakuum ersetzt. Das Tag erlaubt es daher, das anzuzeigen oder nicht
     Verlaufsdiagramm im Dashboard.
 

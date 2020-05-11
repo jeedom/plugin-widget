@@ -8,7 +8,7 @@
 
 # 05/07/2018
 
-- Corrección de un error en las imágenes.
+- Corrección de un error en las imágenes
 
 # 25/04/2018
 

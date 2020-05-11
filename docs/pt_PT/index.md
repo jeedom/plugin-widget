@@ -4,7 +4,7 @@ Configuração
 Introdução 
 =====
 
-O plug-in de Widget é um pouco especial porque não permite
+O plug-in de widget é um pouco especial porque não permite
 criar equipamento, mas modificar a renderização (exibição) de um
 comando O objetivo deste plugin é, portanto, permitir a personalização
 simplesmente como exibir um valor, informações ou ação com base
@@ -12,18 +12,18 @@ de seus gostos e desejos.
 
 Desde a versão 1.112 da Jeedom, é possível personalizar
 widgets com opções específicas (criadas pelo desenvolvedor do
-widget). Assim, podemos ter um Widget que será exibido diferentemente de um
+widget). Assim, podemos ter um widget que será exibido diferentemente de um
 ordem para o outro.
 
-Assim, podemos ter o mesmo Widget escrito em azul em um pedido e em
+Assim, podemos ter o mesmo widget escrito em azul em um pedido e em
 verde em outro.
 
-> **Note**
+> **NOTA**
 >
 > Widget e lado a lado, para não confundir.
 >
-> O Widget é a parte que cuidará da formatação e
-> exibir uma informação ou pedido. Um Widget deve lidar apenas com um
+> O widget é a parte que cuidará da formatação e
+> exibir uma informação ou pedido. Um widget deve lidar apenas com um
 > único pedido ou informação.
 >
 > La Tuile é um agrupamento de widgets para um módulo. Este é o
@@ -57,7 +57,7 @@ só temos uma opção para este plugin : ativar ou desativar.
 Por padrão, o plug-in está desativado. Convido você a clicar no
 botão verde "ativar".
 
-De agora o plug-in está ativo e operacional.
+A partir de agora o plug-in está ativo e operacional.
 
 Apresentação e função básica do Widget Plugin 
 =================================================
@@ -76,25 +76,25 @@ faça o download de outros no mercado ou crie seus próprios widgets
 
 Ao clicar em um dos widgets da lista no menu à direita ou
 esquerda, você abrirá a página de configuração do widget, em
-que você pode modificar, veja uma prévia do Widget (se o Jeedom
+que você pode modificar, veja uma prévia do widget (se o Jeedom
 encontre um comando compatível) e muitas informações de configuração
 como código fonte do widget
 
 ![capture007](../images/capture007.png)
 
-> **Warning**
+> **Aviso**
 >
-> Se você modificar um Widget que não é uma de suas criações, é
+> Se você modificar um widget que não é uma de suas criações, é
 > melhor duplicá-lo para evitar perder suas alterações se o
-> o Widget original é atualizado.
+> o widget original é atualizado.
 
 Para mais informações sobre configuração e criação de widget, veja mais
 bas.
 
-Aplique o Widget em um pedido 
+Aplique o widget em um pedido 
 ------------------------------------
 
-Para aplicar um Widget em um único comando ou modificar o
+Para aplicar um widget em um único comando ou modificar o
 aplicado, você deve ir para a página de configuração do módulo. O
 O caminho para acessar o módulo difere de acordo com o tipo deste último.
 Aqui estão alguns exemplos :
@@ -110,22 +110,22 @@ Guia "Visualização avançada""
 
 ![capture025](../images/capture025.png)
 
-Aqui você pode alterar o Widget aplicado aos computadores e
+Aqui você pode alterar o widget aplicado aos computadores e
 celulares com listas suspensas dedicadas.
 
 ![capture014](../images/capture014.png)
 
-> **Note**
+> **NOTA**
 >
 > As listas suspensas são auto-filtradas. Eles apenas fornecem
 > widgets compatíveis com o tipo de comando.
 
-Aplique o Widget em vários comandos {# anchor-1}
+Aplique o widget em vários comandos {# anchor-1}
 -------------------------------------------
 
 En cliquant sur le bouton “Appliquer sur des commandes” vous ouvrez une
 janela que lista todos os comandos compatíveis com o tipo de
-widget. Assim, você pode simplesmente aplicar ou remover o Widget de
+widget. Assim, você pode simplesmente aplicar ou remover o widget de
 muitos pedidos de uma só vez.
 
 ![capture008](../images/capture008.png)
@@ -141,12 +141,12 @@ aplicar widget
 
 ![Widget : ConsoIMG](../images/capture011.png)
 
-Opções de personalização de Widget 
+Opções de personalização de widget 
 ---------------------------------------
 
 Desde a versão 1.112 da Jeedom, é possível personalizar
 widgets com opções específicas (criadas pelo desenvolvedor do
-widget) e comum a todos os widgets. Para que possamos ter um Widget que
+widget) e comum a todos os widgets. Para que possamos ter um widget que
 será exibido de maneira diferente de um comando para outro.
 
 Existem 2 maneiras de acessar essas opções. Pela árvore da automação residencial
@@ -167,10 +167,10 @@ Na página de configuração do módulo.
 ### Adicionar uma opção personalizada 
 
 Na guia "Exibição avançada", existem 2 listas suspensas que
-permite alterar para o comando o Widget usado em um
+permite alterar para o comando o widget usado em um
 computador e outro para celular. Existem também outras opções,
 para exibir ou não nomes e estatísticas, force uma quebra de linha
-antes / depois do Widget se houver vários comandos em um módulo
+antes / depois do widget se houver vários comandos em um módulo
 (quebras de linha no bloco). Finalmente, a lista de parâmetros
 Widget opcional aplicado (a lista disponível está no fórum
 ou Wiki, um sistema de documentos está em estudo)
@@ -183,7 +183,7 @@ específico](../ images / capture016.png)
 ![exemple 2 de valeur pour afficher un autre
 contador](../ images / capture017.png)
 
-> **Note**
+> **NOTA**
 >
 > Para adicionar uma opção, basta clicar no botão
 > "Adicionar ", digite o nome da opção com as letras minúsculas corretas
@@ -194,9 +194,9 @@ Configuração avançada
 ---------------------
 
 Consulte o documento no resumo da automação residencial ⇒
-[Aqui](https://jeedom.github.io/core/fr_FR/display)
+[Aqui](https://jeedom.github.io/core/pt_PT/display)
 
-Criação / modificação de Widget 
+Criação / modificação de widget 
 ---------------------------------
 
 O plugin oferece 2 possibilidades para a criação de Widgets, o modo
@@ -204,7 +204,7 @@ fácil, o que permite criar widgets básicos facilmente com um
 assistente de criação e o modo avançado que também permite
 modificação subsequente de todos os widgets.
 
-> **Note**
+> **NOTA**
 >
 > O modo avançado fornece flexibilidade ilimitada. No entanto, você
 > deve ter algum conhecimento da linguagem de programação básica
@@ -213,7 +213,7 @@ modificação subsequente de todos os widgets.
 
 ### Modo de criação fácil 
 
-Para criar um Widget com o assistente, basta ir
+Para criar um widget com o assistente, basta ir
 no plugin : Menu "Plugins" ⇒ "Programação" ⇒ "Widget". De
 Nesta página, clique no botão "Modo de criação fácil" na parte superior
 gauche.
@@ -223,7 +223,7 @@ gauche.
 Na nova página, você pode, na parte direita, visualizar
 Ícones básicos do Jeedom, imagens importadas e
 pacotes importados. No lado esquerdo, primeiro um botão para
-importar pacotes ou imagens e, em seguida, 3 botões para criação de Widget.
+importar pacotes ou imagens e, em seguida, 3 botões para criação de widget.
 
 ![capture027](../images/capture027.png)
 
@@ -234,15 +234,15 @@ importar pacotes ou imagens e, em seguida, 3 botões para criação de Widget.
 -   Widget Digital ⇒ Destinado a comandos que enviam um valor
     digital (exemplo : Temperatura, brilho ... etc)
 
-#### Exemplo com a criação de um Widget de status 
+#### Exemplo com a criação de um widget de status 
 
-> **Note**
+> **NOTA**
 >
 > Este exemplo permanece aplicável aos outros 2 tipos de criação
 
 Clique no botão "Simple State Widget". Chegamos na página de
-configuração assistida. Você precisa atribuir um nome ao Widget (nome exclusivo), o
-tipo de interface, se o Widget for para PC (painel) ou dispositivo móvel,
+configuração assistida. Você precisa atribuir um nome ao widget (nome exclusivo), o
+tipo de interface, se o widget for para PC (painel) ou dispositivo móvel,
 depois a biblioteca a ser usada (Jeedom, Imagem pessoal ou pacotes).
 
 ![capture028](../images/capture028.png)
@@ -252,36 +252,36 @@ tamanho do ícone (valor em "EM" =% do tamanho original do
 fonte do navegador, 1 = 100%). Feito isso, o código fonte aparece em
 abaixo da área de configuração.
 
-> **Warning**
+> **Aviso**
 >
-> Não modifique essas informações se você não souber o que deseja.
+> Não modifique essas informações se você não souber o que deseja
 > fazer.
 
-Resta apenas validar para finalizar a criação do Widget. Você
+Resta apenas validar para finalizar a criação do widget. Você
 será automaticamente redirecionado para a página de configuração avançada que
-permite aplicar o Widget a vários comandos (consulte o
-capítulo [Aplique o Widget em vários comandos](#ancre-1))
+permite aplicar o widget a vários comandos (consulte o
+capítulo [Aplique o widget em vários comandos](#ancre-1))
 
 ### Criação / modificação no modo avançado 
 
 No modo avançado, você deve ter conhecimento do idioma de
 Programação "HTML", "CSS" e "JavaScript" para poder modificar
-corretamente um Widget.
+corretamente um widget.
 
-> **Note**
+> **NOTA**
 >
 > Existem vários sites em FR na web para aprender esses
 > idiomas, recomendo o OpenClassRoom, que explica tudo, desde o
 > Começo.
 
 Para acessar o modo avançado, basta ir para o
-plugin do widget, escolha o Widget para modificar ou clique no
+plugin do widget, escolha o widget para modificar ou clique no
 Botão "Adicionar widget""
 
-#### Criando um Widget 
+#### Criando um widget 
 
 Na página principal do plug-in, clique em "Adicionar um widget".
-Jeedom pede algumas informações sobre o Widget futuro.
+Jeedom pede algumas informações sobre o widget futuro.
 
 ![capture029](../images/capture029.png)
 
@@ -297,7 +297,7 @@ Jeedom pede algumas informações sobre o Widget futuro.
 -   Subtipo, fornece precisão ao tipo escolhido anteriormente.
 
 Você pode alterar o nome, o tipo e o subtipo posteriormente. No entanto, isso
-pode ter implicações se o Widget já estiver aplicado a um ou
+pode ter implicações se o widget já estiver aplicado a um ou
 pedidos múltiplos. Portanto, é melhor evitá-lo.
 
 ##### Informações do tipo 
@@ -329,24 +329,24 @@ ação no Jeedom ou em equipamento externo.
 
 Depois de configurado, clique em "Adicionar". O Jeedom o redireciona para o
 página principal de Configuração / modificação de widgets. De
-lá, o Widget é criado no Jeedom, mas atualmente não contém
+lá, o widget é criado no Jeedom, mas atualmente não contém
 código para exibir o comando.
 
 ![capture030](../images/capture030.png)
 
-#### Editando um Widget 
+#### Editando um widget 
 
 Uma vez na página principal de configuração de um widget, ele está no
 A parte "código fonte" que muda de aparência se aplica.
 
-> **Warning**
+> **Aviso**
 >
 > Para modificar essas informações, você precisa ter algumas bases de programação
 > HTML, CSS e JavaScript. Mudanças podem ter um impacto
-> importante na exibição do Widget e na exibição de outros
+> importante na exibição do widget e na exibição de outros
 > widgets, ou mesmo bloquear a exibição de todos os widgets.
 
-A base (esqueleto) de um Widget está em HTML. Isso permite
+A base (esqueleto) de um widget está em HTML. Isso permite
 estruture a tela e encontre as informações de maneira mais simples.
 
 No Jeedom para widgets, o primeiro pedaço de código a ser criado é um
@@ -387,7 +387,7 @@ widget
 `` ''
 
 A estrutura básica que esquematiza os diferentes locais no
-nosso Widget agora é criado. No entanto, não temos nada que
+nosso widget agora é criado. No entanto, não temos nada que
 é exibido, é normal.
 
 div
@@ -420,7 +420,7 @@ em HTML) em nossas tags.
 **Adição de atributos básicos.**
 
 `` `{.html}
-<div class="Doc-#id# cmd dicas cmd-Widget #history#" title="" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
+<div class="Doc-#id# cmd dicas cmd-widget #history#" title="" data-type="info" data-subtype="numeric" data-cmd_id="#id#" >
 
     <center>
         <span></span>
@@ -442,7 +442,7 @@ id
 
 :   O atributo "id" não é recomendado no Jeedom
 
-> **Important**
+> **IMPORTANTE**
 >
 > Certifique-se de evitar um conflito de IDs (que pode
 > plantar toda a página da web), no Jeedom usamos identificações de classe e
@@ -458,33 +458,33 @@ class
     várias classes básicas definidas e disponíveis no Jeedom (consulte
     classe Jeedom inferior).
 
-        O Jeedom usa, em vez do atributo id, uma classe como id, isso torna possível tornar um elemento único na página para encontrá-lo e direcioná-lo mais facilmente. É imperativo que seu valor seja único na página. Para isso, aconselho que você use uma palavra que represente nosso elemento. No nosso exemplo, a div representa todo o nosso widget, para que possamos usar o nome do nosso Widget ou uma abreviação (aqui eu escolhi Doc-). Então, para garantir que o ID da classe seja único, colocaremos uma tag "# ID #" (para obter mais informações sobre tags Jeedom, veja abaixo), que fornece "Doc- # id#".
+        O Jeedom usa, em vez do atributo id, uma classe como id, isso torna possível tornar um elemento único na página para encontrá-lo e direcioná-lo mais facilmente. É imperativo que seu valor seja único na página. Para isso, aconselho que você use uma palavra que represente nosso elemento. No nosso exemplo, a div representa todo o nosso widget, para que possamos usar o nome do nosso widget ou uma abreviação (aqui eu escolhi Doc-). Então, para garantir que o ID da classe seja único, colocaremos uma tag "#id#" (para obter mais informações sobre tags Jeedom, veja abaixo), que fornece "Doc-#id#".
 
 data-type
 
 :   esse atributo permite armazenar o tipo de comando no qual
-    o Widget será aplicado. Seu valor deve, portanto, corresponder
+    o widget será aplicado. Seu valor deve, portanto, corresponder
     para o parâmetro type acima da área de código.
 
 data-subtype
 
 :   esse atributo permite armazenar o subtipo do comando no
-    qual Widget será aplicado. Então o seu valor
+    qual widget será aplicado. Então o seu valor
     corresponde ao parâmetro subtipo acima da área de código.
 
 data-cmd\_id
 
-:   Este atributo assume como valor o Tag \#ID \#. É usado por
+:   Este atributo assume como valor o Tag \#id\#. É usado por
     Jeedom para a atualização do painel.
 
 A partir daí, temos uma base que corresponde ao padrão Jeedom. É
-o código minimalista necessário para ter um Widget que respeite o
+o código minimalista necessário para ter um widget que respeite o
 Regra / regra Jeedom
 
-> **Important**
+> **IMPORTANTE**
 >
-> Não se esqueça de modificar o atributo tipo de dados e data-subttype se
-> você altera esses valores na configuração do Widget.
+> Não se esqueça de modificar o atributo data-type e data-subttype se
+> você altera esses valores na configuração do widget.
 
 ##### Código CSS 
 
@@ -494,7 +494,7 @@ você pode adicionar a formatação diretamente no atributo style
 uma tag ou usando JavaScript. O uso desta parte
 Portanto, é uma questão de preferência separar adequadamente HTML e CSS
 
-> **Warning**
+> **Aviso**
 >
 > Qualquer código declarado em tags de estilo se aplica a toda a página.
 > Portanto, tenha cuidado com o seletor CSS escolhido
@@ -502,7 +502,7 @@ Portanto, é uma questão de preferência separar adequadamente HTML e CSS
 
 Para não afetar acidentalmente outros widgets por código
 CSS que você vai colocar lá, eu aconselho você a usar o seletor
-ID que segmenta seu Widget.
+ID que segmenta seu widget.
 
 Exemplo, se eu quiser colocar em vermelho o texto localizado na tag
 "Span ", tenderíamos a escrever :
@@ -517,18 +517,18 @@ span{
 
 Mas isso mudaria a cor do texto de todos
 período de páginas. Portanto, para evitar isso, adicione um seletor de ID que tenha como objetivo
-seu Widget para definir sua ação :
+seu widget para definir sua ação :
 
 **Código inserido na tag Style e delimitado.**
 
 `` `{.CSS}
-.Doc- # ID # span{
+.Doc-#id# span{
     color: red;
 }
 `` ''
 
-Adicionando .Doc - \# ID \# na frente do seletor de span, delimitamos o
-modificação dentro do nosso Widget.
+Adicionando .Doc- \#id\# na frente do seletor de span, delimitamos o
+modificação dentro do nosso widget.
 
 ##### Código JavaScript 
 
@@ -545,19 +545,19 @@ JavaScript. Portanto, podemos usar sem inicializá-los :
 
 -   Bootstrap
 
-> **Warning**
+> **Aviso**
 >
 > Em caso de erro no código JS, ele pode bloquear todos os códigos JS
-> que podem ser seguidos, seja no Widget ou em outros widgets.
+> que podem ser seguidos, seja no widget ou em outros widgets.
 > Portanto, tenha cuidado ao fazer alterações.
 
-> **Tip**
+> **Dica**
 >
 > Se, após salvar uma modificação do widget, a roda dentada
 > contido para girar indefinidamente, você pode ter feito uma
 > Erro de JS causando o travamento da continuação da execução de JS na página.
 > Para poder corrigi-lo, basta passar a div
-> ID = jqueryLoadingDiv na exibição nenhum usando o console
+> id = jqueryLoadingDiv na exibição nenhum usando o console
 > navegador, corrija o código e salve. Você também tem que fazer F5
 > para atualizar a página.
 
@@ -593,10 +593,10 @@ então aqui está a lista e seus detalhes :
 
         Use como texto ou em JS
 
-\#name\_display \#
+\#name\_display\#
 
 :   Nome do comando. Para ser usado para exibir o nome do
-    comando no nível do Widget.
+    comando no nível do widget.
 
         Use como texto ou em JS
 
@@ -638,7 +638,7 @@ então aqui está a lista e seus detalhes :
 
 \#collectDate\#
 
-:   Retorna a data e hora da última atualização do Widget em
+:   Retorna a data e hora da última atualização do widget em
     formato "aaaa-mm-dd hh:mn:ss"
 
         Use como texto, em JS ou no atributo title
@@ -699,19 +699,19 @@ então aqui está a lista e seus detalhes :
 
 cmd:   
     - Deve ser adicionado ao atributo "class" da div
-    principal, essa classe permite a atualização do Widget. Sem isso
-    o Widget de classe é atualizado apenas atualizando a página.
+    principal, essa classe permite a atualização do widget. Sem isso
+    o widget de classe é atualizado apenas atualizando a página.
 
 cmd-widget:   
     - Esta classe é recomendada porque permite adicionar alguns
-    configurações CSS padrão para o Widget por bom comportamento.
+    configurações CSS padrão para o widget por bom comportamento.
 
 cursor:   
     - Permite alterar o ponteiro na mão.
 
 history:
     - Esta classe permite alterar o ponteiro na mão e, ao clicar em
-    exibir o histórico de valor do Widget.
+    exibir o histórico de valor do widget.
 
 tooltips:   
     - É para o título de um elemento, em vez de ser amarelo, torna-se
@@ -720,12 +720,12 @@ tooltips:
 Faq 
 ===
 
-Como aprender a criar um Widget ?
+Como aprender a criar um widget ?
 
 :   O sistema de widgets é baseado nas linguagens HTML e Javascript,
     Portanto, é aconselhável assistir aos cursos (muito numerosos) em
     esses idiomas. Além disso, também é interessante ler cursos sobre
     Jquery (e Jquery mobile para a versão móvel de widgets).
 
-Outra maneira é criar um Widget de "criação fácil", para que o
+Outra maneira é criar um widget de "criação fácil", para que o
 plugin irá gerar automaticamente o seu código de widgets.
