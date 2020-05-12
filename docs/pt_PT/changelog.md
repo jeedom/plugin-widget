@@ -1,3 +1,5 @@
+# Changelog Widget
+
 # 09/09/2019
 
 - Correção de bugs (obrigado @Salvialf)
