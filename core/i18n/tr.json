@@ -48,8 +48,7 @@
     },
     "plugins\/widget\/desktop\/php\/widget.php": {
         "401 - Accès non autorisé": "401 - Yetkisiz erişim",
-        "Récuperer du market": "",
-        "Market": "Pazar",
+        "Récuperer du serveur d'archive": "",
         "Ajouter un widget": "",
         "Mode création facile": "",
         "Fonts": "",
@@ -185,7 +184,7 @@
     "plugins\/widget\/core\/class\/widget.class.php": {
         "Chemin jusqu\\'au widget non trouvé : ": "",
         "Impossible de supprimer : ": "Silinemiyor:",
-        ". Vérifiez les droits": ". Hakları kontrol edin",
+        ". Vérifiez les droits": "Hakları kontrol edin",
         "Impossible de creer : ": "",
         "Impossible de trouver le widget ": "",
         "Impossible de copier ": "",

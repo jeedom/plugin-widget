@@ -48,8 +48,7 @@
     },
     "plugins\/widget\/desktop\/php\/widget.php": {
         "401 - Accès non autorisé": "401 - Akses tidak sah",
-        "Récuperer du market": "",
-        "Market": "",
+        "Récuperer du serveur d'archive": "",
         "Ajouter un widget": "",
         "Mode création facile": "",
         "Fonts": "",
@@ -166,7 +165,7 @@
         "{{Impossible d'extraire l'archive}} : ": "",
         "{{Répertoire d'upload de fonts non trouvé}} : ": "",
         "{{Le fichier est trop gros}} (maximum 1mo)": "",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : ",
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :",
         "Aucun widget fourni": "",
         "Répertoire d'upload d'images non trouvé": "",
         "Répertoire d'upload non trouvé": "",

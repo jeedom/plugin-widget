@@ -48,8 +48,7 @@
     },
     "plugins\/widget\/desktop\/php\/widget.php": {
         "401 - Accès non autorisé": "401-不正アクセス",
-        "Récuperer du market": "",
-        "Market": "市場",
+        "Récuperer du serveur d'archive": "",
         "Ajouter un widget": "",
         "Mode création facile": "",
         "Fonts": "",
