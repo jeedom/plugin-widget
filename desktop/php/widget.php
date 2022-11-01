@@ -77,7 +77,7 @@ sendVarToJS('pathFile', $pathfile);
     <div class="col-lg-3 col-md-4 col-sm-4" id="bsListWidgets">
         <div class="bs-sidebar">
             <ul id="" class="nav nav-list bs-sidenav">
-                <a class="btn btn-default tooltips" id="bt_getFromMarket" title="{{Récuperer du serveur d'archive}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Récuperer du serveur d'archive}}}</a>
+                <a class="btn btn-default tooltips" id="bt_getFromMarket" title="{{Récuperer du serveur d'archive}}" style="width : 100%"><i class="fa fa-shopping-cart"></i> {{Récuperer du serveur d'archive}}</a>
                 <a class="btn btn-primary widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter un widget}}</a>
                 <a class="btn btn-success widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="create"><i class="fa fa-picture-o"></i> {{Mode création facile}}</a>
                 <a class="btn btn-success widgetAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="fonts"><i class="icon divers-numbers"></i> {{Fonts}}</a>
